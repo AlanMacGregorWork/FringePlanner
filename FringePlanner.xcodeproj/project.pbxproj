@@ -44,6 +44,7 @@
 		080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FringePlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITests.swift; sourceTree = "<group>"; };
 		080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 		0803722F2C98B7A2002DC9A2 = {
 			isa = PBXGroup;
 			children = (
+				089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */,
 				0803723A2C98B7A2002DC9A2 /* FringePlanner */,
 				0803724B2C98B7A3002DC9A2 /* FringePlannerTests */,
 				080372552C98B7A3002DC9A2 /* FringePlannerUITests */,
