@@ -1,0 +1,597 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */; };
+		0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803723D2C98B7A2002DC9A2 /* MainScreen.swift */; };
+		080372402C98B7A3002DC9A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0803723F2C98B7A3002DC9A2 /* Assets.xcassets */; };
+		080372432C98B7A3002DC9A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 080372422C98B7A3002DC9A2 /* Preview Assets.xcassets */; };
+		0803724D2C98B7A3002DC9A2 /* FringePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */; };
+		080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */; };
+		080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		080372492C98B7A3002DC9A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 080372302C98B7A2002DC9A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 080372372C98B7A2002DC9A2;
+			remoteInfo = FringePlanner;
+		};
+		080372532C98B7A3002DC9A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 080372302C98B7A2002DC9A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 080372372C98B7A2002DC9A2;
+			remoteInfo = FringePlanner;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		080372382C98B7A2002DC9A2 /* FringePlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FringePlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerApp.swift; sourceTree = "<group>"; };
+		0803723D2C98B7A2002DC9A2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
+		0803723F2C98B7A3002DC9A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		080372422C98B7A3002DC9A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		080372482C98B7A3002DC9A2 /* FringePlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FringePlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerTests.swift; sourceTree = "<group>"; };
+		080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FringePlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITests.swift; sourceTree = "<group>"; };
+		080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		080372352C98B7A2002DC9A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		080372452C98B7A3002DC9A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0803724F2C98B7A3002DC9A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0803722F2C98B7A2002DC9A2 = {
+			isa = PBXGroup;
+			children = (
+				0803723A2C98B7A2002DC9A2 /* FringePlanner */,
+				0803724B2C98B7A3002DC9A2 /* FringePlannerTests */,
+				080372552C98B7A3002DC9A2 /* FringePlannerUITests */,
+				080372392C98B7A2002DC9A2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		080372392C98B7A2002DC9A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				080372382C98B7A2002DC9A2 /* FringePlanner.app */,
+				080372482C98B7A3002DC9A2 /* FringePlannerTests.xctest */,
+				080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0803723A2C98B7A2002DC9A2 /* FringePlanner */ = {
+			isa = PBXGroup;
+			children = (
+				080372652C98B826002DC9A2 /* Screen */,
+				0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */,
+				0803723F2C98B7A3002DC9A2 /* Assets.xcassets */,
+				080372412C98B7A3002DC9A2 /* Preview Content */,
+			);
+			path = FringePlanner;
+			sourceTree = "<group>";
+		};
+		080372412C98B7A3002DC9A2 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				080372422C98B7A3002DC9A2 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0803724B2C98B7A3002DC9A2 /* FringePlannerTests */ = {
+			isa = PBXGroup;
+			children = (
+				0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */,
+			);
+			path = FringePlannerTests;
+			sourceTree = "<group>";
+		};
+		080372552C98B7A3002DC9A2 /* FringePlannerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */,
+				080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */,
+			);
+			path = FringePlannerUITests;
+			sourceTree = "<group>";
+		};
+		080372652C98B826002DC9A2 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				0803723D2C98B7A2002DC9A2 /* MainScreen.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		080372372C98B7A2002DC9A2 /* FringePlanner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0803725C2C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlanner" */;
+			buildPhases = (
+				080372342C98B7A2002DC9A2 /* Sources */,
+				080372352C98B7A2002DC9A2 /* Frameworks */,
+				080372362C98B7A2002DC9A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FringePlanner;
+			productName = FringePlanner;
+			productReference = 080372382C98B7A2002DC9A2 /* FringePlanner.app */;
+			productType = "com.apple.product-type.application";
+		};
+		080372472C98B7A3002DC9A2 /* FringePlannerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0803725F2C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlannerTests" */;
+			buildPhases = (
+				080372442C98B7A3002DC9A2 /* Sources */,
+				080372452C98B7A3002DC9A2 /* Frameworks */,
+				080372462C98B7A3002DC9A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0803724A2C98B7A3002DC9A2 /* PBXTargetDependency */,
+			);
+			name = FringePlannerTests;
+			productName = FringePlannerTests;
+			productReference = 080372482C98B7A3002DC9A2 /* FringePlannerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		080372512C98B7A3002DC9A2 /* FringePlannerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 080372622C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlannerUITests" */;
+			buildPhases = (
+				0803724E2C98B7A3002DC9A2 /* Sources */,
+				0803724F2C98B7A3002DC9A2 /* Frameworks */,
+				080372502C98B7A3002DC9A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				080372542C98B7A3002DC9A2 /* PBXTargetDependency */,
+			);
+			name = FringePlannerUITests;
+			productName = FringePlannerUITests;
+			productReference = 080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		080372302C98B7A2002DC9A2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					080372372C98B7A2002DC9A2 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					080372472C98B7A3002DC9A2 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 080372372C98B7A2002DC9A2;
+					};
+					080372512C98B7A3002DC9A2 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 080372372C98B7A2002DC9A2;
+					};
+				};
+			};
+			buildConfigurationList = 080372332C98B7A2002DC9A2 /* Build configuration list for PBXProject "FringePlanner" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0803722F2C98B7A2002DC9A2;
+			productRefGroup = 080372392C98B7A2002DC9A2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				080372372C98B7A2002DC9A2 /* FringePlanner */,
+				080372472C98B7A3002DC9A2 /* FringePlannerTests */,
+				080372512C98B7A3002DC9A2 /* FringePlannerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		080372362C98B7A2002DC9A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080372432C98B7A3002DC9A2 /* Preview Assets.xcassets in Resources */,
+				080372402C98B7A3002DC9A2 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		080372462C98B7A3002DC9A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		080372502C98B7A3002DC9A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		080372342C98B7A2002DC9A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
+				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		080372442C98B7A3002DC9A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0803724D2C98B7A3002DC9A2 /* FringePlannerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0803724E2C98B7A3002DC9A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */,
+				080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0803724A2C98B7A3002DC9A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 080372372C98B7A2002DC9A2 /* FringePlanner */;
+			targetProxy = 080372492C98B7A3002DC9A2 /* PBXContainerItemProxy */;
+		};
+		080372542C98B7A3002DC9A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 080372372C98B7A2002DC9A2 /* FringePlanner */;
+			targetProxy = 080372532C98B7A3002DC9A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0803725A2C98B7A3002DC9A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0803725B2C98B7A3002DC9A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0803725D2C98B7A3002DC9A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FringePlanner/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5GWZ3778M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlanner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0803725E2C98B7A3002DC9A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FringePlanner/Preview Content\"";
+				DEVELOPMENT_TEAM = Z5GWZ3778M;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlanner;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		080372602C98B7A3002DC9A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5GWZ3778M;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlannerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FringePlanner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FringePlanner";
+			};
+			name = Debug;
+		};
+		080372612C98B7A3002DC9A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5GWZ3778M;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlannerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FringePlanner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FringePlanner";
+			};
+			name = Release;
+		};
+		080372632C98B7A3002DC9A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5GWZ3778M;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlannerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FringePlanner;
+			};
+			name = Debug;
+		};
+		080372642C98B7A3002DC9A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z5GWZ3778M;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlannerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FringePlanner;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		080372332C98B7A2002DC9A2 /* Build configuration list for PBXProject "FringePlanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0803725A2C98B7A3002DC9A2 /* Debug */,
+				0803725B2C98B7A3002DC9A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0803725C2C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlanner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0803725D2C98B7A3002DC9A2 /* Debug */,
+				0803725E2C98B7A3002DC9A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0803725F2C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlannerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				080372602C98B7A3002DC9A2 /* Debug */,
+				080372612C98B7A3002DC9A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		080372622C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlannerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				080372632C98B7A3002DC9A2 /* Debug */,
+				080372642C98B7A3002DC9A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 080372302C98B7A2002DC9A2 /* Project object */;
+}
