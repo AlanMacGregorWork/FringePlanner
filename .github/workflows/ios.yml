@@ -26,14 +26,10 @@ jobs:
           
       - name: Checkout
         uses: actions/checkout@v4
-        
-      - name: Set Default Scheme
+                
+      - name: Setup environment
         run: |
-          scheme_list=$(xcodebuild -list -json | tr -d "\n")
-          scheme_list="$(echo $scheme_list | ruby -e "require 'json'; puts JSON.parse(STDIN.gets)['project']['schemes']")"
-          echo Schemes available: $scheme_list
-          
-          default="FringePlanner"
+          default="UnitTest"
           echo $default | cat >default
           echo Using scheme: $default
           
