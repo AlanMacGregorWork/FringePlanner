@@ -15,6 +15,9 @@ jobs:
       - name: List available Xcode versions
         run: ls /Applications | grep Xcode
         
+      - name: List available simulators
+        run: xcrun xctrace list devices
+        
       - name: Show current version of Xcode
         run: xcodebuild -version
         
