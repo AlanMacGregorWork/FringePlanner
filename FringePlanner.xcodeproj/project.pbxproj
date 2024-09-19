@@ -12,19 +12,10 @@
 		080372402C98B7A3002DC9A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0803723F2C98B7A3002DC9A2 /* Assets.xcassets */; };
 		080372432C98B7A3002DC9A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 080372422C98B7A3002DC9A2 /* Preview Assets.xcassets */; };
 		0803724D2C98B7A3002DC9A2 /* FringePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */; };
-		080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */; };
-		080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		080372492C98B7A3002DC9A2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 080372302C98B7A2002DC9A2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 080372372C98B7A2002DC9A2;
-			remoteInfo = FringePlanner;
-		};
-		080372532C98B7A3002DC9A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 080372302C98B7A2002DC9A2 /* Project object */;
 			proxyType = 1;
@@ -41,9 +32,6 @@
 		080372422C98B7A3002DC9A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		080372482C98B7A3002DC9A2 /* FringePlannerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FringePlannerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerTests.swift; sourceTree = "<group>"; };
-		080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FringePlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITests.swift; sourceTree = "<group>"; };
-		080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,13 +50,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0803724F2C98B7A3002DC9A2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,7 +59,6 @@
 				089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */,
 				0803723A2C98B7A2002DC9A2 /* FringePlanner */,
 				0803724B2C98B7A3002DC9A2 /* FringePlannerTests */,
-				080372552C98B7A3002DC9A2 /* FringePlannerUITests */,
 				080372392C98B7A2002DC9A2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,7 +68,6 @@
 			children = (
 				080372382C98B7A2002DC9A2 /* FringePlanner.app */,
 				080372482C98B7A3002DC9A2 /* FringePlannerTests.xctest */,
-				080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,15 +97,6 @@
 				0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */,
 			);
 			path = FringePlannerTests;
-			sourceTree = "<group>";
-		};
-		080372552C98B7A3002DC9A2 /* FringePlannerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */,
-				080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */,
-			);
-			path = FringePlannerUITests;
 			sourceTree = "<group>";
 		};
 		080372652C98B826002DC9A2 /* Screen */ = {
@@ -175,24 +145,6 @@
 			productReference = 080372482C98B7A3002DC9A2 /* FringePlannerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		080372512C98B7A3002DC9A2 /* FringePlannerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 080372622C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlannerUITests" */;
-			buildPhases = (
-				0803724E2C98B7A3002DC9A2 /* Sources */,
-				0803724F2C98B7A3002DC9A2 /* Frameworks */,
-				080372502C98B7A3002DC9A2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				080372542C98B7A3002DC9A2 /* PBXTargetDependency */,
-			);
-			name = FringePlannerUITests;
-			productName = FringePlannerUITests;
-			productReference = 080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -207,10 +159,6 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					080372472C98B7A3002DC9A2 = {
-						CreatedOnToolsVersion = 16.0;
-						TestTargetID = 080372372C98B7A2002DC9A2;
-					};
-					080372512C98B7A3002DC9A2 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = 080372372C98B7A2002DC9A2;
 					};
@@ -231,7 +179,6 @@
 			targets = (
 				080372372C98B7A2002DC9A2 /* FringePlanner */,
 				080372472C98B7A3002DC9A2 /* FringePlannerTests */,
-				080372512C98B7A3002DC9A2 /* FringePlannerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -247,13 +194,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		080372462C98B7A3002DC9A2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		080372502C98B7A3002DC9A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -280,15 +220,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0803724E2C98B7A3002DC9A2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */,
-				080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -296,11 +227,6 @@
 			isa = PBXTargetDependency;
 			target = 080372372C98B7A2002DC9A2 /* FringePlanner */;
 			targetProxy = 080372492C98B7A3002DC9A2 /* PBXContainerItemProxy */;
-		};
-		080372542C98B7A3002DC9A2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 080372372C98B7A2002DC9A2 /* FringePlanner */;
-			targetProxy = 080372532C98B7A3002DC9A2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -522,40 +448,6 @@
 			};
 			name = Release;
 		};
-		080372632C98B7A3002DC9A2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z5GWZ3778M;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlannerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FringePlanner;
-			};
-			name = Debug;
-		};
-		080372642C98B7A3002DC9A2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z5GWZ3778M;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = info.alanmacgregor.FringePlannerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FringePlanner;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -582,15 +474,6 @@
 			buildConfigurations = (
 				080372602C98B7A3002DC9A2 /* Debug */,
 				080372612C98B7A3002DC9A2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		080372622C98B7A3002DC9A2 /* Build configuration list for PBXNativeTarget "FringePlannerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				080372632C98B7A3002DC9A2 /* Debug */,
-				080372642C98B7A3002DC9A2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
