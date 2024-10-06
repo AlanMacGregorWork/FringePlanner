@@ -14,6 +14,7 @@
 		0803724D2C98B7A3002DC9A2 /* FringePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */; };
 		080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */; };
 		080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */; };
+		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FringePlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITests.swift; sourceTree = "<group>"; };
 		080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080272E82C9A394E0040A673 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0834BB072C9F609F00BF8A5A /* Text.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		0803722F2C98B7A2002DC9A2 = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +106,7 @@
 		0803723A2C98B7A2002DC9A2 /* FringePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				080272E82C9A394E0040A673 /* Extension */,
 				080372652C98B826002DC9A2 /* Screen */,
 				0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */,
 				0803723F2C98B7A3002DC9A2 /* Assets.xcassets */,
@@ -269,6 +280,7 @@
 			files = (
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
+				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
