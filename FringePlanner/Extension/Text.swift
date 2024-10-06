@@ -12,6 +12,7 @@ extension Text {
     enum FringeStyle: CaseIterable {
         case cellBody
         case caption
+        case subCaption
     }
     
     /// Sets the font & styling to the predefined value
@@ -21,6 +22,9 @@ extension Text {
             self
                 .font(.body)
         case .caption:
+            self
+                .font(.caption)
+        case .subCaption:
             self
                 .font(.caption)
                 .foregroundStyle(.secondary)

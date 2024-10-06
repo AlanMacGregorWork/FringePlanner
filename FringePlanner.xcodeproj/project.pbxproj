@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080272E52C9A20950040A673 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080272E42C9A208B0040A673 /* EventCell.swift */; };
 		0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */; };
 		0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803723D2C98B7A2002DC9A2 /* MainScreen.swift */; };
 		080372402C98B7A3002DC9A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0803723F2C98B7A3002DC9A2 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		080272E42C9A208B0040A673 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		080372382C98B7A2002DC9A2 /* FringePlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FringePlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerApp.swift; sourceTree = "<group>"; };
 		0803723D2C98B7A2002DC9A2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
@@ -74,6 +76,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		080272E22C9A20710040A673 /* SwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				080272E32C9A20800040A673 /* Cell */,
+			);
+			path = SwiftUI;
+			sourceTree = "<group>";
+		};
+		080272E32C9A20800040A673 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				080272E42C9A208B0040A673 /* EventCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		080272E82C9A394E0040A673 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				080272E82C9A394E0040A673 /* Extension */,
+				080272E22C9A20710040A673 /* SwiftUI */,
 				080372652C98B826002DC9A2 /* Screen */,
 				0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */,
 				0803723F2C98B7A3002DC9A2 /* Assets.xcassets */,
@@ -278,6 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				080272E52C9A20950040A673 /* EventCell.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
