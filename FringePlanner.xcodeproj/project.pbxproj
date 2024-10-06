@@ -17,6 +17,7 @@
 		080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */; };
 		0820A5732CB308BE006DDEE7 /* EventPerformanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080272E62C9A2EAB0040A673 /* EventPerformanceCell.swift */; };
 		0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A5752CB30F77006DDEE7 /* MakeEquatable.swift */; };
+		0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITests.swift; sourceTree = "<group>"; };
 		080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0820A5752CB30F77006DDEE7 /* MakeEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeEquatable.swift; sourceTree = "<group>"; };
+		0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProtocol.swift; sourceTree = "<group>"; };
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +131,7 @@
 		0803723A2C98B7A2002DC9A2 /* FringePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				0820A57B2CB31778006DDEE7 /* Protocol */,
 				0820A5742CB30F5B006DDEE7 /* PropertyWrapper */,
 				080272E82C9A394E0040A673 /* Extension */,
 				080272E22C9A20710040A673 /* SwiftUI */,
@@ -179,6 +182,14 @@
 				0820A5752CB30F77006DDEE7 /* MakeEquatable.swift */,
 			);
 			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		0820A57B2CB31778006DDEE7 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,6 +322,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */,
 				080272E52C9A20950040A673 /* EventCell.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */,
