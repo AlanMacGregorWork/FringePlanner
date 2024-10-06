@@ -15,6 +15,7 @@
 		0803724D2C98B7A3002DC9A2 /* FringePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */; };
 		080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */; };
 		080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */; };
+		0820A5732CB308BE006DDEE7 /* EventPerformanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080272E62C9A2EAB0040A673 /* EventPerformanceCell.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		080272E42C9A208B0040A673 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		080272E62C9A2EAB0040A673 /* EventPerformanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPerformanceCell.swift; sourceTree = "<group>"; };
 		080372382C98B7A2002DC9A2 /* FringePlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FringePlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerApp.swift; sourceTree = "<group>"; };
 		0803723D2C98B7A2002DC9A2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		080272E32C9A20800040A673 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				080272E62C9A2EAB0040A673 /* EventPerformanceCell.swift */,
 				080272E42C9A208B0040A673 /* EventCell.swift */,
 			);
 			path = Cell;
@@ -301,6 +304,7 @@
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
+				0820A5732CB308BE006DDEE7 /* EventPerformanceCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
