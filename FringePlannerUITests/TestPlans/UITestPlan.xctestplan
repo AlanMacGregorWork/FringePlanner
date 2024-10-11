@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "1F1F91A5-DDE5-48B6-AD08-AFD659B5F7B1",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:FringePlanner.xcodeproj",
+        "identifier" : "080372512C98B7A3002DC9A2",
+        "name" : "FringePlannerUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

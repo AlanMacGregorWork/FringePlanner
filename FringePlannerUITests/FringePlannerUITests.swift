@@ -23,21 +23,50 @@ final class FringePlannerUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testNavigationCorrectlyPushes() throws {
+        // Verifies that the navigation correctly pushes views
+        
         let app = XCUIApplication()
+        app.launchArguments = ["ui-test"]
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        // == Setup Elements ==
+        let navScreen1 = app.staticTexts.containing(.label(string: "Nav: Screen 1")).firstMatch
+        let navScreen2 = app.staticTexts.containing(.label(string: "Nav: Screen 2")).firstMatch
+        let openSheet1Button = app.buttons.containing(.label(string: "Open Screen 1")).firstMatch
+        let openSheet2Button = app.buttons.containing(.label(string: "Open Screen 2")).firstMatch
+        let backButton = app.buttons.containing(.label(string: "Back")).firstMatch
+        
+        
+        // Pressing the "Open Screen 1" button should push Screen 1
+        try openSheet1Button.throwOnNotExist()
+        openSheet1Button.tap()
+        try navScreen1.throwOnNotExist()
+        
+        // Pressing back should show the first screen again
+        try backButton.throwOnNotExist()
+        backButton.tap()
+        
+        // Pressing the "Open Screen 1" button should push Screen 2
+        try openSheet2Button.throwOnNotExist()
+        openSheet2Button.tap()
+        try navScreen2.throwOnNotExist()
     }
+}
 
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+extension NSPredicate {
+    static func label(string: String) -> NSPredicate {
+        NSPredicate(format: "label CONTAINS '\(string)'")
+    }
+}
+
+extension XCUIElement {
+    @discardableResult
+    func throwOnNotExist() throws -> Self {
+        enum ElementIssue: Error {
+            case elementDoesNotExist
         }
+        guard self.exists else { throw ElementIssue.elementDoesNotExist }
+        return self
     }
 }
