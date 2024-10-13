@@ -36,7 +36,7 @@ extension ContentProtocol {
 /// Allows access to navigation
 protocol RouterProtocol where Self: ObservableObject {
     associatedtype NavigationLocation: NavigationLocationProtocol
-    var navigationPath: NavigationPath { get set }
+    var pushedSheet: NavigationLocation? { get set }
 }
 
 /// Contains interactions and events from the used.
@@ -61,5 +61,4 @@ struct ContentViewGenerationInput<Content: BaseContentProtocol> {
     let router: Content.RouterType
     let dataSource: Content.DataSourceType
     let interaction: Content.InteractionType
-    let navigationPath: Binding<NavigationPath>
 }

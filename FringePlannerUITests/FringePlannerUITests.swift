@@ -47,6 +47,15 @@ final class FringePlannerUITests: XCTestCase {
         try backButton.throwOnNotExist()
         backButton.tap()
         
+        // Pressing the "Open Screen 1" button should push Screen 1 again
+        try openSheet1Button.throwOnNotExist()
+        openSheet1Button.tap()
+        try navScreen1.throwOnNotExist()
+        
+        // Pressing back should show the first screen again
+        try backButton.throwOnNotExist()
+        backButton.tap()
+        
         // Pressing the "Open Screen 1" button should push Screen 2
         try openSheet2Button.throwOnNotExist()
         openSheet2Button.tap()

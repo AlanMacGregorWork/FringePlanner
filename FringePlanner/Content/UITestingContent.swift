@@ -27,7 +27,7 @@ struct UITestingContentContainer {
     }
     
     class Router: RouterProtocol {
-        @Published var navigationPath = NavigationPath()
+        @Published var pushedSheet: NavigationLocation?
         
         enum NavigationLocation: NavigationLocationProtocol {
             case screen1
@@ -43,7 +43,7 @@ struct UITestingContentContainer {
         }
         
         func pushScreen(location: NavigationLocation) {
-            navigationPath.append(location)
+            pushedSheet = location
         }
     }
     
@@ -60,7 +60,7 @@ struct UITestingContentContainer {
         }
         
         let structure = { (input: ContentInput) in
-            NavigationData(router: input.router, navigationPath: input.navigationPath) {
+            NavigationData(router: input.router) {
                 GroupData(type: .form) {
                     ButtonData(title: "Open Screen 1", interaction: input.interaction.openSheet1)
                     ButtonData(title: "Open Screen 2", interaction: input.interaction.openSheet2)

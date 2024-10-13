@@ -15,7 +15,7 @@ class BasicRouter: RouterProtocol, ObservableObject {
         // Without a case, we can always refuse the UI
         func toView() -> some View { EmptyView() }
     }
-    @Published var navigationPath = NavigationPath()
+    var pushedSheet: NavigationLocation?
 }
 
 class BasicInteraction: InteractionProtocol, ObservableObject {}

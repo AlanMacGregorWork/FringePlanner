@@ -19,7 +19,7 @@ struct DemoContentContainer {
         let dataSource: DataSourceType
         
         let structure = { (input: ContentInput) in
-            NavigationData(router: input.router, navigationPath: input.navigationPath) {
+            NavigationData(router: input.router) {
                 TextData(text: "General Row: \(input.dataSource.section2Row1Number)")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
@@ -95,7 +95,7 @@ struct DemoContentContainer {
     }
     
     class Router: ObservableObject, DemoRouter {
-        @Published var navigationPath = NavigationPath()
+        @Published var pushedSheet: NavigationLocation?
         
         enum NavigationLocation: NavigationLocationProtocol {
             case screen1
@@ -111,7 +111,7 @@ struct DemoContentContainer {
         }
         
         func pushScreen(location: NavigationLocation) {
-            navigationPath.append(location)
+            pushedSheet = location
         }
     }
     
