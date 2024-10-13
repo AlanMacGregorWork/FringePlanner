@@ -26,9 +26,7 @@ struct UITestingContentContainer {
         }
     }
     
-    class Router: RouterProtocol {
-        @Published var pushedSheet: NavigationLocation?
-        
+    class Router: SimplifiedRouter<Router.NavigationLocation> {
         enum NavigationLocation: NavigationLocationProtocol {
             case screen1
             case screen2
@@ -40,10 +38,6 @@ struct UITestingContentContainer {
                 case .screen2: Text("Nav: Screen 2")
                 }
             }
-        }
-        
-        func pushScreen(location: NavigationLocation) {
-            pushedSheet = location
         }
     }
     

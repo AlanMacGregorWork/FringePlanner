@@ -94,9 +94,7 @@ struct DemoContentContainer {
         }
     }
     
-    class Router: ObservableObject, DemoRouter {
-        @Published var pushedSheet: NavigationLocation?
-        
+    class Router: SimplifiedRouter<Router.NavigationLocation>, DemoRouter {
         enum NavigationLocation: NavigationLocationProtocol {
             case screen1
             case screen2
@@ -108,10 +106,6 @@ struct DemoContentContainer {
                 case .screen2: Text("Screen 2")
                 }
             }
-        }
-        
-        func pushScreen(location: NavigationLocation) {
-            pushedSheet = location
         }
     }
     

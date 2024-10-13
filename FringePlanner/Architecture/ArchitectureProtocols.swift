@@ -34,7 +34,7 @@ extension ContentProtocol {
 // MARK: - Components
 
 /// Allows access to navigation
-protocol RouterProtocol where Self: ObservableObject {
+protocol RouterProtocol where Self: BaseRouter<NavigationLocation>, Self: ObservableObject {
     associatedtype NavigationLocation: NavigationLocationProtocol
     var pushedSheet: NavigationLocation? { get set }
 }
@@ -64,6 +64,19 @@ class BaseInteraction: ObservableObject, Equatable {
     }
 }
 
+/// The base class required for router
+class BaseRouter<NavigationLocation: NavigationLocationProtocol>: Equatable {
+    @Published var pushedSheet: NavigationLocation?
+    
+    func pushScreen(location: NavigationLocation?) {
+        pushedSheet = location
+    }
+    
+    static func == (lhs: BaseRouter<NavigationLocation>, rhs: BaseRouter<NavigationLocation>) -> Bool {
+        return lhs.pushedSheet == rhs.pushedSheet
+    }
+}
+
 // MARK: - Helpers
 
 /// Contains the models required to build content for `ContentProtocol.structure`
@@ -72,3 +85,6 @@ struct ContentViewGenerationInput<Content: BaseContentProtocol> {
     let dataSource: Content.DataSourceType
     let interaction: Content.InteractionType
 }
+
+/// Simplifies the router creation when just requiring the location type
+class SimplifiedRouter<NavigationLocation: NavigationLocationProtocol>: BaseRouter<NavigationLocation>, RouterProtocol {}
