@@ -40,7 +40,7 @@ protocol RouterProtocol where Self: ObservableObject {
 }
 
 /// Contains interactions and events from the used.
-protocol InteractionProtocol where Self: ObservableObject { }
+protocol InteractionProtocol where Self: BaseInteraction { }
 
 /// The source of data to derive the content
 protocol DataSourceProtocol where Self: ObservableObject { }
@@ -52,6 +52,16 @@ protocol NavigationLocationProtocol: Hashable {
     associatedtype ContentView: View
     /// A view that van be generated from the location
     @ViewBuilder func toView() -> ContentView
+}
+
+// MARK: - Base Components
+
+/// The base class required for interactions
+class BaseInteraction: ObservableObject, Equatable {
+    static func == (lhs: BaseInteraction, rhs: BaseInteraction) -> Bool {
+        // Interactions should not hold state
+        return true
+    }
 }
 
 // MARK: - Helpers

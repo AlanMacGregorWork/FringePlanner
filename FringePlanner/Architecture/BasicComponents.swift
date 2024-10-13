@@ -18,6 +18,6 @@ class BasicRouter: RouterProtocol, ObservableObject {
     var pushedSheet: NavigationLocation?
 }
 
-class BasicInteraction: InteractionProtocol, ObservableObject {}
+class BasicInteraction: BaseInteraction, InteractionProtocol {}
 
 class BasicDataSource: DataSourceProtocol, ObservableObject {}

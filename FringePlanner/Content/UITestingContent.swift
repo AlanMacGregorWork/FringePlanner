@@ -11,7 +11,7 @@ import SwiftUI
 
 /// Content used for UI testing
 struct UITestingContentContainer {
-    class Interaction: InteractionProtocol {
+    class Interaction: BaseInteraction, InteractionProtocol {
         let router: Router
         
         init(router: Router) {
