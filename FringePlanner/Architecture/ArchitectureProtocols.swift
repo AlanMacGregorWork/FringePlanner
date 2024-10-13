@@ -10,15 +10,25 @@ import SwiftUI
 // MARK: - Main
 
 /// Defines the individual components required to build a view
-protocol ContentProtocol {
+protocol BaseContentProtocol {
     associatedtype RouterType: RouterProtocol
     associatedtype InteractionType: InteractionProtocol
     associatedtype DataSourceType: DataSourceProtocol
-    associatedtype ContentType: ViewDataProtocol
     var router: RouterType { get }
     var interaction: InteractionType { get }
     var dataSource: DataSourceType { get }
-    var structure: (Binding<NavigationPath>, RouterType, InteractionType, DataSourceType) -> ContentType { get }
+}
+
+/// Defines the generation of the content
+///  - Note: Having this separate to `BaseContentProtocol` allows the `structure` to build the `ContentInput`
+/// without having to specify types
+protocol ContentProtocol: BaseContentProtocol {
+    associatedtype ContentType: ViewDataProtocol
+    var structure: (ContentInput) -> ContentType { get }
+}
+
+extension ContentProtocol {
+    typealias ContentInput = ContentViewGenerationInput<Self>
 }
 
 // MARK: - Components
@@ -42,4 +52,14 @@ protocol NavigationLocationProtocol: Hashable {
     associatedtype ContentView: View
     /// A view that van be generated from the location
     @ViewBuilder func toView() -> ContentView
+}
+
+// MARK: - Helpers
+
+/// Contains the models required to build content for `ContentProtocol.structure`
+struct ContentViewGenerationInput<Content: BaseContentProtocol> {
+    let router: Content.RouterType
+    let dataSource: Content.DataSourceType
+    let interaction: Content.InteractionType
+    let navigationPath: Binding<NavigationPath>
 }

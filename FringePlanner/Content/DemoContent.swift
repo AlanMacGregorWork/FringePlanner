@@ -18,22 +18,22 @@ struct DemoContentContainer {
         let interaction: InteractionType
         let dataSource: DataSourceType
         
-        let structure = { (navigationPath: Binding<NavigationPath>, router: RouterType, interaction: InteractionType, dataSource: DataSourceType) in
-            NavigationData(router: router, navigationPath: navigationPath) {
-                TextData(text: "General Row: \(dataSource.section2Row1Number)")
+        let structure = { (input: ContentInput) in
+            NavigationData(router: input.router, navigationPath: input.navigationPath) {
+                TextData(text: "General Row: \(input.dataSource.section2Row1Number)")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
-                        TextData(text: dataSource.title)
+                        TextData(text: input.dataSource.title)
                     }
-                    ButtonData(title: "Value updated from row 2: \(dataSource.section1Row1Number)", interaction: { print("Test") })
-                    ButtonData(title: "Update row 1", interaction: interaction.updateSection1Row1)
-                    ButtonData(title: "Push Screen 1", interaction: interaction.pushScreen1)
-                    ButtonData(title: "Push Screen 2", interaction: interaction.pushScreen2)
+                    ButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
+                    ButtonData(title: "Update row 1", interaction: input.interaction.updateSection1Row1)
+                    ButtonData(title: "Push Screen 1", interaction: input.interaction.pushScreen1)
+                    ButtonData(title: "Push Screen 2", interaction: input.interaction.pushScreen2)
                     
                     GroupData(type: .section) {
-                        ButtonData(title: "Add 1 to values: \(dataSource.section2Row1Number)", interaction: interaction.updateSection2Row1)
-                        TextData(text: "General Row: \(dataSource.section2Row1Number)")
-                        CustomTimeData(timerOn: dataSource.timerOn, interaction: interaction.toggleTimer)
+                        ButtonData(title: "Add 1 to values: \(input.dataSource.section2Row1Number)", interaction: input.interaction.updateSection2Row1)
+                        TextData(text: "General Row: \(input.dataSource.section2Row1Number)")
+                        CustomTimeData(timerOn: input.dataSource.timerOn, interaction: input.interaction.toggleTimer)
                     }
                 }
             }
@@ -135,7 +135,7 @@ struct DemoContentPage2<RouterType: RouterProtocol, InteractionType: Interaction
     let interaction: InteractionType
     let dataSource: DataSourceType
     
-    let structure = { (_: Binding<NavigationPath>, _: RouterType, _: InteractionType, _: DataSourceType) in
+    let structure = { (_: ContentInput) in
         TextData(text: "Temp Page #2")
     }
 }
