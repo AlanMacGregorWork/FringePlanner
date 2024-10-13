@@ -18,11 +18,11 @@ struct DemoContentContainer {
         let interaction: InteractionType
         let dataSource: DataSourceType
         
-        let structure = { (navigationPath: Binding<NavigationPath>, interaction: InteractionType, dataSource: DataSourceType) in
-            GroupData(routerType: RouterType.self, type: .navigation(navigationPath)) {
+        let structure = { (navigationPath: Binding<NavigationPath>, router: RouterType, interaction: InteractionType, dataSource: DataSourceType) in
+            NavigationData(router: router, navigationPath: navigationPath) {
                 TextData(text: "General Row: \(dataSource.section2Row1Number)")
-                GroupData(routerType: RouterType.self, type: .form) {
-                    GroupData(routerType: RouterType.self, type: .section) {
+                GroupData(type: .form) {
+                    GroupData(type: .section) {
                         TextData(text: dataSource.title)
                     }
                     ButtonData(title: "Value updated from row 2: \(dataSource.section1Row1Number)", interaction: { print("Test") })
@@ -30,7 +30,7 @@ struct DemoContentContainer {
                     ButtonData(title: "Push Screen 1", interaction: interaction.pushScreen1)
                     ButtonData(title: "Push Screen 2", interaction: interaction.pushScreen2)
                     
-                    GroupData(routerType: RouterType.self, type: .section) {
+                    GroupData(type: .section) {
                         ButtonData(title: "Add 1 to values: \(dataSource.section2Row1Number)", interaction: interaction.updateSection2Row1)
                         TextData(text: "General Row: \(dataSource.section2Row1Number)")
                         CustomTimeData(timerOn: dataSource.timerOn, interaction: interaction.toggleTimer)
@@ -135,7 +135,7 @@ struct DemoContentPage2<RouterType: RouterProtocol, InteractionType: Interaction
     let interaction: InteractionType
     let dataSource: DataSourceType
     
-    let structure = { (_: Binding<NavigationPath>, _: InteractionType, _: DataSourceType) in
+    let structure = { (_: Binding<NavigationPath>, _: RouterType, _: InteractionType, _: DataSourceType) in
         TextData(text: "Temp Page #2")
     }
 }

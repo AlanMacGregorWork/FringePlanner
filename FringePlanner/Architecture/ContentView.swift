@@ -22,7 +22,7 @@ struct ContentView<Content: ContentProtocol>: View {
     }
     
     var body: some View {
-        let content = container.structure($router.navigationPath, interaction, dataSource)
+        let content = container.structure($router.navigationPath, router, interaction, dataSource)
         ContentViewGenerator(content)
     }
 }

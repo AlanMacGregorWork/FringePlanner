@@ -8,21 +8,21 @@
 import SwiftUI
 
 /// Allows grouping multiple objects
-struct GroupData<RouterType: RouterProtocol, each Content: ViewDataProtocol>: ViewDataProtocol {
+struct GroupData<each Content: ViewDataProtocol>: ViewDataProtocol {
     typealias ContentView = GroupView<repeat each Content>
     let type: GroupDataType
     let values: (repeat each Content)
     
     init(
-        routerType: RouterType.Type,
-        type: GroupDataType, @FringeDataResultBuilder _ data: () -> (repeat each Content)
+        type: GroupDataType,
+        @FringeDataResultBuilder _ data: () -> (repeat each Content)
     ) {
         self.type = type
         self.values = data()
     }
     
     struct GroupView<each T: ViewDataProtocol>: View, ViewProtocol {
-        let data: GroupData<RouterType, repeat each T>
+        let data: GroupData<repeat each T>
         
         var body: some View {
             switch data.type {
@@ -33,12 +33,6 @@ struct GroupData<RouterType: RouterProtocol, each Content: ViewDataProtocol>: Vi
             case .section:
                 Section {
                     content
-                }
-            case .navigation(let navigationPath):
-                NavigationStack(path: navigationPath) {
-                    content
-                        .navigationDestination(for: RouterType.NavigationLocation.self,
-                                               destination: { $0.toView() })
                 }
             }
         }
@@ -55,5 +49,4 @@ struct GroupData<RouterType: RouterProtocol, each Content: ViewDataProtocol>: Vi
 enum GroupDataType {
     case form
     case section
-    case navigation(Binding<NavigationPath>)
 }

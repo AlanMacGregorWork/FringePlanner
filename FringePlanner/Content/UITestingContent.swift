@@ -59,9 +59,9 @@ struct UITestingContentContainer {
             self.router = router
         }
         
-        let structure = { (navigationBinding:Binding<NavigationPath>, interaction :Interaction, dataSource :BasicDataSource) in
-            GroupData(routerType: Router.self, type: .navigation(navigationBinding)) {
-                GroupData(routerType: Router.self, type: .form) {
+        let structure = { (navigationBinding: Binding<NavigationPath>, router: Router, interaction: Interaction, dataSource :BasicDataSource) in
+            NavigationData(router: router, navigationPath: navigationBinding) {
+                GroupData(type: .form) {
                     ButtonData(title: "Open Screen 1", interaction: interaction.openSheet1)
                     ButtonData(title: "Open Screen 2", interaction: interaction.openSheet2)
                 }

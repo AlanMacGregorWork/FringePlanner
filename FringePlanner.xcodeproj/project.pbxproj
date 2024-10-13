@@ -21,6 +21,7 @@
 		0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 		08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0402CB98BD000C270F6 /* UITestingContent.swift */; };
+		08E8C0432CBC15A000C270F6 /* NavigationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0422CBC159F00C270F6 /* NavigationData.swift */; };
 		08F10DAE2CB85D91008ACBFF /* ArchitectureProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DAD2CB85D7B008ACBFF /* ArchitectureProtocols.swift */; };
 		08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DAF2CB85EB8008ACBFF /* BasicComponents.swift */; };
 		08F10DB32CB85FC3008ACBFF /* DebugOnlyViewDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DB22CB85FB9008ACBFF /* DebugOnlyViewDatas.swift */; };
@@ -65,6 +66,7 @@
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08E8C0402CB98BD000C270F6 /* UITestingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestingContent.swift; sourceTree = "<group>"; };
+		08E8C0422CBC159F00C270F6 /* NavigationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationData.swift; sourceTree = "<group>"; };
 		08F10DAD2CB85D7B008ACBFF /* ArchitectureProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchitectureProtocols.swift; sourceTree = "<group>"; };
 		08F10DAF2CB85EB8008ACBFF /* BasicComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicComponents.swift; sourceTree = "<group>"; };
 		08F10DB22CB85FB9008ACBFF /* DebugOnlyViewDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOnlyViewDatas.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		08F10DB12CB85F5C008ACBFF /* ViewDatas */ = {
 			isa = PBXGroup;
 			children = (
+				08E8C0422CBC159F00C270F6 /* NavigationData.swift */,
 				08F10DB92CB92B95008ACBFF /* GroupData.swift */,
 				08F10DB22CB85FB9008ACBFF /* DebugOnlyViewDatas.swift */,
 			);
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F10DB32CB85FC3008ACBFF /* DebugOnlyViewDatas.swift in Sources */,
+				08E8C0432CBC15A000C270F6 /* NavigationData.swift in Sources */,
 				0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */,
 				0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */,
 				08F10DAE2CB85D91008ACBFF /* ArchitectureProtocols.swift in Sources */,

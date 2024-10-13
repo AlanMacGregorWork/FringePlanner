@@ -18,7 +18,7 @@ protocol ContentProtocol {
     var router: RouterType { get }
     var interaction: InteractionType { get }
     var dataSource: DataSourceType { get }
-    var structure: (Binding<NavigationPath>, InteractionType, DataSourceType) -> ContentType { get }
+    var structure: (Binding<NavigationPath>, RouterType, InteractionType, DataSourceType) -> ContentType { get }
 }
 
 // MARK: - Components
