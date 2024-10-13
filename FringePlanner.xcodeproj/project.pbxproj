@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		080272E52C9A20950040A673 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080272E42C9A208B0040A673 /* EventCell.swift */; };
 		08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08033E112CD41E6A00380D54 /* FilterRequestTests.swift */; };
+		080272EA2C9A39620040A673 /* EdgeInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080272E92C9A39600040A673 /* EdgeInsets.swift */; };
+		080272EC2C9A39810040A673 /* EdgeInsetsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080272EB2C9A39770040A673 /* EdgeInsetsTests.swift */; };
 		0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */; };
 		0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803723D2C98B7A2002DC9A2 /* MainScreen.swift */; };
 		080372402C98B7A3002DC9A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0803723F2C98B7A3002DC9A2 /* Assets.xcassets */; };
@@ -93,6 +95,8 @@
 		080272E42C9A208B0040A673 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		080272E62C9A2EAB0040A673 /* EventPerformanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPerformanceCell.swift; sourceTree = "<group>"; };
 		08033E112CD41E6A00380D54 /* FilterRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRequestTests.swift; sourceTree = "<group>"; };
+		080272E92C9A39600040A673 /* EdgeInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsets.swift; sourceTree = "<group>"; };
+		080272EB2C9A39770040A673 /* EdgeInsetsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetsTests.swift; sourceTree = "<group>"; };
 		080372382C98B7A2002DC9A2 /* FringePlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FringePlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0803723B2C98B7A2002DC9A2 /* FringePlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerApp.swift; sourceTree = "<group>"; };
 		0803723D2C98B7A2002DC9A2 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
@@ -209,6 +213,7 @@
 				08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */,
 				086159002CD69B7B0076255B /* String.swift */,
 				0834BB072C9F609F00BF8A5A /* Text.swift */,
+				080272E92C9A39600040A673 /* EdgeInsets.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				0862400E2CCEBFFE004DDC3C /* HelperTests */,
 				08C92D672CCEACCB001732E9 /* Extensions */,
 				0803724C2C98B7A3002DC9A2 /* ExampleTest.swift */,
+				080272EB2C9A39770040A673 /* EdgeInsetsTests.swift */,
 			);
 			path = FringePlannerTests;
 			sourceTree = "<group>";
@@ -664,6 +670,7 @@
 				086D08702CE52A28000B6225 /* FBPerformanceType.swift in Sources */,
 				086D087C2CE56A56000B6225 /* FBImage.swift in Sources */,
 				08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */,
+				080272EA2C9A39620040A673 /* EdgeInsets.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */,
 				0843C2362CE7EC430076FF11 /* fbAssert.swift in Sources */,
@@ -691,6 +698,7 @@
 				08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */,
 				08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */,
 				08DA9BB32CEA6AE20080C0A5 /* FBEventURLBuilderTests.swift in Sources */,
+				080272EC2C9A39810040A673 /* EdgeInsetsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
