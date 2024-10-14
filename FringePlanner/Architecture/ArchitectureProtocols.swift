@@ -34,9 +34,16 @@ extension ContentProtocol {
 // MARK: - Components
 
 /// Allows access to navigation
-protocol RouterProtocol where Self: BaseRouter<NavigationLocation>, Self: ObservableObject {
+protocol RouterProtocol where Self: BaseRouter<NavigationLocation>, Self: ObservableObject, Self: Equatable {
     associatedtype NavigationLocation: NavigationLocationProtocol
     var pushedSheet: NavigationLocation? { get set }
+}
+
+extension RouterProtocol {
+    /// Basic Equatable support for the router protocol
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.pushedSheet == rhs.pushedSheet
+    }
 }
 
 /// Contains interactions and events from the used.
@@ -65,15 +72,11 @@ class BaseInteraction: ObservableObject, Equatable {
 }
 
 /// The base class required for router
-class BaseRouter<NavigationLocation: NavigationLocationProtocol>: Equatable {
+class BaseRouter<NavigationLocation: NavigationLocationProtocol> {
     @Published var pushedSheet: NavigationLocation?
     
     func pushScreen(location: NavigationLocation?) {
         pushedSheet = location
-    }
-    
-    static func == (lhs: BaseRouter<NavigationLocation>, rhs: BaseRouter<NavigationLocation>) -> Bool {
-        return lhs.pushedSheet == rhs.pushedSheet
     }
 }
 

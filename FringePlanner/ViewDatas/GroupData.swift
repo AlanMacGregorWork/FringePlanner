@@ -43,6 +43,19 @@ struct GroupData<each Content: ViewDataProtocol>: ViewDataProtocol {
     }
 }
 
+// MARK: Equatable Support
+
+extension GroupData: Equatable {
+    /// Note: Custom `Equatable` required due to parameter pack
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        guard lhs.type == rhs.type else { return false }
+        for (left, right) in repeat (each lhs.values, each rhs.values) {
+            guard left == right else { return false }
+        }
+        return true
+    }
+}
+
 // MARK: - Enums
 
 /// The visual representation to use for the grouping

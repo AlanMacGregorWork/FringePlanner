@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Defines a type that can contain the data for a view
-protocol ViewDataProtocol {
+protocol ViewDataProtocol: Equatable {
     /// The view that can be initialised with the data in this model
     associatedtype ContentView: ViewProtocol where ContentView.DataType == Self
 }
