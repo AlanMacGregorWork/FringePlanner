@@ -27,8 +27,8 @@ struct DemoContentContainer {
                     }
                     ButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
                     ButtonData(title: "Update row 1", interaction: input.interaction.updateSection1Row1)
-                    ButtonData(title: "Push Screen 1", interaction: input.interaction.pushScreen1)
-                    ButtonData(title: "Push Screen 2", interaction: input.interaction.pushScreen2)
+                    ButtonData(title: "Push Screen 1", interaction: input.interaction.pushScreen(.screen1))
+                    ButtonData(title: "Push Screen 2", interaction: input.interaction.pushScreen(.screen2))
                     
                     GroupData(type: .section) {
                         ButtonData(title: "Add 1 to values: \(input.dataSource.section2Row1Number)", interaction: input.interaction.updateSection2Row1)
@@ -53,8 +53,7 @@ struct DemoContentContainer {
         func updateSection1Row1()
         func updateSection2Row1()
         func toggleTimer()
-        func pushScreen1()
-        func pushScreen2()
+        func pushScreen(_ screen: Router.NavigationLocation) -> (() -> Void)
     }
 
     protocol DemoDataSource: DataSourceProtocol {
@@ -86,11 +85,10 @@ struct DemoContentContainer {
         func toggleTimer() {
             dataSource.timerOn.toggle()
         }
-        func pushScreen1() {
-            router.pushScreen(location: .screen1)
-        }
-        func pushScreen2() {
-            router.pushScreen(location: .screen2)
+        func pushScreen(_ screen: Router.NavigationLocation) -> (() -> Void) {
+            { [weak router] in
+                router?.pushScreen(location: screen)
+            }
         }
     }
     
