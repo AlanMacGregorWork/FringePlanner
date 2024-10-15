@@ -40,7 +40,7 @@ struct DemoContentContainer {
         }
     }
     
-    static func createDemoContent() -> Content<Router, Interaction<OverridingDataSource>, OverridingDataSource> {
+    static func createDemoContent() -> Content<Router, Interaction<Router, OverridingDataSource>, OverridingDataSource> {
         let router = Router()
         let dataSource = OverridingDataSource()
         let interaction = Interaction(router: router, dataSource: dataSource)
@@ -53,7 +53,7 @@ struct DemoContentContainer {
         func updateSection1Row1()
         func updateSection2Row1()
         func toggleTimer()
-        func pushScreen(_ screen: Router.NavigationLocation) -> (() -> Void)
+        func pushScreen(_ screen: NavigationLocation) -> (() -> Void)
     }
 
     protocol DemoDataSource: DataSourceProtocol {
@@ -63,15 +63,15 @@ struct DemoContentContainer {
         var title: String { get }
     }
 
-    protocol DemoRouter: RouterProtocol {}
+    protocol DemoRouter: RouterProtocol where NavigationLocation == DemoContentContainer.NavigationLocation {}
     
     // MARK: Models
     
-    class Interaction<DataSourceType: DemoDataSource>: BaseInteraction, DemoInteraction {
-        @Published var router: Router
+    class Interaction<RouterType: DemoRouter, DataSourceType: DemoDataSource>: BaseInteraction, DemoInteraction {
+        @Published var router: RouterType
         private let dataSource: DataSourceType
         
-        init(router: Router, dataSource: DataSourceType) {
+        init(router: RouterType, dataSource: DataSourceType) {
             self.router = router
             self.dataSource = dataSource
         }
@@ -85,24 +85,24 @@ struct DemoContentContainer {
         func toggleTimer() {
             dataSource.timerOn.toggle()
         }
-        func pushScreen(_ screen: Router.NavigationLocation) -> (() -> Void) {
+        func pushScreen(_ screen: RouterType.NavigationLocation) -> (() -> Void) {
             { [weak router] in
                 router?.pushScreen(location: screen)
             }
         }
     }
     
-    class Router: SimplifiedRouter<Router.NavigationLocation>, DemoRouter {
-        enum NavigationLocation: NavigationLocationProtocol {
-            case screen1
-            case screen2
-            
-            @ViewBuilder
-            func toView() -> some View {
-                switch self {
-                case .screen1: Text("Screen 1")
-                case .screen2: Text("Screen 2")
-                }
+    class Router: SimplifiedRouter<NavigationLocation>, DemoRouter {}
+    
+    enum NavigationLocation: NavigationLocationProtocol {
+        case screen1
+        case screen2
+        
+        @ViewBuilder
+        func toView() -> some View {
+            switch self {
+            case .screen1: Text("Screen 1")
+            case .screen2: Text("Screen 2")
             }
         }
     }
