@@ -27,8 +27,17 @@ struct DemoContentContainer {
                     }
                     ButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
                     ButtonData(title: "Update row 1", interaction: input.interaction.updateSection1Row1)
-                    ButtonData(title: "Push Screen 1", interaction: input.interaction.pushScreen(.screen1))
-                    ButtonData(title: "Push Screen 2", interaction: input.interaction.pushScreen(.screen2))
+                    
+                    ForEachData(data: RouterType.NavigationLocation.allCases) { screen in
+                        ButtonData(title: "Push \(screen.title)", interaction: input.interaction.pushScreen(screen))
+                    }
+                    
+                    GroupData(type: .section) {
+                        ButtonData(title: "Add Row", interaction: input.interaction.addRow)
+                        ForEachData(data: input.dataSource.uuids) { uuid in
+                            TextData(text: "ID: \(uuid.uuidString.prefix(10))")
+                        }
+                    }
                     
                     GroupData(type: .section) {
                         ButtonData(title: "Add 1 to values: \(input.dataSource.section2Row1Number)", interaction: input.interaction.updateSection2Row1)
@@ -54,11 +63,13 @@ struct DemoContentContainer {
         func updateSection2Row1()
         func toggleTimer()
         func pushScreen(_ screen: NavigationLocation) -> (() -> Void)
+        func addRow()
     }
 
     protocol DemoDataSource: DataSourceProtocol {
         var section1Row1Number: Int { get set }
         var section2Row1Number: Int { get set }
+        var uuids: [UUID] { get set }
         var timerOn: Bool { get set }
         var title: String { get }
     }
@@ -90,24 +101,32 @@ struct DemoContentContainer {
                 router?.pushScreen(location: screen)
             }
         }
+        func addRow() {
+            dataSource.uuids.append(.init())
+        }
     }
     
     class Router: SimplifiedRouter<NavigationLocation>, DemoRouter {}
     
-    enum NavigationLocation: NavigationLocationProtocol {
+    enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
         case screen1
         case screen2
         
         @ViewBuilder
         func toView() -> some View {
+            Text(title)
+        }
+        
+        var title: String {
             switch self {
-            case .screen1: Text("Screen 1")
-            case .screen2: Text("Screen 2")
+            case .screen1: "Screen 1"
+            case .screen2: "Screen 2"
             }
         }
     }
     
     class DataSource: ObservableObject, DemoDataSource {
+        @Published var uuids: [UUID] = []
         @Published var section1Row1Number = 0
         @Published var section2Row1Number = 0
         @Published var timerOn = false
@@ -115,6 +134,7 @@ struct DemoContentContainer {
     }
     
     class OverridingDataSource: ObservableObject, DemoDataSource {
+        @Published var uuids: [UUID] = []
         @Published var section1Row1Number = 0
         @Published var section2Row1Number = 0
         @Published var timerOn = false

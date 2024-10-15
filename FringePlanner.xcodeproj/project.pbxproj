@@ -15,6 +15,7 @@
 		0803724D2C98B7A3002DC9A2 /* FringePlannerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0803724C2C98B7A3002DC9A2 /* FringePlannerTests.swift */; };
 		080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */; };
 		080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */; };
+		081826A82CBF1445002293FD /* ForEachData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081826A72CBF1443002293FD /* ForEachData.swift */; };
 		0820A5732CB308BE006DDEE7 /* EventPerformanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080272E62C9A2EAB0040A673 /* EventPerformanceCell.swift */; };
 		0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A5752CB30F77006DDEE7 /* MakeEquatable.swift */; };
 		0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */; };
@@ -60,6 +61,7 @@
 		080372522C98B7A3002DC9A2 /* FringePlannerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FringePlannerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		080372562C98B7A3002DC9A2 /* FringePlannerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITests.swift; sourceTree = "<group>"; };
 		080372582C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePlannerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		081826A72CBF1443002293FD /* ForEachData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForEachData.swift; sourceTree = "<group>"; };
 		0820A5752CB30F77006DDEE7 /* MakeEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeEquatable.swift; sourceTree = "<group>"; };
 		0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProtocol.swift; sourceTree = "<group>"; };
 		0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeDataResultBuilder.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		08F10DB12CB85F5C008ACBFF /* ViewDatas */ = {
 			isa = PBXGroup;
 			children = (
+				081826A72CBF1443002293FD /* ForEachData.swift */,
 				08E8C0422CBC159F00C270F6 /* NavigationData.swift */,
 				08F10DB92CB92B95008ACBFF /* GroupData.swift */,
 				08F10DB22CB85FB9008ACBFF /* DebugOnlyViewDatas.swift */,
@@ -390,6 +393,7 @@
 				08F10DAE2CB85D91008ACBFF /* ArchitectureProtocols.swift in Sources */,
 				08F10DB82CB862B8008ACBFF /* DemoContent.swift in Sources */,
 				080272E52C9A20950040A673 /* EventCell.swift in Sources */,
+				081826A82CBF1445002293FD /* ForEachData.swift in Sources */,
 				08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */,
