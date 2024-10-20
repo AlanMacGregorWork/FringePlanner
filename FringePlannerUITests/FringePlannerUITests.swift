@@ -26,56 +26,53 @@ final class FringePlannerUITests: XCTestCase {
     func testNavigationCorrectlyPushes() throws {
         // Verifies that the navigation correctly pushes views
         
+        // == Setup ==
         let app = XCUIApplication()
         app.launchArguments = ["ui-test"]
         app.launch()
         
-        // == Setup Elements ==
-        let navScreen1 = app.staticTexts.containing(.label(string: "Nav: Screen 1")).firstMatch
-        let navScreen2 = app.staticTexts.containing(.label(string: "Nav: Screen 2")).firstMatch
-        let openSheet1Button = app.buttons.containing(.label(string: "Open Screen 1")).firstMatch
-        let openSheet2Button = app.buttons.containing(.label(string: "Open Screen 2")).firstMatch
-        let backButton = app.buttons.containing(.label(string: "Back")).firstMatch
+        // == Setup Variables ==
+        // Buttons
+        let buttonNavigationTests = TestUIElement(elementType: .button, label: "Navigation Tests")
+        let buttonOpenSheetBV1 = TestUIElement(elementType: .button, label: "Open Sheet B (V1)")
+        let buttonOpenSheetBV2 = TestUIElement(elementType: .button, label: "Open Sheet B (V2)")
+        let buttonOpenSheetC = TestUIElement(elementType: .button, label: "Open Sheet C")
+        let buttonOpenSheetDV1 = TestUIElement(elementType: .button, label: "Open Sheet D (V1)")
+        let buttonBack = TestUIElement(elementType: .button, label: "Back")
+        // Sheets
+        let sheetA = TestUIElement(elementType: .text, label: "Title: Sheet A")
+        let sheetBV1 = TestUIElement(elementType: .text, label: "Title: Sheet B (V1)")
+        let sheetBV2 = TestUIElement(elementType: .text, label: "Title: Sheet B (V2)")
+        let sheetC = TestUIElement(elementType: .text, label: "Title: Sheet C")
+        let sheetDV1 = TestUIElement(elementType: .text, label: "Title: Sheet D (V1)")
         
-        
-        // Pressing the "Open Screen 1" button should push Screen 1
-        try openSheet1Button.throwOnNotExist()
-        openSheet1Button.tap()
-        try navScreen1.throwOnNotExist()
-        
-        // Pressing back should show the first screen again
-        try backButton.throwOnNotExist()
-        backButton.tap()
-        
-        // Pressing the "Open Screen 1" button should push Screen 1 again
-        try openSheet1Button.throwOnNotExist()
-        openSheet1Button.tap()
-        try navScreen1.throwOnNotExist()
-        
-        // Pressing back should show the first screen again
-        try backButton.throwOnNotExist()
-        backButton.tap()
-        
-        // Pressing the "Open Screen 1" button should push Screen 2
-        try openSheet2Button.throwOnNotExist()
-        openSheet2Button.tap()
-        try navScreen2.throwOnNotExist()
-    }
-}
-
-extension NSPredicate {
-    static func label(string: String) -> NSPredicate {
-        NSPredicate(format: "label CONTAINS '\(string)'")
-    }
-}
-
-extension XCUIElement {
-    @discardableResult
-    func throwOnNotExist() throws -> Self {
-        enum ElementIssue: Error {
-            case elementDoesNotExist
+        // == Open Navigation Sheet ==
+        try XCTContext.runActivity(named: "Open Navigation Sheet") { _ in
+            try runTask(for: app, tap: buttonNavigationTests, task: "push", expect: sheetA)
         }
-        guard self.exists else { throw ElementIssue.elementDoesNotExist }
-        return self
+        
+        // == Tests ==
+        try XCTContext.runActivity(named: "Test: General Push & Pop") { _ in
+            try runTask(for: app, tap: buttonOpenSheetBV1, task: "push", expect: sheetBV1)
+            try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetA)
+        }
+        try XCTContext.runActivity(named: "Test: Verify the `pushSheet` can have the same selected value (ensures that `pushSheet` became nil on pop)") { _ in
+            try runTask(for: app, tap: buttonOpenSheetBV1, task: "push", expect: sheetBV1)
+            try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetA)
+        }
+        try XCTContext.runActivity(named: "Test: Verify requesting another sheet will not show the first sheet again") { _ in
+            try runTask(for: app, tap: buttonOpenSheetBV2, task: "push", expect: sheetBV2)
+            try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetA)
+        }
+        try XCTContext.runActivity(named: "Test: Multiple child views can be pushed individually") { _ in
+            try runTask(for: app, tap: buttonOpenSheetBV1, task: "push", expect: sheetBV1)
+            try runTask(for: app, tap: buttonOpenSheetC, task: "push", expect: sheetC)
+            try runTask(for: app, tap: buttonOpenSheetDV1, task: "push", expect: sheetDV1)
+        }
+        try XCTContext.runActivity(named: "Test: Multiple child views can be popped individually") { _ in
+            try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetC)
+            try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetBV1)
+            try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetA)
+        }
     }
 }

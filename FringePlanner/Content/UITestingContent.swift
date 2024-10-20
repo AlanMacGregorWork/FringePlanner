@@ -18,25 +18,22 @@ struct UITestingContentContainer {
             self.router = router
         }
         
-        func openSheet1() {
-            self.router.pushScreen(location: .screen1)
+        func push(sheet: Router.NavigationLocation) {
+            self.router.pushScreen(location: sheet)
         }
-        func openSheet2() {
-            self.router.pushScreen(location: .screen2)
+        
+        func pushNavigationTestsSheet() {
+            self.router.pushScreen(location: .navigationTests)
         }
     }
     
     class Router: SimplifiedRouter<Router.NavigationLocation> {
         enum NavigationLocation: NavigationLocationProtocol {
-            case screen1
-            case screen2
+            case navigationTests
             
             @ViewBuilder
             func toView() -> some View {
-                switch self {
-                case .screen1: Text("Nav: Screen 1")
-                case .screen2: Text("Nav: Screen 2")
-                }
+                NavigationTestSheetAContainer.Content().buildView()
             }
         }
     }
@@ -55,9 +52,11 @@ struct UITestingContentContainer {
         
         let structure = { (input: ContentInput) in
             NavigationData(router: input.router) {
+                TextData(text: "Title: Main Sheet")
                 GroupData(type: .form) {
-                    ButtonData(title: "Open Screen 1", interaction: input.interaction.openSheet1)
-                    ButtonData(title: "Open Screen 2", interaction: input.interaction.openSheet2)
+                    GroupData(type: .section) {
+                        ButtonData(title: "Navigation Tests", interaction: input.interaction.pushNavigationTestsSheet)
+                    }
                 }
             }
         }
@@ -66,6 +65,99 @@ struct UITestingContentContainer {
     @ViewBuilder
     var uiTestingView: some View {
         Content().buildView()
+    }
+    
+    private struct NavigationTestSheetAContainer {
+        class Router: SimplifiedRouter<Router.NavigationLocation> {
+            enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
+                case sheetBV1
+                case sheetBV2
+                
+                @ViewBuilder
+                func toView() -> some View {
+                    switch self {
+                    case .sheetBV1:
+                        NavigationTestSheetBContainer.Content().buildView()
+                    case .sheetBV2:
+                        Text("Title: Sheet B (V1)")
+                    }
+                }
+            }
+        }
+        struct Content: ContentProtocol {
+            let router = Router()
+            let interaction = BasicInteraction()
+            let dataSource = BasicDataSource()
+
+            let structure = { (input: ContentInput) in
+                NavigationData(router: input.router) {
+                    TextData(text: "Title: Sheet A")
+                    GroupData(type: .form) {
+                        ButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushScreen(location: .sheetBV1) })
+                        ButtonData(title: "Open Sheet B (V2)", interaction: { input.router.pushScreen(location: .sheetBV2) })
+                    }
+                }
+            }
+        }
+    }
+    
+    private struct NavigationTestSheetBContainer {
+        class Router: SimplifiedRouter<Router.NavigationLocation> {
+            enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
+                case sheetC
+                
+                @ViewBuilder
+                func toView() -> some View {
+                    NavigationTestSheetCContainer.Content().buildView()
+                }
+            }
+        }
+        struct Content: ContentProtocol {
+            let router = Router()
+            let interaction = BasicInteraction()
+            let dataSource = BasicDataSource()
+
+            let structure = { (input: ContentInput) in
+                NavigationData(router: input.router) {
+                    TextData(text: "Title: Sheet B (V1)")
+                    GroupData(type: .form) {
+                        ButtonData(title: "Open Sheet C", interaction: { input.router.pushScreen(location: .sheetC) })
+                    }
+                }
+            }
+        }
+    }
+    
+    private struct NavigationTestSheetCContainer {
+        class Router: SimplifiedRouter<Router.NavigationLocation> {
+            enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
+                case sheetDV1
+                case sheetDV2
+                
+                @ViewBuilder
+                func toView() -> some View {
+                    switch self {
+                    case .sheetDV1: Text("Title: Sheet D (V1)")
+                    case .sheetDV2: Text("title: Sheet D (V2)")
+                    }
+                }
+            }
+        }
+        struct Content: ContentProtocol {
+            let router = Router()
+            let interaction = BasicInteraction()
+            let dataSource = BasicDataSource()
+
+            let structure = { (input: ContentInput) in
+                NavigationData(router: input.router) {
+                    TextData(text: "Title: Sheet C")
+                    GroupData(type: .form) {
+                        ButtonData(title: "Open Sheet D (V1)", interaction: { input.router.pushScreen(location: .sheetDV1) })
+                        ButtonData(title: "Open Sheet D (V2)", interaction: { input.router.pushScreen(location: .sheetDV2) })
+                    }
+                }
+            }
+        }
     }
 }
 
