@@ -28,8 +28,8 @@ struct DemoContentContainer {
                     ButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
                     ButtonData(title: "Update row 1", interaction: input.interaction.updateSection1Row1)
                     
-                    ForEachData(data: RouterType.NavigationLocation.allCases) { screen in
-                        ButtonData(title: "Push \(screen.title)", interaction: input.interaction.pushScreen(screen))
+                    ForEachData(data: RouterType.NavigationLocation.allCases) { sheet in
+                        ButtonData(title: "Push \(sheet.title)", interaction: input.interaction.pushSheet(sheet))
                     }
                     
                     GroupData(type: .section) {
@@ -62,7 +62,7 @@ struct DemoContentContainer {
         func updateSection1Row1()
         func updateSection2Row1()
         func toggleTimer()
-        func pushScreen(_ screen: NavigationLocation) -> (() -> Void)
+        func pushSheet(_ sheet: NavigationLocation) -> (() -> Void)
         func addRow()
     }
 
@@ -96,9 +96,9 @@ struct DemoContentContainer {
         func toggleTimer() {
             dataSource.timerOn.toggle()
         }
-        func pushScreen(_ screen: RouterType.NavigationLocation) -> (() -> Void) {
+        func pushSheet(_ sheet: RouterType.NavigationLocation) -> (() -> Void) {
             { [weak router] in
-                router?.pushScreen(location: screen)
+                router?.pushSheet(location: sheet)
             }
         }
         func addRow() {
@@ -109,8 +109,8 @@ struct DemoContentContainer {
     class Router: SimplifiedRouter<NavigationLocation>, DemoRouter {}
     
     enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
-        case screen1
-        case screen2
+        case sheet1
+        case sheet2
         
         @ViewBuilder
         func toView() -> some View {
@@ -119,8 +119,8 @@ struct DemoContentContainer {
         
         var title: String {
             switch self {
-            case .screen1: "Screen 1"
-            case .screen2: "Screen 2"
+            case .sheet1: "Sheet 1"
+            case .sheet2: "Sheet 2"
             }
         }
     }

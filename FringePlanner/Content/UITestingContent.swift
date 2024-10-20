@@ -19,11 +19,11 @@ struct UITestingContentContainer {
         }
         
         func push(sheet: Router.NavigationLocation) {
-            self.router.pushScreen(location: sheet)
+            self.router.pushSheet(location: sheet)
         }
         
         func pushNavigationTestsSheet() {
-            self.router.pushScreen(location: .navigationTests)
+            self.router.pushSheet(location: .navigationTests)
         }
     }
     
@@ -93,8 +93,8 @@ struct UITestingContentContainer {
                 NavigationData(router: input.router) {
                     TextData(text: "Title: Sheet A")
                     GroupData(type: .form) {
-                        ButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushScreen(location: .sheetBV1) })
-                        ButtonData(title: "Open Sheet B (V2)", interaction: { input.router.pushScreen(location: .sheetBV2) })
+                        ButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushSheet(location: .sheetBV1) })
+                        ButtonData(title: "Open Sheet B (V2)", interaction: { input.router.pushSheet(location: .sheetBV2) })
                     }
                 }
             }
@@ -121,7 +121,7 @@ struct UITestingContentContainer {
                 NavigationData(router: input.router) {
                     TextData(text: "Title: Sheet B (V1)")
                     GroupData(type: .form) {
-                        ButtonData(title: "Open Sheet C", interaction: { input.router.pushScreen(location: .sheetC) })
+                        ButtonData(title: "Open Sheet C", interaction: { input.router.pushSheet(location: .sheetC) })
                     }
                 }
             }
@@ -152,8 +152,8 @@ struct UITestingContentContainer {
                 NavigationData(router: input.router) {
                     TextData(text: "Title: Sheet C")
                     GroupData(type: .form) {
-                        ButtonData(title: "Open Sheet D (V1)", interaction: { input.router.pushScreen(location: .sheetDV1) })
-                        ButtonData(title: "Open Sheet D (V2)", interaction: { input.router.pushScreen(location: .sheetDV2) })
+                        ButtonData(title: "Open Sheet D (V1)", interaction: { input.router.pushSheet(location: .sheetDV1) })
+                        ButtonData(title: "Open Sheet D (V2)", interaction: { input.router.pushSheet(location: .sheetDV2) })
                     }
                 }
             }

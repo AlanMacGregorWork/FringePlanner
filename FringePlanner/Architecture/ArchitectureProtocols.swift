@@ -75,7 +75,7 @@ class BaseInteraction: ObservableObject, Equatable {
 class BaseRouter<NavigationLocation: NavigationLocationProtocol> {
     @Published var pushedSheet: NavigationLocation?
     
-    func pushScreen(location: NavigationLocation?) {
+    func pushSheet(location: NavigationLocation?) {
         pushedSheet = location
     }
 }
