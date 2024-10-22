@@ -38,6 +38,7 @@ final class FringePlannerUITests: XCTestCase {
         let buttonOpenSheetBV2 = TestUIElement(elementType: .button, label: "Open Sheet B (V2)")
         let buttonOpenSheetC = TestUIElement(elementType: .button, label: "Open Sheet C")
         let buttonOpenSheetDV1 = TestUIElement(elementType: .button, label: "Open Sheet D (V1)")
+        let buttonChangeParentSelectionToSheetBV2 = TestUIElement(elementType: .button, label: "Change Parent Selection To Sheet B (V2)")
         let buttonBack = TestUIElement(elementType: .button, label: "Back")
         // Sheets
         let sheetA = TestUIElement(elementType: .text, label: "Title: Sheet A")
@@ -73,6 +74,10 @@ final class FringePlannerUITests: XCTestCase {
             try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetC)
             try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetBV1)
             try runTask(for: app, tap: buttonBack, task: "pop", expect: sheetA)
+        }
+        try XCTContext.runActivity(named: "Test: Altering a parent `pushedSheet` value will pop child view and push new view") { _ in
+            try runTask(for: app, tap: buttonOpenSheetBV1, task: "push", expect: sheetBV1)
+            try runTask(for: app, tap: buttonChangeParentSelectionToSheetBV2, task: "swaps to", expect: sheetBV2)
         }
     }
 }

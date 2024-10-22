@@ -87,6 +87,7 @@ struct ContentViewGenerationInput<Content: BaseContentProtocol> {
     let router: Content.RouterType
     let dataSource: Content.DataSourceType
     let interaction: Content.InteractionType
+    let reference: Content
 }
 
 /// Simplifies the router creation when just requiring the location type

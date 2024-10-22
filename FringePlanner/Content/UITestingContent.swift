@@ -69,17 +69,18 @@ struct UITestingContentContainer {
     
     private struct NavigationTestSheetAContainer {
         class Router: SimplifiedRouter<Router.NavigationLocation> {
-            enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
-                case sheetBV1
+            enum NavigationLocation: NavigationLocationProtocol {
+                #warning("Resolve this Equatable usage")
+                case sheetBV1(parentRouter: MakeEquatableReadOnly<UITestingContentContainer.NavigationTestSheetAContainer.Router>)
                 case sheetBV2
                 
                 @ViewBuilder
                 func toView() -> some View {
                     switch self {
-                    case .sheetBV1:
-                        NavigationTestSheetBContainer.Content().buildView()
+                    case .sheetBV1(let parentRouter):
+                        NavigationTestSheetBContainer.Content(parentRouter: parentRouter.wrappedValue).buildView()
                     case .sheetBV2:
-                        Text("Title: Sheet B (V1)")
+                        Text("Title: Sheet B (V2)")
                     }
                 }
             }
@@ -93,7 +94,7 @@ struct UITestingContentContainer {
                 NavigationData(router: input.router) {
                     TextData(text: "Title: Sheet A")
                     GroupData(type: .form) {
-                        ButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushSheet(location: .sheetBV1) })
+                        ButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushSheet(location: .sheetBV1(parentRouter: MakeEquatableReadOnly.init(wrappedValue: input.router))) })
                         ButtonData(title: "Open Sheet B (V2)", interaction: { input.router.pushSheet(location: .sheetBV2) })
                     }
                 }
@@ -116,12 +117,18 @@ struct UITestingContentContainer {
             let router = Router()
             let interaction = BasicInteraction()
             let dataSource = BasicDataSource()
+            let parentRouter: UITestingContentContainer.NavigationTestSheetAContainer.Router
 
             let structure = { (input: ContentInput) in
                 NavigationData(router: input.router) {
                     TextData(text: "Title: Sheet B (V1)")
                     GroupData(type: .form) {
-                        ButtonData(title: "Open Sheet C", interaction: { input.router.pushSheet(location: .sheetC) })
+                        GroupData(type: .section) {
+                            ButtonData(title: "Open Sheet C", interaction: { input.router.pushSheet(location: .sheetC) })
+                        }
+                        GroupData(type: .section) {
+                            ButtonData(title: "Change Parent Selection To Sheet B (V2)", interaction: { input.reference.parentRouter.pushSheet(location: .sheetBV2) })
+                        }
                     }
                 }
             }
