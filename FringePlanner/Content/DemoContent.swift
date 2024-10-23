@@ -12,9 +12,11 @@ import SwiftUI
 #if DEBUG
 
 struct DemoContentContainer {
+    
+    typealias Router = SimplifiedRouter<NavigationLocation>
 
-    struct Content<RouterType: DemoRouter, InteractionType: DemoInteraction, DataSourceType: DemoDataSource>: ContentProtocol {
-        let router: RouterType
+    struct Content< InteractionType: DemoInteraction, DataSourceType: DemoDataSource>: ContentProtocol {
+        let router: Router
         let interaction: InteractionType
         let dataSource: DataSourceType
         
@@ -49,7 +51,7 @@ struct DemoContentContainer {
         }
     }
     
-    static func createDemoContent() -> Content<Router, Interaction<Router, OverridingDataSource>, OverridingDataSource> {
+    static func createDemoContent() -> Content<Interaction<OverridingDataSource>, OverridingDataSource> {
         let router = Router()
         let dataSource = OverridingDataSource()
         let interaction = Interaction(router: router, dataSource: dataSource)
@@ -73,16 +75,14 @@ struct DemoContentContainer {
         var timerOn: Bool { get set }
         var title: String { get }
     }
-
-    protocol DemoRouter: RouterProtocol where NavigationLocation == DemoContentContainer.NavigationLocation {}
     
     // MARK: Models
     
-    class Interaction<RouterType: DemoRouter, DataSourceType: DemoDataSource>: BaseInteraction, DemoInteraction {
-        @Published var router: RouterType
+    class Interaction<DataSourceType: DemoDataSource>: BaseInteraction, DemoInteraction {
+        @Published var router: Router
         private let dataSource: DataSourceType
         
-        init(router: RouterType, dataSource: DataSourceType) {
+        init(router: Router, dataSource: DataSourceType) {
             self.router = router
             self.dataSource = dataSource
         }
@@ -96,7 +96,7 @@ struct DemoContentContainer {
         func toggleTimer() {
             dataSource.timerOn.toggle()
         }
-        func pushSheet(_ sheet: RouterType.NavigationLocation) -> (() -> Void) {
+        func pushSheet(_ sheet: NavigationLocation) -> (() -> Void) {
             { [weak router] in
                 router?.pushSheet(location: sheet)
             }
@@ -105,8 +105,6 @@ struct DemoContentContainer {
             dataSource.uuids.append(.init())
         }
     }
-    
-    class Router: SimplifiedRouter<NavigationLocation>, DemoRouter {}
     
     enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
         case sheet1

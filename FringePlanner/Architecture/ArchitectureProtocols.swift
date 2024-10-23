@@ -91,4 +91,8 @@ struct ContentViewGenerationInput<Content: BaseContentProtocol> {
 }
 
 /// Simplifies the router creation when just requiring the location type
-class SimplifiedRouter<NavigationLocation: NavigationLocationProtocol>: BaseRouter<NavigationLocation>, RouterProtocol {}
+final class SimplifiedRouter<NavigationLocation: NavigationLocationProtocol>: BaseRouter<NavigationLocation>, RouterProtocol, Hashable {
+    func hash(into hasher: inout Hasher) {
+        // No hashing needed
+    }
+}

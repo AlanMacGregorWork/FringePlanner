@@ -9,14 +9,12 @@ import SwiftUI
 
 // Components that perform no actions
 
-class BasicRouter: SimplifiedRouter<BasicRouter.NavigationLocation> {
-    // Enum with no cases meaning no valid selection can be triggered
-    enum NavigationLocation: NavigationLocationProtocol {
-        // Without a case, we can always refuse the UI
-        func toView() -> some View { EmptyView() }
-    }
-}
-
 class BasicInteraction: BaseInteraction, InteractionProtocol {}
 
 class BasicDataSource: DataSourceProtocol, ObservableObject {}
+
+/// Enum with no cases meaning no valid selection can be triggered
+enum BasicNavigationLocation: NavigationLocationProtocol {
+    // Without a case, we can always refuse the UI
+    func toView() -> some View { EmptyView() }
+}

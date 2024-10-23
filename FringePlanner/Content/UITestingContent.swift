@@ -11,6 +11,8 @@ import SwiftUI
 
 /// Content used for UI testing
 struct UITestingContentContainer {
+    typealias Router = SimplifiedRouter<NavigationLocation>
+    
     class Interaction: BaseInteraction, InteractionProtocol {
         let router: Router
         
@@ -27,14 +29,12 @@ struct UITestingContentContainer {
         }
     }
     
-    class Router: SimplifiedRouter<Router.NavigationLocation> {
-        enum NavigationLocation: NavigationLocationProtocol {
-            case navigationTests
-            
-            @ViewBuilder
-            func toView() -> some View {
-                NavigationTestSheetAContainer.Content().buildView()
-            }
+    enum NavigationLocation: NavigationLocationProtocol {
+        case navigationTests
+        
+        @ViewBuilder
+        func toView() -> some View {
+            NavigationTestSheetAContainer.Content().buildView()
         }
     }
     
@@ -68,23 +68,35 @@ struct UITestingContentContainer {
     }
     
     private struct NavigationTestSheetAContainer {
-        class Router: SimplifiedRouter<Router.NavigationLocation> {
-            enum NavigationLocation: NavigationLocationProtocol {
-                #warning("Resolve this Equatable usage")
-                case sheetBV1(parentRouter: MakeEquatableReadOnly<UITestingContentContainer.NavigationTestSheetAContainer.Router>)
-                case sheetBV2
-                
-                @ViewBuilder
-                func toView() -> some View {
-                    switch self {
-                    case .sheetBV1(let parentRouter):
-                        NavigationTestSheetBContainer.Content(parentRouter: parentRouter.wrappedValue).buildView()
-                    case .sheetBV2:
-                        Text("Title: Sheet B (V2)")
-                    }
+        typealias Router = SimplifiedRouter<NavigationLocation>
+        
+        enum NavigationLocation: NavigationLocationProtocol {
+            case sheetBV1(parentRouter: Router)
+            case sheetBV2
+            
+            @ViewBuilder
+            func toView() -> some View {
+                switch self {
+                case .sheetBV1(let parentRouter):
+                    NavigationTestSheetBContainer.Content(parentRouter: parentRouter).buildView()
+                case .sheetBV2:
+                    Text("Title: Sheet B (V2)")
                 }
             }
+            
+            static func == (lhs: Self, rhs: Self) -> Bool {
+                // Due to equating a `NavigationLocation` with an associated value to a router, it is necessary
+                // to override the `Equatable` check
+                func getId(for caseValue: Self) -> Int {
+                    switch caseValue {
+                    case .sheetBV1: return 1
+                    case .sheetBV2: return 2
+                    }
+                }
+                return getId(for: lhs) == getId(for: rhs)
+            }
         }
+        
         struct Content: ContentProtocol {
             let router = Router()
             let interaction = BasicInteraction()
@@ -94,7 +106,7 @@ struct UITestingContentContainer {
                 NavigationData(router: input.router) {
                     TextData(text: "Title: Sheet A")
                     GroupData(type: .form) {
-                        ButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushSheet(location: .sheetBV1(parentRouter: MakeEquatableReadOnly.init(wrappedValue: input.router))) })
+                        ButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushSheet(location: .sheetBV1(parentRouter: input.router)) })
                         ButtonData(title: "Open Sheet B (V2)", interaction: { input.router.pushSheet(location: .sheetBV2) })
                     }
                 }
@@ -103,16 +115,17 @@ struct UITestingContentContainer {
     }
     
     private struct NavigationTestSheetBContainer {
-        class Router: SimplifiedRouter<Router.NavigationLocation> {
-            enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
-                case sheetC
-                
-                @ViewBuilder
-                func toView() -> some View {
-                    NavigationTestSheetCContainer.Content().buildView()
-                }
+        typealias Router = SimplifiedRouter<NavigationLocation>
+        
+        enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
+            case sheetC
+            
+            @ViewBuilder
+            func toView() -> some View {
+                NavigationTestSheetCContainer.Content().buildView()
             }
         }
+        
         struct Content: ContentProtocol {
             let router = Router()
             let interaction = BasicInteraction()
@@ -136,20 +149,21 @@ struct UITestingContentContainer {
     }
     
     private struct NavigationTestSheetCContainer {
-        class Router: SimplifiedRouter<Router.NavigationLocation> {
-            enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
-                case sheetDV1
-                case sheetDV2
-                
-                @ViewBuilder
-                func toView() -> some View {
-                    switch self {
-                    case .sheetDV1: Text("Title: Sheet D (V1)")
-                    case .sheetDV2: Text("title: Sheet D (V2)")
-                    }
+        typealias Router = SimplifiedRouter<NavigationLocation>
+        
+        enum NavigationLocation: NavigationLocationProtocol, CaseIterable {
+            case sheetDV1
+            case sheetDV2
+            
+            @ViewBuilder
+            func toView() -> some View {
+                switch self {
+                case .sheetDV1: Text("Title: Sheet D (V1)")
+                case .sheetDV2: Text("title: Sheet D (V2)")
                 }
             }
         }
+        
         struct Content: ContentProtocol {
             let router = Router()
             let interaction = BasicInteraction()
