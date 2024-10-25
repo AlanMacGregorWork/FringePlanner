@@ -29,6 +29,11 @@ protocol ContentProtocol: BaseContentProtocol {
 
 extension ContentProtocol {
     typealias ContentInput = ContentViewGenerationInput<Self>
+    
+    /// Generates the structure using self as the input
+    func generateStructure() -> ContentType {
+        self.structure(.init(router: router, dataSource: dataSource, interaction: interaction, reference: self))
+    }
 }
 
 // MARK: - Components
