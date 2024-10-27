@@ -60,11 +60,3 @@ extension TestUIElement {
         case button
     }
 }
-
-// MARK: - Predicate
-
-fileprivate extension NSPredicate {
-    static func label(string: String) -> NSPredicate {
-        NSPredicate(format: "label CONTAINS '\(string)'")
-    }
-}

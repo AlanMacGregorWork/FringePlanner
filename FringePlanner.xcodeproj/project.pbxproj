@@ -24,6 +24,7 @@
 		0835BCC92CCE42790031A860 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835BCC82CCE42770031A860 /* Expectation.swift */; };
 		08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C1E2CC56D370075C50E /* XCTestCase.swift */; };
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
+		08E1B3F82CCEA8EE00C7333A /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */; };
 		08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0402CB98BD000C270F6 /* UITestingContent.swift */; };
 		08E8C0432CBC15A000C270F6 /* NavigationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0422CBC159F00C270F6 /* NavigationData.swift */; };
 		08F10DAE2CB85D91008ACBFF /* ArchitectureProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DAD2CB85D7B008ACBFF /* ArchitectureProtocols.swift */; };
@@ -73,6 +74,7 @@
 		08666C1E2CC56D370075C50E /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
+		08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicate.swift; sourceTree = "<group>"; };
 		08E8C0402CB98BD000C270F6 /* UITestingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestingContent.swift; sourceTree = "<group>"; };
 		08E8C0422CBC159F00C270F6 /* NavigationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationData.swift; sourceTree = "<group>"; };
 		08F10DAD2CB85D7B008ACBFF /* ArchitectureProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchitectureProtocols.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 		08666C1D2CC56D270075C50E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */,
 				08666C1E2CC56D370075C50E /* XCTestCase.swift */,
 			);
 			path = Extensions;
@@ -445,6 +448,7 @@
 			files = (
 				080372592C98B7A3002DC9A2 /* FringePlannerUITestsLaunchTests.swift in Sources */,
 				08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */,
+				08E1B3F82CCEA8EE00C7333A /* NSPredicate.swift in Sources */,
 				08666C212CC56D730075C50E /* TestUIElement.swift in Sources */,
 				080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */,
 				0835BCC92CCE42790031A860 /* Expectation.swift in Sources */,
