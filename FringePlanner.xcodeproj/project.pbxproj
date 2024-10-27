@@ -25,6 +25,7 @@
 		08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C1E2CC56D370075C50E /* XCTestCase.swift */; };
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
 		08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C92D682CCEACD4001732E9 /* ContentProtocol.swift */; };
+		08C92D6E2CCEB7F5001732E9 /* Keys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */; };
 		08E1B3F82CCEA8EE00C7333A /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */; };
 		08E1B3FB2CCEAAD800C7333A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */; };
 		08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0402CB98BD000C270F6 /* UITestingContent.swift */; };
@@ -77,6 +78,8 @@
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08C92D682CCEACD4001732E9 /* ContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProtocol.swift; sourceTree = "<group>"; };
+		08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Keys.xcconfig; sourceTree = "<group>"; };
+		08C92D6F2CCEB9E7001732E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicate.swift; sourceTree = "<group>"; };
 		08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		08E8C0402CB98BD000C270F6 /* UITestingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestingContent.swift; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 		0803723A2C98B7A2002DC9A2 /* FringePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				08C92D6F2CCEB9E7001732E9 /* Info.plist */,
+				08C92D6A2CCEB451001732E9 /* Helper */,
 				08F10DB62CB86298008ACBFF /* Content */,
 				08F10DB12CB85F5C008ACBFF /* ViewDatas */,
 				08F10DAC2CB856E2008ACBFF /* Architecture */,
@@ -266,6 +271,14 @@
 				08C92D682CCEACD4001732E9 /* ContentProtocol.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		08C92D6A2CCEB451001732E9 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		08F10DAC2CB856E2008ACBFF /* Architecture */ = {
@@ -404,6 +417,7 @@
 			files = (
 				080372432C98B7A3002DC9A2 /* Preview Assets.xcassets in Resources */,
 				080372402C98B7A3002DC9A2 /* Assets.xcassets in Resources */,
+				08C92D6E2CCEB7F5001732E9 /* Keys.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,6 +503,7 @@
 /* Begin XCBuildConfiguration section */
 		0803725A2C98B7A3002DC9A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -552,6 +567,7 @@
 		};
 		0803725B2C98B7A3002DC9A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -608,6 +624,7 @@
 		};
 		0803725D2C98B7A3002DC9A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -617,6 +634,7 @@
 				DEVELOPMENT_TEAM = Z5GWZ3778M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FringePlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -638,6 +656,7 @@
 		};
 		0803725E2C98B7A3002DC9A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -647,6 +666,7 @@
 				DEVELOPMENT_TEAM = Z5GWZ3778M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FringePlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -668,6 +688,7 @@
 		};
 		080372602C98B7A3002DC9A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -687,6 +708,7 @@
 		};
 		080372612C98B7A3002DC9A2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
