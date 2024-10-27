@@ -7,29 +7,10 @@
 
 import XCTest
 
-final class FringePlannerUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
+final class FringePlannerUITests: BaseUITests {
     @MainActor
     func testChangesToDataModelRender() throws {
         // Verifies that the changes to the data model correctly render the content
-        
-        // == Setup ==
-        let app = XCUIApplication()
-        app.launchArguments = ["ui-test"]
-        app.launch()
         
         // == Setup Variables ==
         // Elements
@@ -88,11 +69,6 @@ final class FringePlannerUITests: XCTestCase {
     @MainActor
     func testNavigationCorrectlyPushes() throws {
         // Verifies that the navigation correctly pushes views
-        
-        // == Setup ==
-        let app = XCUIApplication()
-        app.launchArguments = ["ui-test"]
-        app.launch()
         
         // == Setup Variables ==
         // Buttons
