@@ -21,6 +21,7 @@
 		0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */; };
 		0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
+		0835BCC92CCE42790031A860 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835BCC82CCE42770031A860 /* Expectation.swift */; };
 		08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C1E2CC56D370075C50E /* XCTestCase.swift */; };
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
 		08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0402CB98BD000C270F6 /* UITestingContent.swift */; };
@@ -68,6 +69,7 @@
 		0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProtocol.swift; sourceTree = "<group>"; };
 		0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeDataResultBuilder.swift; sourceTree = "<group>"; };
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		0835BCC82CCE42770031A860 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		08666C1E2CC56D370075C50E /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 		08666C1C2CC56D040075C50E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0835BCC82CCE42770031A860 /* Expectation.swift */,
 				08666C202CC56D710075C50E /* TestUIElement.swift */,
 			);
 			path = Helpers;
@@ -444,6 +447,7 @@
 				08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */,
 				08666C212CC56D730075C50E /* TestUIElement.swift in Sources */,
 				080372572C98B7A3002DC9A2 /* FringePlannerUITests.swift in Sources */,
+				0835BCC92CCE42790031A860 /* Expectation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

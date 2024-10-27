@@ -8,10 +8,11 @@
 import XCTest
 
 /// Defines information about the UI element for testing
-struct TestUIElement {
+struct TestUIElement: Hashable {
     
     // MARK: Property
     
+    let referenceName: String
     let elementType: ElementType
     let label: String
     
