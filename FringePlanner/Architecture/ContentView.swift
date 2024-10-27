@@ -44,6 +44,7 @@ private struct ContentViewGenerator<T>: View {
 
 extension ViewDataProtocol {
     /// Helper function to create the view from the type
+    @MainActor
     func createView() -> ContentView {
         ContentView(data: self)
     }
@@ -51,6 +52,7 @@ extension ViewDataProtocol {
 
 extension ContentProtocol {
     /// Helper to construct the view from the protocol
+    @MainActor
     func buildView() -> ContentView<Self> {
         .init(self)
     }

@@ -14,6 +14,7 @@ protocol ViewDataProtocol: Equatable {
 }
 
 /// Defines a view that can be generated from a corresponding data model
+@MainActor
 protocol ViewProtocol: View {
     /// The data model required to build the view
     associatedtype DataType: ViewDataProtocol

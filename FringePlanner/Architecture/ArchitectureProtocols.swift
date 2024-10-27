@@ -63,7 +63,9 @@ protocol DataSourceProtocol where Self: ObservableObject { }
 protocol NavigationLocationProtocol: Hashable {
     associatedtype ContentView: View
     /// A view that van be generated from the location
-    @ViewBuilder func toView() -> ContentView
+    @ViewBuilder
+    @MainActor
+    func toView() -> ContentView
 }
 
 // MARK: - Base Components
