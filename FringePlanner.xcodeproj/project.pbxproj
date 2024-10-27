@@ -22,6 +22,8 @@
 		0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 		0835BCC92CCE42790031A860 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835BCC82CCE42770031A860 /* Expectation.swift */; };
+		0862400C2CCEBD9E004DDC3C /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0862400B2CCEBD96004DDC3C /* ApiKey.swift */; };
+		086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086240112CCEC02A004DDC3C /* ApiKeyTests.swift */; };
 		08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C1E2CC56D370075C50E /* XCTestCase.swift */; };
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
 		08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C92D682CCEACD4001732E9 /* ContentProtocol.swift */; };
@@ -74,6 +76,8 @@
 		0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeDataResultBuilder.swift; sourceTree = "<group>"; };
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		0835BCC82CCE42770031A860 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
+		0862400B2CCEBD96004DDC3C /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		086240112CCEC02A004DDC3C /* ApiKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTests.swift; sourceTree = "<group>"; };
 		08666C1E2CC56D370075C50E /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 		0803724B2C98B7A3002DC9A2 /* FringePlannerTests */ = {
 			isa = PBXGroup;
 			children = (
+				0862400E2CCEBFFE004DDC3C /* HelperTests */,
 				08C92D672CCEACCB001732E9 /* Extensions */,
 				0803724C2C98B7A3002DC9A2 /* ExampleTest.swift */,
 			);
@@ -246,6 +251,14 @@
 			path = ResultBuilder;
 			sourceTree = "<group>";
 		};
+		0862400E2CCEBFFE004DDC3C /* HelperTests */ = {
+			isa = PBXGroup;
+			children = (
+				086240112CCEC02A004DDC3C /* ApiKeyTests.swift */,
+			);
+			path = HelperTests;
+			sourceTree = "<group>";
+		};
 		08666C1C2CC56D040075C50E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,6 +289,7 @@
 		08C92D6A2CCEB451001732E9 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				0862400B2CCEBD96004DDC3C /* ApiKey.swift */,
 				08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */,
 			);
 			path = Helper;
@@ -449,6 +463,7 @@
 				08F10DAE2CB85D91008ACBFF /* ArchitectureProtocols.swift in Sources */,
 				08F10DB82CB862B8008ACBFF /* DemoContent.swift in Sources */,
 				080272E52C9A20950040A673 /* EventCell.swift in Sources */,
+				0862400C2CCEBD9E004DDC3C /* ApiKey.swift in Sources */,
 				081826A82CBF1445002293FD /* ForEachData.swift in Sources */,
 				08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
@@ -467,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0803724D2C98B7A3002DC9A2 /* ExampleTest.swift in Sources */,
+				086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */,
 				08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
