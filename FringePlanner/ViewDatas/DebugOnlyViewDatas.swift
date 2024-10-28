@@ -15,7 +15,7 @@ import SwiftUI
 struct TextData: ViewDataProtocol, Equatable {
     let text: String
     
-    struct ContentView: View, Equatable, ViewProtocol {
+    struct ContentView: View, ViewProtocol {
         let data: TextData
         
         var body: some View {
@@ -33,7 +33,7 @@ struct ButtonData: ViewDataProtocol, Equatable {
     let title: String
     @MakeEquatableReadOnly var interaction: (() -> ())
     
-    struct ContentView: View, Equatable, ViewProtocol {
+    struct ContentView: View, ViewProtocol {
         let data: ButtonData
         
         var body: some View {
@@ -54,7 +54,7 @@ struct CustomTimeData: ViewDataProtocol, Equatable {
     let timerOn: Bool
     @MakeEquatableReadOnly var interaction: (() -> ())
     
-    struct ContentView: View, Equatable, ViewProtocol {
+    struct ContentView: View, ViewProtocol {
         let data: CustomTimeData
         @State private var value = 0
         @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -70,12 +70,6 @@ struct CustomTimeData: ViewDataProtocol, Equatable {
             }
             .foregroundStyle(.black)
             .onReceive(timer, perform: { _ in value += 1 })
-        }
-        
-        static func == (lhs: CustomTimeData.ContentView, rhs: CustomTimeData.ContentView) -> Bool {
-            guard lhs.data == rhs.data else { return false }
-            guard lhs.value == rhs.value else { return false }
-            return true
         }
     }
 }
