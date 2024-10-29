@@ -55,7 +55,7 @@ extension RouterProtocol {
 protocol InteractionProtocol where Self: BaseInteraction { }
 
 /// The source of data to derive the content
-protocol DataSourceProtocol where Self: ObservableObject { }
+protocol DataSourceProtocol: Observable, AnyObject { }
 
 // MARK: - Associated Types For Components
 

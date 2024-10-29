@@ -123,19 +123,21 @@ struct DemoContentContainer {
         }
     }
     
-    class DataSource: ObservableObject, DemoDataSource {
-        @Published var uuids: [UUID] = []
-        @Published var section1Row1Number = 0
-        @Published var section2Row1Number = 0
-        @Published var timerOn = false
+    @Observable
+    class DataSource: DemoDataSource {
+        var uuids: [UUID] = []
+        var section1Row1Number = 0
+        var section2Row1Number = 0
+        var timerOn = false
         let title: String = "Using DataSource"
     }
     
-    class OverridingDataSource: ObservableObject, DemoDataSource {
-        @Published var uuids: [UUID] = []
-        @Published var section1Row1Number = 0
-        @Published var section2Row1Number = 0
-        @Published var timerOn = false
+    @Observable
+    class OverridingDataSource: DemoDataSource {
+        var uuids: [UUID] = []
+        var section1Row1Number = 0
+        var section2Row1Number = 0
+        var timerOn = false
         let title: String = "Using Override"
     }
 }

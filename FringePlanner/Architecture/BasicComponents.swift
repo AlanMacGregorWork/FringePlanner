@@ -11,7 +11,8 @@ import SwiftUI
 
 class BasicInteraction: BaseInteraction, InteractionProtocol {}
 
-class BasicDataSource: DataSourceProtocol, ObservableObject {}
+@Observable
+class BasicDataSource: DataSourceProtocol {}
 
 /// Enum with no cases meaning no valid selection can be triggered
 enum BasicNavigationLocation: NavigationLocationProtocol {

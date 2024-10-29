@@ -195,8 +195,9 @@ private struct NavigationTestSheetCContainer {
 private struct RenderingTestsContainer {
     typealias Router = SimplifiedRouter<BasicNavigationLocation>
     
-    class DataSource: DataSourceProtocol, ObservableObject {
-        @Published var value = 0
+    @Observable
+    class DataSource: DataSourceProtocol {
+        var value = 0
     }
     
     class Interaction: BaseInteraction, InteractionProtocol {
