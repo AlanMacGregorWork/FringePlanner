@@ -31,7 +31,7 @@ struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol
         // or failing that, the state variable
         private var pathContainer: PathContainer { envPath ?? statePath }
         @Environment(\.pathContainer) private var envPath: PathContainer?
-        @StateObject private var statePath = PathContainer()
+        @State private var statePath = PathContainer()
         
         // MARK: Init
         
@@ -122,6 +122,7 @@ private extension EnvironmentValues {
 
 /// Allows the path var to be passed onto child views.
 @MainActor
-private final class PathContainer: ObservableObject {
-    @Published var path = NavigationPath()
+@Observable
+private final class PathContainer {
+    var path = NavigationPath()
 }
