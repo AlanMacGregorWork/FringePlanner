@@ -27,11 +27,10 @@ struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol
         // MARK: Property (Path Containing)
         
         // There should be a single source of truth for the `PathContainer`. To support this a state and environment
-        // version of the object are created, then depending on whether the `navigationSet` has been set to true
-        // we can identify which object should be used for that specific view.
-        private var pathContainer: PathContainer { navigationSet ? envPath : statePath }
-        @Environment(\.navigationSet) private var navigationSet: Bool
-        @Environment(\.pathContainer) private var envPath: PathContainer
+        // version of the object are created, which return a coalesce of the environment variable (which can be nil),
+        // or failing that, the state variable
+        private var pathContainer: PathContainer { envPath ?? statePath }
+        @Environment(\.pathContainer) private var envPath: PathContainer?
         @StateObject private var statePath = PathContainer()
         
         // MARK: Init
@@ -53,18 +52,15 @@ struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol
         /// Will either return the navigation stack or just the content based on whether the stack already exists
         @ViewBuilder
         private var navigationView: some View {
-            // If the environment value for `navigationSet` is false, it means the this view is not in a
+            // If the environment value does not exist, it means the this view is not in a
             // navigation stack, and that it can be created.
-            if !navigationSet {
+            if envPath == nil {
                 NavigationStack(path: $statePath.path) {
                     content
                 }
-                .environment(\.pathContainer, pathContainer)
-                // Setting `navigationSet` to true as this view now contains the navigation sacks
-                .environment(\.navigationSet, true)
+                .environment(\.pathContainer, statePath)
             } else {
-                // If `navigationSet` is true, then this view is already in a navigation stack and a new one does
-                // not need to be added
+                // This view is already in a navigation stack and a new one does not need to be added
                 content
             }
         }
@@ -120,27 +116,12 @@ extension NavigationData: Equatable {
 
 // MARK: - Environment Values
 
-private struct PathContainerEnvironmentKey: EnvironmentKey {
-    static let defaultValue = PathContainer()
-}
-
-private struct NavigationStackSetEnvironmentKey: EnvironmentKey {
-    static let defaultValue = false
-}
-
 private extension EnvironmentValues {
-    var navigationSet: Bool {
-        get { self[NavigationStackSetEnvironmentKey.self] }
-        set { self[NavigationStackSetEnvironmentKey.self] = newValue }
-    }
-    
-    var pathContainer: PathContainer {
-        get { self[PathContainerEnvironmentKey.self] }
-        set { self[PathContainerEnvironmentKey.self] = newValue }
-    }
+    @Entry var pathContainer: PathContainer? = nil
 }
 
 /// Allows the path var to be passed onto child views.
-private class PathContainer: ObservableObject {
+@MainActor
+private final class PathContainer: ObservableObject {
     @Published var path = NavigationPath()
 }
