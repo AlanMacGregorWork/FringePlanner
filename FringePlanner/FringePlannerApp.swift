@@ -11,7 +11,7 @@ import SwiftUI
 struct FringePlannerApp: App {
     var body: some Scene {
         WindowGroup {
-            switch Environment.current {
+            switch ApplicationEnvironment.current {
             case .normal:
                 demoView
             case .testingUI:
@@ -22,24 +22,6 @@ struct FringePlannerApp: App {
                     }
             case .testingUnit:
                 Text("Unit Testing")
-            }
-        }
-    }
-    
-    /// Defines the different environments the app can use
-    private enum Environment {
-        case normal
-        case testingUnit
-        case testingUI
-        
-        /// Identifies the current environment being used by the app
-        static var current: Self {
-            if ProcessInfo.processInfo.arguments.contains("ui-test") {
-                return .testingUI
-            } else if NSClassFromString("XCTestCase") != nil {
-                return .testingUnit
-            } else {
-                return .normal
             }
         }
     }
