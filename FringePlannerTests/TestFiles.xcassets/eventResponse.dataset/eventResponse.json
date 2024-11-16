@@ -212,7 +212,7 @@
       "schools": null
     },
     "disabled": {
-      "audio": null,
+      "audio": false,
       "audio_dates": null,
       "signed": false,
       "signed_dates": null,
@@ -317,7 +317,7 @@
       "schools": null
     },
     "disabled": {
-      "audio": null,
+      "audio": true,
       "audio_dates": null,
       "signed": true,
       "signed_dates": null,

@@ -9,6 +9,7 @@ struct FBDisabled: Equatable {
     let captioning: Bool?
     let otherServices: Bool?
     let signed: Bool?
+    let audio: Bool?
 }
 
 extension FBDisabled: Decodable {
@@ -17,8 +18,9 @@ extension FBDisabled: Decodable {
         self.captioning = try container.decodeIfPresent(Bool.self, forKey: "captioning")
         self.otherServices = try container.decodeIfPresent(Bool.self, forKey: "otherServices")
         self.signed = try container.decodeIfPresent(Bool.self, forKey: "signed")
+        self.audio = try container.decodeIfPresent(Bool.self, forKey: "audio")
 
         container.validateAssumedNil(keys: [
-            "audioDates", "audio", "captioningDates", "otherServicesDates", "otherServicesInformation", "signedDates"])
+            "audioDates", "captioningDates", "otherServicesDates", "otherServicesInformation", "signedDates"])
     }
 }
