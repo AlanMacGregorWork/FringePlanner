@@ -1,0 +1,457 @@
+[
+  {
+    "festival_id": "Normal Value",
+    "title": "Normal Value",
+    "sub_title": null,
+    "status": "active",
+    "code": "Normal Value",
+    "year": 2024,
+    "venue": {
+      "name": " Name1  ",
+      "map_ref": null,
+      "code": "  Code1  ",
+      "description": "",
+      "address": "",
+      "post_code": "PostCode1    ",
+      "phone": " ",
+      "fax": null,
+      "email": "",
+      "disabled_description": null,
+      "has_booking_over_phone": null,
+      "has_booking_over_card": null,
+      "has_booking_over_web": null,
+      "box_office_opening": null,
+      "box_office_fringe": null,
+      "has_bar": null,
+      "has_cafe": null,
+      "cafe_description": null,
+      "web_address": null,
+      "position": {
+        "lat": 55.964266,
+        "lon": -3.212126
+      }
+    },
+    "performances": [
+      {
+        "type": "in-person",
+        "start": "2024-10-27 12:15:00",
+        "end": "2024-10-27 12:35:00",
+        "title": "\nSomeValue\n  ",
+        "price": 0,
+        "price_type": "free",
+        "price_string": "Free",
+        "is_at_fixed_time": true,
+        "duration_minutes": 20,
+        "concession": null,
+      },
+      {
+        "type": " some other type ",
+        "start": "2024-10-27 12:45:00",
+        "end": "2024-10-27 13:05:00",
+        "title": null,
+        "price": 32,
+        "price_type": "\n     some Price  ",
+        "price_string": "32 price  ",
+        "is_at_fixed_time": false,
+        "duration_minutes": 65,
+        "concession": 0.4,
+      }
+    ],
+    "performance_space": {
+      "name": "\nTest\nYes\n",
+      "capacity": null,
+      "wheelchair_access": null,
+      "age_limited": null,
+      "age_limit": null
+    },
+    "sub_venue": null,
+    "warnings": "Normal Value",
+    "fringe_first": null,
+    "description": "\u003Cp\u003E Magical things /\u003E \u003C/p\u003E",
+    "description_teaser": null,
+    "artist": "Normal Value",
+    "artist_type": null,
+    "genre": "Normal Value",
+    "genre_tags": "Normal Value",
+    "categories": {
+      "strand_titles": [],
+      "subjects": [],
+      "keywords": []
+    },
+    "discounts": {
+      "two_for_one": null,
+      "group": null,
+      "friends": null,
+      "passport": null,
+      "schools": null
+    },
+    "disabled": {
+      "audio": null,
+      "audio_dates": null,
+      "signed": null,
+      "signed_dates": null,
+      "captioning": null,
+      "captioning_dates": null,
+      "other_services": null,
+      "other_services_dates": null,
+      "other_services_information": null
+    },
+    "age_category": "3-6 yrs",
+    "website": "https://www.othersite.org",
+    "images": {
+      "31439a5845be59caf9d6caf502b2c123": {
+        "hash": "31439a5845be59caf9d6caf502b2c123",
+        "type": "thumb",
+        "orientation": "landscape",
+        "versions": {
+          "original": {
+            "type": "original",
+            "width": 830,
+            "height": 550,
+            "mime": "image/png",
+            "url": "https://www.google.com/img1.png"
+          },
+          "small-320": {
+            "type": "small-320",
+            "width": 320,
+            "height": 212,
+            "mime": "image/jpeg",
+            "url": "https://www.google.com/img2.jpg"
+          }
+        }
+      }
+    },
+    "twitter": null,
+    "country": "Normal Value",
+    "performers_number": null,
+    "non_english": null,
+    "related_content": [],
+    "festival": "Normal Value",
+    "url": "https://www.othersite.org",
+    "updated": "2024-09-11 13:39:35",
+    "update_times": {
+      "identity": 1726054788,
+      "title": 1726054788,
+      "status": 1726054788
+    },
+    "latitude": 55.964266,
+    "longitude": -3.212126
+  },
+  {
+    "festival_id": "   Trim   ",
+    "title": "   Trim   ",
+    "sub_title": "",
+    "status": "cancelled",
+    "code": "   Trim   ",
+    "year": 2024,
+    "venue": {
+      "name": "\nName2\n",
+      "map_ref": null,
+      "code": "\nCode2\n",
+      "description": "\nDesc2\n",
+      "address": "\n\nAddress2",
+      "post_code": "\n Code2",
+      "phone": "\n\nPhone2",
+      "fax": null,
+      "email": "\n\nEmail2",
+      "disabled_description": "\n\nDisabled2",
+      "has_booking_over_phone": null,
+      "has_booking_over_card": null,
+      "has_booking_over_web": null,
+      "box_office_opening": null,
+      "box_office_fringe": null,
+      "has_bar": null,
+      "has_cafe": null,
+      "cafe_description": null,
+      "web_address": "https://www.google.com",
+      "position": {
+        "lat": 123,
+        "lon": 4567
+      }
+    },
+    "performances": [
+      {
+        "type": "in-person",
+        "start": "2024-10-27 12:15:00",
+        "end": "2024-10-27 12:35:00",
+        "title": "\nSomeValue\n  ",
+        "price": 0,
+        "price_type": "free",
+        "price_string": "Free",
+        "is_at_fixed_time": true,
+        "duration_minutes": 20,
+        "concession": null,
+      },
+    ],
+    "performance_space": {
+      "name": "Place",
+      "capacity": null,
+      "wheelchair_access": null,
+      "age_limited": null,
+      "age_limit": null
+    },
+    "sub_venue": null,
+    "warnings": "",
+    "fringe_first": null,
+    "description": "\u003Cp\u003E\n\t\u003Cstrong\u003E.\u003C/strong\u003E\u003C/h4\u003E",
+    "description_teaser": "Some Text",
+    "artist": "",
+    "artist_type": null,
+    "genre": "   Trim   ",
+    "genre_tags": "",
+    "categories": {
+      "strand_titles": [],
+      "subjects": [],
+      "keywords": []
+    },
+    "discounts": {
+      "two_for_one": null,
+      "group": null,
+      "friends": null,
+      "passport": null,
+      "schools": null
+    },
+    "disabled": {
+      "audio": null,
+      "audio_dates": null,
+      "signed": false,
+      "signed_dates": null,
+      "captioning": false,
+      "captioning_dates": null,
+      "other_services": false,
+      "other_services_dates": null,
+      "other_services_information": null
+    },
+    "age_category": "",
+    "website": "https://www.google.com",
+    "images": {
+      "1ddba093dc9ccea67755679060d8724d": {
+        "hash": "1ddba093dc9ccea67755679060d8724d",
+        "type": "thumb",
+        "orientation": "landscape",
+        "versions": {
+          "original": {
+            "type": "original",
+            "width": 600,
+            "height": 400,
+            "mime": "image/jpeg",
+            "url": "https://www.google.com/image"
+          }
+        }
+      }
+    },
+    "twitter": null,
+    "country": "",
+    "performers_number": null,
+    "non_english": null,
+    "related_content": [],
+    "festival": "   Trim   ",
+    "url": "https://www.google.com",
+    "updated": "2024-08-14 09:39:19",
+    "update_times": {
+      "identity": 1718210196,
+      "status": 1718210196
+    },
+    "latitude": 123,
+    "longitude": 4567
+  },
+  {
+    "festival_id": "  \n\nTrimNewLine\n\n",
+    "title": "  \n\nTrimNewLine\n\n",
+    "sub_title": null,
+    "status": "",
+    "code": "  \n\nTrimNewLine\n\n",
+    "year": 2024,
+    "venue": {
+      "name": "Name3",
+      "map_ref": null,
+      "code": "Code3",
+      "description": "",
+      "address": "",
+      "post_code": " PostCode3",
+      "phone": "",
+      "fax": null,
+      "email": "",
+      "disabled_description": null,
+      "has_booking_over_phone": null,
+      "has_booking_over_card": null,
+      "has_booking_over_web": null,
+      "box_office_opening": null,
+      "box_office_fringe": null,
+      "has_bar": null,
+      "has_cafe": null,
+      "cafe_description": null,
+      "web_address": null,
+      "position": {
+        "lat": 55.964266,
+        "lon": -3.212126
+      }
+    },
+    "performances": [],
+    "performance_space": {
+      "name": "Nothing",
+      "capacity": null,
+      "wheelchair_access": null,
+      "age_limited": null,
+      "age_limit": null
+    },
+    "sub_venue": null,
+    "warnings": "  \n\nTrimNewLine\n\n",
+    "fringe_first": null,
+    "description": "\u003Cp\u003E Magical things\u003C/b\u003E\u003C/a\u003E \u003C/p\u003E",
+    "description_teaser": null,
+    "artist": "  \n\nTrimNewLine\n\n",
+    "artist_type": null,
+    "genre": "  \n\nTrimNewLine\n\n",
+    "genre_tags": "  \n\nTrimNewLine\n\n",
+    "categories": {
+      "strand_titles": [],
+      "subjects": [],
+      "keywords": []
+    },
+    "discounts": {
+      "two_for_one": null,
+      "group": null,
+      "friends": null,
+      "passport": null,
+      "schools": null
+    },
+    "disabled": {
+      "audio": null,
+      "audio_dates": null,
+      "signed": true,
+      "signed_dates": null,
+      "captioning": true,
+      "captioning_dates": null,
+      "other_services": true,
+      "other_services_dates": null,
+      "other_services_information": null
+    },
+    "age_category": "11-15 yrs",
+    "website": "http://someothersite.com",
+    "images": {
+      "eec4ccb7002db1d74bf737087dfa1c4a": {
+        "hash": "eec4ccb7002db1d74bf737087dfa1c4a",
+        "type": "thumb",
+        "orientation": "landscape",
+        "versions": {
+          "original": {
+            "type": "original",
+            "width": 830,
+            "height": 550,
+            "mime": "image/png",
+            "url": "https://www.google.com/someotherimage.png"
+          }
+        }
+      }
+    },
+    "twitter": null,
+    "country": "  \n\nTrimNewLine\n\n",
+    "performers_number": null,
+    "non_english": null,
+    "related_content": [],
+    "festival": "  \n\nTrimNewLine\n\n",
+    "url": "http://someothersite.com",
+    "updated": "2024-09-11 12:32:38",
+    "update_times": {
+      "identity": 1726054358,
+      "status": 1726054358
+    },
+    "latitude": 55.964266,
+    "longitude": -3.212126
+  },
+  {
+    "festival_id": "lowercase",
+    "title": "lowercase",
+    "sub_title": null,
+    "status": "deleted",
+    "code": "lowercase",
+    "year": 2024,
+    "venue": {
+      "name": "Name4",
+      "map_ref": null,
+      "code": "Code4",
+      "description": "",
+      "address": "",
+      "post_code": "PostCode4",
+      "phone": "",
+      "fax": null,
+      "email": "",
+      "disabled_description": "",
+      "has_booking_over_phone": null,
+      "has_booking_over_card": null,
+      "has_booking_over_web": null,
+      "box_office_opening": null,
+      "box_office_fringe": null,
+      "has_bar": null,
+      "has_cafe": null,
+      "cafe_description": null,
+      "web_address": "",
+      "position": {
+        "lat": 55.97855,
+        "lon": -3.192044
+      }
+    },
+    "performances": [],
+    "performance_space": {
+      "name": " Item  ",
+      "capacity": null,
+      "wheelchair_access": null,
+      "age_limited": null,
+      "age_limit": null
+    },
+    "sub_venue": null,
+    "warnings": null,
+    "fringe_first": null,
+    "description": "\u003Cp\u003ECreated \u003C/p\u003E",
+    "description_teaser": "  Code for […]   ",
+    "artist": null,
+    "artist_type": null,
+    "genre": "lowercase",
+    "genre_tags": null,
+    "categories": {
+      "strand_titles": [],
+      "subjects": [],
+      "keywords": []
+    },
+    "discounts": {
+      "two_for_one": null,
+      "group": null,
+      "friends": null,
+      "passport": null,
+      "schools": null
+    },
+    "age_category": null,
+    "website": "https://www.google.co.uk",
+    "images": {
+      "a3cc7b5ea9e6788a8a66b9c000e01eec": {
+        "hash": "a3cc7b5ea9e6788a8a66b9c000e01eec",
+        "type": "thumb",
+        "orientation": "landscape",
+        "versions": {
+          "original": {
+            "type": "original",
+            "width": 2000,
+            "height": 1200,
+            "mime": "image/jpeg",
+            "url": "https://www.site.com/imag.jpg"
+          }
+        }
+      }
+    },
+    "twitter": null,
+    "country": null,
+    "performers_number": null,
+    "non_english": null,
+    "related_content": [],
+    "festival": "lowercase",
+    "url": "https://www.google.co.uk",
+    "updated": "2024-06-12 12:40:30",
+    "update_times": {
+      "identity": 1718192430,
+      "status": 1718192430
+    },
+    "latitude": 55.97855,
+    "longitude": -3.192044
+  }
+]

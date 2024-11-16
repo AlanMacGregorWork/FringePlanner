@@ -25,6 +25,7 @@
 		0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 		0835BCC92CCE42790031A860 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835BCC82CCE42770031A860 /* Expectation.swift */; };
+		0843C2322CE7DD390076FF11 /* FBPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2312CE7DD360076FF11 /* FBPerformance.swift */; };
 		0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */; };
 		0843C2362CE7EC430076FF11 /* fbAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2352CE7EC400076FF11 /* fbAssert.swift */; };
 		086159012CD69B7E0076255B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086159002CD69B7B0076255B /* String.swift */; };
@@ -33,6 +34,18 @@
 		086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086240112CCEC02A004DDC3C /* ApiKeyTests.swift */; };
 		08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C1E2CC56D370075C50E /* XCTestCase.swift */; };
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
+		086D086C2CE5276C000B6225 /* FBStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086B2CE5276B000B6225 /* FBStatus.swift */; };
+		086D086E2CE52844000B6225 /* AnyCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086D2CE52842000B6225 /* AnyCodingKey.swift */; };
+		086D08702CE52A28000B6225 /* FBPerformanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086F2CE52A26000B6225 /* FBPerformanceType.swift */; };
+		086D08722CE52A64000B6225 /* FBPriceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08712CE52A63000B6225 /* FBPriceType.swift */; };
+		086D08762CE5302C000B6225 /* FBPerformanceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */; };
+		086D08782CE53111000B6225 /* FBDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08772CE5310F000B6225 /* FBDisabled.swift */; };
+		086D087A2CE53296000B6225 /* FBVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08792CE53292000B6225 /* FBVenue.swift */; };
+		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
+		08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FBEvent.swift */; };
+		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
+		08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD27152CD983D30029E5DF /* FBEventTests.swift */; };
+		08BD27192CD986920029E5DF /* TestFiles.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD27182CD984270029E5DF /* TestFiles.xcassets */; };
 		08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C92D682CCEACD4001732E9 /* ContentProtocol.swift */; };
 		08C92D6E2CCEB7F5001732E9 /* Keys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */; };
 		08CB2C142CD7C05A00B799FA /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2C132CD7C05000B799FA /* General.swift */; };
@@ -89,6 +102,7 @@
 		0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeDataResultBuilder.swift; sourceTree = "<group>"; };
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		0835BCC82CCE42770031A860 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
+		0843C2312CE7DD360076FF11 /* FBPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformance.swift; sourceTree = "<group>"; };
 		0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationEnvironment.swift; sourceTree = "<group>"; };
 		0843C2352CE7EC400076FF11 /* fbAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fbAssert.swift; sourceTree = "<group>"; };
 		086159002CD69B7B0076255B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -97,7 +111,19 @@
 		086240112CCEC02A004DDC3C /* ApiKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTests.swift; sourceTree = "<group>"; };
 		08666C1E2CC56D370075C50E /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
+		086D086B2CE5276B000B6225 /* FBStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStatus.swift; sourceTree = "<group>"; };
+		086D086D2CE52842000B6225 /* AnyCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodingKey.swift; sourceTree = "<group>"; };
+		086D086F2CE52A26000B6225 /* FBPerformanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformanceType.swift; sourceTree = "<group>"; };
+		086D08712CE52A63000B6225 /* FBPriceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPriceType.swift; sourceTree = "<group>"; };
+		086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformanceSpace.swift; sourceTree = "<group>"; };
+		086D08772CE5310F000B6225 /* FBDisabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDisabled.swift; sourceTree = "<group>"; };
+		086D08792CE53292000B6225 /* FBVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBVenue.swift; sourceTree = "<group>"; };
+		086D087B2CE56A54000B6225 /* FBImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImage.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
+		08BA67492CE7F291000DDF37 /* FBEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEvent.swift; sourceTree = "<group>"; };
+		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		08BD27152CD983D30029E5DF /* FBEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventTests.swift; sourceTree = "<group>"; };
+		08BD27182CD984270029E5DF /* TestFiles.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestFiles.xcassets; sourceTree = "<group>"; };
 		08C92D682CCEACD4001732E9 /* ContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProtocol.swift; sourceTree = "<group>"; };
 		08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Keys.xcconfig; sourceTree = "<group>"; };
 		08C92D6F2CCEB9E7001732E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -194,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				08C92D6F2CCEB9E7001732E9 /* Info.plist */,
+				086D086A2CE5274D000B6225 /* FBModels */,
 				08C92D6A2CCEB451001732E9 /* Helper */,
 				08F10DB62CB86298008ACBFF /* Content */,
 				08F10DB12CB85F5C008ACBFF /* ViewDatas */,
@@ -222,6 +249,8 @@
 		0803724B2C98B7A3002DC9A2 /* FringePlannerTests */ = {
 			isa = PBXGroup;
 			children = (
+				08BD27182CD984270029E5DF /* TestFiles.xcassets */,
+				08BD27142CD983CB0029E5DF /* ModelTests */,
 				086159022CD69BD70076255B /* ExtensionTests */,
 				0862400E2CCEBFFE004DDC3C /* HelperTests */,
 				08C92D672CCEACCB001732E9 /* Extensions */,
@@ -311,6 +340,38 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		086D086A2CE5274D000B6225 /* FBModels */ = {
+			isa = PBXGroup;
+			children = (
+				08BA674D2CE9090D000DDF37 /* Enum */,
+				08BA67492CE7F291000DDF37 /* FBEvent.swift */,
+				0843C2312CE7DD360076FF11 /* FBPerformance.swift */,
+				086D087B2CE56A54000B6225 /* FBImage.swift */,
+				086D08792CE53292000B6225 /* FBVenue.swift */,
+				086D08772CE5310F000B6225 /* FBDisabled.swift */,
+				086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */,
+			);
+			path = FBModels;
+			sourceTree = "<group>";
+		};
+		08BA674D2CE9090D000DDF37 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				086D086B2CE5276B000B6225 /* FBStatus.swift */,
+				086D086F2CE52A26000B6225 /* FBPerformanceType.swift */,
+				086D08712CE52A63000B6225 /* FBPriceType.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
+		08BD27142CD983CB0029E5DF /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				08BD27152CD983D30029E5DF /* FBEventTests.swift */,
+			);
+			path = ModelTests;
+			sourceTree = "<group>";
+		};
 		08C92D672CCEACCB001732E9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,8 +383,10 @@
 		08C92D6A2CCEB451001732E9 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				08BA674B2CE7F2E9000DDF37 /* Codable.swift */,
 				0843C2352CE7EC400076FF11 /* fbAssert.swift */,
 				0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */,
+				086D086D2CE52842000B6225 /* AnyCodingKey.swift */,
 				08CB2C132CD7C05000B799FA /* General.swift */,
 				08DF47382CD6B42500405254 /* FilterRequest.swift */,
 				0819F73A2CD2C279009B9D3E /* HMACGenerator.swift */,
@@ -477,6 +540,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08BD27192CD986920029E5DF /* TestFiles.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +560,9 @@
 			files = (
 				08F10DB32CB85FC3008ACBFF /* DebugOnlyViewDatas.swift in Sources */,
 				08E8C0432CBC15A000C270F6 /* NavigationData.swift in Sources */,
+				086D086E2CE52844000B6225 /* AnyCodingKey.swift in Sources */,
+				0843C2322CE7DD390076FF11 /* FBPerformance.swift in Sources */,
+				086D08722CE52A64000B6225 /* FBPriceType.swift in Sources */,
 				086159012CD69B7E0076255B /* String.swift in Sources */,
 				0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */,
 				0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */,
@@ -504,20 +571,28 @@
 				080272E52C9A20950040A673 /* EventCell.swift in Sources */,
 				0862400C2CCEBD9E004DDC3C /* ApiKey.swift in Sources */,
 				081826A82CBF1445002293FD /* ForEachData.swift in Sources */,
+				086D086C2CE5276C000B6225 /* FBStatus.swift in Sources */,
 				08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */,
 				08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */,
+				086D08762CE5302C000B6225 /* FBPerformanceSpace.swift in Sources */,
+				086D087A2CE53296000B6225 /* FBVenue.swift in Sources */,
+				08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */,
 				08CB2C142CD7C05A00B799FA /* General.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */,
 				0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */,
 				08F10DBA2CB92B97008ACBFF /* GroupData.swift in Sources */,
+				086D08702CE52A28000B6225 /* FBPerformanceType.swift in Sources */,
+				086D087C2CE56A56000B6225 /* FBImage.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */,
 				0843C2362CE7EC430076FF11 /* fbAssert.swift in Sources */,
+				08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */,
 				0819F73B2CD2C27C009B9D3E /* HMACGenerator.swift in Sources */,
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
 				0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */,
 				0820A5732CB308BE006DDEE7 /* EventPerformanceCell.swift in Sources */,
+				086D08782CE53111000B6225 /* FBDisabled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -526,6 +601,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0803724D2C98B7A3002DC9A2 /* ExampleTest.swift in Sources */,
+				08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */,
 				086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */,
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
