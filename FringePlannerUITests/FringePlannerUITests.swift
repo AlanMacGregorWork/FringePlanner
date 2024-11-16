@@ -75,7 +75,7 @@ final class FringePlannerUITests: BaseUITests {
         let buttonNavigationTests = TestUIElement(referenceName: "Navigation Tests", elementType: .button, label: "Navigation Tests")
         let buttonOpenSheetBV1 = TestUIElement(referenceName: "Sheet B (V1) button", elementType: .button, label: "Open Sheet B (V1)")
         let buttonOpenSheetBV2 = TestUIElement(referenceName: "Sheet B (V2) button", elementType: .button, label: "Open Sheet B (V2)")
-        let buttonOpenSheetC = TestUIElement(referenceName: "Sheet C button",elementType: .button, label: "Open Sheet C")
+        let buttonOpenSheetC = TestUIElement(referenceName: "Sheet C button", elementType: .button, label: "Open Sheet C")
         let buttonOpenSheetDV1 = TestUIElement(referenceName: "Sheet D (V1) button", elementType: .button, label: "Open Sheet D (V1)")
         let buttonChangeParentSelectionToSheetBV2 = TestUIElement(referenceName: "Switch Sheet button", elementType: .button, label: "Change Parent Selection To Sheet B (V2)")
         let buttonBack = TestUIElement(referenceName: "Back button", elementType: .button, label: "Back")

@@ -92,12 +92,11 @@ struct FilterRequest {
         let longitude = self.longitude.map({ URLQueryItem(name: "lon", value: "\($0)") })
         
         // Page Size
-        let pageSize = self.pageSize.map({ max(25,min(100,$0)) }).map({ URLQueryItem(name: "size", value: "\($0)") })
+        let pageSize = self.pageSize.map({ max(25, min(100, $0)) }).map({ URLQueryItem(name: "size", value: "\($0)") })
 
         // From Page
         let fromPage = self.fromPage.flatMap({ $0 > 0 ? $0 : nil }).flatMap({ URLQueryItem(name: "from", value: "\($0)") })
     
-        
         return [
             title,
             description,

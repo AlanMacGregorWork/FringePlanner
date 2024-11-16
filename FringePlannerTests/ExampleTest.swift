@@ -46,13 +46,13 @@ struct ExampleTest {
 
 // MARK: - Supporting Models
 
-fileprivate typealias Router = SimplifiedRouter<BasicNavigationLocation>
+private typealias Router = SimplifiedRouter<BasicNavigationLocation>
 
-fileprivate class DataSource: DataSourceProtocol {
+private class DataSource: DataSourceProtocol {
     @Published var buttonPresses = 0
 }
 
-fileprivate class Interaction: BaseInteraction, InteractionProtocol {
+private class Interaction: BaseInteraction, InteractionProtocol {
     let dataSource: DataSource
     
     init(dataSource: DataSource) {
@@ -64,7 +64,7 @@ fileprivate class Interaction: BaseInteraction, InteractionProtocol {
     }
 }
 
-fileprivate struct Content: ContentProtocol {
+private struct Content: ContentProtocol {
     let router: Router
     let interaction: Interaction
     let dataSource: DataSource

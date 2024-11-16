@@ -153,7 +153,7 @@ struct FilterRequestCheck {
     let expectedValue: String
 }
 
-fileprivate var filterChecks: [String: FilterRequestCheck] {
+private var filterChecks: [String: FilterRequestCheck] {
     let testDate = DateComponents(calendar: Calendar.current, year: 2024, month: 4, day: 5, hour: 17, minute: 45, second: 43).date!
     
     return [

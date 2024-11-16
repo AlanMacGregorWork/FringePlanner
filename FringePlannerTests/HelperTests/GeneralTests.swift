@@ -24,14 +24,14 @@ extension GeneralTests.MapErrorTests {
             try mapError(
                 for: errorFunction(errorType: ExampleError.example, expectedResponse: ""),
                 expectedType: String.self,
-                to: { (error: ExampleError) in FileError.fileNotFound })
+                to: { (_: ExampleError) in FileError.fileNotFound })
         }
         
         #expect(throws: FileError.accessFailed(.writingFailed)) {
             try mapError(
                 for: errorFunction(errorType: ExampleError.example, expectedResponse: ""),
                 expectedType: String.self,
-                to: { (error: ExampleError) in FileError.accessFailed(.writingFailed) })
+                to: { (_: ExampleError) in FileError.accessFailed(.writingFailed) })
         }
     }
     
@@ -58,7 +58,7 @@ extension GeneralTests.MapErrorTests {
             try mapError(
                 for: errorFunction(errorType: ExampleError.example, expectedResponse: ""),
                 expectedType: String.self,
-                to: { (error: ExampleError) in ExampleError.revision })
+                to: { (_: ExampleError) in ExampleError.revision })
         }
     }
     
@@ -106,7 +106,7 @@ fileprivate extension GeneralTests.MapErrorTests {
         try mapError(
             for: try throwError(shouldPass: shouldPass, expectedResponse: expectedResponse),
             expectedType: Value.self,
-            to: { (error: DataError) in FileError.fileNotFound })
+            to: { (_: DataError) in FileError.fileNotFound })
     }
     
     func throwError<ExpectedResponse>(shouldPass: Bool, expectedResponse: ExpectedResponse) throws(DataError) -> ExpectedResponse {

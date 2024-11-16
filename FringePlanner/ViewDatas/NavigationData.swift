@@ -117,7 +117,7 @@ extension NavigationData: Equatable {
 // MARK: - Environment Values
 
 private extension EnvironmentValues {
-    @Entry var pathContainer: PathContainer? = nil
+    @Entry var pathContainer: PathContainer?
 }
 
 /// Allows the path var to be passed onto child views.

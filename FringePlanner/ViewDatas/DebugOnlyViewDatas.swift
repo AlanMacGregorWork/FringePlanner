@@ -31,7 +31,7 @@ struct TextData: ViewDataProtocol, Equatable {
 /// Displays a basic button
 struct ButtonData: ViewDataProtocol, Equatable {
     let title: String
-    @MakeEquatableReadOnly var interaction: (() -> ())
+    @MakeEquatableReadOnly var interaction: (() -> Void)
     
     struct ContentView: View, ViewProtocol {
         let data: ButtonData
@@ -52,7 +52,7 @@ struct ButtonData: ViewDataProtocol, Equatable {
 ///  - Note: Currently does not disable the time on tap
 struct CustomTimeData: ViewDataProtocol, Equatable {
     let timerOn: Bool
-    @MakeEquatableReadOnly var interaction: (() -> ())
+    @MakeEquatableReadOnly var interaction: (() -> Void)
     
     struct ContentView: View, ViewProtocol {
         let data: CustomTimeData

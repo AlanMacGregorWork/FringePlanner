@@ -66,7 +66,6 @@ struct EventCell: View {
         subCaption: "Venue Number: Venue Name")
 }
 
-
 @available(iOS 18.0, *)
 #Preview("With event & venue", traits: .sizeThatFitsLayout) {
     EventCell(

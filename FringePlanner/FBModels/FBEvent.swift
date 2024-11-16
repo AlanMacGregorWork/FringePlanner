@@ -59,7 +59,7 @@ extension FBEvent: Decodable {
         self.performanceSpace = try container.decode(FBPerformanceSpace.self, forKey: "performanceSpace")
         self.venue = try container.decode(FBVenue.self, forKey: "venue")
         self.disabled = try container.decodeIfPresent(FBDisabled.self, forKey: "disabled")
-        self.images = try container.decode([String : FBImage].self, forKey: "images")
+        self.images = try container.decode([String: FBImage].self, forKey: "images")
         
         // Additional key validation: 
 

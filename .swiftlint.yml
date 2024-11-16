@@ -1,0 +1,8 @@
+disabled_rules:
+  - trailing_whitespace
+  - line_length
+  - todo
+
+nesting:
+  type_level:
+    warning: 2
