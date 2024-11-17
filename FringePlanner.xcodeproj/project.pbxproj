@@ -44,6 +44,9 @@
 		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
 		08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FBEvent.swift */; };
 		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
+		08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */; };
+		08BA67542CE94767000DDF37 /* FBEventDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */; };
+		08BA67572CE953F3000DDF37 /* FBEventDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */; };
 		08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67582CEA3ADD000DDF37 /* Bundle.swift */; };
 		08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD27152CD983D30029E5DF /* FBEventTests.swift */; };
 		08BD27192CD986920029E5DF /* TestFiles.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD27182CD984270029E5DF /* TestFiles.xcassets */; };
@@ -51,6 +54,7 @@
 		08C92D6E2CCEB7F5001732E9 /* Keys.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */; };
 		08CB2C142CD7C05A00B799FA /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2C132CD7C05000B799FA /* General.swift */; };
 		08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2C152CD7C0D200B799FA /* GeneralTests.swift */; };
+		08DA9BB32CEA6AE20080C0A5 /* FBEventURLBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA9BB22CEA6AE00080C0A5 /* FBEventURLBuilderTests.swift */; };
 		08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF47382CD6B42500405254 /* FilterRequest.swift */; };
 		08E1B3F82CCEA8EE00C7333A /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */; };
 		08E1B3FB2CCEAAD800C7333A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */; };
@@ -123,6 +127,9 @@
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08BA67492CE7F291000DDF37 /* FBEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEvent.swift; sourceTree = "<group>"; };
 		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilder.swift; sourceTree = "<group>"; };
+		08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventDownloader.swift; sourceTree = "<group>"; };
+		08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventDownloaderTests.swift; sourceTree = "<group>"; };
 		08BA67582CEA3ADD000DDF37 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		08BD27152CD983D30029E5DF /* FBEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventTests.swift; sourceTree = "<group>"; };
 		08BD27182CD984270029E5DF /* TestFiles.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestFiles.xcassets; sourceTree = "<group>"; };
@@ -131,6 +138,7 @@
 		08C92D6F2CCEB9E7001732E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		08CB2C132CD7C05000B799FA /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		08CB2C152CD7C0D200B799FA /* GeneralTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTests.swift; sourceTree = "<group>"; };
+		08DA9BB22CEA6AE00080C0A5 /* FBEventURLBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilderTests.swift; sourceTree = "<group>"; };
 		08DF47382CD6B42500405254 /* FilterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRequest.swift; sourceTree = "<group>"; };
 		08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicate.swift; sourceTree = "<group>"; };
 		08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
@@ -221,6 +229,7 @@
 		0803723A2C98B7A2002DC9A2 /* FringePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				08BA67502CE9472A000DDF37 /* API */,
 				08C92D6F2CCEB9E7001732E9 /* Info.plist */,
 				086D086A2CE5274D000B6225 /* FBModels */,
 				08C92D6A2CCEB451001732E9 /* Helper */,
@@ -252,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				08BD27182CD984270029E5DF /* TestFiles.xcassets */,
+				08BA67552CE953C7000DDF37 /* APITests */,
 				08BD27142CD983CB0029E5DF /* ModelTests */,
 				086159022CD69BD70076255B /* ExtensionTests */,
 				0862400E2CCEBFFE004DDC3C /* HelperTests */,
@@ -364,6 +374,24 @@
 				086D08712CE52A63000B6225 /* FBPriceType.swift */,
 			);
 			path = Enum;
+			sourceTree = "<group>";
+		};
+		08BA67502CE9472A000DDF37 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */,
+				08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		08BA67552CE953C7000DDF37 /* APITests */ = {
+			isa = PBXGroup;
+			children = (
+				08DA9BB22CEA6AE00080C0A5 /* FBEventURLBuilderTests.swift */,
+				08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */,
+			);
+			path = APITests;
 			sourceTree = "<group>";
 		};
 		08BD27142CD983CB0029E5DF /* ModelTests */ = {
@@ -597,6 +625,7 @@
 				080272E52C9A20950040A673 /* EventCell.swift in Sources */,
 				0862400C2CCEBD9E004DDC3C /* ApiKey.swift in Sources */,
 				081826A82CBF1445002293FD /* ForEachData.swift in Sources */,
+				08BA67542CE94767000DDF37 /* FBEventDownloader.swift in Sources */,
 				086D086C2CE5276C000B6225 /* FBStatus.swift in Sources */,
 				08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */,
 				08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */,
@@ -610,6 +639,7 @@
 				08F10DBA2CB92B97008ACBFF /* GroupData.swift in Sources */,
 				086D08702CE52A28000B6225 /* FBPerformanceType.swift in Sources */,
 				086D087C2CE56A56000B6225 /* FBImage.swift in Sources */,
+				08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */,
 				0843C2362CE7EC430076FF11 /* fbAssert.swift in Sources */,
@@ -632,9 +662,11 @@
 				08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */,
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
+				08BA67572CE953F3000DDF37 /* FBEventDownloaderTests.swift in Sources */,
 				086159042CD69BEE0076255B /* StringTests.swift in Sources */,
 				08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */,
 				08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */,
+				08DA9BB32CEA6AE20080C0A5 /* FBEventURLBuilderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
