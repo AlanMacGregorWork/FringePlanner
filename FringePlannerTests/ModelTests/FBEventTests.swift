@@ -6,7 +6,7 @@
 //
 
 import Testing
-import UIKit
+import Foundation
 @testable import FringePlanner
 
 @Suite("FBEvent Tests")
@@ -97,25 +97,20 @@ private struct TestDataContent {
     static let allJsonKeysSafe: [String] = Array((try? TestDataContent())?.allJsonKeys ?? []).sorted(by: { $0 < $1 })
     
     enum InitErrors: Error {
-        case failedToGetBundle
-        case failedToGetResponseData
+        case failedToGetResponseData(Bundle.GetTestDataError)
         case failedToDecodeData(DecodingError?)
     }
     
     init() throws(InitErrors) {
-        guard let testBundle = Bundle.allBundles.first(where: { $0.bundlePath.hasSuffix("xctest") }) else {
-            throw .failedToGetBundle
-        }
-        guard let dataAsset = NSDataAsset(name: "eventResponse", bundle: testBundle) else {
-            throw .failedToGetResponseData
-        }
-        self.dataResponse = dataAsset.data
+        self.dataResponse = try mapError(
+            for: try Bundle.testData(name: "eventResponse"),
+            expectedType: Data.self,
+            to: { (error: Bundle.GetTestDataError) in InitErrors.failedToGetResponseData(error) })
         
-        do {
-            self.decodedResponse = try fringeJsonDecoder.decode([FBEvent].self, from: dataAsset.data)
-        } catch let error {
-            throw .failedToDecodeData(error as? DecodingError)
-        }
+        self.decodedResponse = try mapError(
+            for: try fringeJsonDecoder.decode([FBEvent].self, from: self.dataResponse),
+            expectedType: [FBEvent].self,
+            to: { (error: Error) in InitErrors.failedToDecodeData(error as? DecodingError) })
         
         guard let json = try? JSONSerialization.jsonObject(with: self.dataResponse) as? [[String: Any]] else {
             throw .failedToDecodeData(nil)

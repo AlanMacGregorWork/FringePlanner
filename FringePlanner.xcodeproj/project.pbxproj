@@ -44,6 +44,7 @@
 		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
 		08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FBEvent.swift */; };
 		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
+		08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67582CEA3ADD000DDF37 /* Bundle.swift */; };
 		08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD27152CD983D30029E5DF /* FBEventTests.swift */; };
 		08BD27192CD986920029E5DF /* TestFiles.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD27182CD984270029E5DF /* TestFiles.xcassets */; };
 		08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C92D682CCEACD4001732E9 /* ContentProtocol.swift */; };
@@ -122,6 +123,7 @@
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08BA67492CE7F291000DDF37 /* FBEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEvent.swift; sourceTree = "<group>"; };
 		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
+		08BA67582CEA3ADD000DDF37 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		08BD27152CD983D30029E5DF /* FBEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventTests.swift; sourceTree = "<group>"; };
 		08BD27182CD984270029E5DF /* TestFiles.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestFiles.xcassets; sourceTree = "<group>"; };
 		08C92D682CCEACD4001732E9 /* ContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProtocol.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 		08C92D672CCEACCB001732E9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				08BA67582CEA3ADD000DDF37 /* Bundle.swift */,
 				08C92D682CCEACD4001732E9 /* ContentProtocol.swift */,
 			);
 			path = Extensions;
@@ -626,6 +629,7 @@
 				0803724D2C98B7A3002DC9A2 /* ExampleTest.swift in Sources */,
 				08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */,
 				086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */,
+				08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */,
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
 				086159042CD69BEE0076255B /* StringTests.swift in Sources */,
