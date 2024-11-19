@@ -6,7 +6,7 @@
 //
 
 /// Defines a general location for the performance
-struct FBPerformanceSpace: Equatable {
+struct FBPerformanceSpace: Equatable, Hashable {
     let name: String
 }
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FBEvent: Equatable {
+struct FBEvent: Equatable, Hashable {
     var title: String
     let artist: String?
     /// Example: `Germany`, `Ireland`, `Scotland`

@@ -6,7 +6,7 @@
 //
 
 /// Dictates the cost of the performance
-enum FBPriceType: Decodable, Equatable {
+enum FBPriceType: Decodable, Equatable, Hashable {
     case paid
     case free
     case other(String)

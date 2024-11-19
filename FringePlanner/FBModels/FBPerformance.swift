@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FBPerformance: Equatable {
+struct FBPerformance: Equatable, Hashable {
     let title: String?
     let type: FBPerformanceType
     /// `false` indicates event is drop-in between start and end time

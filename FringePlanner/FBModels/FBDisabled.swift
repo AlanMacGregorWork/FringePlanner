@@ -5,7 +5,7 @@
 //  Created by Alan MacGregor on 13/11/2024.
 //
 
-struct FBDisabled: Equatable {
+struct FBDisabled: Equatable, Hashable {
     let captioning: Bool?
     let otherServices: Bool?
     let signed: Bool?

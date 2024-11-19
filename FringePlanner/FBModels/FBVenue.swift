@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains details of the venue for the performance
-struct FBVenue: Equatable {
+struct FBVenue: Equatable, Hashable {
     let code: String
     let description: String?
     let name: String
@@ -39,7 +39,7 @@ extension FBVenue: Decodable {
 
 extension FBVenue {
     /// The location of the venue
-    struct Position: Codable, Equatable {
+    struct Position: Codable, Equatable, Hashable {
         let lat: Double
         let lon: Double
     }
