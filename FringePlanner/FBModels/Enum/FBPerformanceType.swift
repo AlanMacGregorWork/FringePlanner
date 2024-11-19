@@ -6,7 +6,7 @@
 //
 
 /// Defines how the performance can experienced
-enum FBPerformanceType: Decodable, Equatable {
+enum FBPerformanceType: Decodable, Equatable, Hashable {
     case inPerson
     case other(String)
     

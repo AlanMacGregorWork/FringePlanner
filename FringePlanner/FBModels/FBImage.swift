@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains a group of images
-struct FBImage: Decodable, Equatable {
+struct FBImage: Equatable, Hashable {
     let hash: String
     let orientation: Orientation
     let type: ImageType
     let versions: [String: Version]
 }
 
-extension FBImage {
+extension FBImage: Decodable {
     enum Orientation: String, Decodable {
         case landscape
         case portrait
@@ -28,7 +28,7 @@ extension FBImage {
     }
     
     /// Contains a particular image (square, small, original, etc)
-    struct Version: Codable, Equatable {
+    struct Version: Codable, Equatable, Hashable {
         let type: String
         let width: Int
         let height: Int
