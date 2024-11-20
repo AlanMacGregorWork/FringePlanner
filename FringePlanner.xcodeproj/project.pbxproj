@@ -45,6 +45,7 @@
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
 		08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */; };
 		08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF812CFCEEB400925B8D /* ConditionalData.swift */; };
+		08A94E4A2CEE8315008B84C6 /* SeededContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A94E492CEE8309008B84C6 /* SeededContent.swift */; };
 		08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FBEvent.swift */; };
 		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
 		08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */; };
@@ -131,6 +132,7 @@
 		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyData.swift; sourceTree = "<group>"; };
 		08B1BF812CFCEEB400925B8D /* ConditionalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalData.swift; sourceTree = "<group>"; };
+		08A94E492CEE8309008B84C6 /* SeededContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededContent.swift; sourceTree = "<group>"; };
 		08BA67492CE7F291000DDF37 /* FBEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEvent.swift; sourceTree = "<group>"; };
 		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilder.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 		0803723A2C98B7A2002DC9A2 /* FringePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				08A94E482CEE8304008B84C6 /* Debug */,
 				08BA67502CE9472A000DDF37 /* API */,
 				08C92D6F2CCEB9E7001732E9 /* Info.plist */,
 				086D086A2CE5274D000B6225 /* FBModels */,
@@ -371,6 +374,14 @@
 				086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */,
 			);
 			path = FBModels;
+			sourceTree = "<group>";
+		};
+		08A94E482CEE8304008B84C6 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				08A94E492CEE8309008B84C6 /* SeededContent.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		08BA674D2CE9090D000DDF37 /* Enum */ = {
@@ -644,6 +655,7 @@
 				08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */,
 				08CB2C142CD7C05A00B799FA /* General.swift in Sources */,
 				08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */,
+				08A94E4A2CEE8315008B84C6 /* SeededContent.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */,
 				0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */,
