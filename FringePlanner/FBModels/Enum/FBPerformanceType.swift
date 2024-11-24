@@ -8,6 +8,8 @@
 /// Defines how the performance can experienced
 enum FBPerformanceType: Decodable, Equatable, Hashable {
     case inPerson
+    case onlineLive
+    case onlineOnDemand
     case other(String)
     
     init(from decoder: any Decoder) throws {
@@ -16,6 +18,8 @@ enum FBPerformanceType: Decodable, Equatable, Hashable {
         
         switch stringValue {
         case "in-person": self = .inPerson
+        case "online-live": self = .onlineLive
+        case "online-on-demand": self = .onlineOnDemand
         default:
             fbAssertionFailure("Found non-identified performance type")
             self = .other(stringValue.trimmed)
