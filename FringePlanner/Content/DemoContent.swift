@@ -15,9 +15,9 @@ struct DemoContentContainer {
     
     typealias Router = SimplifiedRouter<NavigationLocation>
 
-    struct Content< InteractionType: DemoInteraction, DataSourceType: DemoDataSource>: ContentProtocol {
+    struct Content<DataSourceType: DemoDataSource>: ContentProtocol {
         let router: Router
-        let interaction: InteractionType
+        let interaction: Interaction<DataSourceType>
         let dataSource: DataSourceType
         
         let structure = { (input: ContentInput) in
@@ -51,7 +51,7 @@ struct DemoContentContainer {
         }
     }
     
-    static func createDemoContent() -> Content<Interaction<OverridingDataSource>, OverridingDataSource> {
+    static func createDemoContent() -> Content<OverridingDataSource> {
         let router = Router()
         let dataSource = OverridingDataSource()
         let interaction = Interaction(router: router, dataSource: dataSource)
@@ -59,14 +59,6 @@ struct DemoContentContainer {
     }
 
     // MARK: Protocols
-
-    protocol DemoInteraction: InteractionProtocol {
-        func updateSection1Row1()
-        func updateSection2Row1()
-        func toggleTimer()
-        func pushSheet(_ sheet: NavigationLocation) -> (() -> Void)
-        func addRow()
-    }
 
     protocol DemoDataSource: DataSourceProtocol {
         var section1Row1Number: Int { get set }
@@ -78,7 +70,7 @@ struct DemoContentContainer {
     
     // MARK: Models
     
-    struct Interaction<DataSourceType: DemoDataSource>: DemoInteraction {
+    struct Interaction<DataSourceType: DemoDataSource>: InteractionProtocol {
         private let router: Router
         private let dataSource: DataSourceType
         
