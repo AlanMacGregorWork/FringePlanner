@@ -9,6 +9,7 @@
 enum FBPriceType: Decodable, Equatable, Hashable {
     case paid
     case free
+    case payWhatYouCan
     case other(String)
     
     init(from decoder: any Decoder) throws {
@@ -18,6 +19,7 @@ enum FBPriceType: Decodable, Equatable, Hashable {
         switch stringValue {
         case "paid": self = .paid
         case "free": self = .free
+        case "pay-what-you-can": self = .payWhatYouCan
         default:
             fbAssertionFailure("Found non-identified price type")
             self = .other(stringValue.trimmed)
