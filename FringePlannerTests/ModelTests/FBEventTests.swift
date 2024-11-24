@@ -182,7 +182,7 @@ private struct TestDataContent {
                 FBPerformance(title: nil, type: .other("some other type"), isAtFixedTime: false, priceType: .other("some Price"), price: 32, concession: 0.4, priceString: "32 price", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 45).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 13, minute: 05).date!, durationMinutes: 65)
             ],
             [
-                FBPerformance(title: "SomeValue", type: .onlineLive, isAtFixedTime: true, priceType: .free, price: 0, concession: nil, priceString: "Free", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 15).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 35).date!, durationMinutes: 20)
+                FBPerformance(title: "SomeValue", type: .onlineLive, isAtFixedTime: true, priceType: .payWhatYouCan, price: 0, concession: nil, priceString: "Free", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 15).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 35).date!, durationMinutes: 20)
             ],
             [],
             []
