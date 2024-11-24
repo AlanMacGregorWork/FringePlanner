@@ -222,7 +222,7 @@ private struct RenderingTestsContainer {
                 GroupData(type: .section) {
                     TextData(text: "Value stored in data model: \(input.dataSource.value)")
                     ButtonData(title: "Add 1 to data model directly", interaction: { input.dataSource.value += 1 })
-                    ButtonData(title: "Add 1 to data model from interaction", interaction: input.interaction.addToDataSource)
+                    ButtonData(title: "Add 1 to data model from interaction", interaction: { input.interaction.addToDataSource() })
                 }
             }
         }

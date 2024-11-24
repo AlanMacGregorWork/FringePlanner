@@ -27,7 +27,7 @@ struct ExampleTest {
         content.expect {
             NavigationData(router: content.router) {
                 TextData(text: "Row Value: 0")
-                ButtonData(title: "Add To Value", interaction: content.interaction.addToButtonPress)
+                ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })
             }
         }
         
@@ -38,7 +38,7 @@ struct ExampleTest {
         content.expect {
             NavigationData(router: content.router) {
                 TextData(text: "Row Value: 1")
-                ButtonData(title: "Add To Value", interaction: content.interaction.addToButtonPress)
+                ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })
             }
         }
     }
