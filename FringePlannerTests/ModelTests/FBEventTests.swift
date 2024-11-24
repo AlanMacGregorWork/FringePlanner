@@ -136,7 +136,11 @@ private struct TestDataContent {
         "description": TestData(keyPath: \.description, array: ["<p> Magical things /> </p>", "<p>\n\t<strong>.</strong></h4>", "<p> Magical things</b></a> </p>", "<p>Created </p>"]),
         "description_teaser": TestData(keyPath: \.descriptionTeaser, array: [nil, "Some Text", nil, "Code for […]"]),
         "year": TestData(keyPath: \.year, array: [2024, 2024, 2024, 2024]),
-        "disabled": TestData(keyPath: \.disabled, array: [FBDisabled(captioning: nil, otherServices: nil, signed: nil, audio: nil), FBDisabled(captioning: false, otherServices: false, signed: false, audio: false), FBDisabled(captioning: true, otherServices: true, signed: true, audio: true), nil]),
+        "disabled": TestData(keyPath: \.disabled, array: [
+            FBDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil),
+            FBDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"]),
+            FBDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil),
+            nil]),
         "performance_space": TestData(keyPath: \.performanceSpace, array: [FBPerformanceSpace(name: "Test\nYes"), FBPerformanceSpace(name: "Place"), FBPerformanceSpace(name: "Nothing"), FBPerformanceSpace(name: "Item")]),
         "venue": TestData(keyPath: \.venue, array: [
             FBVenue(code: "Code1", description: nil, name: "Name1", address: nil, position: FBVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode1", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
