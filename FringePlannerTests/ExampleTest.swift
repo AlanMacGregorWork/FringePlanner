@@ -12,6 +12,7 @@ import SwiftUI
 @Suite("Example Tests")
 struct ExampleTest {
     
+    @MainActor
     private let content: Content
     
     init() {
@@ -24,7 +25,7 @@ struct ExampleTest {
     @Test("Interacting should update the data source")
     func testExample() async throws {
         // Initial row
-        content.expect {
+        await content.expect {
             NavigationData(router: content.router) {
                 TextData(text: "Row Value: 0")
                 ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })
@@ -32,10 +33,10 @@ struct ExampleTest {
         }
         
         // User taps the button
-        content.interaction.addToButtonPress()
+        await content.interaction.addToButtonPress()
         
         // Row value should increase to 1
-        content.expect {
+        await content.expect {
             NavigationData(router: content.router) {
                 TextData(text: "Row Value: 1")
                 ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })

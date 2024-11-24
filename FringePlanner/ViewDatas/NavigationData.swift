@@ -121,7 +121,6 @@ private extension EnvironmentValues {
 }
 
 /// Allows the path var to be passed onto child views.
-@MainActor
 @Observable
 private final class PathContainer {
     var path = NavigationPath()

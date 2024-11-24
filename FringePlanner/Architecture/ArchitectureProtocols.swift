@@ -11,6 +11,7 @@ import Combine
 // MARK: - Main
 
 /// Defines the individual components required to build a view
+@MainActor
 protocol BaseContentProtocol {
     associatedtype RouterType: RouterProtocol
     associatedtype InteractionType: InteractionProtocol
