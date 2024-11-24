@@ -18,7 +18,7 @@ struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol
         // MARK: Property
         
         private let data: NavigationData<RouterType, repeat each T>
-        @StateObject private var router: RouterType
+        @State private var router: RouterType
         @State private var localSheet: RouterType.NavigationLocation?
         /// The path count given on the last push. This can be used to identify if the view has been popped and
         /// the sheet needs to be set to nil.

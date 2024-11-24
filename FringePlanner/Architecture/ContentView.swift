@@ -9,7 +9,7 @@ import SwiftUI
 
 /// Constructs a view from the content
 struct ContentView<Content: ContentProtocol>: View {
-    @ObservedObject private var router: Content.RouterType
+    @State private var router: Content.RouterType
     private var dataSource: Content.DataSourceType
     private let container: Content
     

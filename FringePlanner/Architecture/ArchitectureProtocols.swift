@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 // MARK: - Main
 
@@ -39,16 +40,10 @@ extension ContentProtocol {
 // MARK: - Components
 
 /// Allows access to navigation
-protocol RouterProtocol where Self: BaseRouter<NavigationLocation>, Self: ObservableObject, Self: Equatable {
+protocol RouterProtocol: Observable, Equatable {
     associatedtype NavigationLocation: NavigationLocationProtocol
     var pushedSheet: NavigationLocation? { get set }
-}
-
-extension RouterProtocol {
-    /// Basic Equatable support for the router protocol
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.pushedSheet == rhs.pushedSheet
-    }
+    var objectWillChange: PassthroughSubject<Void, Never> { get }
 }
 
 /// Contains interactions and events from the user.
@@ -68,17 +63,6 @@ protocol NavigationLocationProtocol: Hashable {
     func toView() -> ContentView
 }
 
-// MARK: - Base Components
-
-/// The base class required for router
-class BaseRouter<NavigationLocation: NavigationLocationProtocol> {
-    @Published var pushedSheet: NavigationLocation?
-    
-    func pushSheet(location: NavigationLocation?) {
-        pushedSheet = location
-    }
-}
-
 // MARK: - Helpers
 
 /// Contains the models required to build content for `ContentProtocol.structure`
@@ -89,9 +73,25 @@ struct ContentViewGenerationInput<Content: BaseContentProtocol> {
     let reference: Content
 }
 
+@Observable
 /// Simplifies the router creation when just requiring the location type
-final class SimplifiedRouter<NavigationLocation: NavigationLocationProtocol>: BaseRouter<NavigationLocation>, RouterProtocol, Hashable {
+final class SimplifiedRouter<NavigationLocation: NavigationLocationProtocol>: RouterProtocol, Hashable {
+    let objectWillChange = PassthroughSubject<Void, Never>()
+    var pushedSheet: NavigationLocation? {
+        didSet {
+            objectWillChange.send(())
+        }
+    }
+    
     func hash(into hasher: inout Hasher) {
-        // No hashing needed
+        hasher.combine(pushedSheet)
+    }
+    
+    static func == (lhs: SimplifiedRouter, rhs: SimplifiedRouter) -> Bool {
+        lhs.pushedSheet == rhs.pushedSheet
+    }
+    
+    func pushSheet(location: NavigationLocation?) {
+        self.pushedSheet = location
     }
 }
