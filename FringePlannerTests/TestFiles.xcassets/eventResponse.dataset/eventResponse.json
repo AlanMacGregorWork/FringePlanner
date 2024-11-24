@@ -214,10 +214,10 @@
     "disabled": {
       "audio": false,
       "audio_dates": null,
-      "signed": false,
-      "signed_dates": null,
-      "captioning": false,
-      "captioning_dates": null,
+      "signed": true,
+      "signed_dates": "2024-08-25,2024-08-26",
+      "captioning": true,
+      "captioning_dates": "2024-08-25,2024-08-25,2024-08-26",
       "other_services": false,
       "other_services_dates": null,
       "other_services_information": null
@@ -319,10 +319,10 @@
     "disabled": {
       "audio": true,
       "audio_dates": null,
-      "signed": true,
+      "signed": false,
       "signed_dates": null,
       "captioning": true,
-      "captioning_dates": null,
+      "captioning_dates": "2024-08-25",
       "other_services": true,
       "other_services_dates": null,
       "other_services_information": null
