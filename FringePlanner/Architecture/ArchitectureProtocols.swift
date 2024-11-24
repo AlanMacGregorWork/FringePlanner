@@ -51,8 +51,8 @@ extension RouterProtocol {
     }
 }
 
-/// Contains interactions and events from the used.
-protocol InteractionProtocol where Self: BaseInteraction { }
+/// Contains interactions and events from the user.
+protocol InteractionProtocol { }
 
 /// The source of data to derive the content
 protocol DataSourceProtocol: Observable, AnyObject { }
@@ -69,14 +69,6 @@ protocol NavigationLocationProtocol: Hashable {
 }
 
 // MARK: - Base Components
-
-/// The base class required for interactions
-class BaseInteraction: ObservableObject, Equatable {
-    static func == (lhs: BaseInteraction, rhs: BaseInteraction) -> Bool {
-        // Interactions should not hold state
-        return true
-    }
-}
 
 /// The base class required for router
 class BaseRouter<NavigationLocation: NavigationLocationProtocol> {

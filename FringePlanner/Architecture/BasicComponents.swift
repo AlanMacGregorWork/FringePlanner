@@ -9,7 +9,7 @@ import SwiftUI
 
 // Components that perform no actions
 
-class BasicInteraction: BaseInteraction, InteractionProtocol {}
+struct BasicInteraction: InteractionProtocol {}
 
 @Observable
 class BasicDataSource: DataSourceProtocol {}

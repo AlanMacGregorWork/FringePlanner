@@ -13,12 +13,8 @@ import SwiftUI
 struct UITestingContentContainer {
     typealias Router = SimplifiedRouter<NavigationLocation>
     
-    class Interaction: BaseInteraction, InteractionProtocol {
+    struct Interaction: InteractionProtocol {
         let router: Router
-        
-        init(router: Router) {
-            self.router = router
-        }
         
         func push(sheet: Router.NavigationLocation) {
             self.router.pushSheet(location: sheet)
@@ -200,12 +196,8 @@ private struct RenderingTestsContainer {
         var value = 0
     }
     
-    class Interaction: BaseInteraction, InteractionProtocol {
+    struct Interaction: InteractionProtocol {
         let dataSource: DataSource
-        
-        init(dataSource: DataSource) {
-            self.dataSource = dataSource
-        }
         
         func addToDataSource() {
             dataSource.value += 1

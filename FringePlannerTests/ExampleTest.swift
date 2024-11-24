@@ -52,12 +52,8 @@ private class DataSource: DataSourceProtocol {
     @Published var buttonPresses = 0
 }
 
-private class Interaction: BaseInteraction, InteractionProtocol {
+private struct Interaction: InteractionProtocol {
     let dataSource: DataSource
-    
-    init(dataSource: DataSource) {
-        self.dataSource = dataSource
-    }
     
     func addToButtonPress() {
         dataSource.buttonPresses += 1

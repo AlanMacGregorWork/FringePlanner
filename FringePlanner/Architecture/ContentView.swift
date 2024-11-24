@@ -11,13 +11,11 @@ import SwiftUI
 struct ContentView<Content: ContentProtocol>: View {
     @ObservedObject private var router: Content.RouterType
     private var dataSource: Content.DataSourceType
-    @ObservedObject private var interaction: Content.InteractionType
     private let container: Content
     
     init(_ container: Content) {
         self._router = .init(initialValue: container.router)
         self.dataSource = container.dataSource
-        self._interaction = .init(initialValue: container.interaction)
         self.container = container
     }
     

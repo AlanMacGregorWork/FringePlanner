@@ -78,8 +78,8 @@ struct DemoContentContainer {
     
     // MARK: Models
     
-    class Interaction<DataSourceType: DemoDataSource>: BaseInteraction, DemoInteraction {
-        @Published var router: Router
+    struct Interaction<DataSourceType: DemoDataSource>: DemoInteraction {
+        private let router: Router
         private let dataSource: DataSourceType
         
         init(router: Router, dataSource: DataSourceType) {
