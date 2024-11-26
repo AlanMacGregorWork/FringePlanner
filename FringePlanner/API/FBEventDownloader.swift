@@ -8,7 +8,7 @@
 import Foundation
 
 /// Downloads Fringe events from the Fringe API
-struct FBEventDownloader {
+struct FBEventDownloader: FBEventDownloader.GetEventsProtocol {
     
     private let downloadSupport: any DownloadProtocol
     
@@ -77,11 +77,25 @@ extension FBEventDownloader {
     
     // MARK: Protocols
     
-    protocol DownloadProtocol {
+    /// Protocol for downloading data from a URL
+    protocol DownloadProtocol: Sendable {
         func data(from: URL) async throws -> (Data, URLResponse)
+    }
+    
+    /// Protocol for the downloading events from the Fringe API 
+    protocol GetEventsProtocol {
+        func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FBEvent]
     }
 }
 
 // MARK: Protocol Support
 
 extension URLSession: FBEventDownloader.DownloadProtocol {}
+
+#if DEBUG
+struct MockEventDownloader: FBEventDownloader.GetEventsProtocol {
+    func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FBEvent] {
+        return .exampleModels()
+    }
+}
+#endif

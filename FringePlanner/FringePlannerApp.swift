@@ -34,6 +34,6 @@ struct FringePlannerApp: App {
 @ViewBuilder
 @MainActor
 var demoView: some View {
-    DemoContentContainer.createDemoContent()
+    SearchEventContentContainer.createContent()
         .buildView()
 }

@@ -35,6 +35,10 @@ struct FBEvent: Equatable, Hashable {
     let year: Int
 }
 
+extension FBEvent: Identifiable {
+    var id: String { code }
+}
+
 extension FBEvent: Decodable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)

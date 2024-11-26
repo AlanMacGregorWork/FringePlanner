@@ -12,6 +12,28 @@ import SwiftUI
 #if DEBUG
 
 /// Displays a basic text view
+struct TextFieldData: ViewDataProtocol, Equatable {
+    var text: Binding<String>
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        guard lhs.text.wrappedValue == rhs.text.wrappedValue else { return false }
+        return true
+    }
+
+    struct ContentView: View, ViewProtocol {
+        let data: TextFieldData
+
+        var body: some View {
+            VStack(alignment: .leading) {
+                TextField("Text", text: data.text)
+                Text("View Change: \(Date.now.timeIntervalSince1970)")
+                    .font(.footnote)
+            }
+        }
+    }
+}
+
+/// Displays a basic text view
 struct TextData: ViewDataProtocol, Equatable {
     let text: String
     
