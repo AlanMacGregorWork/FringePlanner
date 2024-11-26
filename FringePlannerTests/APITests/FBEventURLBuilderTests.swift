@@ -44,19 +44,19 @@ struct FBEventURLBuilderTests {
     
     @Test("Requests alter URL")
     func testRequestsAlterURL() throws {
-        let urlBuilder = FBEventURLBuilder()
+        let urlBuilder = FBEventURLBuilder(key: "fakeKey", secretKey: "fakeSecretKey")
         
         let actualURL1 = try urlBuilder.constructURL(for: .init(title: "some Item"))
-        let expectedURL1 = try #require(URL(string: "https://api.edinburghfestivalcity.com/events?title=some%20Item&key=j2MuaCgShVgUaMtm&signature=418e8d542d471e45254b5fd736028100b6533fcc"))
+        let expectedURL1 = try #require(URL(string: "https://api.edinburghfestivalcity.com/events?title=some%20Item&key=fakeKey&signature=786b76e82c2951f124ebfa166569cca154796075"))
         #expect(expectedURL1 == actualURL1)
         // Pass 2
         let actualURL2 = try urlBuilder.constructURL(for: .init(title: "some different item"))
-        let expectedURL2 = try #require(URL(string: "https://api.edinburghfestivalcity.com/events?title=some%20different%20item&key=j2MuaCgShVgUaMtm&signature=eeb8f86fd3cf79dd339bf92418fa8d779a87e77e"))
+        let expectedURL2 = try #require(URL(string: "https://api.edinburghfestivalcity.com/events?title=some%20different%20item&key=fakeKey&signature=10645ea99cc3f64871ee72a270b6c15ce12a9b4f"))
         #expect(expectedURL2 == actualURL2)
         
         // Pass 3
         let actualURL3 = try urlBuilder.constructURL(for: .init(title: "some different item", hasCaptioning: true))
-        let expectedURL3 = try #require(URL(string: "https://api.edinburghfestivalcity.com/events?title=some%20different%20item&has_captioning=1&key=j2MuaCgShVgUaMtm&signature=b68fd08d7ad586b82dd89a4ed98fe0853c4907c7"))
+        let expectedURL3 = try #require(URL(string: "https://api.edinburghfestivalcity.com/events?title=some%20different%20item&has_captioning=1&key=fakeKey&signature=2624149597697647ca952c383ab118f3aa6957e5"))
         #expect(expectedURL3 == actualURL3)
         
         #expect(actualURL1 != actualURL2, "Requests should affect URL")
