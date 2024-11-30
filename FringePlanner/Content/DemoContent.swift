@@ -135,14 +135,4 @@ struct DemoContentContainer {
     }
 }
 
-struct DemoContentPage2<RouterType: RouterProtocol, InteractionType: InteractionProtocol, DataSourceType: DataSourceProtocol>: ContentProtocol {
-    let router: RouterType
-    let interaction: InteractionType
-    let dataSource: DataSourceType
-    
-    let structure = { (_: ContentInput) in
-        TextData(text: "Temp Page #2")
-    }
-}
-
 #endif
