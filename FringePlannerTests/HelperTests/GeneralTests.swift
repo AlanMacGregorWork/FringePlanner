@@ -62,7 +62,7 @@ extension GeneralTests.MapErrorTests {
         }
     }
     
-    @Test("Maps to output type", arguments: typesTest.keys)
+    @Test("Maps to output type", arguments: typesTest.cleanKeys)
     func testMapError_Equatable(key: String) throws {
         let expectedResponse = try #require(Self.typesTest[key])
         try testMapError_EquatableTests(expectedResponse: expectedResponse)

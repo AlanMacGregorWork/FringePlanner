@@ -10,6 +10,7 @@ import Testing
 
 extension ContentProtocol {
     /// Triggers an `expect` test specifically for fringe data
+    @MainActor
     func expect<T: ViewDataProtocol>(@FringeDataResultBuilder _ data: () -> (T)) {
         if let value = data() as? Self.Structure.StructureType {
             #expect(Self.Structure(input: self).structure == value)

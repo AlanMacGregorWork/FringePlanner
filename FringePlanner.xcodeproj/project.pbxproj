@@ -42,6 +42,7 @@
 		086D08782CE53111000B6225 /* FBDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08772CE5310F000B6225 /* FBDisabled.swift */; };
 		086D087A2CE53296000B6225 /* FBVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08792CE53292000B6225 /* FBVenue.swift */; };
 		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
+		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
 		08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FBEvent.swift */; };
 		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
 		08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */; };
@@ -125,6 +126,7 @@
 		086D08792CE53292000B6225 /* FBVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBVenue.swift; sourceTree = "<group>"; };
 		086D087B2CE56A54000B6225 /* FBImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImage.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
+		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		08BA67492CE7F291000DDF37 /* FBEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEvent.swift; sourceTree = "<group>"; };
 		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilder.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		080272E82C9A394E0040A673 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */,
 				086159002CD69B7B0076255B /* String.swift */,
 				0834BB072C9F609F00BF8A5A /* Text.swift */,
 			);
@@ -633,6 +636,7 @@
 				086D087A2CE53296000B6225 /* FBVenue.swift in Sources */,
 				08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */,
 				08CB2C142CD7C05A00B799FA /* General.swift in Sources */,
+				08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */,
 				0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */,
