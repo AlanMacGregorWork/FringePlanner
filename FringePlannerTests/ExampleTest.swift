@@ -22,10 +22,11 @@ struct ExampleTest {
         self.content = Content(router: router, interaction: interaction, dataSource: dataSource)
     }
     
+    @MainActor
     @Test("Interacting should update the data source")
     func testExample() async throws {
         // Initial row
-        await content.expect {
+        content.expect {
             NavigationData(router: content.router) {
                 TextData(text: "Row Value: 0")
                 ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })
@@ -33,10 +34,10 @@ struct ExampleTest {
         }
         
         // User taps the button
-        await content.interaction.addToButtonPress()
+        content.interaction.addToButtonPress()
         
         // Row value should increase to 1
-        await content.expect {
+        content.expect {
             NavigationData(router: content.router) {
                 TextData(text: "Row Value: 1")
                 ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })
