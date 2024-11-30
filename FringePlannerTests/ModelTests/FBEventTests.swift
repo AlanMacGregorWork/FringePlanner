@@ -80,7 +80,7 @@ struct FBEventTests {
 
 // MARK: - TestData
 
-private struct TestData<T: Equatable>: Identifiable {
+private struct TestData<T: Equatable & Sendable>: Identifiable {
     let keyPath: KeyPath<FBEvent, T>
     let array: [T]
     var id: String { "\(keyPath)" }
@@ -119,7 +119,7 @@ private struct TestDataContent {
     }
     
     /// A array of the the expected response from the decoded JSON
-    static let expectedValues: [String: (any Identifiable)?] = [
+    static let expectedValues: [String: (any Identifiable & Sendable)?] = [
         "title": TestData(keyPath: \.title, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
         "genre": TestData(keyPath: \.genre, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
         "code": TestData(keyPath: \.code, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
@@ -198,3 +198,8 @@ private struct TestDataContent {
         "categories": nil
     ]
 }
+
+// MARK: - Support
+
+// Note: Set as `@unchecked` as KeyPaths "should" be fine, plus this is only in the testing target
+extension KeyPath: @retroactive @unchecked Sendable {}
