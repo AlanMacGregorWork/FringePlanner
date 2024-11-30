@@ -9,6 +9,7 @@ import XCTest
 
 extension XCTestCase {
     /// Constructs a basic task to be performed
+    @MainActor
     func runTask(for app: XCUIApplication, tap: TestUIElement, task: String, expect: Expectation) throws {
         try XCTContext.runActivity(named: "Tap '\(tap.referenceName)' to \(task) \(expect.title)") { _ in
             let tapElement = try tap.xcElement(from: app)
@@ -19,9 +20,11 @@ extension XCTestCase {
     
     // MARK: Redirects
     
+    @MainActor
     func runTask(for app: XCUIApplication, tap: TestUIElement, pushToSheet sheet: TestUIElement) throws {
         try runTask(for: app, tap: tap, task: "push to", expect: .elementExists(sheet))
     }
+    @MainActor
     func runTask(for app: XCUIApplication, tap: TestUIElement, popToSheet sheet: TestUIElement) throws {
         try runTask(for: app, tap: tap, task: "pop to", expect: .elementExists(sheet))
     }

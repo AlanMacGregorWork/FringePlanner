@@ -20,6 +20,7 @@ struct TestUIElement: Hashable {
     
     /// Retrieves the test element defined for this object
     @discardableResult
+    @MainActor
     func xcElement(from app: XCUIApplication) throws -> XCUIElement {
         let element: XCUIElement = switch elementType {
         case .text:
@@ -32,6 +33,7 @@ struct TestUIElement: Hashable {
     }
     
     /// Throws an error if the identified UI element does not exist
+    @MainActor
     private func throwOnNotExist(for element: XCUIElement) throws -> XCUIElement {
         enum ElementIssue: Error, CustomStringConvertible {
             case elementDoesNotExist(type: String, label: String)

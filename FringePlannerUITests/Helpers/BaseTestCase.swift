@@ -11,41 +11,27 @@ class BaseUITests: XCTestCase {
     
     // MARK: Properties
     
-    private static var isAppLaunched = false
-    private static let app = XCUIApplication()
-    var app: XCUIApplication { Self.app }
+    private static let session = UISession()
+    var app: XCUIApplication { Self.session.app }
     
     // MARK: Overrides
-
-    override class func setUp() {
-        super.setUp()
-        
-        // Ensure that the application is only launched once. This reduces the time of having to relaunch
-        // the app to run another test
-        if !isAppLaunched {
-            app.launchArguments = ["ui-test"]
-            app.launch()
-            isAppLaunched = true
-        }
+    
+    override func setUp() async throws {
+        try await super.setUp()
+        // No point in continuing after a failure
+        self.continueAfterFailure = false
+        await Self.session.launchAppIfNeeded()
     }
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        try popToMainSheetTearDown()
+    
+    override func tearDown() async throws {
+        try await super.tearDown()
+        try await popToMainSheetTearDown()
     }
     
     // MARK: Helpers
     
     /// Continuously pops the navigation stack until the main sheet is present
+    @MainActor
     private func popToMainSheetTearDown() throws {
         enum TearDownError: Error, CustomStringConvertible {
             case couldNotPopToMainSheet
@@ -62,6 +48,26 @@ class BaseUITests: XCTestCase {
             guard attempts < 10 else { throw TearDownError.couldNotPopToMainSheet }
             try buttonBack.xcElement(from: app).tap()
             attempts += 1
+        }
+    }
+}
+
+// MARK: - Actors
+
+/// A singleton that manages the state of the UI session
+private actor UISession {
+    private var isAppLaunched = false
+    @MainActor let app = XCUIApplication()
+    
+    func launchAppIfNeeded() async {
+        // Ensure that the application is only launched once. This reduces the time of having to relaunch
+        // the app to run another test
+        if !isAppLaunched {
+            await MainActor.run {
+                app.launchArguments = ["ui-test"]
+                app.launch()
+            }
+            isAppLaunched = true
         }
     }
 }

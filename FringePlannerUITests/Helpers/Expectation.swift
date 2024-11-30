@@ -12,6 +12,7 @@ enum Expectation {
     case elementExists(TestUIElement)
     case labelsContain([TestUIElement: LabelContains])
     
+    @MainActor
     func trigger(app: XCUIApplication) throws {
         switch self {
         case .elementExists(let element):
