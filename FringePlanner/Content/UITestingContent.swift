@@ -63,12 +63,6 @@ struct UITestingContentContainer {
             }
         }
     }
-    
-    @ViewBuilder
-    @MainActor
-    var uiTestingView: some View {
-        Content().buildView()
-    }
 }
 
 // MARK: - NavigationTestSheetAContainer

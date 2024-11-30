@@ -60,7 +60,6 @@ struct DemoContentContainer {
      
     // MARK: - Create
     
-    @MainActor
     static func createDemoContent() -> Content<OverridingDataSource> {
         let router = Router()
         let dataSource = OverridingDataSource()
