@@ -11,11 +11,10 @@ import SwiftUI
 
 @Suite("Example Tests")
 struct ExampleTest {
-    
-    @MainActor
+
     private let content: Content
     
-    init() {
+    init() async {
         let dataSource = DataSource()
         let interaction = Interaction(dataSource: dataSource)
         let router = Router()
