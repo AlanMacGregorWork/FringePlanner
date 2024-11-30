@@ -10,7 +10,8 @@ import SwiftUI
 /// Constructs a view from the content
 struct ContentView<Content: ContentProtocol>: View {
     @State private var router: Content.RouterType
-    private var dataSource: Content.DataSourceType
+    // Note: `@State` is required for detecting changes in the data source that trigger a view update
+    @State private var dataSource: Content.DataSourceType
     private let container: Content
     
     init(_ container: Content) {
@@ -20,8 +21,8 @@ struct ContentView<Content: ContentProtocol>: View {
     }
     
     var body: some View {
-        let content = container.generateStructure()
-        ContentViewGenerator(content)
+        let structure = Content.Structure.init(input: container).structure
+        ContentViewGenerator(structure)
     }
 }
 

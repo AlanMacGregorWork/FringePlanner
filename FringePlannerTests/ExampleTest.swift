@@ -67,10 +67,14 @@ private struct Content: ContentProtocol {
     let interaction: Interaction
     let dataSource: DataSource
     
-    let structure = { (input: ContentInput) in
-        NavigationData(router: input.router) {
-            TextData(text: "Row Value: \(input.dataSource.buttonPresses)")
-            ButtonData(title: "Add To Value", interaction: input.interaction.addToButtonPress)
+    struct Structure: StructureProtocol {
+        let input: Content
+
+        var structure: some ViewDataProtocol {
+            NavigationData(router: input.router) {
+                TextData(text: "Row Value: \(input.dataSource.buttonPresses)")
+                ButtonData(title: "Add To Value", interaction: input.interaction.addToButtonPress)
+            }
         }
     }
 }

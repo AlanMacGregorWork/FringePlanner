@@ -12,30 +12,14 @@ import Combine
 
 /// Defines the individual components required to build a view
 @MainActor
-protocol BaseContentProtocol {
+protocol ContentProtocol {
     associatedtype RouterType: RouterProtocol
     associatedtype InteractionType: InteractionProtocol
     associatedtype DataSourceType: DataSourceProtocol
+    associatedtype Structure: StructureProtocol where Structure.Content == Self
     var router: RouterType { get }
     var interaction: InteractionType { get }
     var dataSource: DataSourceType { get }
-}
-
-/// Defines the generation of the content
-///  - Note: Having this separate to `BaseContentProtocol` allows the `structure` to build the `ContentInput`
-/// without having to specify types
-protocol ContentProtocol: BaseContentProtocol {
-    associatedtype ContentType: ViewDataProtocol
-    var structure: (ContentInput) -> ContentType { get }
-}
-
-extension ContentProtocol {
-    typealias ContentInput = ContentViewGenerationInput<Self>
-    
-    /// Generates the structure using self as the input
-    func generateStructure() -> ContentType {
-        self.structure(.init(router: router, dataSource: dataSource, interaction: interaction, reference: self))
-    }
 }
 
 // MARK: - Components
@@ -53,6 +37,16 @@ protocol InteractionProtocol { }
 /// The source of data to derive the content
 protocol DataSourceProtocol: Observable, AnyObject { }
 
+/// The structure of the content
+protocol StructureProtocol {
+    associatedtype Content: ContentProtocol
+    associatedtype StructureType: ViewDataProtocol
+
+    init(input: Content)
+    @MainActor
+    var structure: StructureType { get }
+}
+
 // MARK: - Associated Types For Components
 
 /// Identifies a hashable type that can be sent and received for navigation
@@ -65,14 +59,6 @@ protocol NavigationLocationProtocol: Hashable {
 }
 
 // MARK: - Helpers
-
-/// Contains the models required to build content for `ContentProtocol.structure`
-struct ContentViewGenerationInput<Content: BaseContentProtocol> {
-    let router: Content.RouterType
-    let dataSource: Content.DataSourceType
-    let interaction: Content.InteractionType
-    let reference: Content
-}
 
 @Observable
 /// Simplifies the router creation when just requiring the location type

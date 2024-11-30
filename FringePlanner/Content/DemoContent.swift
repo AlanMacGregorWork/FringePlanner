@@ -19,8 +19,15 @@ struct DemoContentContainer {
         let router: Router
         let interaction: Interaction<DataSourceType>
         let dataSource: DataSourceType
+        typealias Structure = DemoContentContainer.Structure<DataSourceType>
+    }
+    
+    // MARK: - Structure
+    
+    struct Structure<DataSourceType: DemoDataSource>: StructureProtocol {
+        let input: Content<DataSourceType>
         
-        let structure = { (input: ContentInput) in
+        var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
                 TextData(text: "General Row: \(input.dataSource.section2Row1Number)")
                 GroupData(type: .form) {
@@ -30,7 +37,7 @@ struct DemoContentContainer {
                     ButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
                     ButtonData(title: "Update row 1", interaction: {input.interaction.updateSection1Row1() })
                     
-                    ForEachData(data: RouterType.NavigationLocation.allCases) { sheet in
+                    ForEachData(data: DemoContentContainer.Router.NavigationLocation.allCases) { sheet in
                         ButtonData(title: "Push \(sheet.title)", interaction: input.interaction.pushSheet(sheet))
                     }
                     
@@ -50,6 +57,8 @@ struct DemoContentContainer {
             }
         }
     }
+     
+    // MARK: - Create
     
     @MainActor
     static func createDemoContent() -> Content<OverridingDataSource> {

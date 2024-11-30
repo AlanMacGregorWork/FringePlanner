@@ -38,6 +38,7 @@ struct UITestingContentContainer {
         let router: Router
         let interaction: Interaction
         let dataSource = BasicDataSource()
+        typealias Structure = UITestingContentContainer.Structure
         
         init() {
             let router = Router()
@@ -45,8 +46,12 @@ struct UITestingContentContainer {
             self.interaction = interaction
             self.router = router
         }
+    }
+    
+    struct Structure: StructureProtocol {
+        let input: Content
         
-        let structure = { (input: ContentInput) in
+        var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
                 TextData(text: "Title: Main Sheet")
                 GroupData(type: .form) {
@@ -102,8 +107,13 @@ private struct NavigationTestSheetAContainer {
         let router = Router()
         let interaction = BasicInteraction()
         let dataSource = BasicDataSource()
-
-        let structure = { (input: ContentInput) in
+        typealias Structure = NavigationTestSheetAContainer.Structure
+    }
+    
+    struct Structure: StructureProtocol {
+        let input: Content
+        
+        var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
                 TextData(text: "Title: Sheet A")
                 GroupData(type: .form) {
@@ -134,8 +144,13 @@ private struct NavigationTestSheetBContainer {
         let interaction = BasicInteraction()
         let dataSource = BasicDataSource()
         let parentRouter: NavigationTestSheetAContainer.Router
+        typealias Structure = NavigationTestSheetBContainer.Structure
+    }
+    
+    struct Structure: StructureProtocol {
+        let input: Content
 
-        let structure = { (input: ContentInput) in
+        var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
                 TextData(text: "Title: Sheet B (V1)")
                 GroupData(type: .form) {
@@ -143,7 +158,7 @@ private struct NavigationTestSheetBContainer {
                         ButtonData(title: "Open Sheet C", interaction: { input.router.pushSheet(location: .sheetC) })
                     }
                     GroupData(type: .section) {
-                        ButtonData(title: "Change Parent Selection To Sheet B (V2)", interaction: { input.reference.parentRouter.pushSheet(location: .sheetBV2) })
+                        ButtonData(title: "Change Parent Selection To Sheet B (V2)", interaction: { input.parentRouter.pushSheet(location: .sheetBV2) })
                     }
                 }
             }
@@ -173,8 +188,13 @@ private struct NavigationTestSheetCContainer {
         let router = Router()
         let interaction = BasicInteraction()
         let dataSource = BasicDataSource()
-
-        let structure = { (input: ContentInput) in
+        typealias Structure = NavigationTestSheetCContainer.Structure
+    }
+    
+    struct Structure: StructureProtocol {
+        let input: Content
+        
+        var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
                 TextData(text: "Title: Sheet C")
                 GroupData(type: .form) {
@@ -208,14 +228,19 @@ private struct RenderingTestsContainer {
         let router = Router()
         let interaction: Interaction
         let dataSource: DataSource
+        typealias Structure = RenderingTestsContainer.Structure
         
         init() {
             let dataSource = DataSource()
             self.interaction = .init(dataSource: dataSource)
             self.dataSource = dataSource
         }
-        
-        let structure = { (input: ContentInput) in
+    }
+    
+    struct Structure: StructureProtocol {
+        let input: Content
+
+        var structure: some ViewDataProtocol {
             GroupData(type: .form) {
                 TextData(text: "Title: Rendering Tests")
                 
