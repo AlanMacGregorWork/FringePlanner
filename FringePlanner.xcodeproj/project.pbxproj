@@ -44,6 +44,7 @@
 		086D08782CE53111000B6225 /* FBDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08772CE5310F000B6225 /* FBDisabled.swift */; };
 		086D087A2CE53296000B6225 /* FBVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08792CE53292000B6225 /* FBVenue.swift */; };
 		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
+		087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */; };
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
 		08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */; };
 		08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF812CFCEEB400925B8D /* ConditionalData.swift */; };
@@ -133,6 +134,7 @@
 		086D08772CE5310F000B6225 /* FBDisabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDisabled.swift; sourceTree = "<group>"; };
 		086D08792CE53292000B6225 /* FBVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBVenue.swift; sourceTree = "<group>"; };
 		086D087B2CE56A54000B6225 /* FBImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImage.swift; sourceTree = "<group>"; };
+		087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataIsEmpty.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyData.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		0820A57B2CB31778006DDEE7 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */,
 				0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */,
 			);
 			path = Protocol;
@@ -677,6 +680,7 @@
 				080272EA2C9A39620040A673 /* EdgeInsets.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */,
+				087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */,
 				0843C2362CE7EC430076FF11 /* fbAssert.swift in Sources */,
 				08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */,
 				0819F73B2CD2C27C009B9D3E /* HMACGenerator.swift in Sources */,
