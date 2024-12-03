@@ -30,15 +30,35 @@ struct GroupData<each Content: ViewDataProtocol>: ViewDataProtocol {
                 Form {
                     content
                 }
-            case .section:
-                Section {
-                    content
+            case .section(let title):
+                Section(
+                    content: { content },
+                    header: { sectionHeader(title: title) }
+                )
+            }
+        }
+        
+        @ViewBuilder
+        /// Creates a section header if the contents are not empty
+        private func sectionHeader(title: String?) -> some View {
+            if !contentsIsEmpty {
+                if let title {
+                    Text("\(title)")
                 }
             }
         }
         
         private var content: some View {
             TupleView((repeat (each data.values).createView()))
+        }
+        
+        /// Checks if all the contents are empty (Used to determine if the content should be shown)
+        private var contentsIsEmpty: Bool {
+            for item in repeat (each data.values) {
+                guard let isEmptyType = item as? ViewDataIsEmpty else { return false }
+                guard isEmptyType.isEmpty else { return false }
+            }
+            return true
         }
     }
 }
@@ -59,7 +79,10 @@ extension GroupData: Equatable {
 // MARK: - Enums
 
 /// The visual representation to use for the grouping
-enum GroupDataType {
+enum GroupDataType: Equatable {
     case form
-    case section
+    case section(title: String? = nil)
+    
+    /// A section with no title 
+    static var section: Self { Self.section(title: nil) }
 }
