@@ -26,6 +26,7 @@
 		0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */; };
 		0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */; };
 		082DFF282D03839E00F5CBB7 /* ViewDataIsEmptyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082DFF272D03839A00F5CBB7 /* ViewDataIsEmptyTests.swift */; };
+		082DFF2A2D06573B00F5CBB7 /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082DFF292D06573900F5CBB7 /* AttributedString.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 		0835BCC92CCE42790031A860 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835BCC82CCE42770031A860 /* Expectation.swift */; };
 		0843C2322CE7DD390076FF11 /* FBPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2312CE7DD360076FF11 /* FBPerformance.swift */; };
@@ -117,6 +118,7 @@
 		0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProtocol.swift; sourceTree = "<group>"; };
 		0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeDataResultBuilder.swift; sourceTree = "<group>"; };
 		082DFF272D03839A00F5CBB7 /* ViewDataIsEmptyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataIsEmptyTests.swift; sourceTree = "<group>"; };
+		082DFF292D06573900F5CBB7 /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		0835BCC82CCE42770031A860 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		0843C2312CE7DD360076FF11 /* FBPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformance.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		080272E82C9A394E0040A673 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				082DFF292D06573900F5CBB7 /* AttributedString.swift */,
 				08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */,
 				086159002CD69B7B0076255B /* String.swift */,
 				0834BB072C9F609F00BF8A5A /* Text.swift */,
@@ -682,6 +685,7 @@
 				08AB2F872CF65C9D00D22B34 /* SearchEventContentContainer.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */,
+				082DFF2A2D06573B00F5CBB7 /* AttributedString.swift in Sources */,
 				0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */,
 				08F10DBA2CB92B97008ACBFF /* GroupData.swift in Sources */,
 				08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */,
