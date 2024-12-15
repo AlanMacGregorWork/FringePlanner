@@ -24,7 +24,7 @@ func fringeAssert(
     // Only assert if not testing
     // Note: Several tests verify the outcome of invalid states which would normally assert
     switch ApplicationEnvironment.current {
-    case .testingUI, .testingUnit: return
+    case .testingUI, .testingUnit, .preview: return
     case .normal: break
     }
     

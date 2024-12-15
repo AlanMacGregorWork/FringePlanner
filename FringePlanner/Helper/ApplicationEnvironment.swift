@@ -12,6 +12,7 @@ enum ApplicationEnvironment {
     case normal
     case testingUnit
     case testingUI
+    case preview
     
     /// Identifies the current environment being used by the app
     static var current: Self {
@@ -19,6 +20,8 @@ enum ApplicationEnvironment {
             return .testingUI
         } else if NSClassFromString("XCTestCase") != nil {
             return .testingUnit
+        } else if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            return .preview
         } else {
             return .normal
         }

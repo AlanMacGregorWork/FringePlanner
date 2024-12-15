@@ -20,6 +20,8 @@ struct FringePlannerApp: App {
                         // Disabling animations for UI tests makes them faster
                         UIView.setAnimationsEnabled(false)
                     }
+            case .preview:
+                Text("Preview")
             case .testingUnit:
                 Text("Unit Testing")
             }
