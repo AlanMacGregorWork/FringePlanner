@@ -36,14 +36,17 @@ protocol InteractionProtocol { }
 /// The source of data to derive the content
 protocol DataSourceProtocol: Observable, AnyObject { }
 
-/// The structure of the content
-protocol StructureProtocol {
-    associatedtype Content: ContentProtocol
-    associatedtype StructureType: ViewDataProtocol
-
-    init(input: Content)
+/// A structure that is not bound to any `ContentProtocol` type
+protocol BaseStructureProtocol {
     @MainActor
     var structure: StructureType { get }
+    associatedtype StructureType: ViewDataProtocol
+}
+    
+/// A structure that can be initialised from the `ContentProtocol` type
+protocol StructureProtocol: BaseStructureProtocol {
+    associatedtype Content: ContentProtocol
+    init(input: Content)
 }
 
 // MARK: - Associated Types For Components
