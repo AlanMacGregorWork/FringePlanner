@@ -70,6 +70,7 @@
 		08E1B3FB2CCEAAD800C7333A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */; };
 		08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0402CB98BD000C270F6 /* UITestingContent.swift */; };
 		08E8C0432CBC15A000C270F6 /* NavigationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0422CBC159F00C270F6 /* NavigationData.swift */; };
+		08EFD7FE2D0F06FF0090A051 /* LinkSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFD7FD2D0F06FE0090A051 /* LinkSectionView.swift */; };
 		08F10DAE2CB85D91008ACBFF /* ArchitectureProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DAD2CB85D7B008ACBFF /* ArchitectureProtocols.swift */; };
 		08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DAF2CB85EB8008ACBFF /* BasicComponents.swift */; };
 		08F10DB32CB85FC3008ACBFF /* DebugOnlyViewDatas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DB22CB85FB9008ACBFF /* DebugOnlyViewDatas.swift */; };
@@ -164,6 +165,7 @@
 		08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
 		08E8C0402CB98BD000C270F6 /* UITestingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestingContent.swift; sourceTree = "<group>"; };
 		08E8C0422CBC159F00C270F6 /* NavigationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationData.swift; sourceTree = "<group>"; };
+		08EFD7FD2D0F06FE0090A051 /* LinkSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSectionView.swift; sourceTree = "<group>"; };
 		08F10DAD2CB85D7B008ACBFF /* ArchitectureProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchitectureProtocols.swift; sourceTree = "<group>"; };
 		08F10DAF2CB85EB8008ACBFF /* BasicComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicComponents.swift; sourceTree = "<group>"; };
 		08F10DB22CB85FB9008ACBFF /* DebugOnlyViewDatas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugOnlyViewDatas.swift; sourceTree = "<group>"; };
@@ -470,6 +472,14 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
+		08EFD7FC2D0F06E30090A051 /* SectionRowData */ = {
+			isa = PBXGroup;
+			children = (
+				08EFD7FD2D0F06FE0090A051 /* LinkSectionView.swift */,
+			);
+			path = SectionRowData;
+			sourceTree = "<group>";
+		};
 		08F10DAC2CB856E2008ACBFF /* Architecture */ = {
 			isa = PBXGroup;
 			children = (
@@ -483,6 +493,7 @@
 		08F10DB12CB85F5C008ACBFF /* ViewDatas */ = {
 			isa = PBXGroup;
 			children = (
+				08EFD7FC2D0F06E30090A051 /* SectionRowData */,
 				08B1BF812CFCEEB400925B8D /* ConditionalData.swift */,
 				08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */,
 				081826A72CBF1443002293FD /* ForEachData.swift */,
@@ -696,6 +707,7 @@
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */,
 				087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */,
+				08EFD7FE2D0F06FF0090A051 /* LinkSectionView.swift in Sources */,
 				0843C2362CE7EC430076FF11 /* fringeAssert.swift in Sources */,
 				08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */,
 				0819F73B2CD2C27C009B9D3E /* HMACGenerator.swift in Sources */,
