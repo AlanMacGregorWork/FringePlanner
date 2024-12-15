@@ -44,7 +44,7 @@ extension FBEventDownloader {
         do {
             (data, response) = try await downloadSupport.data(from: url)
         } catch {
-            fbAssertionFailure("Download failed: \(error)")
+            fringeAssertFailure("Download failed: \(error)")
             throw .downloadFailed
         }
         
@@ -60,7 +60,7 @@ extension FBEventDownloader {
             for: try fringeJsonDecoder.decode([FBEvent].self, from: data),
             expectedType: [FBEvent].self,
             to: { (error: any Error) in
-                fbAssertionFailure("Decode failed: \(error)")
+                fringeAssertFailure("Decode failed: \(error)")
                 return FBEventDownloadError.decodeFailed
             })
     }

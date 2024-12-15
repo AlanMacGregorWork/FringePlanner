@@ -77,8 +77,8 @@ extension FBEvent: Decodable {
         
         // It looks like latitude and longitude will always match with the venues position
         let latitude = try container.decode(Double.self, forKey: "latitude")
-        fbAssert(latitude == self.venue.position.lat, "Base latitude value does not match")
+        fringeAssert(latitude == self.venue.position.lat, "Base latitude value does not match")
         let longitude = try container.decode(Double.self, forKey: "longitude")
-        fbAssert(longitude == self.venue.position.lon, "Base longitude value does not match")
+        fringeAssert(longitude == self.venue.position.lon, "Base longitude value does not match")
     }
 }

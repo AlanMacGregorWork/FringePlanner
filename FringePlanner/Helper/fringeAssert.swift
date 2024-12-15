@@ -1,21 +1,21 @@
 //
-//  fbAssert.swift
+//  fringeAssert.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 15/11/2024.
 //
 
 /// Custom assertion for the application
-func fbAssertionFailure(
+func fringeAssertFailure(
     _ message: @autoclosure () -> String,
     file: StaticString = #file,
     line: UInt = #line
 ) {
-    fbAssert(false, message(), file: file, line: line)
+    fringeAssert(false, message(), file: file, line: line)
 }
 
 /// Custom assertion for the application
-func fbAssert(
+func fringeAssert(
     _ condition: @autoclosure () -> Bool,
     _ message: @autoclosure () -> String,
     file: StaticString = #file,

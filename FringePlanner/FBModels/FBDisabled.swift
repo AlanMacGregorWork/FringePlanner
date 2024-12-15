@@ -28,13 +28,13 @@ extension FBDisabled: Decodable {
         // logic below ensures that these values still corresponds to the dates informations
         if let captioningDates, !captioningDates.isEmpty {
             let captioning = try container.decodeIfPresent(Bool.self, forKey: "captioning")
-            fbAssert(captioning != nil, "Captioning Dates exist without Bool flag")
-            fbAssert(captioning ?? false, "Captioning Dates exist with Bool flag not true")
+            fringeAssert(captioning != nil, "Captioning Dates exist without Bool flag")
+            fringeAssert(captioning ?? false, "Captioning Dates exist with Bool flag not true")
         }
         if let signedDates, !signedDates.isEmpty {
             let signed = try container.decodeIfPresent(Bool.self, forKey: "signed")
-            fbAssert(signed != nil, "Signed Dates exist without Bool flag")
-            fbAssert(signed ?? false, "Signed Dates exist with Bool flag not true")
+            fringeAssert(signed != nil, "Signed Dates exist without Bool flag")
+            fringeAssert(signed ?? false, "Signed Dates exist with Bool flag not true")
         }
         
         container.validateAssumedNil(keys: ["audioDates", "otherServicesDates", "otherServicesInformation"])

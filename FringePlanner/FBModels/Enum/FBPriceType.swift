@@ -21,7 +21,7 @@ enum FBPriceType: Decodable, Equatable, Hashable {
         case "free": self = .free
         case "pay-what-you-can": self = .payWhatYouCan
         default:
-            fbAssertionFailure("Found non-identified price type")
+            fringeAssertFailure("Found non-identified price type")
             self = .other(stringValue.trimmed)
         }
     }

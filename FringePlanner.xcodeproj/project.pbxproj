@@ -31,7 +31,7 @@
 		0835BCC92CCE42790031A860 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835BCC82CCE42770031A860 /* Expectation.swift */; };
 		0843C2322CE7DD390076FF11 /* FBPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2312CE7DD360076FF11 /* FBPerformance.swift */; };
 		0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */; };
-		0843C2362CE7EC430076FF11 /* fbAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2352CE7EC400076FF11 /* fbAssert.swift */; };
+		0843C2362CE7EC430076FF11 /* fringeAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2352CE7EC400076FF11 /* fringeAssert.swift */; };
 		086159012CD69B7E0076255B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086159002CD69B7B0076255B /* String.swift */; };
 		086159042CD69BEE0076255B /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086159032CD69BEA0076255B /* StringTests.swift */; };
 		0862400C2CCEBD9E004DDC3C /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0862400B2CCEBD96004DDC3C /* ApiKey.swift */; };
@@ -123,7 +123,7 @@
 		0835BCC82CCE42770031A860 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
 		0843C2312CE7DD360076FF11 /* FBPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformance.swift; sourceTree = "<group>"; };
 		0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationEnvironment.swift; sourceTree = "<group>"; };
-		0843C2352CE7EC400076FF11 /* fbAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fbAssert.swift; sourceTree = "<group>"; };
+		0843C2352CE7EC400076FF11 /* fringeAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fringeAssert.swift; sourceTree = "<group>"; };
 		086159002CD69B7B0076255B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		086159032CD69BEA0076255B /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		0862400B2CCEBD96004DDC3C /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
@@ -458,7 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				08BA674B2CE7F2E9000DDF37 /* Codable.swift */,
-				0843C2352CE7EC400076FF11 /* fbAssert.swift */,
+				0843C2352CE7EC400076FF11 /* fringeAssert.swift */,
 				0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */,
 				086D086D2CE52842000B6225 /* AnyCodingKey.swift */,
 				08CB2C132CD7C05000B799FA /* General.swift */,
@@ -696,7 +696,7 @@
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */,
 				087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */,
-				0843C2362CE7EC430076FF11 /* fbAssert.swift in Sources */,
+				0843C2362CE7EC430076FF11 /* fringeAssert.swift in Sources */,
 				08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */,
 				0819F73B2CD2C27C009B9D3E /* HMACGenerator.swift in Sources */,
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,

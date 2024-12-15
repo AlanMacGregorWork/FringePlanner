@@ -26,7 +26,7 @@ extension AttributedString {
                 documentAttributes: nil)
             self = AttributedString(nsAttributedString)
         } catch {
-            fbAssertionFailure("HTML failed to generate")
+            fringeAssertFailure("HTML failed to generate")
             return nil
         }
     }

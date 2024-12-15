@@ -21,7 +21,7 @@ enum FBPerformanceType: Decodable, Equatable, Hashable {
         case "online-live": self = .onlineLive
         case "online-on-demand": self = .onlineOnDemand
         default:
-            fbAssertionFailure("Found non-identified performance type")
+            fringeAssertFailure("Found non-identified performance type")
             self = .other(stringValue.trimmed)
         }
     }

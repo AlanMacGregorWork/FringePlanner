@@ -51,7 +51,7 @@ extension KeyedDecodingContainer where K == AnyCodingKey {
     private func verifyExistsAndNil(_ key: String) {
         // Validate key exists
         if !contains(.init(key: key)) {
-            return fbAssertionFailure("`\(key)` no longer exists")
+            return fringeAssertFailure("`\(key)` no longer exists")
         }
         
         // Validate key is nil
@@ -61,7 +61,7 @@ extension KeyedDecodingContainer where K == AnyCodingKey {
                 return
             }
         } catch {
-            return fbAssertionFailure("`\(key) decodeNil failed: \(error)")
+            return fringeAssertFailure("`\(key) decodeNil failed: \(error)")
         }
         
         // If the value isn't nil, check if it's an empty `String` which may erroneously be included
@@ -75,6 +75,6 @@ extension KeyedDecodingContainer where K == AnyCodingKey {
         }
         
         // Value must have some form of data
-        return fbAssertionFailure("`\(key)` incorrectly contains data")
+        return fringeAssertFailure("`\(key)` incorrectly contains data")
     }
 }
