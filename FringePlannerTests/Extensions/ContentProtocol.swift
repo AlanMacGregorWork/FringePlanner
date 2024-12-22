@@ -11,12 +11,11 @@ import Testing
 extension ContentProtocol {
     /// Triggers an `expect` test specifically for fringe data
     @MainActor
-    func expect<T: ViewDataProtocol>(@FringeDataResultBuilder _ data: () -> (T)) {
-        if let value = data() as? Self.Structure.StructureType {
-            #expect(Self.Structure(input: self).structure == value)
-        } else {
-            Issue.record("Structure provided does not match")
-        }
+    func expect<T: ViewDataProtocol>(
+        @FringeDataResultBuilder _ data: () -> (T),
+        sourceLocation: SourceLocation = #_sourceLocation
+    ) {
+        Self.Structure(input: self).expect(data, sourceLocation: sourceLocation)
     }
 }
 
@@ -27,4 +26,19 @@ private func == <each Element: Equatable>(lhs: (repeat each Element), rhs: (repe
         guard left == right else { return false }
     }
     return true
+}
+
+extension BaseStructureProtocol {
+    /// Triggers an `expect` test specifically for fringe data
+    @MainActor
+    func expect<T: ViewDataProtocol>(
+        @FringeDataResultBuilder _ data: () -> (T),
+        sourceLocation: SourceLocation = #_sourceLocation
+    ) {
+        guard let value = data() as? Self.StructureType else {
+            Issue.record("Structure provided does not match\n\(self.structure)", sourceLocation: sourceLocation)
+            return
+        }
+        #expect(self.structure == value, "Structure matched but produced different values", sourceLocation: sourceLocation)
+    }
 }
