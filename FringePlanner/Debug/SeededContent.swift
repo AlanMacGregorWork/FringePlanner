@@ -17,7 +17,17 @@ struct SeededContent {
     struct AllContent {
         let postcodes = ["EH1 1QR", "EH2 2LR", "EH3 9QN", "EH6 4NP", "EH8 9AB", "EH10 4SD", "EH11 2JL", "EH15 2QR"]
         let phoneNumbers = ["0131 123 4567", "0131 234 5678", "0131 345 6789", "0131 456 7890", "0131 567 8901", "0131 678 9012", "0131 789 0123", "0131 890 1234", "0131 901 2345"]
-        let eventDescriptions = ["A historic venue in the heart of Edinburgh", "A modern arts space with multiple performance areas", "An intimate theatre in a converted church", "A vibrant cultural hub in the Old Town", "A prestigious concert hall with excellent acoustics", "A quirky underground venue with character", "A spacious multi-purpose performance space", "A traditional Scottish music venue", "A contemporary gallery and events space"]
+        let eventDescriptions = [
+            "A historic venue in the heart of Edinburgh. <br><br>Features include:<ul><li>Original Georgian architecture</li><li>Multiple performance spaces</li><li>Central location</li></ul>",
+            "A modern arts space with multiple performance areas. <p>Recently renovated with state-of-the-art facilities.</p>",
+            "An intimate theatre in a converted church. <strong>Perfect for dramatic performances</strong>.",
+            "A vibrant cultural hub in the Old Town. <em>Home to some of the Fringe's most memorable shows</em>.",
+            "A prestigious concert hall with <strong>excellent acoustics</strong> and rich history.",
+            "A quirky underground venue with character. <br>Known for its <em>atmospheric performances</em>.",
+            "A spacious multi-purpose performance space. <p>Hosting shows since 1947.</p>",
+            "A traditional Scottish music venue. <ul><li>Live music daily</li><li>Traditional sessions</li></ul>",
+            "A contemporary gallery and events space. <strong>Showcasing the best in modern performance art</strong>."
+        ]
         let names = ["Assembly Rooms", "Pleasance Courtyard", "Summerhall", "The Stand Comedy Club", "Traverse Theatre", "Underbelly Cowgate", "Gilded Balloon Teviot", "The Queen's Hall", "Festival Theatre"]
         let addresses = ["54 George Street", "60 Pleasance", "1 Summerhall", "5 York Place", "10 Cambridge Street", "66 Cowgate", "13 Bristo Square", "85-89 Clerk Street", "13-29 Nicolson Street"]
         let webAddresses = ["https://www.assemblyfestival.com", "https://www.pleasance.co.uk", "https://www.summerhall.co.uk", "https://www.thestand.co.uk", "https://www.traverse.co.uk", "https://www.underbellyedinburgh.co.uk", "https://www.gildedballoon.co.uk", "https://www.thequeenshall.net", "https://www.capitaltheatres.com"]
@@ -31,7 +41,18 @@ struct SeededContent {
         let teasers = ["A hilarious evening of non-stop laughter", "Classic theatre with a modern twist", "Musical entertainment for all ages", "Journey through dance history", "Improvised comedy at its finest", "Mind-bending illusions", "Words that move and inspire", "Acrobatic excellence", "Comedy after dark", "Dramatic masterpiece"]
         let codes = ["COM123", "THTR456", "MUS789", "DNC012", "IMP345", "MAG678", "POE901", "CIR234", "LNL567", "DRM890"]
         let ageCategories = ["16+", "12+", "All ages", "5+", "18+", "7+", "14+", "3+", "16+", "15+"]
-        let venueDescriptions = ["Join us for an unforgettable evening of entertainment", "A groundbreaking performance that pushes boundaries", "Experience the magic of live performance", "Be transported to another world", "Laugh until you cry", "Prepare to be amazed", "Feel the power of words", "Witness the impossible", "Comedy that breaks all the rules", "Theatre that changes lives"]
+        let venueDescriptions = [
+            "Join us for an unforgettable evening of entertainment. <br><em>Book early to avoid disappointment!</em>",
+            "A groundbreaking performance that <strong>pushes boundaries</strong>.",
+            "Experience the magic of live performance. <p>Every show is unique.</p>",
+            "Be transported to another world. <ul><li>Immersive staging</li><li>Professional cast</li></ul>",
+            "Laugh until you cry. <br><strong>5-star reviews across the board!</strong>",
+            "Prepare to be amazed. <em>Unlike anything you've seen before.</em>",
+            "Feel the power of words. <p>Award-winning production.</p>",
+            "Witness the impossible. <strong>Limited season only!</strong>",
+            "Comedy that breaks all the rules. <br><em>Not for the faint-hearted.</em>",
+            "Theatre that changes lives. <p>Critics' choice 2024.</p>"
+        ]
         let festivals = ["Edinburgh Fringe", "Edinburgh International", "Edinburgh Jazz", "Edinburgh Art", "Edinburgh Film"]
         let festivalIds = ["EDF2024", "EIF2024", "EJF2024", "EAF2024", "EIFF2024"]
         let genres = ["Comedy", "Theatre", "Music", "Dance", "Magic", "Poetry", "Circus", "Cabaret", "Drama", "Physical Theatre"]
