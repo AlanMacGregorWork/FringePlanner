@@ -68,6 +68,7 @@
 		08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF47382CD6B42500405254 /* FilterRequest.swift */; };
 		08E1B3F82CCEA8EE00C7333A /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */; };
 		08E1B3FB2CCEAAD800C7333A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */; };
+		08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6AF332D17939B007F3F59 /* ViewDataProtocol.swift */; };
 		08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0402CB98BD000C270F6 /* UITestingContent.swift */; };
 		08E8C0432CBC15A000C270F6 /* NavigationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0422CBC159F00C270F6 /* NavigationData.swift */; };
 		08EFD7FE2D0F06FF0090A051 /* LinkSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EFD7FD2D0F06FE0090A051 /* LinkSectionView.swift */; };
@@ -166,6 +167,7 @@
 		08DF47382CD6B42500405254 /* FilterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRequest.swift; sourceTree = "<group>"; };
 		08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicate.swift; sourceTree = "<group>"; };
 		08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		08E6AF332D17939B007F3F59 /* ViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProtocol.swift; sourceTree = "<group>"; };
 		08E8C0402CB98BD000C270F6 /* UITestingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestingContent.swift; sourceTree = "<group>"; };
 		08E8C0422CBC159F00C270F6 /* NavigationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationData.swift; sourceTree = "<group>"; };
 		08EFD7FD2D0F06FE0090A051 /* LinkSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSectionView.swift; sourceTree = "<group>"; };
@@ -456,6 +458,7 @@
 		08C92D672CCEACCB001732E9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				08E6AF332D17939B007F3F59 /* ViewDataProtocol.swift */,
 				08BA67582CEA3ADD000DDF37 /* Bundle.swift */,
 				08C92D682CCEACD4001732E9 /* ContentProtocol.swift */,
 			);
@@ -742,6 +745,7 @@
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
 				08BA67572CE953F3000DDF37 /* FBEventDownloaderTests.swift in Sources */,
+				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,
 				086159042CD69BEE0076255B /* StringTests.swift in Sources */,
 				08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */,
 				08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */,
