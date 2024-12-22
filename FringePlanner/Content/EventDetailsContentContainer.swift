@@ -28,9 +28,11 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     struct Structure: StructureProtocol {
         let input: Content
+        var event: FBEvent { input.dataSource.event }
         
         var structure: some ViewDataProtocol {
             GroupData(type: .form) {
+                AccessibilityStructure(disabled: event.disabled)
             }
         }
     }

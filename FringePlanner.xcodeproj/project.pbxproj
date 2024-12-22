@@ -46,6 +46,7 @@
 		086D08782CE53111000B6225 /* FBDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08772CE5310F000B6225 /* FBDisabled.swift */; };
 		086D087A2CE53296000B6225 /* FBVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08792CE53292000B6225 /* FBVenue.swift */; };
 		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
+		08754C2A2D18AB920022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */; };
 		087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */; };
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
 		08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */; };
@@ -68,6 +69,7 @@
 		08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF47382CD6B42500405254 /* FilterRequest.swift */; };
 		08E1B3F82CCEA8EE00C7333A /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */; };
 		08E1B3FB2CCEAAD800C7333A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */; };
+		08E6AF312D17229B007F3F59 /* EventDetailsContentContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6AF302D172298007F3F59 /* EventDetailsContentContainerTests.swift */; };
 		08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6AF332D17939B007F3F59 /* ViewDataProtocol.swift */; };
 		08E6AF362D179458007F3F59 /* EventDetailsContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E6AF352D179457007F3F59 /* EventDetailsContentContainer.swift */; };
 		08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E8C0402CB98BD000C270F6 /* UITestingContent.swift */; };
@@ -144,6 +146,7 @@
 		086D08772CE5310F000B6225 /* FBDisabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDisabled.swift; sourceTree = "<group>"; };
 		086D08792CE53292000B6225 /* FBVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBVenue.swift; sourceTree = "<group>"; };
 		086D087B2CE56A54000B6225 /* FBImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImage.swift; sourceTree = "<group>"; };
+		08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+AccessibilityStructure.swift"; sourceTree = "<group>"; };
 		087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataIsEmpty.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 		08DF47382CD6B42500405254 /* FilterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRequest.swift; sourceTree = "<group>"; };
 		08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicate.swift; sourceTree = "<group>"; };
 		08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
+		08E6AF302D172298007F3F59 /* EventDetailsContentContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsContentContainerTests.swift; sourceTree = "<group>"; };
 		08E6AF332D17939B007F3F59 /* ViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProtocol.swift; sourceTree = "<group>"; };
 		08E6AF352D179457007F3F59 /* EventDetailsContentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailsContentContainer.swift; sourceTree = "<group>"; };
 		08E8C0402CB98BD000C270F6 /* UITestingContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestingContent.swift; sourceTree = "<group>"; };
@@ -298,6 +302,7 @@
 			children = (
 				08BD27182CD984270029E5DF /* TestFiles.xcassets */,
 				08BA67552CE953C7000DDF37 /* APITests */,
+				08E6AF2F2D172282007F3F59 /* ContentTests */,
 				08BD27142CD983CB0029E5DF /* ModelTests */,
 				086159022CD69BD70076255B /* ExtensionTests */,
 				082DFF262D03838D00F5CBB7 /* ProtocolTests */,
@@ -413,6 +418,14 @@
 			path = FBModels;
 			sourceTree = "<group>";
 		};
+		08754C282D18AB740022654F /* EventDetailsContentContainer */ = {
+			isa = PBXGroup;
+			children = (
+				08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */,
+			);
+			path = EventDetailsContentContainer;
+			sourceTree = "<group>";
+		};
 		08A94E482CEE8304008B84C6 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +494,14 @@
 				08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		08E6AF2F2D172282007F3F59 /* ContentTests */ = {
+			isa = PBXGroup;
+			children = (
+				08E6AF302D172298007F3F59 /* EventDetailsContentContainerTests.swift */,
+			);
+			path = ContentTests;
 			sourceTree = "<group>";
 		};
 		08EFD7FC2D0F06E30090A051 /* SectionRowData */ = {
@@ -721,6 +742,7 @@
 				08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */,
 				086D08702CE52A28000B6225 /* FBPerformanceType.swift in Sources */,
 				086D087C2CE56A56000B6225 /* FBImage.swift in Sources */,
+				08754C2A2D18AB920022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift in Sources */,
 				08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */,
 				080272EA2C9A39620040A673 /* EdgeInsets.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
@@ -751,6 +773,7 @@
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
 				08BA67572CE953F3000DDF37 /* FBEventDownloaderTests.swift in Sources */,
 				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,
+				08E6AF312D17229B007F3F59 /* EventDetailsContentContainerTests.swift in Sources */,
 				086159042CD69BEE0076255B /* StringTests.swift in Sources */,
 				08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */,
 				08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */,
