@@ -60,6 +60,12 @@ struct SeededContent {
         let warnings = ["Strong language", "Strobe lighting", "Loud music", "Adult themes", "Smoke effects", "Contains nudity", "Violence", "Mature content", "Flashing lights", "Dark themes"]
         let ticketUrls = ["https://tickets.edfringe.com/COM123", "https://tickets.edfringe.com/THTR456", "https://tickets.edfringe.com/MUS789", "https://tickets.edfringe.com/DNC012", "https://tickets.edfringe.com/IMP345", "https://tickets.edfringe.com/MAG678", "https://tickets.edfringe.com/POE901", "https://tickets.edfringe.com/CIR234", "https://tickets.edfringe.com/LNL567", "https://tickets.edfringe.com/DRM890"]
         let websites = ["https://www.comedycrew.com", "https://www.theatrex.com", "https://www.musicmavericks.net", "https://www.dancecollective.org", "https://www.improvtroupe.co.uk", "https://www.magiccircle.com", "https://www.poetsunited.org", "https://www.circusdreams.com", "https://www.latenightcomics.com", "https://www.dramaworkshop.co.uk"]
+        let disabledInfo = [
+            FBDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-03", "2024-08-10"], signedDates: ["2024-08-05", "2024-08-12"]),
+            FBDisabled(otherServices: true, audio: false, captioningDates: ["2024-08-04", "2024-08-11"], signedDates: nil),
+            FBDisabled(otherServices: false, audio: true, captioningDates: nil, signedDates: ["2024-08-06", "2024-08-13"]),
+            FBDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-07"], signedDates: ["2024-08-14"])
+        ]
     }
 
     private func seedValue<T>(for input: Int, at keyPath: KeyPath<AllContent, [T]>) -> T {
@@ -137,7 +143,7 @@ struct SeededContent {
             url: URL(string: seedValue(for: newCode, at: \.ticketUrls))!,
             venue: venue(for: newCode),
             website: URL(string: seedValue(for: newCode, at: \.websites))!,
-            disabled: nil,
+            disabled: seedValue(for: newCode, at: \.disabledInfo),
             images: images(),
             warnings: seedValue(for: newCode, at: \.warnings),
             updated: DateComponents(calendar: .current, year: 2024, month: 8, day: 1, hour: 19, minute: 30).date!,
