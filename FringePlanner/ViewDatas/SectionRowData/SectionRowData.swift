@@ -29,16 +29,26 @@ struct SectionRowData: ViewDataProtocol, Equatable {
     /// The content to be used for the row
     enum ValueType: Equatable {
         case url(title: String, value: String, url: String)
-        case text(title: String?, text: String)
+        case text(title: String?, text: AttributedString)
         case button(title: String, closure: MakeEquatableReadOnly<(() -> Void)>)
+        
+        static func text(title: String?, text: String) -> Self {
+            let attributedStringText = AttributedString(from: text) ?? .init(stringLiteral: text)
+            return .text(title: title, text: attributedStringText)
+        }
     }
 }
 
 // MARK: - Helper Inits
 
 extension SectionRowData {
-    init(title: String? = nil, text: String) {
+    init(title: String? = nil, text: AttributedString) {
         self.value = .text(title: title, text: text)
+    }
+    
+    init(title: String? = nil, text: String) {
+        let attributedStringText = AttributedString(from: text) ?? .init(stringLiteral: text)
+        self.value = .text(title: title, text: attributedStringText)
     }
     
     init(title: String, value: URL) {

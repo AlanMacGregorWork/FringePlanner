@@ -13,10 +13,9 @@ import SwiftUI
 struct TextSectionView: View {
     /// Note: If the title is included, the `text` will not include custom formatting
     let title: String?
-    let text: String
+    let text: AttributedString
 
     var body: some View {
-        let text = AttributedString(from: text) ?? .init(stringLiteral: text)
         if let title {
             LabeledContent(title) {
                 Text(text)
@@ -24,6 +23,14 @@ struct TextSectionView: View {
         } else {
             Text(text)
         }
+    }
+}
+
+extension TextSectionView {
+    /// Note: If the title is included, the `text` will not include custom formatting
+    init(title: String?, text: String) {
+        self.title = title
+        self.text = AttributedString(from: text) ?? .init(stringLiteral: text)
     }
 }
 
