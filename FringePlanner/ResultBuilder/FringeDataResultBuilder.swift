@@ -8,7 +8,8 @@
 /// Simplifies building `ViewDataProtocol`
 @resultBuilder
 struct FringeDataResultBuilder {
-    static func buildBlock() {
+    static func buildBlock() -> EmptyData {
+        EmptyData()
     }
     
     static func buildBlock<each Content: ViewDataProtocol>(_ content: repeat each Content) -> (repeat each Content) {
