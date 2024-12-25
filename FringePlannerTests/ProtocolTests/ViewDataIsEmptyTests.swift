@@ -24,6 +24,13 @@ struct ViewDataIsEmptyTests {
             #expect(ConditionalData<TextData, EmptyData>(option: .second(EmptyData())).isEmpty == true)
             #expect(ConditionalData<EmptyData, TextData>(option: .second(TextData(text: "text"))).isEmpty == false)
         }
+        
+        @Test("ContainerData Supports ViewDataIsEmpty")
+        func containerData() {
+            #expect(ContainerData(values: ()).isEmpty == true)
+            #expect(ContainerData(values: (TextData(text: "TEST"))).isEmpty == false)
+            #expect(ContainerData(values: (TextData(text: "TEST"), TextData(text: "TEST"))).isEmpty == false)
+        }
     }
     
     @Suite("Result Builder Tests")
