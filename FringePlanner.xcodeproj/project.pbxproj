@@ -48,6 +48,7 @@
 		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
 		08754C2A2D18AB920022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */; };
 		087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */; };
+		0892D96D2D1CA48300145788 /* ContainerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96C2D1CA48100145788 /* ContainerData.swift */; };
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
 		08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */; };
 		08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF812CFCEEB400925B8D /* ConditionalData.swift */; };
@@ -148,6 +149,7 @@
 		086D087B2CE56A54000B6225 /* FBImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImage.swift; sourceTree = "<group>"; };
 		08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+AccessibilityStructure.swift"; sourceTree = "<group>"; };
 		087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataIsEmpty.swift; sourceTree = "<group>"; };
+		0892D96C2D1CA48100145788 /* ContainerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerData.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyData.swift; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 			children = (
 				08EFD7FC2D0F06E30090A051 /* SectionRowData */,
 				08B1BF812CFCEEB400925B8D /* ConditionalData.swift */,
+				0892D96C2D1CA48100145788 /* ContainerData.swift */,
 				08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */,
 				081826A72CBF1443002293FD /* ForEachData.swift */,
 				08E8C0422CBC159F00C270F6 /* NavigationData.swift */,
@@ -737,6 +740,7 @@
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
 				08E8C0412CB98BD500C270F6 /* UITestingContent.swift in Sources */,
 				082DFF2A2D06573B00F5CBB7 /* AttributedString.swift in Sources */,
+				0892D96D2D1CA48300145788 /* ContainerData.swift in Sources */,
 				0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */,
 				08F10DBA2CB92B97008ACBFF /* GroupData.swift in Sources */,
 				08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */,
