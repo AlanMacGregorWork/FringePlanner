@@ -8,16 +8,28 @@
 import SwiftUI
 
 /// Allows handling navigation
-struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol>: ViewDataProtocol {
-    typealias ContentView = NavigationView<repeat each Content>
+struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: ViewDataProtocol {
+    typealias ContentView = NavigationView
     let router: RouterType
-    @FringeDataResultBuilder let values: (repeat each Content)
+    let container: Content
     
-    struct NavigationView<each T: ViewDataProtocol>: View, ViewProtocol {
+    #warning("Update deprecations")
+    @available(*, deprecated, message: "ContainerData should be instantiated")
+    init<each ParameterContent: ViewDataProtocol>(router: RouterType, @FringeDataResultBuilder _ values: () -> (repeat each ParameterContent)) where Content == ContainerData<repeat each ParameterContent> {
+        self.container = ContainerData(values: values)
+        self.router = router
+    }
+    
+    init(router: RouterType, @FringeDataResultBuilder _ values: () -> Content) {
+        self.container = values()
+        self.router = router
+    }
+    
+    struct NavigationView: View, ViewProtocol {
         
         // MARK: Property
         
-        private let data: NavigationData<RouterType, repeat each T>
+        private let data: NavigationData<RouterType, Content>
         @State private var router: RouterType
         @State private var localSheet: RouterType.NavigationLocation?
         /// The path count given on the last push. This can be used to identify if the view has been popped and
@@ -35,7 +47,7 @@ struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol
         
         // MARK: Init
         
-        init(data: NavigationData<RouterType, repeat each T>) {
+        init(data: NavigationData<RouterType, Content>) {
             self.data = data
             self._router = .init(wrappedValue: data.router)
         }
@@ -67,7 +79,7 @@ struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol
         
         /// The content to include in the navigation view
         private var content: some View {
-            TupleView((repeat (each data.values).createView()))
+            data.container.createView()
                 .navigationDestination(for: RouterType.NavigationLocation.self,
                                        destination: { $0.toView() })
         }
@@ -98,19 +110,6 @@ struct NavigationData<RouterType: RouterProtocol, each Content: ViewDataProtocol
             localSheet = nil
             pathCount = 0
         }
-    }
-}
-
-// MARK: Equatable Support
-
-extension NavigationData: Equatable {
-    /// Note: Custom `Equatable` required due to parameter pack
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        guard lhs.router == rhs.router else { return false }
-        for (left, right) in repeat (each lhs.values, each rhs.values) {
-            guard left == right else { return false }
-        }
-        return true
     }
 }
 
