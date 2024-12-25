@@ -8,21 +8,22 @@
 import SwiftUI
 
 /// Allows grouping multiple objects
-struct GroupData<each Content: ViewDataProtocol>: ViewDataProtocol {
-    typealias ContentView = GroupView<repeat each Content>
+struct GroupData<Content: ViewDataProtocol>: ViewDataProtocol {
     let type: GroupDataType
-    let values: (repeat each Content)
+    let container: Content
     
-    init(
+    #warning("Update deprecations")
+    @available(*, deprecated, message: "ContainerData should be instantiated")
+    init<each ParameterContent: ViewDataProtocol>(
         type: GroupDataType,
-        @FringeDataResultBuilder _ data: () -> (repeat each Content)
-    ) {
+        @FringeDataResultBuilder _ data: () -> (repeat each ParameterContent)
+    ) where Content == ContainerData<repeat each ParameterContent> {
         self.type = type
-        self.values = data()
+        self.container = ContainerData(values: data)
     }
     
-    struct GroupView<each T: ViewDataProtocol>: View, ViewProtocol {
-        let data: GroupData<repeat each T>
+    struct ContentView: View, ViewProtocol {
+        let data: GroupData<Content>
         
         var body: some View {
             switch data.type {
@@ -49,30 +50,15 @@ struct GroupData<each Content: ViewDataProtocol>: ViewDataProtocol {
         }
         
         private var content: some View {
-            TupleView((repeat (each data.values).createView()))
+            data.container.createView()
         }
         
         /// Checks if all the contents are empty (Used to determine if the content should be shown)
         private var contentsIsEmpty: Bool {
-            for item in repeat (each data.values) {
-                guard let isEmptyType = item as? ViewDataIsEmpty else { return false }
-                guard isEmptyType.isEmpty else { return false }
-            }
+            guard let isEmptyType = data.container as? ViewDataIsEmpty else { return false }
+            guard isEmptyType.isEmpty else { return false }
             return true
         }
-    }
-}
-
-// MARK: Equatable Support
-
-extension GroupData: Equatable {
-    /// Note: Custom `Equatable` required due to parameter pack
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        guard lhs.type == rhs.type else { return false }
-        for (left, right) in repeat (each lhs.values, each rhs.values) {
-            guard left == right else { return false }
-        }
-        return true
     }
 }
 
