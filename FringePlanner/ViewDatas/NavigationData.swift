@@ -13,13 +13,6 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
     let router: RouterType
     let container: Content
     
-    #warning("Update deprecations")
-    @available(*, deprecated, message: "ContainerData should be instantiated")
-    init<each ParameterContent: ViewDataProtocol>(router: RouterType, @FringeDataResultBuilder _ values: () -> (repeat each ParameterContent)) where Content == ContainerData<repeat each ParameterContent> {
-        self.container = ContainerData(values: values)
-        self.router = router
-    }
-    
     init(router: RouterType, @FringeDataResultBuilder _ values: () -> Content) {
         self.container = values()
         self.router = router

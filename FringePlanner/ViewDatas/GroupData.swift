@@ -12,14 +12,9 @@ struct GroupData<Content: ViewDataProtocol>: ViewDataProtocol {
     let type: GroupDataType
     let container: Content
     
-    #warning("Update deprecations")
-    @available(*, deprecated, message: "ContainerData should be instantiated")
-    init<each ParameterContent: ViewDataProtocol>(
-        type: GroupDataType,
-        @FringeDataResultBuilder _ data: () -> (repeat each ParameterContent)
-    ) where Content == ContainerData<repeat each ParameterContent> {
+    init(type: GroupDataType, @FringeDataResultBuilder _ values: () -> Content) {
         self.type = type
-        self.container = ContainerData(values: data)
+        self.container = values()
     }
     
     struct ContentView: View, ViewProtocol {

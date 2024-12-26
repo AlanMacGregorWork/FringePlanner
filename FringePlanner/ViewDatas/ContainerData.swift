@@ -11,14 +11,6 @@ import SwiftUI
 struct ContainerData<each Content: ViewDataProtocol>: ViewDataProtocol {
     let values: (repeat each Content)
     
-    init(values: (repeat each Content)) {
-        self.values = values
-    }
-    
-    init(@FringeDataResultBuilder values: () -> (repeat each Content)) {
-        self.values = values()
-    }
-    
     struct ContentView: View, ViewProtocol {
         let data: ContainerData<repeat each Content>
         

@@ -8,17 +8,32 @@
 /// Simplifies building `ViewDataProtocol`
 @resultBuilder
 struct FringeDataResultBuilder {
+    
+    // MARK: Expressions
+    
+    /// Builds a general `ViewDataProtocol` (this is the default)
+    static func buildExpression<Content: ViewDataProtocol>(_ content: Content) -> Content {
+        content
+    }
+    
+    // MARK: Blocks
+    
+    /// Build block for zero content
     static func buildBlock() -> EmptyData {
         EmptyData()
     }
     
-    static func buildBlock<each Content: ViewDataProtocol>(_ content: repeat each Content) -> (repeat each Content) {
-        (repeat each content)
+    /// Build block for single content
+    static func buildBlock<Content: ViewDataProtocol>(_ content: Content) -> Content {
+        content
     }
     
-    static func buildExpression<each Content: ViewDataProtocol>(_ content: repeat each Content) -> (repeat each Content) {
-        (repeat each content)
+    /// Build block for multiple content
+    static func buildBlock<FirstContent: ViewDataProtocol, each OtherContent: ViewDataProtocol>(_ firstContent: FirstContent, _ otherContent: repeat each OtherContent) -> ContainerData<FirstContent, repeat each OtherContent> {
+        .init(values: (firstContent, repeat each otherContent))
     }
+    
+    // MARK: Conditionals
     
     static func buildIf<FirstContent: ViewDataProtocol>(_ content: FirstContent?) -> ConditionalData<FirstContent, EmptyData> {
         .init(option: content.map({ .first($0) }) ?? .second(EmptyData()))
