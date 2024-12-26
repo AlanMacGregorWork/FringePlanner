@@ -32,6 +32,7 @@ extension EventDetailsContentContainer {
         
         var structure: some ViewDataProtocol {
             GroupData(type: .form) {
+                DetailsStructure(event: event)
                 AccessibilityStructure(disabled: event.disabled)
             }
         }
