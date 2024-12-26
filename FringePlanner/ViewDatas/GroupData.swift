@@ -42,7 +42,7 @@ struct GroupData<Content: ViewDataProtocol>: ViewDataProtocol {
         @ViewBuilder
         /// Creates a section header if the contents are not empty
         private func sectionHeader(title: String?) -> some View {
-            if !contentsIsEmpty {
+            if !data.container.isEmpty {
                 if let title {
                     Text("\(title)")
                 }
@@ -51,13 +51,6 @@ struct GroupData<Content: ViewDataProtocol>: ViewDataProtocol {
         
         private var content: some View {
             data.container.createView()
-        }
-        
-        /// Checks if all the contents are empty (Used to determine if the content should be shown)
-        private var contentsIsEmpty: Bool {
-            guard let isEmptyType = data.container as? ViewDataIsEmpty else { return false }
-            guard isEmptyType.isEmpty else { return false }
-            return true
         }
     }
 }

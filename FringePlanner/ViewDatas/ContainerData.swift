@@ -39,15 +39,3 @@ extension ContainerData: Equatable {
         return true
     }
 }
-
-// MARK: ViewDataIsEmpty Support
-
-extension ContainerData: ViewDataIsEmpty {
-    var isEmpty: Bool {
-        for item in repeat (each values) {
-            guard let isEmptyType = item as? ViewDataIsEmpty else { return false }
-            guard isEmptyType.isEmpty else { return false }
-        }
-        return true
-    }
-}

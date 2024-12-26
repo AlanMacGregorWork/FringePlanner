@@ -11,25 +11,36 @@ protocol ViewDataIsEmpty {
     var isEmpty: Bool { get }
 }
 
-extension ConditionalData: ViewDataIsEmpty {
+// MARK: Default Handling
+
+extension ViewDataProtocol {
+    /// By default the content should not be empty
+    var isEmpty: Bool { false }
+}
+
+// MARK: Custom Handling
+
+extension ConditionalData {
+    /// ConditionalData will return the value of whatever option is chosen
     var isEmpty: Bool {
         switch self.option {
-        case .first(let type):
-            return isEmpty(type: type)
-        case .second(let type):
-            return isEmpty(type: type)
+        case .first(let type): return type.isEmpty
+        case .second(let type): return type.isEmpty
         }
-    }
-
-    private func isEmpty<T: ViewDataProtocol>(type: T) -> Bool {
-        if let isEmptyType = type as? ViewDataIsEmpty {
-            return isEmptyType.isEmpty
-        }
-        return false
     }
 }
 
-/// Empty view data is always empty
-extension EmptyData: ViewDataIsEmpty {
+extension EmptyData {
+    /// Empty view data is always empty
     var isEmpty: Bool { true }
+}
+
+extension ContainerData: ViewDataIsEmpty {
+    /// Will return false if any content is not empty
+    var isEmpty: Bool {
+        for item in repeat (each values) {
+            guard item.isEmpty else { return false }
+        }
+        return true
+    }
 }
