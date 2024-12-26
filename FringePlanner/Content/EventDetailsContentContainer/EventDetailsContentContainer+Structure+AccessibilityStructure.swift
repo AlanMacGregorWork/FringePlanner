@@ -23,21 +23,21 @@ extension EventDetailsContentContainer.Structure {
         }
         
         @FringeDataResultBuilder
-        static func getAudioRow(from audio: Bool?) -> ConditionalData<SectionRowData, EmptyData> {
+        static func getAudioRow(from audio: Bool?) -> some ViewDataProtocol {
             if let audio {
                 SectionRowData(title: "Audio Description", text: audio ? "Available" : "Not Available")
             }
         }
         
         @FringeDataResultBuilder
-        static func getOtherServices(from otherServices: Bool?) -> ConditionalData<SectionRowData, EmptyData> {
+        static func getOtherServices(from otherServices: Bool?) -> some ViewDataProtocol {
             if let otherServices {
                 SectionRowData(title: "Other Services", text: otherServices ? "Available" : "Not Available")
             }
         }
         
         @FringeDataResultBuilder
-        static func getCaptioningDates(from captioningDates: [String]?) -> ConditionalData<SectionRowData, EmptyData> {
+        static func getCaptioningDates(from captioningDates: [String]?) -> some ViewDataProtocol {
             if let captioningDates {
                 let text = captioningDates.joined(separator: ", ").nilOnEmpty ?? "None"
                 SectionRowData(title: "Captioning Dates", text: text)
@@ -45,7 +45,7 @@ extension EventDetailsContentContainer.Structure {
         }
         
         @FringeDataResultBuilder
-        static func getSignedDates(from signedDates: [String]?) -> ConditionalData<SectionRowData, EmptyData> {
+        static func getSignedDates(from signedDates: [String]?) -> some ViewDataProtocol {
             if let signedDates {
                 let text = signedDates.joined(separator: ", ").nilOnEmpty ?? "None"
                 SectionRowData(title: "Signed Performance Dates", text: text)

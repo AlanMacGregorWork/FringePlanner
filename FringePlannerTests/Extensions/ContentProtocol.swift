@@ -8,6 +8,20 @@
 import Testing
 @testable import FringePlanner
 
+extension ViewDataProtocol {
+    /// Triggers an `expect` test specifically for fringe data
+    func expect<T: ViewDataProtocol>(
+        @FringeDataResultBuilder _ data: () -> (T),
+        sourceLocation: SourceLocation = #_sourceLocation
+    ) {
+        guard let value = data() as? Self else {
+            Issue.record("Type provided does not match\n\(self)", sourceLocation: sourceLocation)
+            return
+        }
+        #expect(self == value, "Type matched but produced different values", sourceLocation: sourceLocation)
+    }
+}
+
 extension ContentProtocol {
     /// Triggers an `expect` test specifically for fringe data
     @MainActor
@@ -19,15 +33,6 @@ extension ContentProtocol {
     }
 }
 
-/// Provides a basic `==` for two parameter packs
-/// - Note: Does not make the parameter packs conform to `Equatable`
-private func == <each Element: Equatable>(lhs: (repeat each Element), rhs: (repeat each Element)) -> Bool {
-    for (left, right) in repeat (each lhs, each rhs) {
-        guard left == right else { return false }
-    }
-    return true
-}
-
 extension BaseStructureProtocol {
     /// Triggers an `expect` test specifically for fringe data
     @MainActor
@@ -35,10 +40,17 @@ extension BaseStructureProtocol {
         @FringeDataResultBuilder _ data: () -> (T),
         sourceLocation: SourceLocation = #_sourceLocation
     ) {
-        guard let value = data() as? Self.StructureType else {
-            Issue.record("Structure provided does not match\n\(self.structure)", sourceLocation: sourceLocation)
-            return
-        }
-        #expect(self.structure == value, "Structure matched but produced different values", sourceLocation: sourceLocation)
+        self.structure.expect(data, sourceLocation: sourceLocation)
     }
+}
+
+// MARK: - Helpers
+
+/// Provides a basic `==` for two parameter packs
+/// - Note: Does not make the parameter packs conform to `Equatable`
+private func == <each Element: Equatable>(lhs: (repeat each Element), rhs: (repeat each Element)) -> Bool {
+    for (left, right) in repeat (each lhs, each rhs) {
+        guard left == right else { return false }
+    }
+    return true
 }

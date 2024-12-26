@@ -85,20 +85,26 @@ extension EventDetailsContentContainerTests.AccessibilityStructureTests {
     struct GetSignedSatesTests {
         @Test("Dates creates string")
         func testSomePerformanceDates() {
-            let expected = Structure.getSignedDates(from: ["test1", "test2"])
-            #expect(expected == .init(option: .first(SectionRowData(title: "Signed Performance Dates", text: "test1, test2"))))
+            Structure.getSignedDates(from: ["test1", "test2"]).expect {
+                SectionRowData(title: "Signed Performance Dates", text: "test1, test2")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Empty dates shows `None`")
         func testEmptyPerformanceDates() {
-            let expected = Structure.getSignedDates(from: [])
-            #expect(expected == .init(option: .first(SectionRowData(title: "Signed Performance Dates", text: "None"))))
+            Structure.getSignedDates(from: []).expect {
+                SectionRowData(title: "Signed Performance Dates", text: "None")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Nil dates will not show data")
         func testNilPerformanceDates() {
-            let expected = Structure.getSignedDates(from: nil)
-            #expect(expected == .init(option: .second(EmptyData())))
+            Structure.getSignedDates(from: nil).expect {
+                EmptyData()
+                    .conditionalSecond(firstType: SectionRowData.self)
+            }
         }
     }
     
@@ -108,20 +114,26 @@ extension EventDetailsContentContainerTests.AccessibilityStructureTests {
     struct GetAudioRowTests {
         @Test("Audio available")
         func testAudioAvailable() {
-            let expected = Structure.getAudioRow(from: true)
-            #expect(expected == .init(option: .first(SectionRowData(title: "Audio Description", text: "Available"))))
+            Structure.getAudioRow(from: true).expect {
+                SectionRowData(title: "Audio Description", text: "Available")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Audio not available")
         func testAudioNotAvailable() {
-            let expected = Structure.getAudioRow(from: false)
-            #expect(expected == .init(option: .first(SectionRowData(title: "Audio Description", text: "Not Available"))))
+            Structure.getAudioRow(from: false).expect {
+                SectionRowData(title: "Audio Description", text: "Not Available")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Nil audio will not show data")
         func testNilAudio() {
-            let expected = Structure.getAudioRow(from: nil)
-            #expect(expected == .init(option: .second(EmptyData())))
+            Structure.getAudioRow(from: nil).expect {
+                EmptyData()
+                    .conditionalSecond(firstType: SectionRowData.self)
+            }
         }
     }
     
@@ -131,20 +143,26 @@ extension EventDetailsContentContainerTests.AccessibilityStructureTests {
     struct GetOtherServicesTests {
         @Test("Other services available")
         func testOtherServicesAvailable() {
-            let expected = Structure.getOtherServices(from: true)
-            #expect(expected == .init(option: .first(SectionRowData(title: "Other Services", text: "Available"))))
+            Structure.getOtherServices(from: true).expect {
+                SectionRowData(title: "Other Services", text: "Available")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Other services not available")
         func testOtherServicesNotAvailable() {
-            let expected = Structure.getOtherServices(from: false)
-            #expect(expected == .init(option: .first(SectionRowData(title: "Other Services", text: "Not Available"))))
+            Structure.getOtherServices(from: false).expect {
+                SectionRowData(title: "Other Services", text: "Not Available")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Nil other services will not show data")
         func testNilOtherServices() {
-            let expected = Structure.getOtherServices(from: nil)
-            #expect(expected == .init(option: .second(EmptyData())))
+            Structure.getOtherServices(from: nil).expect {
+                EmptyData()
+                    .conditionalSecond(firstType: SectionRowData.self)
+            }
         }
     }
     
@@ -154,20 +172,26 @@ extension EventDetailsContentContainerTests.AccessibilityStructureTests {
     struct GetCaptioningDatesTests {
         @Test("Dates creates string")
         func testSomeCaptioningDates() {
-            let expected = Structure.getCaptioningDates(from: ["date1", "date2"])
-            #expect(expected == .init(option: .first(SectionRowData(title: "Captioning Dates", text: "date1, date2"))))
+            Structure.getCaptioningDates(from: ["date1", "date2"]).expect {
+                SectionRowData(title: "Captioning Dates", text: "date1, date2")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Empty dates shows `None`")
         func testEmptyCaptioningDates() {
-            let expected = Structure.getCaptioningDates(from: [])
-            #expect(expected == .init(option: .first(SectionRowData(title: "Captioning Dates", text: "None"))))
+            Structure.getCaptioningDates(from: []).expect {
+                SectionRowData(title: "Captioning Dates", text: "None")
+                    .conditionalFirst()
+            }
         }
         
         @Test("Nil dates will not show data")
         func testNilCaptioningDates() {
-            let expected = Structure.getCaptioningDates(from: nil)
-            #expect(expected == .init(option: .second(EmptyData())))
+            Structure.getCaptioningDates(from: nil).expect {
+                EmptyData()
+                    .conditionalSecond(firstType: SectionRowData.self)
+            }
         }
     }
 }
