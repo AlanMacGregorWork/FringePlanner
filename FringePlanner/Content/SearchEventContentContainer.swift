@@ -10,7 +10,7 @@ import Combine
 
 /// Container for searching Fringe events
 struct SearchEventContentContainer {
-    typealias Router = SimplifiedRouter<BasicNavigationLocation>
+    typealias Router = SimplifiedRouter<NavigationLocation>
 }
 
 // MARK: - Content
@@ -31,15 +31,17 @@ extension SearchEventContentContainer {
         let input: Content
         
         var structure: some ViewDataProtocol {
-            GroupData(type: .form) {
-                GroupData(type: .section) {
-                    TextFieldData(text: Bindable(input.dataSource).search)
-                    ButtonData(title: "Perform Search", interaction: { input.interaction.performSearch() })
-                }
-                
-                GroupData(type: .section) {
-                    ForEachData(data: input.dataSource.events) { event in
-                        TextData(text: event.title)
+            NavigationData(router: input.router) {
+                GroupData(type: .form) {
+                    GroupData(type: .section) {
+                        TextFieldData(text: Bindable(input.dataSource).search)
+                        ButtonData(title: "Perform Search", interaction: { input.interaction.performSearch() })
+                    }
+                    
+                    GroupData(type: .section) {
+                        ForEachData(data: input.dataSource.events) { event in
+                            ButtonData(title: event.title, interaction: { input.interaction.openEvent(event) })
+                        }
                     }
                 }
             }
@@ -74,12 +76,18 @@ extension SearchEventContentContainer {
 extension SearchEventContentContainer {
     struct Interaction: InteractionProtocol {
         private let dataSource: DataSource
+        private let router: Router
         private let downloader: FBEventDownloader.GetEventsProtocol
         private let searchSubjectCancellable: AnyCancellable
         
         @MainActor
-        init(dataSource: DataSource, downloader: FBEventDownloader.GetEventsProtocol = FBEventDownloader()) {
+        init(
+            dataSource: DataSource,
+            router: Router,
+            downloader: FBEventDownloader.GetEventsProtocol = FBEventDownloader()
+        ) {
             self.dataSource = dataSource
+            self.router = router
             self.downloader = downloader
             self.searchSubjectCancellable = dataSource.searchSubject
                 .receive(on: DispatchQueue.main)
@@ -88,6 +96,11 @@ extension SearchEventContentContainer {
                         await Self.asyncSearch(downloader: downloader, dataSource: dataSource)
                     }
                 }
+        }
+        
+        @MainActor
+        func openEvent(_ event: FBEvent) {
+            router.pushSheet(location: .eventDetails(event))
         }
         
         @MainActor
@@ -113,6 +126,22 @@ extension SearchEventContentContainer {
     }
 }
 
+// MARK: -
+
+extension SearchEventContentContainer {
+    enum NavigationLocation: NavigationLocationProtocol {
+        case eventDetails(FBEvent)
+        
+        @ViewBuilder
+        func toView() -> some View {
+            switch self {
+            case .eventDetails(let event):
+                EventDetailsContentContainer.createContent(event: event).buildView()
+            }
+        }
+    }
+}
+
 // MARK: - Helper
 
 extension SearchEventContentContainer {
@@ -120,7 +149,7 @@ extension SearchEventContentContainer {
     static func createContent() -> Content {
         let router = Router()
         let dataSource = DataSource()
-        let interaction = Interaction(dataSource: dataSource)
+        let interaction = Interaction(dataSource: dataSource, router: router)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }
