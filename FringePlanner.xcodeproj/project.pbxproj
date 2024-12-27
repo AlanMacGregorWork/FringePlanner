@@ -51,6 +51,7 @@
 		0892D96B2D1AE7E200145788 /* EventDetailsContentContainer+Structure+DetailsStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96A2D1AE7DA00145788 /* EventDetailsContentContainer+Structure+DetailsStructure.swift */; };
 		0892D96D2D1CA48300145788 /* ContainerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96C2D1CA48100145788 /* ContainerData.swift */; };
 		0892D96F2D1DB86E00145788 /* ContainerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96E2D1DB86C00145788 /* ContainerData.swift */; };
+		0892D9742D1F274600145788 /* AttributedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D9732D1F274000145788 /* AttributedStringTests.swift */; };
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
 		08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */; };
 		08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF812CFCEEB400925B8D /* ConditionalData.swift */; };
@@ -154,6 +155,7 @@
 		0892D96A2D1AE7DA00145788 /* EventDetailsContentContainer+Structure+DetailsStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+DetailsStructure.swift"; sourceTree = "<group>"; };
 		0892D96C2D1CA48100145788 /* ContainerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerData.swift; sourceTree = "<group>"; };
 		0892D96E2D1DB86C00145788 /* ContainerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerData.swift; sourceTree = "<group>"; };
+		0892D9732D1F274000145788 /* AttributedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStringTests.swift; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyData.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 		086159022CD69BD70076255B /* ExtensionTests */ = {
 			isa = PBXGroup;
 			children = (
+				0892D9732D1F274000145788 /* AttributedStringTests.swift */,
 				086159032CD69BEA0076255B /* StringTests.swift */,
 			);
 			path = ExtensionTests;
@@ -777,6 +780,7 @@
 			files = (
 				0803724D2C98B7A3002DC9A2 /* ExampleTest.swift in Sources */,
 				08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */,
+				0892D9742D1F274600145788 /* AttributedStringTests.swift in Sources */,
 				086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */,
 				08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */,
 				082DFF282D03839E00F5CBB7 /* ViewDataIsEmptyTests.swift in Sources */,

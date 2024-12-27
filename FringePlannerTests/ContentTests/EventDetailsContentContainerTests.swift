@@ -119,31 +119,6 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
         }
     }
     
-    @Suite("Artist Prefix Detection")
-    struct ArtistPrefixTests {
-        let title = AttributedString("Test Artist: The Show")
-        
-        @Test("Succeeds on matching prefix")
-        func testExactPrefixMatch() {
-            #expect(Structure.isArtist(AttributedString("Test Artist"), prefixForTitle: title) == true)
-        }
-        
-        @Test("Succeeds on matching prefix (with trimming)")
-        func testPrefixMatchWithTrimming() {
-            #expect(Structure.isArtist(AttributedString("  Test Artist  "), prefixForTitle: title) == true)
-        }
-        
-        @Test("Fails on nil artist")
-        func testNilArtist() {
-            #expect(Structure.isArtist(nil, prefixForTitle: title) == false)
-        }
-        
-        @Test("Fails on non-matching prefix")
-        func testNonMatchingPrefix() {
-            #expect(Structure.isArtist(AttributedString("Other Artist"), prefixForTitle: title) == false)
-        }
-    }
-    
     // MARK: - Get Artist Row
     
     @Suite("Get Artist Row")

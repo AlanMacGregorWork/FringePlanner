@@ -7,6 +7,24 @@
 
 import SwiftUI
 
+// MARK: - General
+
+extension AttributedString {
+    /// Returns true if the string includes the prefix after both string are trimmed.
+    func hasTrimmedPrefix(_ prefix: AttributedString?) -> Bool {
+        // Prefix must exist to be a prefix for the title
+        guard let prefix else { return false }
+        // Get the string values for each so that they can be evaluated
+        let stringPrefix = NSAttributedString(prefix).string
+        let stringSelf = NSAttributedString(self).string
+        // Values must be trimmed of whitespace before comparison as the attributed string generated from HTML
+        // may have whitespace which is not part of the default decoding
+        return stringSelf.trimmed.hasPrefix(stringPrefix.trimmed)
+    }
+}
+
+// MARK: - Generation from HTML
+
 extension AttributedString {
     /// Create an attributed string from HTML.
     /// - Parameters:

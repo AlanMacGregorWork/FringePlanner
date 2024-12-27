@@ -19,7 +19,9 @@ extension EventDetailsContentContainer.Structure {
         
         var structure: some ViewDataProtocol {
             GroupData(type: .section(title: "Details")) {
-                if Self.isArtist(artist, prefixForTitle: title) {
+                // Artists will often be included in the prefix of the title, in these situations the
+                // artist row will be removed and a row showing the Artist & Title will be displayed
+                if title.hasTrimmedPrefix(artist) {
                     Self.getArtistAndTitleRow(from: title)
                 } else {
                     Self.getArtistRow(from: artist)
@@ -73,17 +75,6 @@ extension EventDetailsContentContainer.Structure {
             if let genreTags {
                 SectionRowData(title: "Genre Tags", text: genreTags)
             }
-        }
-        
-        static func isArtist(_ artist: AttributedString?, prefixForTitle title: AttributedString) -> Bool {
-            // Artist must exist to be a prefix for the title
-            guard let artist else { return false }
-            // Get the string values for each so that they can be evaluated
-            let stringArtist = NSAttributedString(artist).string
-            let stringTitle = NSAttributedString(title).string
-            // Values must be trimmed of whitespace before comparison as the attributed string generated from HTML
-            // may have whitespace which is not part of the default decoding
-            return stringTitle.trimmed.hasPrefix(stringArtist.trimmed)
         }
     }
 }
