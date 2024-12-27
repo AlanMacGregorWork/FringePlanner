@@ -14,8 +14,16 @@ extension ViewDataProtocol {
         @FringeDataResultBuilder _ data: () -> (T),
         sourceLocation: SourceLocation = #_sourceLocation
     ) {
-        guard let value = data() as? Self else {
-            Issue.record("Type provided does not match\n\(self)", sourceLocation: sourceLocation)
+        let generatedData = data()
+        guard let value = generatedData as? Self else {
+            Issue.record("""
+                Type provided does not match
+                Expected Type: 
+                \(type(of: self))
+                
+                Found Type:
+                \(type(of: generatedData))
+                """, sourceLocation: sourceLocation)
             return
         }
         #expect(self == value, "Type matched but produced different values", sourceLocation: sourceLocation)
