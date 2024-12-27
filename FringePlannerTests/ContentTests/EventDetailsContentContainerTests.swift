@@ -21,6 +21,11 @@ struct EventDetailsContentContainerTests {
     struct AccessibilityStructureTests {
         typealias Structure = EventDetailsContentContainer.Structure.AccessibilityStructure
     }
+    
+    @Suite("DescriptionStructure")
+    struct DescriptionStructureTests {
+        typealias Structure = EventDetailsContentContainer.Structure.DescriptionStructure
+    }
 }
 
 // MARK: - DetailsStructureTests
@@ -412,6 +417,144 @@ extension EventDetailsContentContainerTests.AccessibilityStructureTests {
         @Test("Nil dates will not show data")
         func testNilCaptioningDates() {
             Structure.getCaptioningDates(from: nil).expect {
+                EmptyData()
+                    .conditionalSecond(firstType: SectionRowData.self)
+            }
+        }
+    }
+}
+
+// MARK: - DescriptionStructureTests
+
+extension EventDetailsContentContainerTests.DescriptionStructureTests {
+    
+    @Suite("General Structure Tests")
+    struct GeneralStructureTests {
+        @MainActor
+        @Test("Structure with minimal content")
+        func testMinimalContent() {
+            let structure = Structure(
+                descriptionTeaser: nil,
+                description: AttributedString("Test Description"),
+                warnings: nil
+            )
+            
+            structure.expect {
+                GroupData(type: .section) {
+                    EmptyData()
+                        .conditionalSecond(firstType: SectionRowData.self)
+                    SectionRowData(text: AttributedString("Test Description"))
+                    EmptyData()
+                        .conditionalSecond(firstType: SectionRowData.self)
+                }
+            }
+        }
+        
+        @MainActor
+        @Test("Structure with all content")
+        func testAllContent() {
+            let structure = Structure(
+                descriptionTeaser: AttributedString("Test Teaser"),
+                description: AttributedString("Test Description"),
+                warnings: AttributedString("Test Warning")
+            )
+            
+            structure.expect {
+                GroupData(type: .section) {
+                    SectionRowData(text: AttributedString("Test Teaser"))
+                        .conditionalFirst()
+                    SectionRowData(text: AttributedString("Test Description"))
+                    SectionRowData(title: "Warnings", text: AttributedString("Test Warning"))
+                        .conditionalFirst()
+                }
+            }
+        }
+        
+        @MainActor
+        @Test("Structure with teaser included in description")
+        func testTeaserIncludedInDescription() {
+            let teaser = AttributedString("Test Teaser")
+            let description = AttributedString("Test Teaser followed by more text")
+            
+            let structure = Structure(
+                descriptionTeaser: teaser,
+                description: description,
+                warnings: nil
+            )
+            
+            structure.expect {
+                GroupData(type: .section) {
+                    EmptyData()
+                        .conditionalSecond(firstType: SectionRowData.self)
+                    SectionRowData(text: AttributedString("Test Teaser followed by more text"))
+                    EmptyData()
+                        .conditionalSecond(firstType: SectionRowData.self)
+                }
+            }
+        }
+    }
+    
+    // MARK: - Get Teaser Row
+    
+    @Suite("Get Teaser Row")
+    struct GetTeaserRowTests {
+        @Test("Returns row if teaser exists and not prefix of description")
+        func testTeaserExistsAndNotPrefixOfDescription() {
+            let teaser = AttributedString("Test Teaser")
+            let description = AttributedString("Some Other Description")
+            Structure.getTeaserRow(from: teaser, description: description).expect {
+                SectionRowData(text: AttributedString("Test Teaser"))
+                    .conditionalFirst()
+            }
+        }
+        
+        @Test("Returns empty if teaser does not exist")
+        func testNoTeaser() {
+            let description = AttributedString("Some Other Description")
+            Structure.getTeaserRow(from: nil, description: description).expect {
+                EmptyData()
+                    .conditionalSecond(firstType: SectionRowData.self)
+            }
+        }
+        
+        @Test("Returns empty if teaser is prefix of description")
+        func testTeaserIsPrefix() {
+            let teaser = AttributedString("Test Teaser")
+            let description = AttributedString("Test Teaser Description")
+            Structure.getTeaserRow(from: teaser, description: description).expect {
+                EmptyData()
+                    .conditionalSecond(firstType: SectionRowData.self)
+            }
+        }
+    }
+    
+    // MARK: - Get Description Row
+    
+    @Suite("Get Description Row")
+    struct GetDescriptionRowTests {
+        @Test("Returns description row")
+        func testDescriptionRow() {
+            Structure.getDescriptionRow(from: AttributedString("Test Description")).expect {
+                SectionRowData(text: AttributedString("Test Description"))
+            }
+        }
+    }
+    
+    // MARK: - Get Warnings Row
+    
+    @Suite("Get Warnings Row")
+    struct GetWarningsRowTests {
+        @Test("Row returned with warning")
+        func testWarningsExist() {
+            Structure.getWarningsRow(from: AttributedString("Test Warning")).expect {
+                SectionRowData(title: "Warnings", text: AttributedString("Test Warning"))
+                    .conditionalFirst()
+            }
+        }
+        
+        @Test("EmptyData returned without warning")
+        func testNilWarnings() {
+            Structure.getWarningsRow(from: nil).expect {
                 EmptyData()
                     .conditionalSecond(firstType: SectionRowData.self)
             }

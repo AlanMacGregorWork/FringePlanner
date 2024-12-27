@@ -34,6 +34,7 @@ extension EventDetailsContentContainer {
             GroupData(type: .form) {
                 DetailsStructure(event: event)
                 AccessibilityStructure(disabled: event.disabled)
+                DescriptionStructure(event: event)
             }
         }
     }
