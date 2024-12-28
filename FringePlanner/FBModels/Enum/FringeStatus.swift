@@ -1,12 +1,12 @@
 //
-//  FBStatus.swift
+//  FringeStatus.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 13/11/2024.
 //
 
 /// Defines the status of a Fringe event
-enum FBStatus: Decodable {
+enum FringeStatus: Decodable {
     case active
     case cancelled
     /// Note: If this appears in a response the event should be deleted from the local database

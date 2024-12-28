@@ -58,7 +58,7 @@ struct FBEventTests {
         let castedTests = [
             (value as? TestData<String>).map(testValues(for:)),
             (value as? TestData<String?>).map(testValues(for:)),
-            (value as? TestData<FBStatus>).map(testValues(for:)),
+            (value as? TestData<FringeStatus>).map(testValues(for:)),
             (value as? TestData<URL>).map(testValues(for:)),
             (value as? TestData<Date>).map(testValues(for:)),
             (value as? TestData<Int>).map(testValues(for:)),
