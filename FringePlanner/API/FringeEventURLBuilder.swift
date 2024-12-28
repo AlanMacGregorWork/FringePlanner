@@ -1,5 +1,5 @@
 //
-//  FBEventURLBuilder.swift
+//  FringeEventURLBuilder.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 16/11/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FBEventURLBuilder {
+struct FringeEventURLBuilder {
 
     let key: String
     let secretKey: String
@@ -17,7 +17,7 @@ struct FBEventURLBuilder {
         self.secretKey = secretKey
     }
     
-    func constructURL(for request: FilterRequest) throws(FBEventURLError) -> URL {
+    func constructURL(for request: FilterRequest) throws(URLError) -> URL {
         // The URL requires a "signature" which is taken from the later half of the URL, this is then appended
         // onto the URL to authenticate
         var components = URLComponents()
@@ -35,19 +35,19 @@ struct FBEventURLBuilder {
         return url
     }
 
-    private func getSignature(from components: URLComponents) throws(FBEventURLError) -> String {
+    private func getSignature(from components: URLComponents) throws(URLError) -> String {
         guard let componentsString = components.string else { throw .componentsFailed }
         
         // Create a signature from the path
         return try mapError(
             for: try HMACGenerator.createHash(for: componentsString, key: secretKey),
             expectedType: String.self,
-            to: FBEventURLError.signatureFailed)
+            to: URLError.signatureFailed)
     }
     
     // MARK: Error
     
-    enum FBEventURLError: Error, Equatable {
+    enum URLError: Error, Equatable {
         case signatureFailed(HMACGenerator.GeneratorError)
         case componentsFailed
         case urlFailed

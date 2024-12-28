@@ -30,7 +30,7 @@ extension FringeEventDownloader {
 
     private static func constructURL(from request: FilterRequest) throws (DownloadError) -> URL {
         try mapError(
-            for: try FBEventURLBuilder().constructURL(for: request),
+            for: try FringeEventURLBuilder().constructURL(for: request),
             expectedType: URL.self,
             to: { DownloadError.urlGenerationFailed($0) })
     }
@@ -68,7 +68,7 @@ extension FringeEventDownloader {
     // MARK: Errors
     
     enum DownloadError: Error, Equatable {
-        case urlGenerationFailed(FBEventURLBuilder.FBEventURLError)
+        case urlGenerationFailed(FringeEventURLBuilder.URLError)
         case downloadFailed
         case decodeFailed
         case invalidResponse

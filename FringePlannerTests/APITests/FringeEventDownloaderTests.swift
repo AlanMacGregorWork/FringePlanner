@@ -89,7 +89,7 @@ private struct Cache {
 
 // MARK: - MockDownloaderSupport
 
-/// Mock implementation of `FBEventDownloader.DownloadProtocol`
+/// Mock implementation of `FringeEventDownloader.DownloadProtocol`
 private struct MockDownloaderSupport: FringeEventDownloader.DownloadProtocol {
     let dataResult: DataResult
     

@@ -60,7 +60,7 @@
 		08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF812CFCEEB400925B8D /* ConditionalData.swift */; };
 		08BA674A2CE7F293000DDF37 /* FringeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FringeEvent.swift */; };
 		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
-		08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */; };
+		08BA67522CE94733000DDF37 /* FringeEventURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67512CE94730000DDF37 /* FringeEventURLBuilder.swift */; };
 		08BA67542CE94767000DDF37 /* FringeEventDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67532CE9475F000DDF37 /* FringeEventDownloader.swift */; };
 		08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67562CE953EF000DDF37 /* FringeEventDownloaderTests.swift */; };
 		08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67582CEA3ADD000DDF37 /* Bundle.swift */; };
@@ -69,7 +69,7 @@
 		08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C92D682CCEACD4001732E9 /* ContentProtocol.swift */; };
 		08CB2C142CD7C05A00B799FA /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2C132CD7C05000B799FA /* General.swift */; };
 		08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2C152CD7C0D200B799FA /* GeneralTests.swift */; };
-		08DA9BB32CEA6AE20080C0A5 /* FBEventURLBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA9BB22CEA6AE00080C0A5 /* FBEventURLBuilderTests.swift */; };
+		08DA9BB32CEA6AE20080C0A5 /* FringeEventURLBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DA9BB22CEA6AE00080C0A5 /* FringeEventURLBuilderTests.swift */; };
 		08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DF47382CD6B42500405254 /* FilterRequest.swift */; };
 		08E1B3F82CCEA8EE00C7333A /* NSPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */; };
 		08E1B3FB2CCEAAD800C7333A /* BaseTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */; };
@@ -165,7 +165,7 @@
 		08B1BF812CFCEEB400925B8D /* ConditionalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalData.swift; sourceTree = "<group>"; };
 		08BA67492CE7F291000DDF37 /* FringeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEvent.swift; sourceTree = "<group>"; };
 		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
-		08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilder.swift; sourceTree = "<group>"; };
+		08BA67512CE94730000DDF37 /* FringeEventURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventURLBuilder.swift; sourceTree = "<group>"; };
 		08BA67532CE9475F000DDF37 /* FringeEventDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventDownloader.swift; sourceTree = "<group>"; };
 		08BA67562CE953EF000DDF37 /* FringeEventDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventDownloaderTests.swift; sourceTree = "<group>"; };
 		08BA67582CEA3ADD000DDF37 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
@@ -176,7 +176,7 @@
 		08C92D6F2CCEB9E7001732E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		08CB2C132CD7C05000B799FA /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		08CB2C152CD7C0D200B799FA /* GeneralTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralTests.swift; sourceTree = "<group>"; };
-		08DA9BB22CEA6AE00080C0A5 /* FBEventURLBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilderTests.swift; sourceTree = "<group>"; };
+		08DA9BB22CEA6AE00080C0A5 /* FringeEventURLBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventURLBuilderTests.swift; sourceTree = "<group>"; };
 		08DF47382CD6B42500405254 /* FilterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRequest.swift; sourceTree = "<group>"; };
 		08E1B3F72CCEA8E600C7333A /* NSPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSPredicate.swift; sourceTree = "<group>"; };
 		08E1B3FA2CCEAABF00C7333A /* BaseTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTestCase.swift; sourceTree = "<group>"; };
@@ -460,7 +460,7 @@
 			isa = PBXGroup;
 			children = (
 				08BA67532CE9475F000DDF37 /* FringeEventDownloader.swift */,
-				08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */,
+				08BA67512CE94730000DDF37 /* FringeEventURLBuilder.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -468,7 +468,7 @@
 		08BA67552CE953C7000DDF37 /* APITests */ = {
 			isa = PBXGroup;
 			children = (
-				08DA9BB22CEA6AE00080C0A5 /* FBEventURLBuilderTests.swift */,
+				08DA9BB22CEA6AE00080C0A5 /* FringeEventURLBuilderTests.swift */,
 				08BA67562CE953EF000DDF37 /* FringeEventDownloaderTests.swift */,
 			);
 			path = APITests;
@@ -759,7 +759,7 @@
 				086D08702CE52A28000B6225 /* FringePerformanceType.swift in Sources */,
 				086D087C2CE56A56000B6225 /* FringeImage.swift in Sources */,
 				08754C2A2D18AB920022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift in Sources */,
-				08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */,
+				08BA67522CE94733000DDF37 /* FringeEventURLBuilder.swift in Sources */,
 				080272EA2C9A39620040A673 /* EdgeInsets.swift in Sources */,
 				0803723C2C98B7A2002DC9A2 /* FringePlannerApp.swift in Sources */,
 				08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */,
@@ -795,7 +795,7 @@
 				0892D96F2D1DB86E00145788 /* ContainerData.swift in Sources */,
 				08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */,
 				08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */,
-				08DA9BB32CEA6AE20080C0A5 /* FBEventURLBuilderTests.swift in Sources */,
+				08DA9BB32CEA6AE20080C0A5 /* FringeEventURLBuilderTests.swift in Sources */,
 				080272EC2C9A39810040A673 /* EdgeInsetsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
