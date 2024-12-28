@@ -1,5 +1,5 @@
 //
-//  FBEventDownloader.swift
+//  FringeEventDownloader.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 16/11/2024.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// Downloads Fringe events from the Fringe API
-struct FBEventDownloader: FBEventDownloader.GetEventsProtocol {
+struct FringeEventDownloader: FringeEventDownloader.GetEventsProtocol {
     
     private let downloadSupport: any DownloadProtocol
     
@@ -16,7 +16,7 @@ struct FBEventDownloader: FBEventDownloader.GetEventsProtocol {
         self.downloadSupport = downloadSupport
     }
 
-    func getFBEvents(from request: FilterRequest) async throws(FBEventDownloadError) -> [FringeEvent] {
+    func getEvents(from request: FilterRequest) async throws(DownloadError) -> [FringeEvent] {
         let url = try Self.constructURL(from: request)
         let data = try await Self.downloadData(from: url, downloadSupport: downloadSupport)
         let events = try Self.decodeEvents(from: data)
@@ -26,19 +26,19 @@ struct FBEventDownloader: FBEventDownloader.GetEventsProtocol {
 
 // MARK: Helpers
 
-extension FBEventDownloader {
+extension FringeEventDownloader {
 
-    private static func constructURL(from request: FilterRequest) throws (FBEventDownloadError) -> URL {
+    private static func constructURL(from request: FilterRequest) throws (DownloadError) -> URL {
         try mapError(
             for: try FBEventURLBuilder().constructURL(for: request),
             expectedType: URL.self,
-            to: { FBEventDownloadError.urlGenerationFailed($0) })
+            to: { DownloadError.urlGenerationFailed($0) })
     }
     
     private static func downloadData(
         from url: URL,
         downloadSupport: any DownloadProtocol
-    ) async throws(FBEventDownloadError) -> Data {
+    ) async throws(DownloadError) -> Data {
         // Get Data
         let (data, response): (Data, URLResponse)
         do {
@@ -55,19 +55,19 @@ extension FBEventDownloader {
         return data
     }
     
-    private static func decodeEvents(from data: Data) throws(FBEventDownloadError) -> [FringeEvent] {
+    private static func decodeEvents(from data: Data) throws(DownloadError) -> [FringeEvent] {
         try mapError(
             for: try fringeJsonDecoder.decode([FringeEvent].self, from: data),
             expectedType: [FringeEvent].self,
             to: { (error: any Error) in
                 fringeAssertFailure("Decode failed: \(error)")
-                return FBEventDownloadError.decodeFailed
+                return DownloadError.decodeFailed
             })
     }
     
     // MARK: Errors
     
-    enum FBEventDownloadError: Error, Equatable {
+    enum DownloadError: Error, Equatable {
         case urlGenerationFailed(FBEventURLBuilder.FBEventURLError)
         case downloadFailed
         case decodeFailed
@@ -84,17 +84,17 @@ extension FBEventDownloader {
     
     /// Protocol for the downloading events from the Fringe API 
     protocol GetEventsProtocol {
-        func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FringeEvent]
+        func getEvents(from request: FilterRequest) async throws(FringeEventDownloader.DownloadError) -> [FringeEvent]
     }
 }
 
 // MARK: Protocol Support
 
-extension URLSession: FBEventDownloader.DownloadProtocol {}
+extension URLSession: FringeEventDownloader.DownloadProtocol {}
 
 #if DEBUG
-struct MockEventDownloader: FBEventDownloader.GetEventsProtocol {
-    func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FringeEvent] {
+struct MockEventDownloader: FringeEventDownloader.GetEventsProtocol {
+    func getEvents(from request: FilterRequest) async throws(FringeEventDownloader.DownloadError) -> [FringeEvent] {
         return .exampleModels()
     }
 }

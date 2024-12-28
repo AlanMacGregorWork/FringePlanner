@@ -77,14 +77,14 @@ extension SearchEventContentContainer {
     struct Interaction: InteractionProtocol {
         private let dataSource: DataSource
         private let router: Router
-        private let downloader: FBEventDownloader.GetEventsProtocol
+        private let downloader: FringeEventDownloader.GetEventsProtocol
         private let searchSubjectCancellable: AnyCancellable
         
         @MainActor
         init(
             dataSource: DataSource,
             router: Router,
-            downloader: FBEventDownloader.GetEventsProtocol = FBEventDownloader()
+            downloader: FringeEventDownloader.GetEventsProtocol = FringeEventDownloader()
         ) {
             self.dataSource = dataSource
             self.router = router
@@ -113,11 +113,11 @@ extension SearchEventContentContainer {
         }
         
         private static func asyncSearch(
-            downloader: FBEventDownloader.GetEventsProtocol,
+            downloader: FringeEventDownloader.GetEventsProtocol,
             dataSource: DataSource
         ) async {
             do {
-                let events = try await downloader.getFBEvents(from: .init(title: dataSource.search))
+                let events = try await downloader.getEvents(from: .init(title: dataSource.search))
                 dataSource.events = events
             } catch {
                 // TODO: Implement error UI

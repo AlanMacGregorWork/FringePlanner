@@ -61,8 +61,8 @@
 		08BA674A2CE7F293000DDF37 /* FringeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FringeEvent.swift */; };
 		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
 		08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */; };
-		08BA67542CE94767000DDF37 /* FBEventDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */; };
-		08BA67572CE953F3000DDF37 /* FBEventDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */; };
+		08BA67542CE94767000DDF37 /* FringeEventDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67532CE9475F000DDF37 /* FringeEventDownloader.swift */; };
+		08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67562CE953EF000DDF37 /* FringeEventDownloaderTests.swift */; };
 		08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67582CEA3ADD000DDF37 /* Bundle.swift */; };
 		08BD27162CD983DA0029E5DF /* FringeEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD27152CD983D30029E5DF /* FringeEventTests.swift */; };
 		08BD27192CD986920029E5DF /* TestFiles.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD27182CD984270029E5DF /* TestFiles.xcassets */; };
@@ -166,8 +166,8 @@
 		08BA67492CE7F291000DDF37 /* FringeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEvent.swift; sourceTree = "<group>"; };
 		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilder.swift; sourceTree = "<group>"; };
-		08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventDownloader.swift; sourceTree = "<group>"; };
-		08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventDownloaderTests.swift; sourceTree = "<group>"; };
+		08BA67532CE9475F000DDF37 /* FringeEventDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventDownloader.swift; sourceTree = "<group>"; };
+		08BA67562CE953EF000DDF37 /* FringeEventDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventDownloaderTests.swift; sourceTree = "<group>"; };
 		08BA67582CEA3ADD000DDF37 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		08BD27152CD983D30029E5DF /* FringeEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventTests.swift; sourceTree = "<group>"; };
 		08BD27182CD984270029E5DF /* TestFiles.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestFiles.xcassets; sourceTree = "<group>"; };
@@ -459,7 +459,7 @@
 		08BA67502CE9472A000DDF37 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */,
+				08BA67532CE9475F000DDF37 /* FringeEventDownloader.swift */,
 				08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */,
 			);
 			path = API;
@@ -469,7 +469,7 @@
 			isa = PBXGroup;
 			children = (
 				08DA9BB22CEA6AE00080C0A5 /* FBEventURLBuilderTests.swift */,
-				08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */,
+				08BA67562CE953EF000DDF37 /* FringeEventDownloaderTests.swift */,
 			);
 			path = APITests;
 			sourceTree = "<group>";
@@ -737,7 +737,7 @@
 				08E6AF362D179458007F3F59 /* EventDetailsContentContainer.swift in Sources */,
 				08EFD8042D0F47690090A051 /* SectionRowData.swift in Sources */,
 				081826A82CBF1445002293FD /* ForEachData.swift in Sources */,
-				08BA67542CE94767000DDF37 /* FBEventDownloader.swift in Sources */,
+				08BA67542CE94767000DDF37 /* FringeEventDownloader.swift in Sources */,
 				086D086C2CE5276C000B6225 /* FringeStatus.swift in Sources */,
 				08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */,
 				08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */,
@@ -788,7 +788,7 @@
 				082DFF282D03839E00F5CBB7 /* ViewDataIsEmptyTests.swift in Sources */,
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
-				08BA67572CE953F3000DDF37 /* FBEventDownloaderTests.swift in Sources */,
+				08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */,
 				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,
 				08E6AF312D17229B007F3F59 /* EventDetailsContentContainerTests.swift in Sources */,
 				086159042CD69BEE0076255B /* StringTests.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  FBEventDownloaderTests.swift
+//  FringeEventDownloaderTests.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 16/11/2024.
@@ -9,8 +9,8 @@ import Testing
 import Foundation
 @testable import FringePlanner
 
-@Suite("FBEventDownloader Tests")
-struct FBEventDownloaderTests {
+@Suite("FringeEventDownloader Tests")
+struct FringeEventDownloaderTests {
 
     let validResponseData: Data
     
@@ -22,16 +22,16 @@ struct FBEventDownloaderTests {
     func testDownloadFailsThrows() async throws {
         let dataResult = try DataResult(testOption: .downloadFailed)
         let downloadSupport = MockDownloaderSupport(dataResult: dataResult)
-        let downloader = FBEventDownloader(downloadSupport: downloadSupport)
-        await #expect(throws: FBEventDownloader.FBEventDownloadError.downloadFailed, performing: { try await downloader.getFBEvents(from: .init()) })
+        let downloader = FringeEventDownloader(downloadSupport: downloadSupport)
+        await #expect(throws: FringeEventDownloader.DownloadError.downloadFailed, performing: { try await downloader.getEvents(from: .init()) })
     }
     
     @Test("Throws `decodeFailed` if decode failed", arguments: ["", "someData", "{}"])
     func testDecodeFailsThrows(dataString: String) async throws {
         let dataResult = try #require(try DataResult(testOption: .decodeFailed(dataString: dataString)))
         let downloadSupport = MockDownloaderSupport(dataResult: dataResult)
-        let downloader = FBEventDownloader(downloadSupport: downloadSupport)
-        await #expect(throws: FBEventDownloader.FBEventDownloadError.decodeFailed, performing: { try await downloader.getFBEvents(from: .init()) })
+        let downloader = FringeEventDownloader(downloadSupport: downloadSupport)
+        await #expect(throws: FringeEventDownloader.DownloadError.decodeFailed, performing: { try await downloader.getEvents(from: .init()) })
     }
 
     @Test("Throws `httpError` if status code is not 200-299", arguments: [(0...199), (200...299), (300...999)])
@@ -39,11 +39,11 @@ struct FBEventDownloaderTests {
         for statusCode in statusCode {
             let dataResult = try #require(try DataResult(testOption: .httpError(statusCode: statusCode, validData: validResponseData)))
             let downloadSupport = MockDownloaderSupport(dataResult: dataResult)
-            let downloader = FBEventDownloader(downloadSupport: downloadSupport)
+            let downloader = FringeEventDownloader(downloadSupport: downloadSupport)
             if (200...299).contains(statusCode) {
-                await #expect(throws: Never.self, "\(statusCode) should not fail", performing: { try await downloader.getFBEvents(from: .init()) })
+                await #expect(throws: Never.self, "\(statusCode) should not fail", performing: { try await downloader.getEvents(from: .init()) })
             } else {
-                await #expect(throws: FBEventDownloader.FBEventDownloadError.httpError(statusCode: statusCode), "\(statusCode) should fail", performing: { try await downloader.getFBEvents(from: .init()) })
+                await #expect(throws: FringeEventDownloader.DownloadError.httpError(statusCode: statusCode), "\(statusCode) should fail", performing: { try await downloader.getEvents(from: .init()) })
             }
         }
     }
@@ -52,16 +52,16 @@ struct FBEventDownloaderTests {
     func testValidResponse() async throws {
         let dataResult = try #require(try DataResult(testOption: .validResponse(validData: validResponseData)))
         let downloadSupport = MockDownloaderSupport(dataResult: dataResult)
-        let downloader = FBEventDownloader(downloadSupport: downloadSupport)
-        await #expect(throws: Never.self, performing: { try await downloader.getFBEvents(from: .init()) })
+        let downloader = FringeEventDownloader(downloadSupport: downloadSupport)
+        await #expect(throws: Never.self, performing: { try await downloader.getEvents(from: .init()) })
     }
     
     @Test("Does not throw when response is an empty array")
     func testValidResponseFromEmptyArray() async throws {
         let dataResult = try #require(try DataResult(testOption: .validResponse(validData: Data("[]".utf8))))
         let downloadSupport = MockDownloaderSupport(dataResult: dataResult)
-        let downloader = FBEventDownloader(downloadSupport: downloadSupport)
-        await #expect(throws: Never.self, performing: { try await downloader.getFBEvents(from: .init()) })
+        let downloader = FringeEventDownloader(downloadSupport: downloadSupport)
+        await #expect(throws: Never.self, performing: { try await downloader.getEvents(from: .init()) })
     }
 }
 
@@ -90,7 +90,7 @@ private struct Cache {
 // MARK: - MockDownloaderSupport
 
 /// Mock implementation of `FBEventDownloader.DownloadProtocol`
-private struct MockDownloaderSupport: FBEventDownloader.DownloadProtocol {
+private struct MockDownloaderSupport: FringeEventDownloader.DownloadProtocol {
     let dataResult: DataResult
     
     func data(from: URL) async throws -> (Data, URLResponse) {
