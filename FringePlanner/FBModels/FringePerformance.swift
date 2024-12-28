@@ -1,5 +1,5 @@
 //
-//  FBPerformance.swift
+//  FringePerformance.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 15/11/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FBPerformance: Equatable, Hashable {
+struct FringePerformance: Equatable, Hashable {
     let title: String?
     let type: FringePerformanceType
     /// `false` indicates event is drop-in between start and end time
@@ -21,7 +21,7 @@ struct FBPerformance: Equatable, Hashable {
     let durationMinutes: Int
 }
 
-extension FBPerformance: Decodable {
+extension FringePerformance: Decodable {
     init(from decoder: (any Decoder)) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         type = try container.decode(FringePerformanceType.self, forKey: "type")

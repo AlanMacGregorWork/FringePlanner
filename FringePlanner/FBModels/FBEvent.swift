@@ -22,7 +22,7 @@ struct FBEvent: Equatable, Hashable {
     let genre: String
     /// Example: `Art, Event`
     let genreTags: String?
-    let performances: [FBPerformance]
+    let performances: [FringePerformance]
     let performanceSpace: FringePerformanceSpace
     let status: FringeStatus
     let url: URL
@@ -59,7 +59,7 @@ extension FBEvent: Decodable {
         self.descriptionTeaser = try container.decodeIfPresent(String.self, forKey: "descriptionTeaser")?.trimmed.nilOnEmpty
         self.updated = try container.decode(Date.self, forKey: "updated")
         self.year = try container.decode(Int.self, forKey: "year")
-        self.performances = try container.decode([FBPerformance].self, forKey: "performances")
+        self.performances = try container.decode([FringePerformance].self, forKey: "performances")
         self.performanceSpace = try container.decode(FringePerformanceSpace.self, forKey: "performanceSpace")
         self.venue = try container.decode(FringeVenue.self, forKey: "venue")
         self.disabled = try container.decodeIfPresent(FringeDisabled.self, forKey: "disabled")

@@ -66,7 +66,7 @@ struct FBEventTests {
             (value as? TestData<FringePerformanceSpace>).map(testValues(for:)),
             (value as? TestData<FringeVenue>).map(testValues(for:)),
             (value as? TestData<[String: FringeImage]>).map(testValues(for:)),
-            (value as? TestData<[FBPerformance]>).map(testValues(for:))
+            (value as? TestData<[FringePerformance]>).map(testValues(for:))
         ]
         guard castedTests.contains(where: { $0 != nil }) else {
             // If this is triggered another type will need adding to the switch
@@ -178,11 +178,11 @@ private struct TestDataContent {
         ]),
         "performances": TestData(keyPath: \.performances, array: [
             [
-                FBPerformance(title: "SomeValue", type: .inPerson, isAtFixedTime: true, priceType: .free, price: 0, concession: nil, priceString: "Free", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 15).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 35).date!, durationMinutes: 20),
-                FBPerformance(title: nil, type: .other("some other type"), isAtFixedTime: false, priceType: .other("some Price"), price: 32, concession: 0.4, priceString: "32 price", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 45).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 13, minute: 05).date!, durationMinutes: 65)
+                FringePerformance(title: "SomeValue", type: .inPerson, isAtFixedTime: true, priceType: .free, price: 0, concession: nil, priceString: "Free", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 15).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 35).date!, durationMinutes: 20),
+                FringePerformance(title: nil, type: .other("some other type"), isAtFixedTime: false, priceType: .other("some Price"), price: 32, concession: 0.4, priceString: "32 price", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 45).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 13, minute: 05).date!, durationMinutes: 65)
             ],
             [
-                FBPerformance(title: "SomeValue", type: .onlineLive, isAtFixedTime: true, priceType: .payWhatYouCan, price: 0, concession: nil, priceString: "Free", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 15).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 35).date!, durationMinutes: 20)
+                FringePerformance(title: "SomeValue", type: .onlineLive, isAtFixedTime: true, priceType: .payWhatYouCan, price: 0, concession: nil, priceString: "Free", start: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 15).date!, end: DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 10, day: 27, hour: 12, minute: 35).date!, durationMinutes: 20)
             ],
             [],
             []

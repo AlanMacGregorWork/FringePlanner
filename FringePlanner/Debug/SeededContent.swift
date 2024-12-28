@@ -103,13 +103,13 @@ struct SeededContent {
         return ["someHash": FringeImage(hash: "someHash", orientation: .landscape, type: .thumb, versions: ["original": version])]
     }
     
-    func performance(for input: Int) -> FBPerformance {
+    func performance(for input: Int) -> FringePerformance {
         let startDate = seedValue(for: input, at: \.dates)
         let endDate = seedValue(for: input, at: \.dates).addingTimeInterval(60 * 60)
         let basePrice = Double((input % 4) + 1) * 10.00
         let concessionPrice = basePrice * 0.8
         
-        return FBPerformance(
+        return FringePerformance(
             title: nil,
             type: .inPerson,
             isAtFixedTime: true,

@@ -29,7 +29,7 @@
 		082DFF2A2D06573B00F5CBB7 /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082DFF292D06573900F5CBB7 /* AttributedString.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
 		0835BCC92CCE42790031A860 /* Expectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835BCC82CCE42770031A860 /* Expectation.swift */; };
-		0843C2322CE7DD390076FF11 /* FBPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2312CE7DD360076FF11 /* FBPerformance.swift */; };
+		0843C2322CE7DD390076FF11 /* FringePerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2312CE7DD360076FF11 /* FringePerformance.swift */; };
 		0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */; };
 		0843C2362CE7EC430076FF11 /* fringeAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2352CE7EC400076FF11 /* fringeAssert.swift */; };
 		086159012CD69B7E0076255B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086159002CD69B7B0076255B /* String.swift */; };
@@ -133,7 +133,7 @@
 		082DFF292D06573900F5CBB7 /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		0835BCC82CCE42770031A860 /* Expectation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expectation.swift; sourceTree = "<group>"; };
-		0843C2312CE7DD360076FF11 /* FBPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformance.swift; sourceTree = "<group>"; };
+		0843C2312CE7DD360076FF11 /* FringePerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePerformance.swift; sourceTree = "<group>"; };
 		0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationEnvironment.swift; sourceTree = "<group>"; };
 		0843C2352CE7EC400076FF11 /* fringeAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fringeAssert.swift; sourceTree = "<group>"; };
 		086159002CD69B7B0076255B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 			children = (
 				08BA674D2CE9090D000DDF37 /* Enum */,
 				08BA67492CE7F291000DDF37 /* FBEvent.swift */,
-				0843C2312CE7DD360076FF11 /* FBPerformance.swift */,
+				0843C2312CE7DD360076FF11 /* FringePerformance.swift */,
 				086D087B2CE56A54000B6225 /* FringeImage.swift */,
 				086D08792CE53292000B6225 /* FringeVenue.swift */,
 				086D08772CE5310F000B6225 /* FringeDisabled.swift */,
@@ -722,7 +722,7 @@
 				08F10DB32CB85FC3008ACBFF /* DebugOnlyViewDatas.swift in Sources */,
 				08E8C0432CBC15A000C270F6 /* NavigationData.swift in Sources */,
 				086D086E2CE52844000B6225 /* AnyCodingKey.swift in Sources */,
-				0843C2322CE7DD390076FF11 /* FBPerformance.swift in Sources */,
+				0843C2322CE7DD390076FF11 /* FringePerformance.swift in Sources */,
 				086D08722CE52A64000B6225 /* FringePriceType.swift in Sources */,
 				086159012CD69B7E0076255B /* String.swift in Sources */,
 				08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */,
