@@ -58,13 +58,13 @@
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
 		08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */; };
 		08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF812CFCEEB400925B8D /* ConditionalData.swift */; };
-		08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FBEvent.swift */; };
+		08BA674A2CE7F293000DDF37 /* FringeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67492CE7F291000DDF37 /* FringeEvent.swift */; };
 		08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA674B2CE7F2E9000DDF37 /* Codable.swift */; };
 		08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */; };
 		08BA67542CE94767000DDF37 /* FBEventDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */; };
 		08BA67572CE953F3000DDF37 /* FBEventDownloaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */; };
 		08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BA67582CEA3ADD000DDF37 /* Bundle.swift */; };
-		08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD27152CD983D30029E5DF /* FBEventTests.swift */; };
+		08BD27162CD983DA0029E5DF /* FringeEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BD27152CD983D30029E5DF /* FringeEventTests.swift */; };
 		08BD27192CD986920029E5DF /* TestFiles.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08BD27182CD984270029E5DF /* TestFiles.xcassets */; };
 		08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C92D682CCEACD4001732E9 /* ContentProtocol.swift */; };
 		08CB2C142CD7C05A00B799FA /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CB2C132CD7C05000B799FA /* General.swift */; };
@@ -163,13 +163,13 @@
 		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		08B1BF7F2CFCEE7300925B8D /* EmptyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyData.swift; sourceTree = "<group>"; };
 		08B1BF812CFCEEB400925B8D /* ConditionalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalData.swift; sourceTree = "<group>"; };
-		08BA67492CE7F291000DDF37 /* FBEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEvent.swift; sourceTree = "<group>"; };
+		08BA67492CE7F291000DDF37 /* FringeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEvent.swift; sourceTree = "<group>"; };
 		08BA674B2CE7F2E9000DDF37 /* Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Codable.swift; sourceTree = "<group>"; };
 		08BA67512CE94730000DDF37 /* FBEventURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventURLBuilder.swift; sourceTree = "<group>"; };
 		08BA67532CE9475F000DDF37 /* FBEventDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventDownloader.swift; sourceTree = "<group>"; };
 		08BA67562CE953EF000DDF37 /* FBEventDownloaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventDownloaderTests.swift; sourceTree = "<group>"; };
 		08BA67582CEA3ADD000DDF37 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
-		08BD27152CD983D30029E5DF /* FBEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBEventTests.swift; sourceTree = "<group>"; };
+		08BD27152CD983D30029E5DF /* FringeEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeEventTests.swift; sourceTree = "<group>"; };
 		08BD27182CD984270029E5DF /* TestFiles.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = TestFiles.xcassets; sourceTree = "<group>"; };
 		08C92D682CCEACD4001732E9 /* ContentProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProtocol.swift; sourceTree = "<group>"; };
 		08C92D6D2CCEB7F5001732E9 /* Keys.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Keys.xcconfig; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 			isa = PBXGroup;
 			children = (
 				08BA674D2CE9090D000DDF37 /* Enum */,
-				08BA67492CE7F291000DDF37 /* FBEvent.swift */,
+				08BA67492CE7F291000DDF37 /* FringeEvent.swift */,
 				0843C2312CE7DD360076FF11 /* FringePerformance.swift */,
 				086D087B2CE56A54000B6225 /* FringeImage.swift */,
 				086D08792CE53292000B6225 /* FringeVenue.swift */,
@@ -477,7 +477,7 @@
 		08BD27142CD983CB0029E5DF /* ModelTests */ = {
 			isa = PBXGroup;
 			children = (
-				08BD27152CD983D30029E5DF /* FBEventTests.swift */,
+				08BD27152CD983D30029E5DF /* FringeEventTests.swift */,
 			);
 			path = ModelTests;
 			sourceTree = "<group>";
@@ -767,7 +767,7 @@
 				08EFD7FE2D0F06FF0090A051 /* LinkSectionView.swift in Sources */,
 				08EFD8002D0F29700090A051 /* ButtonSectionView.swift in Sources */,
 				0843C2362CE7EC430076FF11 /* fringeAssert.swift in Sources */,
-				08BA674A2CE7F293000DDF37 /* FBEvent.swift in Sources */,
+				08BA674A2CE7F293000DDF37 /* FringeEvent.swift in Sources */,
 				0819F73B2CD2C27C009B9D3E /* HMACGenerator.swift in Sources */,
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
 				0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */,
@@ -781,7 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0803724D2C98B7A3002DC9A2 /* ExampleTest.swift in Sources */,
-				08BD27162CD983DA0029E5DF /* FBEventTests.swift in Sources */,
+				08BD27162CD983DA0029E5DF /* FringeEventTests.swift in Sources */,
 				0892D9742D1F274600145788 /* AttributedStringTests.swift in Sources */,
 				086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */,
 				08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */,

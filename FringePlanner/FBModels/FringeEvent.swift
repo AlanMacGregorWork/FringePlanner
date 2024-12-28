@@ -1,5 +1,5 @@
 //
-//  FBEvent.swift
+//  FringeEvent.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 15/11/2024.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FBEvent: Equatable, Hashable {
+struct FringeEvent: Equatable, Hashable {
     var title: String
     let artist: String?
     /// Example: `Germany`, `Ireland`, `Scotland`
@@ -35,11 +35,11 @@ struct FBEvent: Equatable, Hashable {
     let year: Int
 }
 
-extension FBEvent: Identifiable {
+extension FringeEvent: Identifiable {
     var id: String { code }
 }
 
-extension FBEvent: Decodable {
+extension FringeEvent: Decodable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.title = try container.decode(String.self, forKey: "title").trimmed

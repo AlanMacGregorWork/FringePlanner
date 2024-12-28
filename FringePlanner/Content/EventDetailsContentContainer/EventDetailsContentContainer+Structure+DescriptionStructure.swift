@@ -45,7 +45,7 @@ extension EventDetailsContentContainer.Structure {
 }
 
 extension EventDetailsContentContainer.Structure.DescriptionStructure {
-    init(event: FBEvent) {
+    init(event: FringeEvent) {
         self.descriptionTeaser = event.descriptionTeaser.map(AttributedString.init)
         self.description = AttributedString(event.description)
         self.warnings = event.warnings.map(AttributedString.init)

@@ -123,7 +123,7 @@ struct SeededContent {
         )
     }
     
-    func event(for input: Int) -> FBEvent {
+    func event(for input: Int) -> FringeEvent {
         let newCode = code / input
         return .init(
             title: seedValue(for: newCode, at: \.titles),
@@ -151,12 +151,12 @@ struct SeededContent {
         )
     }
     
-    var events: [FBEvent] {
+    var events: [FringeEvent] {
         (1...25).map({ self.event(for: $0) })
     }
 }
 
-extension Array where Element == FBEvent {
+extension Array where Element == FringeEvent {
     static func exampleModels() -> Self {
         SeededContent(code: 8494536).events
     }

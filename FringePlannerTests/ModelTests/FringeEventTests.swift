@@ -1,5 +1,5 @@
 //
-//  FBEventTests.swift
+//  FringeEventTests.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 04/11/2024.
@@ -9,8 +9,8 @@ import Testing
 import Foundation
 @testable import FringePlanner
 
-@Suite("FBEvent Tests")
-struct FBEventTests {
+@Suite("FringeEvent Tests")
+struct FringeEventTests {
     
     // MARK: Properties
 
@@ -81,7 +81,7 @@ struct FBEventTests {
 // MARK: - TestData
 
 private struct TestData<T: Equatable & Sendable>: Identifiable {
-    let keyPath: KeyPath<FBEvent, T>
+    let keyPath: KeyPath<FringeEvent, T>
     let array: [T]
     var id: String { "\(keyPath)" }
 }
@@ -91,7 +91,7 @@ private struct TestData<T: Equatable & Sendable>: Identifiable {
 /// Contains test information from the json assets
 private struct TestDataContent {
     let dataResponse: Data
-    let decodedResponse: [FBEvent]
+    let decodedResponse: [FringeEvent]
     let jsonResponse: [[String: Any]]
     var allJsonKeys: Set<String> { Set(jsonResponse.flatMap { $0.keys }) }
     static let allJsonKeysSafe: [String] = Array((try? TestDataContent())?.allJsonKeys ?? []).sorted(by: { $0 < $1 })
@@ -108,8 +108,8 @@ private struct TestDataContent {
             to: { (error: Bundle.GetTestDataError) in InitErrors.failedToGetResponseData(error) })
         
         self.decodedResponse = try mapError(
-            for: try fringeJsonDecoder.decode([FBEvent].self, from: self.dataResponse),
-            expectedType: [FBEvent].self,
+            for: try fringeJsonDecoder.decode([FringeEvent].self, from: self.dataResponse),
+            expectedType: [FringeEvent].self,
             to: { (error: Error) in InitErrors.failedToDecodeData(error as? DecodingError) })
         
         guard let json = try? JSONSerialization.jsonObject(with: self.dataResponse) as? [[String: Any]] else {

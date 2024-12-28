@@ -28,7 +28,7 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     struct Structure: StructureProtocol {
         let input: Content
-        var event: FBEvent { input.dataSource.event }
+        var event: FringeEvent { input.dataSource.event }
         
         var structure: some ViewDataProtocol {
             GroupData(type: .form) {
@@ -45,9 +45,9 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let event: FBEvent
+        let event: FringeEvent
         
-        init(event: FBEvent) {
+        init(event: FringeEvent) {
             self.event = event
         }
     }
@@ -65,7 +65,7 @@ extension EventDetailsContentContainer {
 
 extension EventDetailsContentContainer {
     @MainActor
-    static func createContent(event: FBEvent = SeededContent(code: 123).events[0]) -> Content {
+    static func createContent(event: FringeEvent = SeededContent(code: 123).events[0]) -> Content {
         let router = Router()
         let dataSource = DataSource(event: event)
         let interaction = Interaction()

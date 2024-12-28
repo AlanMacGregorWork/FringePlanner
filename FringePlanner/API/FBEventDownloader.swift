@@ -16,7 +16,7 @@ struct FBEventDownloader: FBEventDownloader.GetEventsProtocol {
         self.downloadSupport = downloadSupport
     }
 
-    func getFBEvents(from request: FilterRequest) async throws(FBEventDownloadError) -> [FBEvent] {
+    func getFBEvents(from request: FilterRequest) async throws(FBEventDownloadError) -> [FringeEvent] {
         let url = try Self.constructURL(from: request)
         let data = try await Self.downloadData(from: url, downloadSupport: downloadSupport)
         let events = try Self.decodeEvents(from: data)
@@ -55,10 +55,10 @@ extension FBEventDownloader {
         return data
     }
     
-    private static func decodeEvents(from data: Data) throws(FBEventDownloadError) -> [FBEvent] {
+    private static func decodeEvents(from data: Data) throws(FBEventDownloadError) -> [FringeEvent] {
         try mapError(
-            for: try fringeJsonDecoder.decode([FBEvent].self, from: data),
-            expectedType: [FBEvent].self,
+            for: try fringeJsonDecoder.decode([FringeEvent].self, from: data),
+            expectedType: [FringeEvent].self,
             to: { (error: any Error) in
                 fringeAssertFailure("Decode failed: \(error)")
                 return FBEventDownloadError.decodeFailed
@@ -84,7 +84,7 @@ extension FBEventDownloader {
     
     /// Protocol for the downloading events from the Fringe API 
     protocol GetEventsProtocol {
-        func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FBEvent]
+        func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FringeEvent]
     }
 }
 
@@ -94,7 +94,7 @@ extension URLSession: FBEventDownloader.DownloadProtocol {}
 
 #if DEBUG
 struct MockEventDownloader: FBEventDownloader.GetEventsProtocol {
-    func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FBEvent] {
+    func getFBEvents(from request: FilterRequest) async throws(FBEventDownloader.FBEventDownloadError) -> [FringeEvent] {
         return .exampleModels()
     }
 }

@@ -55,7 +55,7 @@ extension SearchEventContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
         let searchSubject: CurrentValueSubject<String, Never>
-        var events: [FBEvent] = .exampleModels()
+        var events: [FringeEvent] = .exampleModels()
         var search: String {
             didSet {
                 guard oldValue != search else { return }
@@ -99,7 +99,7 @@ extension SearchEventContentContainer {
         }
         
         @MainActor
-        func openEvent(_ event: FBEvent) {
+        func openEvent(_ event: FringeEvent) {
             router.pushSheet(location: .eventDetails(event))
         }
         
@@ -130,7 +130,7 @@ extension SearchEventContentContainer {
 
 extension SearchEventContentContainer {
     enum NavigationLocation: NavigationLocationProtocol {
-        case eventDetails(FBEvent)
+        case eventDetails(FringeEvent)
         
         @ViewBuilder
         func toView() -> some View {

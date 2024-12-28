@@ -80,7 +80,7 @@ extension EventDetailsContentContainer.Structure {
 }
 
 extension EventDetailsContentContainer.Structure.DetailsStructure {
-    init(event: FBEvent) {
+    init(event: FringeEvent) {
         self.title = AttributedString(event.title)
         self.artist = event.artist.map(AttributedString.init)
         self.country = event.country.map(AttributedString.init)
