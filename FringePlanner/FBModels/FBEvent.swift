@@ -26,7 +26,7 @@ struct FBEvent: Equatable, Hashable {
     let performanceSpace: FBPerformanceSpace
     let status: FBStatus
     let url: URL
-    let venue: FBVenue
+    let venue: FringeVenue
     let website: URL
     let disabled: FBDisabled?
     let images: [String: FBImage]
@@ -61,7 +61,7 @@ extension FBEvent: Decodable {
         self.year = try container.decode(Int.self, forKey: "year")
         self.performances = try container.decode([FBPerformance].self, forKey: "performances")
         self.performanceSpace = try container.decode(FBPerformanceSpace.self, forKey: "performanceSpace")
-        self.venue = try container.decode(FBVenue.self, forKey: "venue")
+        self.venue = try container.decode(FringeVenue.self, forKey: "venue")
         self.disabled = try container.decodeIfPresent(FBDisabled.self, forKey: "disabled")
         self.images = try container.decode([String: FBImage].self, forKey: "images")
         

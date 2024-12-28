@@ -64,7 +64,7 @@ struct FBEventTests {
             (value as? TestData<Int>).map(testValues(for:)),
             (value as? TestData<FBDisabled?>).map(testValues(for:)),
             (value as? TestData<FBPerformanceSpace>).map(testValues(for:)),
-            (value as? TestData<FBVenue>).map(testValues(for:)),
+            (value as? TestData<FringeVenue>).map(testValues(for:)),
             (value as? TestData<[String: FBImage]>).map(testValues(for:)),
             (value as? TestData<[FBPerformance]>).map(testValues(for:))
         ]
@@ -143,10 +143,10 @@ private struct TestDataContent {
             nil]),
         "performance_space": TestData(keyPath: \.performanceSpace, array: [FBPerformanceSpace(name: "Test\nYes"), FBPerformanceSpace(name: "Place"), FBPerformanceSpace(name: "Nothing"), FBPerformanceSpace(name: "Item")]),
         "venue": TestData(keyPath: \.venue, array: [
-            FBVenue(code: "Code1", description: nil, name: "Name1", address: nil, position: FBVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode1", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
-            FBVenue(code: "Code2", description: "Desc2", name: "Name2", address: "Address2", position: FBVenue.Position(lat: 123, lon: 4567), postCode: "Code2", webAddress: URL(string: "https://www.google.com")!, phone: "Phone2", email: "Email2", disabledDescription: "Disabled2"),
-            FBVenue(code: "Code3", description: nil, name: "Name3", address: nil, position: FBVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode3", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
-            FBVenue(code: "Code4", description: nil, name: "Name4", address: nil, position: FBVenue.Position(lat: 55.97855, lon: -3.192044), postCode: "PostCode4", webAddress: nil, phone: nil, email: nil, disabledDescription: nil)
+            FringeVenue(code: "Code1", description: nil, name: "Name1", address: nil, position: FringeVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode1", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
+            FringeVenue(code: "Code2", description: "Desc2", name: "Name2", address: "Address2", position: FringeVenue.Position(lat: 123, lon: 4567), postCode: "Code2", webAddress: URL(string: "https://www.google.com")!, phone: "Phone2", email: "Email2", disabledDescription: "Disabled2"),
+            FringeVenue(code: "Code3", description: nil, name: "Name3", address: nil, position: FringeVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode3", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
+            FringeVenue(code: "Code4", description: nil, name: "Name4", address: nil, position: FringeVenue.Position(lat: 55.97855, lon: -3.192044), postCode: "PostCode4", webAddress: nil, phone: nil, email: nil, disabledDescription: nil)
         ]),
         "updated": TestData(keyPath: \.updated, array: [
             DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 9, day: 11, hour: 13, minute: 39, second: 35).date!,

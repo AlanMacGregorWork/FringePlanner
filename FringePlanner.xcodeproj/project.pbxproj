@@ -44,7 +44,7 @@
 		086D08722CE52A64000B6225 /* FBPriceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08712CE52A63000B6225 /* FBPriceType.swift */; };
 		086D08762CE5302C000B6225 /* FBPerformanceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */; };
 		086D08782CE53111000B6225 /* FBDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08772CE5310F000B6225 /* FBDisabled.swift */; };
-		086D087A2CE53296000B6225 /* FBVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08792CE53292000B6225 /* FBVenue.swift */; };
+		086D087A2CE53296000B6225 /* FringeVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08792CE53292000B6225 /* FringeVenue.swift */; };
 		086D087C2CE56A56000B6225 /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D087B2CE56A54000B6225 /* FBImage.swift */; };
 		08754C2A2D18AB920022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */; };
 		087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */; };
@@ -148,7 +148,7 @@
 		086D08712CE52A63000B6225 /* FBPriceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPriceType.swift; sourceTree = "<group>"; };
 		086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformanceSpace.swift; sourceTree = "<group>"; };
 		086D08772CE5310F000B6225 /* FBDisabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDisabled.swift; sourceTree = "<group>"; };
-		086D08792CE53292000B6225 /* FBVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBVenue.swift; sourceTree = "<group>"; };
+		086D08792CE53292000B6225 /* FringeVenue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeVenue.swift; sourceTree = "<group>"; };
 		086D087B2CE56A54000B6225 /* FBImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBImage.swift; sourceTree = "<group>"; };
 		08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+AccessibilityStructure.swift"; sourceTree = "<group>"; };
 		087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataIsEmpty.swift; sourceTree = "<group>"; };
@@ -421,7 +421,7 @@
 				08BA67492CE7F291000DDF37 /* FBEvent.swift */,
 				0843C2312CE7DD360076FF11 /* FBPerformance.swift */,
 				086D087B2CE56A54000B6225 /* FBImage.swift */,
-				086D08792CE53292000B6225 /* FBVenue.swift */,
+				086D08792CE53292000B6225 /* FringeVenue.swift */,
 				086D08772CE5310F000B6225 /* FBDisabled.swift */,
 				086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */,
 			);
@@ -742,7 +742,7 @@
 				08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */,
 				08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */,
 				086D08762CE5302C000B6225 /* FBPerformanceSpace.swift in Sources */,
-				086D087A2CE53296000B6225 /* FBVenue.swift in Sources */,
+				086D087A2CE53296000B6225 /* FringeVenue.swift in Sources */,
 				08BA674C2CE7F2F6000DDF37 /* Codable.swift in Sources */,
 				08EFD8022D0F3D620090A051 /* TextSectionView.swift in Sources */,
 				08CB2C142CD7C05A00B799FA /* General.swift in Sources */,

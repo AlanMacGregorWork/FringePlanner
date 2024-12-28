@@ -33,7 +33,7 @@ struct SeededContent {
         let webAddresses = ["https://www.assemblyfestival.com", "https://www.pleasance.co.uk", "https://www.summerhall.co.uk", "https://www.thestand.co.uk", "https://www.traverse.co.uk", "https://www.underbellyedinburgh.co.uk", "https://www.gildedballoon.co.uk", "https://www.thequeenshall.net", "https://www.capitaltheatres.com"]
         let emails = ["info@assemblyfestival.com", "info@pleasance.co.uk", "info@summerhall.co.uk", "info@thestand.co.uk", "info@traverse.co.uk", "info@underbelly.co.uk", "info@gildedballoon.co.uk", "info@thequeenshall.net", "info@capitaltheatres.com"]
         let disabledDescriptions = ["Wheelchair accessible, hearing loop available", "Level access, accessible toilets, lift to all floors", "Accessible entrance via ramp, adapted facilities", "Ground floor access, accessible toilets", "Full accessibility, BSL interpreted shows available", "Limited accessibility, please contact venue", "Lift access to all areas, accessible facilities", "Step-free access, accessible seating areas", "Full accessibility including wheelchair spaces"]
-        let positions = [FBVenue.Position(lat: 55.9533, lon: -3.1883), FBVenue.Position(lat: 55.9478, lon: -3.1836), FBVenue.Position(lat: 55.9419, lon: -3.1789), FBVenue.Position(lat: 55.9557, lon: -3.1897), FBVenue.Position(lat: 55.9468, lon: -3.2021), FBVenue.Position(lat: 55.9486, lon: -3.1891), FBVenue.Position(lat: 55.9465, lon: -3.1892), FBVenue.Position(lat: 55.9412, lon: -3.1824), FBVenue.Position(lat: 55.9467, lon: -3.1859)]
+        let positions = [FringeVenue.Position(lat: 55.9533, lon: -3.1883), FringeVenue.Position(lat: 55.9478, lon: -3.1836), FringeVenue.Position(lat: 55.9419, lon: -3.1789), FringeVenue.Position(lat: 55.9557, lon: -3.1897), FringeVenue.Position(lat: 55.9468, lon: -3.2021), FringeVenue.Position(lat: 55.9486, lon: -3.1891), FringeVenue.Position(lat: 55.9465, lon: -3.1892), FringeVenue.Position(lat: 55.9412, lon: -3.1824), FringeVenue.Position(lat: 55.9467, lon: -3.1859)]
         let dates = (2...17).map({ DateComponents(calendar: .current, year: 2024, month: 8, day: $0, hour: 19, minute: 30).date! })
         let titles = ["The Stand-Up Sensation", "Shakespeare in Space", "Musical Mayhem", "Dance Through Time", "Comedy Chaos", "Magical Mysteries", "Poetry in Motion", "Circus Spectacular", "Late Night Laughs", "Drama in the Dark"]
         let artists = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
@@ -76,8 +76,8 @@ struct SeededContent {
         return array[index]
     }
     
-    func venue(for input: Int) -> FBVenue {
-        FBVenue(
+    func venue(for input: Int) -> FringeVenue {
+        FringeVenue(
            code: "venue\(input)",
            description: seedValue(for: input, at: \.venueDescriptions),
            name: seedValue(for: input, at: \.names),

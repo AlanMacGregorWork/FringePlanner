@@ -1,5 +1,5 @@
 //
-//  FBVenue.swift
+//  FringeVenue.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 13/11/2024.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains details of the venue for the performance
-struct FBVenue: Equatable, Hashable {
+struct FringeVenue: Equatable, Hashable {
     let code: String
     let description: String?
     let name: String
@@ -21,7 +21,7 @@ struct FBVenue: Equatable, Hashable {
     let disabledDescription: String?
 }
 
-extension FBVenue: Decodable {
+extension FringeVenue: Decodable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.address = try container.decodeIfPresent(String.self, forKey: "address")?.trimmed.nilOnEmpty
@@ -37,7 +37,7 @@ extension FBVenue: Decodable {
     }
 }
 
-extension FBVenue {
+extension FringeVenue {
     /// The location of the venue
     struct Position: Codable, Equatable, Hashable {
         let lat: Double
