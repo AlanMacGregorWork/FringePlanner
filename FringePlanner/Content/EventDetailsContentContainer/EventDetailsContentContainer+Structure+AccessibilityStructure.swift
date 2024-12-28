@@ -55,7 +55,7 @@ extension EventDetailsContentContainer.Structure {
 }
 
 extension EventDetailsContentContainer.Structure.AccessibilityStructure {
-    init(disabled: FBDisabled?) {
+    init(disabled: FringeDisabled?) {
         self.audio = disabled?.audio
         self.otherServices = disabled?.otherServices
         self.captioningDates = disabled?.captioningDates

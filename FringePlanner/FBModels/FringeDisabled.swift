@@ -1,18 +1,18 @@
 //
-//  FBDisabled.swift
+//  FringeDisabled.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 13/11/2024.
 //
 
-struct FBDisabled: Equatable, Hashable {
+struct FringeDisabled: Equatable, Hashable {
     let otherServices: Bool?
     let audio: Bool?
     let captioningDates: [String]?
     let signedDates: [String]?
 }
 
-extension FBDisabled: Decodable {
+extension FringeDisabled: Decodable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.otherServices = try container.decodeIfPresent(Bool.self, forKey: "otherServices")

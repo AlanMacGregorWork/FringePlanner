@@ -62,7 +62,7 @@ struct FBEventTests {
             (value as? TestData<URL>).map(testValues(for:)),
             (value as? TestData<Date>).map(testValues(for:)),
             (value as? TestData<Int>).map(testValues(for:)),
-            (value as? TestData<FBDisabled?>).map(testValues(for:)),
+            (value as? TestData<FringeDisabled?>).map(testValues(for:)),
             (value as? TestData<FBPerformanceSpace>).map(testValues(for:)),
             (value as? TestData<FringeVenue>).map(testValues(for:)),
             (value as? TestData<[String: FringeImage]>).map(testValues(for:)),
@@ -137,9 +137,9 @@ private struct TestDataContent {
         "description_teaser": TestData(keyPath: \.descriptionTeaser, array: [nil, "Some Text", nil, "Code for […]"]),
         "year": TestData(keyPath: \.year, array: [2024, 2024, 2024, 2024]),
         "disabled": TestData(keyPath: \.disabled, array: [
-            FBDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil),
-            FBDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"]),
-            FBDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil),
+            FringeDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil),
+            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"]),
+            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil),
             nil]),
         "performance_space": TestData(keyPath: \.performanceSpace, array: [FBPerformanceSpace(name: "Test\nYes"), FBPerformanceSpace(name: "Place"), FBPerformanceSpace(name: "Nothing"), FBPerformanceSpace(name: "Item")]),
         "venue": TestData(keyPath: \.venue, array: [

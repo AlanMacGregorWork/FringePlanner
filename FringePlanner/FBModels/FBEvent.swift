@@ -28,7 +28,7 @@ struct FBEvent: Equatable, Hashable {
     let url: URL
     let venue: FringeVenue
     let website: URL
-    let disabled: FBDisabled?
+    let disabled: FringeDisabled?
     let images: [String: FringeImage]
     let warnings: String?
     let updated: Date
@@ -62,7 +62,7 @@ extension FBEvent: Decodable {
         self.performances = try container.decode([FBPerformance].self, forKey: "performances")
         self.performanceSpace = try container.decode(FBPerformanceSpace.self, forKey: "performanceSpace")
         self.venue = try container.decode(FringeVenue.self, forKey: "venue")
-        self.disabled = try container.decodeIfPresent(FBDisabled.self, forKey: "disabled")
+        self.disabled = try container.decodeIfPresent(FringeDisabled.self, forKey: "disabled")
         self.images = try container.decode([String: FringeImage].self, forKey: "images")
         
         // Additional key validation: 
