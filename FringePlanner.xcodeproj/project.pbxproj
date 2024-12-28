@@ -40,7 +40,7 @@
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
 		086D086C2CE5276C000B6225 /* FringeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086B2CE5276B000B6225 /* FringeStatus.swift */; };
 		086D086E2CE52844000B6225 /* AnyCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086D2CE52842000B6225 /* AnyCodingKey.swift */; };
-		086D08702CE52A28000B6225 /* FBPerformanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086F2CE52A26000B6225 /* FBPerformanceType.swift */; };
+		086D08702CE52A28000B6225 /* FringePerformanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086F2CE52A26000B6225 /* FringePerformanceType.swift */; };
 		086D08722CE52A64000B6225 /* FBPriceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08712CE52A63000B6225 /* FBPriceType.swift */; };
 		086D08762CE5302C000B6225 /* FBPerformanceSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */; };
 		086D08782CE53111000B6225 /* FBDisabled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D08772CE5310F000B6225 /* FBDisabled.swift */; };
@@ -144,7 +144,7 @@
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
 		086D086B2CE5276B000B6225 /* FringeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeStatus.swift; sourceTree = "<group>"; };
 		086D086D2CE52842000B6225 /* AnyCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodingKey.swift; sourceTree = "<group>"; };
-		086D086F2CE52A26000B6225 /* FBPerformanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformanceType.swift; sourceTree = "<group>"; };
+		086D086F2CE52A26000B6225 /* FringePerformanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePerformanceType.swift; sourceTree = "<group>"; };
 		086D08712CE52A63000B6225 /* FBPriceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPriceType.swift; sourceTree = "<group>"; };
 		086D08752CE5302B000B6225 /* FBPerformanceSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBPerformanceSpace.swift; sourceTree = "<group>"; };
 		086D08772CE5310F000B6225 /* FBDisabled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBDisabled.swift; sourceTree = "<group>"; };
@@ -450,7 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				086D086B2CE5276B000B6225 /* FringeStatus.swift */,
-				086D086F2CE52A26000B6225 /* FBPerformanceType.swift */,
+				086D086F2CE52A26000B6225 /* FringePerformanceType.swift */,
 				086D08712CE52A63000B6225 /* FBPriceType.swift */,
 			);
 			path = Enum;
@@ -756,7 +756,7 @@
 				0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */,
 				08F10DBA2CB92B97008ACBFF /* GroupData.swift in Sources */,
 				08B1BF802CFCEE7400925B8D /* EmptyData.swift in Sources */,
-				086D08702CE52A28000B6225 /* FBPerformanceType.swift in Sources */,
+				086D08702CE52A28000B6225 /* FringePerformanceType.swift in Sources */,
 				086D087C2CE56A56000B6225 /* FringeImage.swift in Sources */,
 				08754C2A2D18AB920022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift in Sources */,
 				08BA67522CE94733000DDF37 /* FBEventURLBuilder.swift in Sources */,

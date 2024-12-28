@@ -1,12 +1,12 @@
 //
-//  FBPerformanceType.swift
+//  FringePerformanceType.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 13/11/2024.
 //
 
 /// Defines how the performance can experienced
-enum FBPerformanceType: Decodable, Equatable, Hashable {
+enum FringePerformanceType: Decodable, Equatable, Hashable {
     case inPerson
     case onlineLive
     case onlineOnDemand
