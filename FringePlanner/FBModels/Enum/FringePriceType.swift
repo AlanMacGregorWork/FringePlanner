@@ -1,12 +1,12 @@
 //
-//  FBPriceType.swift
+//  FringePriceType.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 13/11/2024.
 //
 
 /// Dictates the cost of the performance
-enum FBPriceType: Decodable, Equatable, Hashable {
+enum FringePriceType: Decodable, Equatable, Hashable {
     case paid
     case free
     case payWhatYouCan
