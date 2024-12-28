@@ -1,16 +1,16 @@
 //
-//  FBPerformanceSpace.swift
+//  FringePerformanceSpace.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 13/11/2024.
 //
 
 /// Defines a general location for the performance
-struct FBPerformanceSpace: Equatable, Hashable {
+struct FringePerformanceSpace: Equatable, Hashable {
     let name: String
 }
 
-extension FBPerformanceSpace: Decodable {
+extension FringePerformanceSpace: Decodable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.name = try container.decode(String.self, forKey: "name").trimmed

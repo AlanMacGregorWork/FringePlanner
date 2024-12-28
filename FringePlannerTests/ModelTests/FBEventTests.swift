@@ -63,7 +63,7 @@ struct FBEventTests {
             (value as? TestData<Date>).map(testValues(for:)),
             (value as? TestData<Int>).map(testValues(for:)),
             (value as? TestData<FringeDisabled?>).map(testValues(for:)),
-            (value as? TestData<FBPerformanceSpace>).map(testValues(for:)),
+            (value as? TestData<FringePerformanceSpace>).map(testValues(for:)),
             (value as? TestData<FringeVenue>).map(testValues(for:)),
             (value as? TestData<[String: FringeImage]>).map(testValues(for:)),
             (value as? TestData<[FBPerformance]>).map(testValues(for:))
@@ -141,7 +141,7 @@ private struct TestDataContent {
             FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"]),
             FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil),
             nil]),
-        "performance_space": TestData(keyPath: \.performanceSpace, array: [FBPerformanceSpace(name: "Test\nYes"), FBPerformanceSpace(name: "Place"), FBPerformanceSpace(name: "Nothing"), FBPerformanceSpace(name: "Item")]),
+        "performance_space": TestData(keyPath: \.performanceSpace, array: [FringePerformanceSpace(name: "Test\nYes"), FringePerformanceSpace(name: "Place"), FringePerformanceSpace(name: "Nothing"), FringePerformanceSpace(name: "Item")]),
         "venue": TestData(keyPath: \.venue, array: [
             FringeVenue(code: "Code1", description: nil, name: "Name1", address: nil, position: FringeVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode1", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
             FringeVenue(code: "Code2", description: "Desc2", name: "Name2", address: "Address2", position: FringeVenue.Position(lat: 123, lon: 4567), postCode: "Code2", webAddress: URL(string: "https://www.google.com")!, phone: "Phone2", email: "Email2", disabledDescription: "Disabled2"),

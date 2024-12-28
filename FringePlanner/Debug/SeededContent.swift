@@ -138,7 +138,7 @@ struct SeededContent {
             genre: seedValue(for: newCode, at: \.genres),
             genreTags: seedValue(for: newCode, at: \.genreTags),
             performances: (1..<10).map({ performance(for: newCode * $0) }),
-            performanceSpace: FBPerformanceSpace(name: "Main Hall"),
+            performanceSpace: FringePerformanceSpace(name: "Main Hall"),
             status: .active,
             url: URL(string: seedValue(for: newCode, at: \.ticketUrls))!,
             venue: venue(for: newCode),
