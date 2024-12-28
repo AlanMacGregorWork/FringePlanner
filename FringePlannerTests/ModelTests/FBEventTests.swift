@@ -65,7 +65,7 @@ struct FBEventTests {
             (value as? TestData<FBDisabled?>).map(testValues(for:)),
             (value as? TestData<FBPerformanceSpace>).map(testValues(for:)),
             (value as? TestData<FringeVenue>).map(testValues(for:)),
-            (value as? TestData<[String: FBImage]>).map(testValues(for:)),
+            (value as? TestData<[String: FringeImage]>).map(testValues(for:)),
             (value as? TestData<[FBPerformance]>).map(testValues(for:))
         ]
         guard castedTests.contains(where: { $0 != nil }) else {
@@ -155,24 +155,24 @@ private struct TestDataContent {
             DateComponents(calendar: Calendar.current, timeZone: fringeDateFormatter.timeZone, year: 2024, month: 6, day: 12, hour: 12, minute: 40, second: 30).date!]),
         "images": TestData(keyPath: \.images, array: [
             [
-                "31439a5845be59caf9d6caf502b2c123": FBImage(hash: "31439a5845be59caf9d6caf502b2c123", orientation: .landscape, type: .thumb, versions: [
-                    "original": FBImage.Version(type: "original", width: 830, height: 550, mime: "image/png", url: URL(string: "https://www.google.com/img1.png")!),
-                    "small-320": FBImage.Version(type: "small-320", width: 320, height: 212, mime: "image/jpeg", url: URL(string: "https://www.google.com/img2.jpg")!)
+                "31439a5845be59caf9d6caf502b2c123": FringeImage(hash: "31439a5845be59caf9d6caf502b2c123", orientation: .landscape, type: .thumb, versions: [
+                    "original": FringeImage.Version(type: "original", width: 830, height: 550, mime: "image/png", url: URL(string: "https://www.google.com/img1.png")!),
+                    "small-320": FringeImage.Version(type: "small-320", width: 320, height: 212, mime: "image/jpeg", url: URL(string: "https://www.google.com/img2.jpg")!)
                 ])
             ],
             [
-                "1ddba093dc9ccea67755679060d8724d": FBImage(hash: "1ddba093dc9ccea67755679060d8724d", orientation: .landscape, type: .thumb, versions: [
-                    "original": FBImage.Version(type: "original", width: 600, height: 400, mime: "image/jpeg", url: URL(string: "https://www.google.com/image")!)
+                "1ddba093dc9ccea67755679060d8724d": FringeImage(hash: "1ddba093dc9ccea67755679060d8724d", orientation: .landscape, type: .thumb, versions: [
+                    "original": FringeImage.Version(type: "original", width: 600, height: 400, mime: "image/jpeg", url: URL(string: "https://www.google.com/image")!)
                 ])
             ],
             [
-                "eec4ccb7002db1d74bf737087dfa1c4a": FBImage(hash: "eec4ccb7002db1d74bf737087dfa1c4a", orientation: .landscape, type: .thumb, versions: [
-                    "original": FBImage.Version(type: "original", width: 830, height: 550, mime: "image/png", url: URL(string: "https://www.google.com/someotherimage.png")!)
+                "eec4ccb7002db1d74bf737087dfa1c4a": FringeImage(hash: "eec4ccb7002db1d74bf737087dfa1c4a", orientation: .landscape, type: .thumb, versions: [
+                    "original": FringeImage.Version(type: "original", width: 830, height: 550, mime: "image/png", url: URL(string: "https://www.google.com/someotherimage.png")!)
                 ])
             ],
             [
-                "a3cc7b5ea9e6788a8a66b9c000e01eec": FBImage(hash: "a3cc7b5ea9e6788a8a66b9c000e01eec", orientation: .landscape, type: .thumb, versions: [
-                    "original": FBImage.Version(type: "original", width: 2000, height: 1200, mime: "image/jpeg", url: URL(string: "https://www.site.com/imag.jpg")!)
+                "a3cc7b5ea9e6788a8a66b9c000e01eec": FringeImage(hash: "a3cc7b5ea9e6788a8a66b9c000e01eec", orientation: .landscape, type: .thumb, versions: [
+                    "original": FringeImage.Version(type: "original", width: 2000, height: 1200, mime: "image/jpeg", url: URL(string: "https://www.site.com/imag.jpg")!)
                 ])
             ]
         ]),

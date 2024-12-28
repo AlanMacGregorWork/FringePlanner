@@ -1,5 +1,5 @@
 //
-//  FBImage.swift
+//  FringeImage.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 13/11/2024.
@@ -8,14 +8,14 @@
 import Foundation
 
 /// Contains a group of images
-struct FBImage: Equatable, Hashable {
+struct FringeImage: Equatable, Hashable {
     let hash: String
     let orientation: Orientation
     let type: ImageType
     let versions: [String: Version]
 }
 
-extension FBImage: Decodable {
+extension FringeImage: Decodable {
     enum Orientation: String, Decodable {
         case landscape
         case portrait

@@ -91,8 +91,8 @@ struct SeededContent {
        )
     }
     
-    func images() -> [String: FBImage] {
-        let version = FBImage.Version(
+    func images() -> [String: FringeImage] {
+        let version = FringeImage.Version(
             type: "original",
             width: 800,
             height: 600,
@@ -100,7 +100,7 @@ struct SeededContent {
             url: URL(string: "https://example.com/image.jpg")!
         )
         
-        return ["someHash": FBImage(hash: "someHash", orientation: .landscape, type: .thumb, versions: ["original": version])]
+        return ["someHash": FringeImage(hash: "someHash", orientation: .landscape, type: .thumb, versions: ["original": version])]
     }
     
     func performance(for input: Int) -> FBPerformance {
