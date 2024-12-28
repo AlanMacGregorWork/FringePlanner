@@ -280,7 +280,6 @@
 				08A94E482CEE8304008B84C6 /* Debug */,
 				08BA67502CE9472A000DDF37 /* API */,
 				08C92D6F2CCEB9E7001732E9 /* Info.plist */,
-				086D086A2CE5274D000B6225 /* FBModels */,
 				08C92D6A2CCEB451001732E9 /* Helper */,
 				08F10DB62CB86298008ACBFF /* Content */,
 				08F10DB12CB85F5C008ACBFF /* ViewDatas */,
@@ -414,7 +413,7 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		086D086A2CE5274D000B6225 /* FBModels */ = {
+		086D086A2CE5274D000B6225 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				08BA674D2CE9090D000DDF37 /* Enum */,
@@ -425,7 +424,7 @@
 				086D08772CE5310F000B6225 /* FringeDisabled.swift */,
 				086D08752CE5302B000B6225 /* FringePerformanceSpace.swift */,
 			);
-			path = FBModels;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		08754C282D18AB740022654F /* EventDetailsContentContainer */ = {
@@ -459,6 +458,7 @@
 		08BA67502CE9472A000DDF37 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				086D086A2CE5274D000B6225 /* Models */,
 				08BA67532CE9475F000DDF37 /* FringeEventDownloader.swift */,
 				08BA67512CE94730000DDF37 /* FringeEventURLBuilder.swift */,
 			);
