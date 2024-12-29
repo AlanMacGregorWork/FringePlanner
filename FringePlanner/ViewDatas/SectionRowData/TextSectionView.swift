@@ -27,10 +27,14 @@ struct TextSectionView: View {
 }
 
 extension TextSectionView {
-    /// Note: If the title is included, the `text` will not include custom formatting
     init(title: String?, text: String) {
         self.title = title
-        self.text = AttributedString(fromHTML: text) ?? .init(stringLiteral: text)
+        self.text = .init(stringLiteral: text)
+    }
+    /// Note: If the title is included, the `text` will not include custom formatting
+    init(title: String?, html: String) {
+        self.title = title
+        self.text = AttributedString(fromHTML: html) ?? .init(stringLiteral: html)
     }
 }
 

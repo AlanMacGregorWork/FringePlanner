@@ -31,11 +31,6 @@ struct SectionRowData: ViewDataProtocol, Equatable {
         case url(title: String, value: String, url: String)
         case text(title: String?, text: AttributedString)
         case button(title: String, closure: MakeEquatableReadOnly<(() -> Void)>)
-        
-        static func text(title: String?, text: String) -> Self {
-            let attributedStringText = AttributedString(fromHTML: text) ?? .init(text)
-            return .text(title: title, text: attributedStringText)
-        }
     }
 }
 
@@ -46,9 +41,13 @@ extension SectionRowData {
         self.value = .text(title: title, text: text)
     }
     
+    init(title: String? = nil, html: String) {
+        let attributedStringText = AttributedString(fromHTML: html) ?? .init(html)
+        self = .init(title: title, text: attributedStringText)
+    }
+    
     init(title: String? = nil, text: String) {
-        let attributedStringText = AttributedString(fromHTML: text) ?? .init(text)
-        self.value = .text(title: title, text: attributedStringText)
+        self.value = .text(title: title, text: AttributedString(text))
     }
     
     init(title: String, value: URL) {
