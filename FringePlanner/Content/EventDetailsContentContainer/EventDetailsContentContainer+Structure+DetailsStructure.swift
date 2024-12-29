@@ -81,11 +81,29 @@ extension EventDetailsContentContainer.Structure {
 
 extension EventDetailsContentContainer.Structure.DetailsStructure {
     init(event: FringeEvent) {
-        self.title = AttributedString(event.title)
-        self.artist = event.artist.map(AttributedString.init)
-        self.country = event.country.map(AttributedString.init)
-        self.ageCategory = event.ageCategory.map(AttributedString.init)
-        self.genre = AttributedString(event.genre)
-        self.genreTags = event.genreTags.map(AttributedString.init)
+        self.init(
+            title: event.title,
+            artist: event.artist,
+            country: event.country,
+            ageCategory: event.ageCategory,
+            genre: event.genre,
+            genreTags: event.genreTags
+        )
+    }
+        
+    init(
+        title: String,
+        artist: String?,
+        country: String?,
+        ageCategory: String?,
+        genre: String,
+        genreTags: String?
+    ) {
+        self.title = AttributedString(fromHTML: title) ?? AttributedString(title)
+        self.artist = artist.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
+        self.country = country.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
+        self.ageCategory = ageCategory.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
+        self.genre = AttributedString(fromHTML: genre) ?? AttributedString(genre)
+        self.genreTags = genreTags.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
     }
 }

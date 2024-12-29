@@ -12,6 +12,26 @@ import SwiftUI
 @Suite("AttributedString Tests")
 struct AttributedStringTests {
     
+    @Suite("Sanity Checks")
+    struct SanityChecks {
+        @Test("Attributes should equate if they are built the same way")
+        func verifyFormatEquates() {
+            let html = "<b>Text</b>"
+            let withHTMLFormatting1 = AttributedString(fromHTML: html)
+            let withHTMLFormatting2 = AttributedString(fromHTML: html)
+            let withoutHTMLFormatting1 = AttributedString(html)
+            let withoutHTMLFormatting2 = AttributedString(html)
+            
+            // Attributes built the same way are equatable
+            #expect(withHTMLFormatting1 == withHTMLFormatting2)
+            #expect(withoutHTMLFormatting1 == withoutHTMLFormatting2)
+            
+            // Attributes not built the same way are not equatable
+            #expect(withHTMLFormatting1 != withoutHTMLFormatting1)
+            #expect(withHTMLFormatting2 != withoutHTMLFormatting2)
+        }
+    }
+    
     @Suite("hasTrimmedPrefix")
     struct HasTrimmedPrefixTests {
         let testString = AttributedString("Some Value")

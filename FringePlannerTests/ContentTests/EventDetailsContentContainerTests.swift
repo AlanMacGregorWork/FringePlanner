@@ -32,6 +32,46 @@ struct EventDetailsContentContainerTests {
 
 extension EventDetailsContentContainerTests.DetailsStructureTests {
     
+    @Suite("Init Tests")
+    struct InitTests {                
+        @Test("Init converts string to AttributedStrings correctly")
+        func testInitConvertsStrings() {
+            let details = EventDetailsContentContainer.Structure.DetailsStructure(
+                title: "Test <b>Title</b>",
+                artist: "Test <i>Artist</i>",
+                country: "Test <u>Country</u>",
+                ageCategory: "Age <b>12+</b>",
+                genre: "Test <b>Genre</b>",
+                genreTags: "Tag1, <i>Tag2</i>"
+            )
+            
+            // Verify raw HTML strings are not being used as the final strings
+            #expect(details.title != AttributedString("Test <b>Title</b>"))
+            #expect(details.artist != AttributedString("Test <i>Artist</i>"))
+            #expect(details.country != AttributedString("Test <u>Country</u>"))
+            #expect(details.ageCategory != AttributedString("Age <b>12+</b>"))
+            #expect(details.genre != AttributedString("Test <b>Genre</b>"))
+            #expect(details.genreTags != AttributedString("Tag1, <i>Tag2</i>"))
+
+            // Verify formatting has been applied (ie not just raw strings)
+            #expect(details.title != AttributedString("Test Title"))
+            #expect(details.artist != AttributedString("Test Artist"))
+            #expect(details.country != AttributedString("Test Country"))
+            #expect(details.ageCategory != AttributedString("Age 12+"))
+            #expect(details.genre != AttributedString("Test Genre"))
+            #expect(details.genreTags != AttributedString("Tag1, Tag2"))
+            
+            // Verify generated AttributedStrings are formatted correctly
+            #expect(NSAttributedString(details.title).string == NSAttributedString(AttributedString("Test Title ")).string)
+            #expect(details.artist.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Artist ")).string)
+            #expect(details.country.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Country ")).string)
+            #expect(details.ageCategory.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Age 12+ ")).string)
+            #expect(NSAttributedString(details.genre).string == NSAttributedString(AttributedString("Test Genre ")).string)
+            #expect(details.genreTags.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Tag1, Tag2 ")).string)
+        }
+    
+    }
+
     @Suite("General Structure Tests")
     struct GeneralStructureTests {
         @MainActor
@@ -427,6 +467,33 @@ extension EventDetailsContentContainerTests.AccessibilityStructureTests {
 // MARK: - DescriptionStructureTests
 
 extension EventDetailsContentContainerTests.DescriptionStructureTests {
+    
+    @Suite("Init Tests")
+    struct InitTests {
+        @Test("Init converts string to AttributedStrings correctly")
+        func testInitConvertsStrings() {
+            let description = Structure(
+                descriptionTeaser: "Test <b>Teaser</b>",
+                description: "Test <i>Description</i>",
+                warnings: "Test <u>Warning</u>"
+            )
+            
+            // Verify raw HTML strings are not being used as the final strings
+            #expect(description.descriptionTeaser != AttributedString("Test <b>Teaser</b>"))
+            #expect(description.description != AttributedString("Test <i>Description</i>"))
+            #expect(description.warnings != AttributedString("Test <u>Warning</u>"))
+            
+            // Verify formatting has been applied (ie not just raw strings)
+            #expect(description.descriptionTeaser != AttributedString("Test Teaser"))
+            #expect(description.description != AttributedString("Test Description"))
+            #expect(description.warnings != AttributedString("Test Warning"))
+            
+            // Verify generated AttributedStrings are formatted correctly
+            #expect(description.descriptionTeaser.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Teaser ")).string)
+            #expect(NSAttributedString(description.description).string == NSAttributedString(AttributedString("Test Description ")).string)
+            #expect(description.warnings.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Warning ")).string)
+        }
+    }
     
     @Suite("General Structure Tests")
     struct GeneralStructureTests {

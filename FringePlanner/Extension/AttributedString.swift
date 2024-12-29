@@ -30,7 +30,7 @@ extension AttributedString {
     /// - Parameters:
     ///   - html: The HTML string to convert (may also be a standard string)
     /// - Returns: An attributed string created from the HTML.
-    init?(from html: String) {
+    init?(fromHTML html: String) {
         let styledHTML = Self.createHTML(fromString: html)
         let data = Data(styledHTML.utf8)
         do {

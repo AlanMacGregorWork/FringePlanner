@@ -30,7 +30,7 @@ extension TextSectionView {
     /// Note: If the title is included, the `text` will not include custom formatting
     init(title: String?, text: String) {
         self.title = title
-        self.text = AttributedString(from: text) ?? .init(stringLiteral: text)
+        self.text = AttributedString(fromHTML: text) ?? .init(stringLiteral: text)
     }
 }
 

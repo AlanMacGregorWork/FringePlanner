@@ -33,7 +33,7 @@ struct SectionRowData: ViewDataProtocol, Equatable {
         case button(title: String, closure: MakeEquatableReadOnly<(() -> Void)>)
         
         static func text(title: String?, text: String) -> Self {
-            let attributedStringText = AttributedString(from: text) ?? .init(stringLiteral: text)
+            let attributedStringText = AttributedString(fromHTML: text) ?? .init(text)
             return .text(title: title, text: attributedStringText)
         }
     }
@@ -47,7 +47,7 @@ extension SectionRowData {
     }
     
     init(title: String? = nil, text: String) {
-        let attributedStringText = AttributedString(from: text) ?? .init(stringLiteral: text)
+        let attributedStringText = AttributedString(fromHTML: text) ?? .init(text)
         self.value = .text(title: title, text: attributedStringText)
     }
     

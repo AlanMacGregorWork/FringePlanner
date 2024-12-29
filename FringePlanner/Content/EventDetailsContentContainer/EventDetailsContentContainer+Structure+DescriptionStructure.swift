@@ -46,8 +46,12 @@ extension EventDetailsContentContainer.Structure {
 
 extension EventDetailsContentContainer.Structure.DescriptionStructure {
     init(event: FringeEvent) {
-        self.descriptionTeaser = event.descriptionTeaser.map(AttributedString.init)
-        self.description = AttributedString(event.description)
-        self.warnings = event.warnings.map(AttributedString.init)
+        self.init(descriptionTeaser: event.descriptionTeaser, description: event.description, warnings: event.warnings)
+    }
+    
+    init(descriptionTeaser: String?, description: String, warnings: String? ) {
+        self.descriptionTeaser = descriptionTeaser.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
+        self.description = AttributedString(fromHTML: description) ?? AttributedString(description)
+        self.warnings = warnings.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
     }
 }
