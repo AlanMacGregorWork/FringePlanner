@@ -45,10 +45,12 @@ extension EventDetailsContentContainer.Structure {
 }
 
 extension EventDetailsContentContainer.Structure.DescriptionStructure {
+    @MainActor
     init(event: FringeEvent) {
         self.init(descriptionTeaser: event.descriptionTeaser, description: event.description, warnings: event.warnings)
     }
     
+    @MainActor
     init(descriptionTeaser: String?, description: String, warnings: String? ) {
         self.descriptionTeaser = descriptionTeaser.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
         self.description = AttributedString(fromHTML: description) ?? AttributedString(description)

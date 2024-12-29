@@ -80,6 +80,7 @@ extension EventDetailsContentContainer.Structure {
 }
 
 extension EventDetailsContentContainer.Structure.DetailsStructure {
+    @MainActor
     init(event: FringeEvent) {
         self.init(
             title: event.title,
@@ -91,6 +92,7 @@ extension EventDetailsContentContainer.Structure.DetailsStructure {
         )
     }
         
+    @MainActor
     init(
         title: String,
         artist: String?,

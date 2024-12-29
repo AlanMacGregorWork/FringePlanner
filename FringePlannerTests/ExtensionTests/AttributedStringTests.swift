@@ -14,6 +14,7 @@ struct AttributedStringTests {
     
     @Suite("Sanity Checks")
     struct SanityChecks {
+        @MainActor
         @Test("Attributes should equate if they are built the same way")
         func verifyFormatEquates() {
             let html = "<b>Text</b>"
@@ -29,6 +30,22 @@ struct AttributedStringTests {
             // Attributes not built the same way are not equatable
             #expect(withHTMLFormatting1 != withoutHTMLFormatting1)
             #expect(withHTMLFormatting2 != withoutHTMLFormatting2)
+        }
+    }
+    
+    @Suite("init(from:<html>)")
+    struct InitFromHtmlTests {
+        @MainActor
+        @Test("Converts HTML into a rendered format")
+        func testConvertsHTML() throws {
+            let html = "<b>Some</b>Other<br>Text Here<br>"
+            let attributedString = try #require(AttributedString(fromHTML: html), "Attributed string should be generated from HTML")
+            #expect(NSAttributedString(attributedString).string ==
+            """
+            SomeOther
+            Text Here
+            
+            """)
         }
     }
     

@@ -41,6 +41,7 @@ extension SectionRowData {
         self.value = .text(title: title, text: text)
     }
     
+    @MainActor
     init(title: String? = nil, html: String) {
         let attributedStringText = AttributedString(fromHTML: html) ?? .init(html)
         self = .init(title: title, text: attributedStringText)

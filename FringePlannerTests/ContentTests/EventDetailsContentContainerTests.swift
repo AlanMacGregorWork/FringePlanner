@@ -33,7 +33,8 @@ struct EventDetailsContentContainerTests {
 extension EventDetailsContentContainerTests.DetailsStructureTests {
     
     @Suite("Init Tests")
-    struct InitTests {                
+    struct InitTests {
+        @MainActor
         @Test("Init converts string to AttributedStrings correctly")
         func testInitConvertsStrings() {
             let details = EventDetailsContentContainer.Structure.DetailsStructure(
@@ -470,6 +471,7 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
     
     @Suite("Init Tests")
     struct InitTests {
+        @MainActor
         @Test("Init converts string to AttributedStrings correctly")
         func testInitConvertsStrings() {
             let description = Structure(

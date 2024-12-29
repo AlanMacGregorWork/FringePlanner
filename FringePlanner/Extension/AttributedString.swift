@@ -27,9 +27,12 @@ extension AttributedString {
 
 extension AttributedString {
     /// Create an attributed string from HTML.
+    /// - Note: This must be called from the MainActor otherwise it will attempt to access the main thread and fail
+    /// causing the generation to hang
     /// - Parameters:
     ///   - html: The HTML string to convert (may also be a standard string)
     /// - Returns: An attributed string created from the HTML.
+    @MainActor
     init?(fromHTML html: String) {
         let styledHTML = Self.createHTML(fromString: html)
         let data = Data(styledHTML.utf8)
