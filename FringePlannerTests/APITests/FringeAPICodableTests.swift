@@ -18,6 +18,14 @@ struct FringeAPICodableTests {
         try testEncodeDecodeEquates(value: FringePerformanceType.onlineOnDemand)
         try testEncodeDecodeEquates(value: FringePerformanceType.other("some alternative value"))
     }
+    
+    @Test("FringePriceType")
+    func testFringePriceType() throws {
+        try testEncodeDecodeEquates(value: FringePriceType.paid)
+        try testEncodeDecodeEquates(value: FringePriceType.free)
+        try testEncodeDecodeEquates(value: FringePriceType.payWhatYouCan)
+        try testEncodeDecodeEquates(value: FringePriceType.other("custom price type"))
+    }
 }
 
 // MARK: - Helpers
