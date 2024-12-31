@@ -12,15 +12,32 @@ struct FringeDisabled: Equatable, Hashable {
     let signedDates: [String]?
 }
 
-extension FringeDisabled: Decodable {
+// MARK: Codable
+
+private let kOtherServices = "otherServices"
+private let kAudio = "audio"
+private let kCaptioningDates = "captioningDates"
+private let kSignedDates = "signedDates"
+
+extension FringeDisabled: Codable {
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: AnyCodingKey.self)
+        try container.encodeIfPresent(otherServices, forKey: kOtherServices)
+        try container.encodeIfPresent(audio, forKey: kAudio)
+        try container.encodeIfPresent(captioningDates?.joined(separator: ","), forKey: kCaptioningDates)
+        try container.encodeIfPresent(signedDates?.joined(separator: ","), forKey: kSignedDates)
+    }
+
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
-        self.otherServices = try container.decodeIfPresent(Bool.self, forKey: "otherServices")
-        self.audio = try container.decodeIfPresent(Bool.self, forKey: "audio")
-        self.captioningDates = try container.decodeIfPresent(String.self, forKey: "captioningDates")?
+        self.otherServices = try container.decodeIfPresent(Bool.self, forKey: kOtherServices)
+        self.audio = try container.decodeIfPresent(Bool.self, forKey: kAudio)
+        self.captioningDates = try container.decodeIfPresent(String.self, forKey: kCaptioningDates)?
             .components(separatedBy: ",")
-        self.signedDates = try container.decodeIfPresent(String.self, forKey: "signedDates")?
+            .compactMap { $0.nilOnEmpty } // None of the elements should be empty
+        self.signedDates = try container.decodeIfPresent(String.self, forKey: kSignedDates)?
             .components(separatedBy: ",")
+            .compactMap { $0.nilOnEmpty } // None of the elements should be empty
         
         // Additional key validation:
         

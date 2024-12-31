@@ -33,6 +33,13 @@ struct FringeAPICodableTests {
         try testEncodeDecodeEquates(value: FringeStatus.cancelled)
         try testEncodeDecodeEquates(value: FringeStatus.deleted)
     }
+    
+    @Test("FringeDisabled")
+    func testFringeDisabled() throws {
+        try testEncodeDecodeEquates(value: FringeDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil))
+        try testEncodeDecodeEquates(value: FringeDisabled(otherServices: true, audio: false, captioningDates: [], signedDates: []))
+        try testEncodeDecodeEquates(value: FringeDisabled(otherServices: false, audio: true, captioningDates: ["item1", "item2"], signedDates: ["valueA", "valueB"]))
+    }
 }
 
 // MARK: - Helpers

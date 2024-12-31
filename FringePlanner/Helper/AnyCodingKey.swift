@@ -28,6 +28,12 @@ struct AnyCodingKey: CodingKey {
 
 // MARK: Helper
 
+extension KeyedEncodingContainer where K == AnyCodingKey {
+    mutating func encodeIfPresent<T: Encodable>(_ value: T?, forKey key: String) throws {
+        try encodeIfPresent(value, forKey: .init(key: key))
+    }
+}   
+
 extension KeyedDecodingContainer where K == AnyCodingKey {
     /// Allows decoding by just using a String value
     func decodeIfPresent<T: Decodable>(_ type: T.Type, forKey key: String) throws -> T? {
