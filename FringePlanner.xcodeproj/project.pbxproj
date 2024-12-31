@@ -38,6 +38,7 @@
 		086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086240112CCEC02A004DDC3C /* ApiKeyTests.swift */; };
 		08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C1E2CC56D370075C50E /* XCTestCase.swift */; };
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
+		086858542D2419780081AAD5 /* FringeAPICodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086858532D24196B0081AAD5 /* FringeAPICodableTests.swift */; };
 		086D086C2CE5276C000B6225 /* FringeStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086B2CE5276B000B6225 /* FringeStatus.swift */; };
 		086D086E2CE52844000B6225 /* AnyCodingKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086D2CE52842000B6225 /* AnyCodingKey.swift */; };
 		086D08702CE52A28000B6225 /* FringePerformanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086D086F2CE52A26000B6225 /* FringePerformanceType.swift */; };
@@ -142,6 +143,7 @@
 		086240112CCEC02A004DDC3C /* ApiKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTests.swift; sourceTree = "<group>"; };
 		08666C1E2CC56D370075C50E /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
+		086858532D24196B0081AAD5 /* FringeAPICodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeAPICodableTests.swift; sourceTree = "<group>"; };
 		086D086B2CE5276B000B6225 /* FringeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeStatus.swift; sourceTree = "<group>"; };
 		086D086D2CE52842000B6225 /* AnyCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodingKey.swift; sourceTree = "<group>"; };
 		086D086F2CE52A26000B6225 /* FringePerformanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePerformanceType.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 		08BA67552CE953C7000DDF37 /* APITests */ = {
 			isa = PBXGroup;
 			children = (
+				086858532D24196B0081AAD5 /* FringeAPICodableTests.swift */,
 				08DA9BB22CEA6AE00080C0A5 /* FringeEventURLBuilderTests.swift */,
 				08BA67562CE953EF000DDF37 /* FringeEventDownloaderTests.swift */,
 			);
@@ -789,6 +792,7 @@
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
 				08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */,
+				086858542D2419780081AAD5 /* FringeAPICodableTests.swift in Sources */,
 				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,
 				08E6AF312D17229B007F3F59 /* EventDetailsContentContainerTests.swift in Sources */,
 				086159042CD69BEE0076255B /* StringTests.swift in Sources */,
