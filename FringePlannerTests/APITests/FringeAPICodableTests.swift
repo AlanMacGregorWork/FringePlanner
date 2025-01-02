@@ -46,6 +46,12 @@ struct FringeAPICodableTests {
         try testEncodeDecodeEquates(value: FringePerformanceSpace(name: "Item"))
         try testEncodeDecodeEquates(value: FringePerformanceSpace(name: "New"))
     }
+
+    @Test("FringeVenue")
+    func testFringeVenue() throws {
+        try testEncodeDecodeEquates(value: FringeVenue(code: "VENUE1", description: nil, name: "Test Venue", address: nil, position: .init(lat: 55.9533, lon: -3.1883), postCode: "EH1 1QS", webAddress: nil, phone: nil, email: nil, disabledDescription: nil))
+        try testEncodeDecodeEquates(value: FringeVenue(code: "VENUE2", description: "A lovely venue", name: "Edinburgh Playhouse", address: "18-22 Greenside Place", position: .init(lat: 55.9571, lon: -3.1856), postCode: "EH1 3AA", webAddress: URL(string: "https://example.com"), phone: "+44123456789", email: "venue@example.com", disabledDescription: "Fully accessible"))
+    }
 }
 
 // MARK: - Helpers

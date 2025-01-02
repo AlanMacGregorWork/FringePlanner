@@ -21,7 +21,9 @@ struct FringeVenue: Equatable, Hashable {
     let disabledDescription: String?
 }
 
-extension FringeVenue: Decodable {
+// MARK: Codable
+
+extension FringeVenue: Codable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.address = try container.decodeIfPresent(String.self, forKey: "address")?.trimmed.nilOnEmpty
@@ -36,6 +38,8 @@ extension FringeVenue: Decodable {
         self.disabledDescription = try container.decodeIfPresent(String.self, forKey: "disabledDescription")?.trimmed.nilOnEmpty
     }
 }
+
+// MARK: Enums
 
 extension FringeVenue {
     /// The location of the venue
