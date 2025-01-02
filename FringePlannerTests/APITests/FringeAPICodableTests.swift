@@ -52,6 +52,13 @@ struct FringeAPICodableTests {
         try testEncodeDecodeEquates(value: FringeVenue(code: "VENUE1", description: nil, name: "Test Venue", address: nil, position: .init(lat: 55.9533, lon: -3.1883), postCode: "EH1 1QS", webAddress: nil, phone: nil, email: nil, disabledDescription: nil))
         try testEncodeDecodeEquates(value: FringeVenue(code: "VENUE2", description: "A lovely venue", name: "Edinburgh Playhouse", address: "18-22 Greenside Place", position: .init(lat: 55.9571, lon: -3.1856), postCode: "EH1 3AA", webAddress: URL(string: "https://example.com"), phone: "+44123456789", email: "venue@example.com", disabledDescription: "Fully accessible"))
     }
+        
+    @Test("FringePerformance")
+    func testFringePerformance() throws {
+        let testDate = Date(timeIntervalSince1970: 1691625600) // 2023-08-10 00:00:00 UTC
+        try testEncodeDecodeEquates(value: FringePerformance(title: nil, type: .inPerson, isAtFixedTime: true, priceType: .paid, price: 12.50, concession: nil, priceString: "£12.50", start: testDate, end: testDate.addingTimeInterval(3600), durationMinutes: 60))
+        try testEncodeDecodeEquates(value: FringePerformance(title: "Comedy Show", type: .onlineLive, isAtFixedTime: false, priceType: .payWhatYouCan, price: 5.00, concession: 3.50, priceString: "£5.00 (£3.50)", start: testDate, end: testDate.addingTimeInterval(7200), durationMinutes: 120))
+    }
 }
 
 // MARK: - Helpers

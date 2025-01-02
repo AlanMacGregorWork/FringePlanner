@@ -5,6 +5,8 @@
 //  Created by Alan MacGregor on 13/11/2024.
 //
 
+import Foundation
+
 /// Allows generating keys from JSON decoding when the keys are unknown
 struct AnyCodingKey: CodingKey {
     let stringValue: String
@@ -42,7 +44,18 @@ extension KeyedDecodingContainer where K == AnyCodingKey {
     
     /// Allows decoding by just using a String value
     func decode<T: Decodable>(_ type: T.Type, forKey key: String) throws -> T {
-        try self.decode(type, forKey: .init(key: key))
+        return try self.decode(type, forKey: .init(key: key))
+    }
+    
+    /// Custom decoding for Date types
+    ///  - Note: Dates will always be stored as strings, this ensures that codables from SwiftData and
+    /// standard JSON are compatible
+    func decode(_ type: Date.Type, forKey key: String) throws -> Date {
+        let string = try self.decode(String.self, forKey: key)
+        guard let date = fringeDateFormatter.date(from: string) else {
+            throw DecodeError(key: key, value: string)
+        }
+        return date
     }
     
     /// Note: Some keys were not found to contain values during development, and may not contain data using
@@ -82,5 +95,16 @@ extension KeyedDecodingContainer where K == AnyCodingKey {
         
         // Value must have some form of data
         return fringeAssertFailure("`\(key)` incorrectly contains data")
+    }
+    
+    // MARK: Errors
+    
+    struct DecodeError: Error, CustomStringConvertible {
+        let key: String
+        let value: String
+        
+        var description: String {
+            return "Failed to decode string to date. Key: \(key), Value: \(value)"
+        }
     }
 }
