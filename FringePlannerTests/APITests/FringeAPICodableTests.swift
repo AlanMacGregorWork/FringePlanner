@@ -59,6 +59,14 @@ struct FringeAPICodableTests {
         try testEncodeDecodeEquates(value: FringePerformance(title: nil, type: .inPerson, isAtFixedTime: true, priceType: .paid, price: 12.50, concession: nil, priceString: "£12.50", start: testDate, end: testDate.addingTimeInterval(3600), durationMinutes: 60))
         try testEncodeDecodeEquates(value: FringePerformance(title: "Comedy Show", type: .onlineLive, isAtFixedTime: false, priceType: .payWhatYouCan, price: 5.00, concession: 3.50, priceString: "£5.00 (£3.50)", start: testDate, end: testDate.addingTimeInterval(7200), durationMinutes: 120))
     }
+
+    @Test("FringeImage")
+    func testFringeImage() throws {
+        try testEncodeDecodeEquates(value: FringeImage.Orientation.landscape)
+        try testEncodeDecodeEquates(value: FringeImage.ImageType.hero)
+        try testEncodeDecodeEquates(value: FringeImage.Version(type: "original", width: 1920, height: 1080, mime: "image/jpeg", url: URL(string: "https://example.com/image.jpg")!))
+        try testEncodeDecodeEquates(value: FringeImage(hash: "abc123", orientation: .landscape, type: .hero, versions: ["original": .init(type: "original", width: 1920, height: 1080, mime: "image/jpeg", url: URL(string: "https://example.com/image.jpg")!)]))
+    }
 }
 
 // MARK: - Helpers

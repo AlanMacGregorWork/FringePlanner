@@ -15,14 +15,16 @@ struct FringeImage: Equatable, Hashable {
     let versions: [String: Version]
 }
 
-extension FringeImage: Decodable {
-    enum Orientation: String, Decodable {
+// MARK: Codable
+
+extension FringeImage: Codable {
+    enum Orientation: String, Codable {
         case landscape
         case portrait
         case square
     }
     
-    enum ImageType: String, Decodable {
+    enum ImageType: String, Codable {
         case thumb
         case hero
     }
