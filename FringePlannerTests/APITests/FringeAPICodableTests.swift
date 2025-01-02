@@ -40,6 +40,12 @@ struct FringeAPICodableTests {
         try testEncodeDecodeEquates(value: FringeDisabled(otherServices: true, audio: false, captioningDates: [], signedDates: []))
         try testEncodeDecodeEquates(value: FringeDisabled(otherServices: false, audio: true, captioningDates: ["item1", "item2"], signedDates: ["valueA", "valueB"]))
     }
+    
+    @Test("FringePerformanceSpace")
+    func testFringePerformanceSpace() throws {
+        try testEncodeDecodeEquates(value: FringePerformanceSpace(name: "Item"))
+        try testEncodeDecodeEquates(value: FringePerformanceSpace(name: "New"))
+    }
 }
 
 // MARK: - Helpers

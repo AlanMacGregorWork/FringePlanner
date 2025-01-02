@@ -10,7 +10,9 @@ struct FringePerformanceSpace: Equatable, Hashable {
     let name: String
 }
 
-extension FringePerformanceSpace: Decodable {
+// MARK: Codable
+
+extension FringePerformanceSpace: Codable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.name = try container.decode(String.self, forKey: "name").trimmed
