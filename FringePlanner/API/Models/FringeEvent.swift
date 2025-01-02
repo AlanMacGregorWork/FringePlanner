@@ -39,7 +39,9 @@ extension FringeEvent: Identifiable {
     var id: String { code }
 }
 
-extension FringeEvent: Decodable {
+// MARK: Codable
+
+extension FringeEvent: Codable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.title = try container.decode(String.self, forKey: "title").trimmed
@@ -76,9 +78,35 @@ extension FringeEvent: Decodable {
         // - `update_times`
         
         // It looks like latitude and longitude will always match with the venues position
-        let latitude = try container.decode(Double.self, forKey: "latitude")
+        let latitude = try container.decodeIfPresent(Double.self, forKey: "latitude")
         fringeAssert(latitude == self.venue.position.lat, "Base latitude value does not match")
-        let longitude = try container.decode(Double.self, forKey: "longitude")
+        let longitude = try container.decodeIfPresent(Double.self, forKey: "longitude")
         fringeAssert(longitude == self.venue.position.lon, "Base longitude value does not match")
+    }
+    
+    func encode(to encoder: any Encoder) throws {
+        var container = encoder.container(keyedBy: AnyCodingKey.self)
+        try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(ageCategory, forKey: "ageCategory")
+        try container.encodeIfPresent(artist, forKey: "artist")
+        try container.encodeIfPresent(country, forKey: "country")
+        try container.encodeIfPresent(warnings, forKey: "warnings")
+        try container.encodeIfPresent(status, forKey: "status")
+        try container.encodeIfPresent(code, forKey: "code")
+        try container.encodeIfPresent(festival, forKey: "festival")
+        try container.encodeIfPresent(festivalId, forKey: "festivalId")
+        try container.encodeIfPresent(genre, forKey: "genre")
+        try container.encodeIfPresent(website, forKey: "website")
+        try container.encodeIfPresent(url, forKey: "url")
+        try container.encodeIfPresent(description, forKey: "description")
+        try container.encodeIfPresent(genreTags, forKey: "genreTags")
+        try container.encodeIfPresent(descriptionTeaser, forKey: "descriptionTeaser")
+        try container.encodeIfPresent(fringeDateFormatter.string(from: updated), forKey: "updated")
+        try container.encodeIfPresent(year, forKey: "year")
+        try container.encodeIfPresent(performances, forKey: "performances")
+        try container.encodeIfPresent(performanceSpace, forKey: "performanceSpace")
+        try container.encodeIfPresent(venue, forKey: "venue")
+        try container.encodeIfPresent(disabled, forKey: "disabled")
+        try container.encodeIfPresent(images, forKey: "images")
     }
 }
