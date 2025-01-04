@@ -54,6 +54,7 @@
 		0892D96F2D1DB86E00145788 /* ContainerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96E2D1DB86C00145788 /* ContainerData.swift */; };
 		0892D9712D1ED3CB00145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D9702D1ED3C400145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift */; };
 		0892D9742D1F274600145788 /* AttributedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D9732D1F274000145788 /* AttributedStringTests.swift */; };
+		089709DA2D29B20A00C96A0F /* DBFringeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086858462D2330830081AAD5 /* DBFringeModel.swift */; };
 		08A94E4A2CEE8315008B84C6 /* SeededContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A94E492CEE8309008B84C6 /* SeededContent.swift */; };
 		08AB2F872CF65C9D00D22B34 /* SearchEventContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB2F862CF65C9A00D22B34 /* SearchEventContentContainer.swift */; };
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
@@ -143,6 +144,7 @@
 		086240112CCEC02A004DDC3C /* ApiKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyTests.swift; sourceTree = "<group>"; };
 		08666C1E2CC56D370075C50E /* XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCase.swift; sourceTree = "<group>"; };
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
+		086858462D2330830081AAD5 /* DBFringeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeModel.swift; sourceTree = "<group>"; };
 		086858532D24196B0081AAD5 /* FringeAPICodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeAPICodableTests.swift; sourceTree = "<group>"; };
 		086D086B2CE5276B000B6225 /* FringeStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeStatus.swift; sourceTree = "<group>"; };
 		086D086D2CE52842000B6225 /* AnyCodingKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodingKey.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		0803723A2C98B7A2002DC9A2 /* FringePlanner */ = {
 			isa = PBXGroup;
 			children = (
+				08B4EAC52D207C13007EA57C /* DB */,
 				08A94E482CEE8304008B84C6 /* Debug */,
 				08BA67502CE9472A000DDF37 /* API */,
 				08C92D6F2CCEB9E7001732E9 /* Info.plist */,
@@ -415,6 +418,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		086858452D23307C0081AAD5 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				086858462D2330830081AAD5 /* DBFringeModel.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		086D086A2CE5274D000B6225 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,6 +456,14 @@
 				08A94E492CEE8309008B84C6 /* SeededContent.swift */,
 			);
 			path = Debug;
+			sourceTree = "<group>";
+		};
+		08B4EAC52D207C13007EA57C /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				086858452D23307C0081AAD5 /* Protocols */,
+			);
+			path = DB;
 			sourceTree = "<group>";
 		};
 		08BA674D2CE9090D000DDF37 /* Enum */ = {
@@ -750,6 +769,7 @@
 				08EFD8022D0F3D620090A051 /* TextSectionView.swift in Sources */,
 				08CB2C142CD7C05A00B799FA /* General.swift in Sources */,
 				08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */,
+				089709DA2D29B20A00C96A0F /* DBFringeModel.swift in Sources */,
 				08A94E4A2CEE8315008B84C6 /* SeededContent.swift in Sources */,
 				08AB2F872CF65C9D00D22B34 /* SearchEventContentContainer.swift in Sources */,
 				0803723E2C98B7A2002DC9A2 /* MainScreen.swift in Sources */,
