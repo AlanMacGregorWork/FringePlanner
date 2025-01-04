@@ -56,7 +56,9 @@
 		0892D96F2D1DB86E00145788 /* ContainerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96E2D1DB86C00145788 /* ContainerData.swift */; };
 		0892D9712D1ED3CB00145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D9702D1ED3C400145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift */; };
 		0892D9742D1F274600145788 /* AttributedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D9732D1F274000145788 /* AttributedStringTests.swift */; };
+		089709D92D29B01800C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089709D82D29B01700C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift */; };
 		089709DA2D29B20A00C96A0F /* DBFringeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086858462D2330830081AAD5 /* DBFringeModel.swift */; };
+		089709DE2D29B6F000C96A0F /* DBFringeModelTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089709D42D29AFA900C96A0F /* DBFringeModelTestSupport.swift */; };
 		08A94E4A2CEE8315008B84C6 /* SeededContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A94E492CEE8309008B84C6 /* SeededContent.swift */; };
 		08AB2F872CF65C9D00D22B34 /* SearchEventContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB2F862CF65C9A00D22B34 /* SearchEventContentContainer.swift */; };
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
@@ -167,6 +169,8 @@
 		0892D96E2D1DB86C00145788 /* ContainerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerData.swift; sourceTree = "<group>"; };
 		0892D9702D1ED3C400145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+DescriptionStructure.swift"; sourceTree = "<group>"; };
 		0892D9732D1F274000145788 /* AttributedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStringTests.swift; sourceTree = "<group>"; };
+		089709D42D29AFA900C96A0F /* DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeModelTestSupport.swift; sourceTree = "<group>"; };
+		089709D82D29B01700C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBFringeVenue+DBFringeModelTestSupport.swift"; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
 		08A94E492CEE8309008B84C6 /* SeededContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededContent.swift; sourceTree = "<group>"; };
 		08AB2F862CF65C9A00D22B34 /* SearchEventContentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEventContentContainer.swift; sourceTree = "<group>"; };
@@ -321,6 +325,7 @@
 		0803724B2C98B7A3002DC9A2 /* FringePlannerTests */ = {
 			isa = PBXGroup;
 			children = (
+				089709DD2D29B63600C96A0F /* Protocols */,
 				0868584C2D2331490081AAD5 /* Helper */,
 				08B4EAC22D2050D6007EA57C /* DBTests */,
 				08BD27182CD984270029E5DF /* TestFiles.xcassets */,
@@ -476,6 +481,14 @@
 			path = EventDetailsContentContainer;
 			sourceTree = "<group>";
 		};
+		089709DD2D29B63600C96A0F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				089709D42D29AFA900C96A0F /* DBFringeModelTestSupport.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		08A94E482CEE8304008B84C6 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +564,7 @@
 		08C92D672CCEACCB001732E9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				089709D82D29B01700C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift */,
 				0892D96E2D1DB86C00145788 /* ContainerData.swift */,
 				08E6AF332D17939B007F3F59 /* ViewDataProtocol.swift */,
 				08BA67582CEA3ADD000DDF37 /* Bundle.swift */,
@@ -860,10 +874,12 @@
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
 				08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */,
 				086858542D2419780081AAD5 /* FringeAPICodableTests.swift in Sources */,
+				089709DE2D29B6F000C96A0F /* DBFringeModelTestSupport.swift in Sources */,
 				0868584E2D2331550081AAD5 /* KeyPathCheck.swift in Sources */,
 				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,
 				08E6AF312D17229B007F3F59 /* EventDetailsContentContainerTests.swift in Sources */,
 				086159042CD69BEE0076255B /* StringTests.swift in Sources */,
+				089709D92D29B01800C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift in Sources */,
 				0892D96F2D1DB86E00145788 /* ContainerData.swift in Sources */,
 				08C92D692CCEACD9001732E9 /* ContentProtocol.swift in Sources */,
 				08CB2C162CD7C0D700B799FA /* GeneralTests.swift in Sources */,
