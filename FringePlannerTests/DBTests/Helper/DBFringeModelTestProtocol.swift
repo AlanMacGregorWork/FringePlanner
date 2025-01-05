@@ -25,14 +25,14 @@ extension DBFringeModelTestProtocol {
         
         // Verify that all of the fields in both models are different
         for keyPath in keyPaths {
-            try #require(!keyPath.equate(dbModel, apiModel), "\(DBModelType.self).\(keyPath.dbName) & \(DBModelType.APIModelType.self).\(keyPath.apiName) should not be equal")
+            try #require(!keyPath.equate(dbModel, apiModel), "\(DBModelType.self).\(keyPath.dbName) & \(DBModelType.APIFringeModelType.self).\(keyPath.apiName) should not be equal")
         }
         // Update the model
         dbModel.update(from: apiModel)
         
         // Test that all of the fields now match
         for keyPath in keyPaths {
-            #expect(keyPath.equate(dbModel, apiModel), "\(DBModelType.self).\(keyPath.dbName) & \(DBModelType.APIModelType.self).\(keyPath.apiName) should be equal")
+            #expect(keyPath.equate(dbModel, apiModel), "\(DBModelType.self).\(keyPath.dbName) & \(DBModelType.APIFringeModelType.self).\(keyPath.apiName) should be equal")
         }
     }
 }

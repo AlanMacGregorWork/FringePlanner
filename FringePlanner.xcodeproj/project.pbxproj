@@ -32,6 +32,7 @@
 		0843C2322CE7DD390076FF11 /* FringePerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2312CE7DD360076FF11 /* FringePerformance.swift */; };
 		0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */; };
 		0843C2362CE7EC430076FF11 /* fringeAssert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0843C2352CE7EC400076FF11 /* fringeAssert.swift */; };
+		0851C6E12D2AD37D00000A77 /* APIFringeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851C6E02D2AD37600000A77 /* APIFringeModel.swift */; };
 		086159012CD69B7E0076255B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086159002CD69B7B0076255B /* String.swift */; };
 		086159042CD69BEE0076255B /* StringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086159032CD69BEA0076255B /* StringTests.swift */; };
 		0862400C2CCEBD9E004DDC3C /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0862400B2CCEBD96004DDC3C /* ApiKey.swift */; };
@@ -147,6 +148,7 @@
 		0843C2312CE7DD360076FF11 /* FringePerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringePerformance.swift; sourceTree = "<group>"; };
 		0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationEnvironment.swift; sourceTree = "<group>"; };
 		0843C2352CE7EC400076FF11 /* fringeAssert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fringeAssert.swift; sourceTree = "<group>"; };
+		0851C6E02D2AD37600000A77 /* APIFringeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFringeModel.swift; sourceTree = "<group>"; };
 		086159002CD69B7B0076255B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		086159032CD69BEA0076255B /* StringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringTests.swift; sourceTree = "<group>"; };
 		0862400B2CCEBD96004DDC3C /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 		086858452D23307C0081AAD5 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				0851C6E02D2AD37600000A77 /* APIFringeModel.swift */,
 				086858462D2330830081AAD5 /* DBFringeModel.swift */,
 			);
 			path = Protocols;
@@ -859,6 +862,7 @@
 				08EFD7FE2D0F06FF0090A051 /* LinkSectionView.swift in Sources */,
 				08EFD8002D0F29700090A051 /* ButtonSectionView.swift in Sources */,
 				0843C2362CE7EC430076FF11 /* fringeAssert.swift in Sources */,
+				0851C6E12D2AD37D00000A77 /* APIFringeModel.swift in Sources */,
 				08BA674A2CE7F293000DDF37 /* FringeEvent.swift in Sources */,
 				0819F73B2CD2C27C009B9D3E /* HMACGenerator.swift in Sources */,
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
