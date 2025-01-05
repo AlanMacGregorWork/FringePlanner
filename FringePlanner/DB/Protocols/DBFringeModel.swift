@@ -9,6 +9,6 @@ import SwiftData
 
 /// Supports linking the database Fringe model to the API
 protocol DBFringeModel: PersistentModel {
-    associatedtype APIModelType
-    func update(from apiModel: APIModelType)
+    associatedtype APIFringeModelType: APIFringeModel where APIFringeModelType.DBFringeModelType == Self
+    func update(from apiModel: APIFringeModelType)
 }

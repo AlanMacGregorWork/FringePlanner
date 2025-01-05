@@ -21,6 +21,12 @@ struct FringePerformance: Equatable, Hashable {
     let durationMinutes: Int
 }
 
+// MARK: APIFringeModel
+
+extension FringePerformance: APIFringeModel {
+    typealias DBFringeModelType = DBFringePerformance
+}
+
 // MARK: Codable
 
 private let kType = "type"
