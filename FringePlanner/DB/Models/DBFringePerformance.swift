@@ -72,4 +72,19 @@ extension DBFringePerformance {
         self.end = performance.end
         self.durationMinutes = performance.durationMinutes
     }
+    
+    static var equatableChecksForDBAndAPI: [EquatableCheck<DBFringePerformance, FringePerformance>] {
+        [
+            EquatableCheck(lhsName: "title", rhsName: "title", lhsKeyPath: \.title, rhsKeyPath: \.title),
+            EquatableCheck(lhsName: "type", rhsName: "type", lhsKeyPath: \.type, rhsKeyPath: \.type),
+            EquatableCheck(lhsName: "isAtFixedTime", rhsName: "isAtFixedTime", lhsKeyPath: \.isAtFixedTime, rhsKeyPath: \.isAtFixedTime),
+            EquatableCheck(lhsName: "priceType", rhsName: "priceType", lhsKeyPath: \.priceType, rhsKeyPath: \.priceType),
+            EquatableCheck(lhsName: "price", rhsName: "price", lhsKeyPath: \.price, rhsKeyPath: \.price),
+            EquatableCheck(lhsName: "concession", rhsName: "concession", lhsKeyPath: \.concession, rhsKeyPath: \.concession),
+            EquatableCheck(lhsName: "priceString", rhsName: "priceString", lhsKeyPath: \.priceString, rhsKeyPath: \.priceString),
+            EquatableCheck(lhsName: "start", rhsName: "start", lhsKeyPath: \.start, rhsKeyPath: \.start),
+            EquatableCheck(lhsName: "end", rhsName: "end", lhsKeyPath: \.end, rhsKeyPath: \.end),
+            EquatableCheck(lhsName: "durationMinutes", rhsName: "durationMinutes", lhsKeyPath: \.durationMinutes, rhsKeyPath: \.durationMinutes)
+        ]
+    }
 }

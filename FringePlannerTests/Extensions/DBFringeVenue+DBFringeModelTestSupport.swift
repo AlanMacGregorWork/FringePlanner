@@ -9,21 +9,6 @@ import Foundation
 @testable import FringePlanner
 
 extension DBFringeVenue: DBFringeModelTestSupport {
-    static var keyPaths: [KeyPathCheck<DBFringeVenue, FringeVenue>] {
-        get throws { try [
-            .init(dbKeyPath: \.code, apiKeyPath: \.code),
-            .init(dbKeyPath: \.venueDescription, apiKeyPath: \.description),
-            .init(dbKeyPath: \.name, apiKeyPath: \.name),
-            .init(dbKeyPath: \.address, apiKeyPath: \.address),
-            .init(dbKeyPath: \.position, apiKeyPath: \.position),
-            .init(dbKeyPath: \.postCode, apiKeyPath: \.postCode),
-            .init(dbKeyPath: \.webAddress, apiKeyPath: \.webAddress),
-            .init(dbKeyPath: \.phone, apiKeyPath: \.phone),
-            .init(dbKeyPath: \.email, apiKeyPath: \.email),
-            .init(dbKeyPath: \.disabledDescription, apiKeyPath: \.disabledDescription)
-        ] }
-    }
-    
     static var apiModel: FringeVenue {
         FringeVenue(
             code: "TEST123",

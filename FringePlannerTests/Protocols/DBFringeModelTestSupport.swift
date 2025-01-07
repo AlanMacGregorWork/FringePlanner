@@ -9,7 +9,6 @@
 
 /// Provides default values that can be used for testing DBFringeModels
 protocol DBFringeModelTestSupport where Self: DBFringeModel {
-    static var keyPaths: [KeyPathCheck<Self, APIFringeModelType>] { get throws }
     static var apiModel: APIFringeModelType { get }
     static var dbModel: Self { get }
 }

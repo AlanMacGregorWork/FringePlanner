@@ -11,4 +11,5 @@ import SwiftData
 protocol DBFringeModel: PersistentModel {
     associatedtype APIFringeModelType: APIFringeModel where APIFringeModelType.DBFringeModelType == Self
     func update(from apiModel: APIFringeModelType)
+    static var equatableChecksForDBAndAPI: [EquatableCheck<Self, APIFringeModelType>] { get }
 }

@@ -40,7 +40,6 @@
 		08666C1F2CC56D3A0075C50E /* XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C1E2CC56D370075C50E /* XCTestCase.swift */; };
 		08666C212CC56D730075C50E /* TestUIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08666C202CC56D710075C50E /* TestUIElement.swift */; };
 		0868584B2D2330DB0081AAD5 /* DBFringeModelTestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868584A2D2330D80081AAD5 /* DBFringeModelTestProtocol.swift */; };
-		0868584E2D2331550081AAD5 /* KeyPathCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868584D2D2331540081AAD5 /* KeyPathCheck.swift */; };
 		086858502D2339490081AAD5 /* DBFringePerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0868584F2D2339480081AAD5 /* DBFringePerformance.swift */; };
 		086858522D233A5C0081AAD5 /* DBFringePerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086858512D233A540081AAD5 /* DBFringePerformanceTests.swift */; };
 		086858542D2419780081AAD5 /* FringeAPICodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086858532D24196B0081AAD5 /* FringeAPICodableTests.swift */; };
@@ -63,6 +62,7 @@
 		089709DA2D29B20A00C96A0F /* DBFringeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086858462D2330830081AAD5 /* DBFringeModel.swift */; };
 		089709DE2D29B6F000C96A0F /* DBFringeModelTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089709D42D29AFA900C96A0F /* DBFringeModelTestSupport.swift */; };
 		089709E42D29BE8F00C96A0F /* DBFringePerformance+DBFringeModelTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089709E32D29BE8800C96A0F /* DBFringePerformance+DBFringeModelTestSupport.swift */; };
+		089B2DDD2D2DE63D0027A439 /* EquatableCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089B2DDC2D2DE63B0027A439 /* EquatableCheck.swift */; };
 		08A94E4A2CEE8315008B84C6 /* SeededContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A94E492CEE8309008B84C6 /* SeededContent.swift */; };
 		08AB2F872CF65C9D00D22B34 /* SearchEventContentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AB2F862CF65C9A00D22B34 /* SearchEventContentContainer.swift */; };
 		08B1BF7E2CFBAC4F00925B8D /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */; };
@@ -157,7 +157,6 @@
 		08666C202CC56D710075C50E /* TestUIElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIElement.swift; sourceTree = "<group>"; };
 		086858462D2330830081AAD5 /* DBFringeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeModel.swift; sourceTree = "<group>"; };
 		0868584A2D2330D80081AAD5 /* DBFringeModelTestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeModelTestProtocol.swift; sourceTree = "<group>"; };
-		0868584D2D2331540081AAD5 /* KeyPathCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPathCheck.swift; sourceTree = "<group>"; };
 		0868584F2D2339480081AAD5 /* DBFringePerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringePerformance.swift; sourceTree = "<group>"; };
 		086858512D233A540081AAD5 /* DBFringePerformanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringePerformanceTests.swift; sourceTree = "<group>"; };
 		086858532D24196B0081AAD5 /* FringeAPICodableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeAPICodableTests.swift; sourceTree = "<group>"; };
@@ -180,6 +179,7 @@
 		089709D82D29B01700C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBFringeVenue+DBFringeModelTestSupport.swift"; sourceTree = "<group>"; };
 		089709E32D29BE8800C96A0F /* DBFringePerformance+DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBFringePerformance+DBFringeModelTestSupport.swift"; sourceTree = "<group>"; };
 		089764AC2C98E558002E9F64 /* UnitTestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UnitTestPlan.xctestplan; path = FringePlannerTests/TestPlans/UnitTestPlan.xctestplan; sourceTree = "<group>"; };
+		089B2DDC2D2DE63B0027A439 /* EquatableCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableCheck.swift; sourceTree = "<group>"; };
 		08A94E492CEE8309008B84C6 /* SeededContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeededContent.swift; sourceTree = "<group>"; };
 		08AB2F862CF65C9A00D22B34 /* SearchEventContentContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchEventContentContainer.swift; sourceTree = "<group>"; };
 		08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
@@ -334,7 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				089709DD2D29B63600C96A0F /* Protocols */,
-				0868584C2D2331490081AAD5 /* Helper */,
 				08B4EAC22D2050D6007EA57C /* DBTests */,
 				08BD27182CD984270029E5DF /* TestFiles.xcassets */,
 				08BA67552CE953C7000DDF37 /* APITests */,
@@ -454,14 +453,6 @@
 			isa = PBXGroup;
 			children = (
 				0868584A2D2330D80081AAD5 /* DBFringeModelTestProtocol.swift */,
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
-		0868584C2D2331490081AAD5 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				0868584D2D2331540081AAD5 /* KeyPathCheck.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -588,6 +579,7 @@
 		08C92D6A2CCEB451001732E9 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				089B2DDC2D2DE63B0027A439 /* EquatableCheck.swift */,
 				08BA674B2CE7F2E9000DDF37 /* Codable.swift */,
 				0843C2352CE7EC400076FF11 /* fringeAssert.swift */,
 				0843C2332CE7EA890076FF11 /* ApplicationEnvironment.swift */,
@@ -868,6 +860,7 @@
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
 				0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */,
 				0820A5732CB308BE006DDEE7 /* EventPerformanceCell.swift in Sources */,
+				089B2DDD2D2DE63D0027A439 /* EquatableCheck.swift in Sources */,
 				086D08782CE53111000B6225 /* FringeDisabled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,7 +882,6 @@
 				08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */,
 				086858542D2419780081AAD5 /* FringeAPICodableTests.swift in Sources */,
 				089709DE2D29B6F000C96A0F /* DBFringeModelTestSupport.swift in Sources */,
-				0868584E2D2331550081AAD5 /* KeyPathCheck.swift in Sources */,
 				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,
 				089709E42D29BE8F00C96A0F /* DBFringePerformance+DBFringeModelTestSupport.swift in Sources */,
 				08E6AF312D17229B007F3F59 /* EventDetailsContentContainerTests.swift in Sources */,

@@ -66,4 +66,19 @@ extension DBFringeVenue {
         self.email = venue.email
         self.disabledDescription = venue.disabledDescription
     }
+
+    static var equatableChecksForDBAndAPI: [EquatableCheck<DBFringeVenue, FringeVenue>] {
+        [
+            EquatableCheck(lhsName: "code", rhsName: "code", lhsKeyPath: \.code, rhsKeyPath: \.code),
+            EquatableCheck(lhsName: "venueDescription", rhsName: "description", lhsKeyPath: \.venueDescription, rhsKeyPath: \.description),
+            EquatableCheck(lhsName: "name", rhsName: "name", lhsKeyPath: \.name, rhsKeyPath: \.name),
+            EquatableCheck(lhsName: "address", rhsName: "address", lhsKeyPath: \.address, rhsKeyPath: \.address),
+            EquatableCheck(lhsName: "position", rhsName: "position", lhsKeyPath: \.position, rhsKeyPath: \.position),
+            EquatableCheck(lhsName: "postCode", rhsName: "postCode", lhsKeyPath: \.postCode, rhsKeyPath: \.postCode),
+            EquatableCheck(lhsName: "webAddress", rhsName: "webAddress", lhsKeyPath: \.webAddress, rhsKeyPath: \.webAddress),
+            EquatableCheck(lhsName: "phone", rhsName: "phone", lhsKeyPath: \.phone, rhsKeyPath: \.phone),
+            EquatableCheck(lhsName: "email", rhsName: "email", lhsKeyPath: \.email, rhsKeyPath: \.email),
+            EquatableCheck(lhsName: "disabledDescription", rhsName: "disabledDescription", lhsKeyPath: \.disabledDescription, rhsKeyPath: \.disabledDescription)
+        ]
+    }   
 }

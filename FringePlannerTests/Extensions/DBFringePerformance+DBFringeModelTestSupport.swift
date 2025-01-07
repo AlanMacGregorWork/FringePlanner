@@ -9,21 +9,6 @@ import Foundation
 @testable import FringePlanner
 
 extension DBFringePerformance: DBFringeModelTestSupport {
-    static var keyPaths: [KeyPathCheck<DBFringePerformance, FringePerformance>] {
-        get throws { try [
-            .init(dbKeyPath: \.title, apiKeyPath: \.title),
-            .init(dbKeyPath: \.type, apiKeyPath: \.type),
-            .init(dbKeyPath: \.isAtFixedTime, apiKeyPath: \.isAtFixedTime),
-            .init(dbKeyPath: \.priceType, apiKeyPath: \.priceType),
-            .init(dbKeyPath: \.price, apiKeyPath: \.price),
-            .init(dbKeyPath: \.concession, apiKeyPath: \.concession),
-            .init(dbKeyPath: \.priceString, apiKeyPath: \.priceString),
-            .init(dbKeyPath: \.start, apiKeyPath: \.start),
-            .init(dbKeyPath: \.end, apiKeyPath: \.end),
-            .init(dbKeyPath: \.durationMinutes, apiKeyPath: \.durationMinutes)
-        ]}
-    }
-    
     static var apiModel: FringePerformance {
         FringePerformance(
             title: "Test Performance",

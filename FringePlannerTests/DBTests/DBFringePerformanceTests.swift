@@ -21,4 +21,9 @@ class DBFringePerformanceTests: DBFringeModelTestProtocol {
     func testUpdateCopiesAllFields() throws {
         try autoTestUpdateCopiesAllFields()
     }
+
+    @Test("Equatable checks match properties")
+    func testEquatableChecksMatchProperties() throws {
+        try autoTestEquatableChecksMatchProperties()
+    }
 }
