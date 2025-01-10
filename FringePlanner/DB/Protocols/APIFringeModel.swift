@@ -6,6 +6,14 @@
 //
 
 /// The model received from the Fringe API
-protocol APIFringeModel {
+protocol APIFringeModel: CustomEquatableSupport where OtherEquatableType == DBFringeModelType {
     associatedtype DBFringeModelType: DBFringeModel where DBFringeModelType.APIFringeModelType == Self
+}
+
+// MARK: CustomEquatableSupport
+
+extension APIFringeModel {
+    static func == (lhs: Self, rhs: DBFringeModelType) -> Bool {
+        rhs == lhs
+    }
 }
