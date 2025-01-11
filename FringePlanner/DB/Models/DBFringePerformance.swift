@@ -45,7 +45,7 @@ final class DBFringePerformance: DBFringeModel {
 }
 
 extension DBFringePerformance {
-    convenience init(from performance: FringePerformance) {
+    convenience init(apiModel performance: FringePerformance, context: ModelContext) throws(DBError) {
         self.init(
             title: performance.title,
             type: performance.type,
