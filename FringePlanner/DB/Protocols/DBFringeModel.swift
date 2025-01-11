@@ -12,6 +12,7 @@ protocol DBFringeModel: PersistentModel, CustomEquatableSupport where OtherEquat
     associatedtype APIFringeModelType: APIFringeModel where APIFringeModelType.DBFringeModelType == Self
     func update(from apiModel: APIFringeModelType)
     static var equatableChecksForDBAndAPI: [EquatableCheck<Self, APIFringeModelType>] { get }
+    init(apiModel: APIFringeModelType, context: ModelContext) throws(DBError)
 }
 
 // MARK: CustomEquatableSupport

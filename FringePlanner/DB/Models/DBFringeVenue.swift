@@ -47,7 +47,7 @@ final class DBFringeVenue: DBFringeModel {
 
 extension DBFringeVenue {
     
-    convenience init(from venue: FringeVenue) {
+    convenience init(apiModel venue: FringeVenue, context: ModelContext) throws(DBError) {
         // Create a new venue including the required fields
         self.init(code: venue.code, name: venue.name, position: venue.position, postCode: venue.postCode)
         // Update the venue with the optional fields
