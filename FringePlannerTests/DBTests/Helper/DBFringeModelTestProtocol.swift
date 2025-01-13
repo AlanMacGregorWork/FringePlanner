@@ -13,6 +13,7 @@ protocol DBFringeModelTestProtocol {
     associatedtype DBModelType: DBFringeModelTestSupport
     func testUpdateCopiesAllFields() throws
     func testEquatableChecksMatchProperties() throws
+    func testPredicateIdentifiesCorrectModels() throws
 }
 
 // MARK: Test
@@ -65,6 +66,17 @@ extension DBFringeModelTestProtocol {
                 "API equatable checks count (\(equatableChecks.map(\.rhsName).count)) doesn't match property count (\(apiProperties.count))",
                 sourceLocation: sourceLocation)
     }   
+
+    func autoTestPredicateIdentifiesCorrectModels(mockAPIModel: DBModelType.APIFringeModelType, mockDBModel1: DBModelType, mockDBModel2: DBModelType, sourceLocation: SourceLocation = #_sourceLocation) throws {        
+        // Test
+        // Testing multiple models should return the correct model regardless of order
+        try #expect([mockDBModel1, mockDBModel2].filter(DBModelType.predicate(forMatchingAPIModel: mockAPIModel)) == [mockDBModel1], "DB model #1 should match API model")
+        try #expect([mockDBModel2, mockDBModel1].filter(DBModelType.predicate(forMatchingAPIModel: mockAPIModel)) == [mockDBModel1], "DB model #1 should match API model")
+        // Testing a single model should return the correct model
+        try #expect([mockDBModel1].filter(DBModelType.predicate(forMatchingAPIModel: mockAPIModel)) == [mockDBModel1], "DB model #1 should match API model")
+        // Testing a single model that doesn't match should return an empty array
+        try #expect([mockDBModel2].filter(DBModelType.predicate(forMatchingAPIModel: mockAPIModel)) == [], "DB model #2 should not match API model")
+    }
 }
 
 // MARK: Init Validation

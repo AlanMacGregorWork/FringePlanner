@@ -87,4 +87,12 @@ extension DBFringePerformance {
             EquatableCheck(lhsName: "durationMinutes", rhsName: "durationMinutes", lhsKeyPath: \.durationMinutes, rhsKeyPath: \.durationMinutes)
         ]
     }
+    
+    static func predicate(forMatchingAPIModel apiModel: FringePerformance) -> Predicate<DBFringePerformance> {
+        // `FringePerformance` does not include a traditional `id`, instead the start time should be used as the
+        // performance id as each performance is allocated a set time and should not move our of it. This information
+        // was gathered from an enquiry to the API owner
+        let start = apiModel.start
+        return #Predicate { $0.start == start }
+    }
 }
