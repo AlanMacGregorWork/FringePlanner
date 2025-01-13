@@ -81,4 +81,9 @@ extension DBFringeVenue {
             EquatableCheck(lhsName: "disabledDescription", rhsName: "disabledDescription", lhsKeyPath: \.disabledDescription, rhsKeyPath: \.disabledDescription)
         ]
     }   
+    
+    static func predicate(forMatchingAPIModel apiModel: FringeVenue) -> Predicate<DBFringeVenue> {
+        let code = apiModel.code
+        return #Predicate { $0.code == code }
+    }
 }

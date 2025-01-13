@@ -6,6 +6,7 @@
 //
 
 import SwiftData
+import Foundation
 
 /// Supports linking the database Fringe model to the API
 protocol DBFringeModel: PersistentModel, CustomEquatableSupport where OtherEquatableType == APIFringeModelType {
@@ -13,6 +14,7 @@ protocol DBFringeModel: PersistentModel, CustomEquatableSupport where OtherEquat
     func update(from apiModel: APIFringeModelType)
     static var equatableChecksForDBAndAPI: [EquatableCheck<Self, APIFringeModelType>] { get }
     init(apiModel: APIFringeModelType, context: ModelContext) throws(DBError)
+    static func predicate(forMatchingAPIModel apiModel: APIFringeModelType) -> Predicate<Self>
 }
 
 // MARK: CustomEquatableSupport
