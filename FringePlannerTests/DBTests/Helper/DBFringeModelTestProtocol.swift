@@ -44,25 +44,31 @@ extension DBFringeModelTestProtocol {
         let dbProperties = try getDBProperties()
         let apiProperties = Mirror(reflecting: DBModelType.apiModel).children.compactMap(\.label)
 
+        // Ensure that all of the properties match the equatable checks
+        let dbMissing = dbProperties
+            // Filter out the omitted fields
+            .filter({ !DBModelType.omittedDBAndAPIFields.dbFields.contains($0) })
+            // Filter out the equatable checks that don't match the property
+            .filter({ !equatableChecks.map(\.lhsName).contains($0) })
+        #expect(dbMissing == [], "DB properties missing from equatable checks: \(dbMissing)", sourceLocation: sourceLocation)
+        let apiMissing = apiProperties
+            // Filter out the omitted fields
+            .filter({ !DBModelType.omittedDBAndAPIFields.apiFields.contains($0) })
+            // Filter out the equatable checks that don't match the property
+            .filter({ !equatableChecks.map(\.rhsName).contains($0) })
+        #expect(apiMissing == [], "API properties missing from equatable checks: \(apiMissing)", sourceLocation: sourceLocation)
+
         // Ensure that all of the equatable checks match the corresponding properties
-        let dbMissing = dbProperties.filter({ !equatableChecks.map(\.lhsName).contains($0) })
-        #expect(dbMissing.isEmpty, "DB properties missing from equatable checks: \(dbMissing)", sourceLocation: sourceLocation)
-
-        let apiMissing = apiProperties.filter({ !equatableChecks.map(\.rhsName).contains($0) })
-        #expect(apiMissing.isEmpty, "API properties missing from equatable checks: \(apiMissing)", sourceLocation: sourceLocation)
-
         let apiExtra = equatableChecks.map(\.rhsName).filter({ !apiProperties.contains($0) })
-        #expect(apiExtra.isEmpty, "Extra API equatable checks names that don't match any properties: \(apiExtra)", sourceLocation: sourceLocation)
-
+        #expect(apiExtra == [], "Extra API equatable checks names that don't match any properties: \(apiExtra)", sourceLocation: sourceLocation)
         let dbExtra = equatableChecks.map(\.lhsName).filter({ !dbProperties.contains($0) })
-        #expect(dbExtra.isEmpty, "Extra DB equatable checks names that don't match any properties: \(dbExtra)", sourceLocation: sourceLocation)
+        #expect(dbExtra == [], "Extra DB equatable checks names that don't match any properties: \(dbExtra)", sourceLocation: sourceLocation)
 
         // Verify property count matches
-        #expect(equatableChecks.map(\.lhsName).count == dbProperties.count,
+        #expect(equatableChecks.map(\.lhsName).count == dbProperties.count - DBModelType.omittedDBAndAPIFields.dbFields.count,
                 "DB equatable checks count (\(equatableChecks.map(\.lhsName).count)) doesn't match property count (\(dbProperties.count))",
                 sourceLocation: sourceLocation)
-
-        #expect(equatableChecks.map(\.rhsName).count == apiProperties.count,
+        #expect(equatableChecks.map(\.rhsName).count == apiProperties.count - DBModelType.omittedDBAndAPIFields.apiFields.count,
                 "API equatable checks count (\(equatableChecks.map(\.rhsName).count)) doesn't match property count (\(apiProperties.count))",
                 sourceLocation: sourceLocation)
     }   
@@ -84,8 +90,14 @@ extension DBFringeModelTestProtocol {
 extension DBFringeModelTestProtocol {
     /// Validate the content for the protocol. Should be used during the init phase
     func validateContent(sourceLocation: SourceLocation = #_sourceLocation) throws {
-        try #require(try !getDBProperties().isEmpty, "DB model must have at least 1 field", sourceLocation: sourceLocation)
-        try #require(!DBModelType.equatableChecksForDBAndAPI.isEmpty, "EquatableChecks must have at least 1 field", sourceLocation: sourceLocation)
+        let dbProperties = try getDBProperties()
+        let apiProperties = Mirror(reflecting: DBModelType.apiModel).children.compactMap(\.label)
+        for dbField in DBModelType.omittedDBAndAPIFields.dbFields {
+            try #require(dbProperties.contains(dbField), "Omitted field \"\(dbField)\" should be in the DB properties", sourceLocation: sourceLocation)    
+        }
+        for apiField in DBModelType.omittedDBAndAPIFields.apiFields {
+            try #require(apiProperties.contains(apiField), "Omitted field \"\(apiField)\" should be in the API properties", sourceLocation: sourceLocation)
+        }
     }
 }
 
