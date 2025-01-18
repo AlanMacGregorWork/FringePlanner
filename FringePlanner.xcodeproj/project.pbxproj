@@ -55,12 +55,15 @@
 		08754C2A2D18AB920022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */; };
 		087C59322CFFBE17008007F6 /* ViewDataIsEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */; };
 		08926F952D31C5EF003B6BE5 /* DBFringeModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08926F942D31C5EC003B6BE5 /* DBFringeModelTests.swift */; };
+		08926F972D330202003B6BE5 /* DBFringeEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08926F962D330201003B6BE5 /* DBFringeEventTests.swift */; };
 		08926F9A2D331F5E003B6BE5 /* DBError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08926F992D331F5D003B6BE5 /* DBError.swift */; };
+		08926F9C2D33227C003B6BE5 /* DBFringeEvent+DBFringeModelTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08926F9B2D33226F003B6BE5 /* DBFringeEvent+DBFringeModelTestSupport.swift */; };
 		0892D96B2D1AE7E200145788 /* EventDetailsContentContainer+Structure+DetailsStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96A2D1AE7DA00145788 /* EventDetailsContentContainer+Structure+DetailsStructure.swift */; };
 		0892D96D2D1CA48300145788 /* ContainerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96C2D1CA48100145788 /* ContainerData.swift */; };
 		0892D96F2D1DB86E00145788 /* ContainerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D96E2D1DB86C00145788 /* ContainerData.swift */; };
 		0892D9712D1ED3CB00145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D9702D1ED3C400145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift */; };
 		0892D9742D1F274600145788 /* AttributedStringTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892D9732D1F274000145788 /* AttributedStringTests.swift */; };
+		089709D12D29747200C96A0F /* DBFringeEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089709D02D29739200C96A0F /* DBFringeEvent.swift */; };
 		089709D92D29B01800C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089709D82D29B01700C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift */; };
 		089709DA2D29B20A00C96A0F /* DBFringeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086858462D2330830081AAD5 /* DBFringeModel.swift */; };
 		089709DE2D29B6F000C96A0F /* DBFringeModelTestSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089709D42D29AFA900C96A0F /* DBFringeModelTestSupport.swift */; };
@@ -175,12 +178,15 @@
 		08754C292D18AB800022654F /* EventDetailsContentContainer+Structure+AccessibilityStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+AccessibilityStructure.swift"; sourceTree = "<group>"; };
 		087C59312CFFBE15008007F6 /* ViewDataIsEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataIsEmpty.swift; sourceTree = "<group>"; };
 		08926F942D31C5EC003B6BE5 /* DBFringeModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeModelTests.swift; sourceTree = "<group>"; };
+		08926F962D330201003B6BE5 /* DBFringeEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeEventTests.swift; sourceTree = "<group>"; };
 		08926F992D331F5D003B6BE5 /* DBError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBError.swift; sourceTree = "<group>"; };
+		08926F9B2D33226F003B6BE5 /* DBFringeEvent+DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBFringeEvent+DBFringeModelTestSupport.swift"; sourceTree = "<group>"; };
 		0892D96A2D1AE7DA00145788 /* EventDetailsContentContainer+Structure+DetailsStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+DetailsStructure.swift"; sourceTree = "<group>"; };
 		0892D96C2D1CA48100145788 /* ContainerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerData.swift; sourceTree = "<group>"; };
 		0892D96E2D1DB86C00145788 /* ContainerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerData.swift; sourceTree = "<group>"; };
 		0892D9702D1ED3C400145788 /* EventDetailsContentContainer+Structure+DescriptionStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventDetailsContentContainer+Structure+DescriptionStructure.swift"; sourceTree = "<group>"; };
 		0892D9732D1F274000145788 /* AttributedStringTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStringTests.swift; sourceTree = "<group>"; };
+		089709D02D29739200C96A0F /* DBFringeEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeEvent.swift; sourceTree = "<group>"; };
 		089709D42D29AFA900C96A0F /* DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBFringeModelTestSupport.swift; sourceTree = "<group>"; };
 		089709D82D29B01700C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBFringeVenue+DBFringeModelTestSupport.swift"; sourceTree = "<group>"; };
 		089709E32D29BE8800C96A0F /* DBFringePerformance+DBFringeModelTestSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DBFringePerformance+DBFringeModelTestSupport.swift"; sourceTree = "<group>"; };
@@ -517,6 +523,7 @@
 			isa = PBXGroup;
 			children = (
 				086858482D2330C20081AAD5 /* Helper */,
+				08926F962D330201003B6BE5 /* DBFringeEventTests.swift */,
 				086858512D233A540081AAD5 /* DBFringePerformanceTests.swift */,
 				08B4EAC32D2050DF007EA57C /* DBFringeVenueTests.swift */,
 			);
@@ -535,6 +542,7 @@
 		08B4EAC62D207C18007EA57C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				089709D02D29739200C96A0F /* DBFringeEvent.swift */,
 				0868584F2D2339480081AAD5 /* DBFringePerformance.swift */,
 				08B4EAC72D207C1E007EA57C /* DBFringeVenue.swift */,
 			);
@@ -582,6 +590,7 @@
 		08C92D672CCEACCB001732E9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				08926F9B2D33226F003B6BE5 /* DBFringeEvent+DBFringeModelTestSupport.swift */,
 				089709E32D29BE8800C96A0F /* DBFringePerformance+DBFringeModelTestSupport.swift */,
 				089709D82D29B01700C96A0F /* DBFringeVenue+DBFringeModelTestSupport.swift */,
 				0892D96E2D1DB86C00145788 /* ContainerData.swift */,
@@ -829,6 +838,7 @@
 				08B1BF822CFCEEB600925B8D /* ConditionalData.swift in Sources */,
 				0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */,
 				0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */,
+				089709D12D29747200C96A0F /* DBFringeEvent.swift in Sources */,
 				08F10DAE2CB85D91008ACBFF /* ArchitectureProtocols.swift in Sources */,
 				08926F9A2D331F5E003B6BE5 /* DBError.swift in Sources */,
 				08F10DB82CB862B8008ACBFF /* DemoContent.swift in Sources */,
@@ -895,11 +905,13 @@
 				086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */,
 				08B4EAC42D2050E1007EA57C /* DBFringeVenueTests.swift in Sources */,
 				08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */,
+				08926F972D330202003B6BE5 /* DBFringeEventTests.swift in Sources */,
 				082DFF282D03839E00F5CBB7 /* ViewDataIsEmptyTests.swift in Sources */,
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				0868584B2D2330DB0081AAD5 /* DBFringeModelTestProtocol.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
 				08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */,
+				08926F9C2D33227C003B6BE5 /* DBFringeEvent+DBFringeModelTestSupport.swift in Sources */,
 				086858542D2419780081AAD5 /* FringeAPICodableTests.swift in Sources */,
 				089709DE2D29B6F000C96A0F /* DBFringeModelTestSupport.swift in Sources */,
 				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,

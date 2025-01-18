@@ -35,8 +35,10 @@ struct FringeEvent: Equatable, Hashable {
     let year: Int
 }
 
-extension FringeEvent: Identifiable {
-    var id: String { code }
+// MARK: APIFringeModelType
+
+extension FringeEvent: APIFringeModel {
+    typealias DBFringeModelType = DBFringeEvent
 }
 
 // MARK: Codable
