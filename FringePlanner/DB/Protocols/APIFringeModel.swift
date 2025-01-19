@@ -6,7 +6,7 @@
 //
 
 /// The model received from the Fringe API
-protocol APIFringeModel: CustomEquatableSupport where OtherEquatableType == DBFringeModelType {
+protocol APIFringeModel: CustomEquatableSupport, Sendable where OtherEquatableType == DBFringeModelType {
     associatedtype DBFringeModelType: DBFringeModel where DBFringeModelType.APIFringeModelType == Self
 }
 
