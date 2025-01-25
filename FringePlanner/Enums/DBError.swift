@@ -7,15 +7,26 @@
 
 /// An error for a task made on the database
 enum DBError: Error, CustomStringConvertible {
-    case updateFailed
     case fetchFailed
-    case insertFailed
+    case saveFailed
+    case assumptionFailed(AssumptionFailedReasons)
     
     var description: String {
         switch self {
-        case .updateFailed: return "Database update failed"
         case .fetchFailed: return "Database fetch failed"
-        case .insertFailed: return "Database insert failed"
+        case .saveFailed: return "Database save failed"
+        case .assumptionFailed(.expectedCreatedVenue): return "Expected created venue not found"
+        case .assumptionFailed(.multipleModelsForSingle): return "Found multiple models when expecting single model"
         }
+    }
+}
+
+// MARK: SubErrors
+
+extension DBError {
+    /// Specific errors for actions that should have been carried out successfully
+    enum AssumptionFailedReasons {
+        case expectedCreatedVenue
+        case multipleModelsForSingle
     }
 }
