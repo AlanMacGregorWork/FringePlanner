@@ -135,6 +135,32 @@ struct ImportAPIActorTests {
     }
 }
 
+extension ImportAPIActorTests {
+    @Suite("Insert Model Tests")
+    struct InsertModelTests {
+        
+        @Test("Insert will throw if the container is not setup for the model type")
+        func testMissingContainerThrows() async throws {
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            let container = try ModelContainer(configurations: config)
+            let insertActor = ImportAPIActor(modelContainer: container)
+            
+            try await #require(throws: DBError.insertFailed(.modelDidNotInsertIntoContext)) {
+                try await insertActor.insertModel(from: DBFringeVenue.apiModel)
+            }
+        }
+
+        @Test("Insert will not throw if the container is setup for the model type")
+        func testSetupContainerDoesNotThrow() async throws {
+            let config = ModelConfiguration(isStoredInMemoryOnly: true)
+            let container = try ModelContainer(for: DBFringeVenue.self, configurations: config)
+            let insertActor = ImportAPIActor(modelContainer: container)
+            
+            #expect(try await insertActor.insertModel(from: DBFringeVenue.apiModel) == .insertedModel)
+        }
+    }
+}
+
 /// Allows performing tests on a fetch inside an actor
 @ModelActor
 actor TestDBActor {

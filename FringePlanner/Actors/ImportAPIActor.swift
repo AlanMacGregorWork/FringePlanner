@@ -38,11 +38,19 @@ actor ImportAPIActor {
             dbModel.update(from: apiModel)
             return .updatedModel
         } else {
-            // If the model does not exist, create & insert it
-            let dbModel = try APIFringeModelType.DBFringeModelType(apiModel: apiModel, context: modelContext)
-            modelContext.insert(dbModel)
-            return .insertedModel
+            return try insertModel(from: apiModel)
         }
+    }
+    
+    /// Insert the model into the Database
+    func insertModel<APIFringeModelType: APIFringeModel>(from apiModel: APIFringeModelType) throws(DBError) -> ImportAPIActor.Status {
+        // Create a new model and insert it into the database
+        let dbModel = try APIFringeModelType.DBFringeModelType(apiModel: apiModel, context: modelContext)
+        modelContext.insert(dbModel)
+        // There is currently no way to tell if the maintainer has support for the model, and calling `.insert(_)`
+        // will not do anything. This will now throw if the model is not inserted as it means saving will fail
+        guard dbModel.modelContext != nil else { throw .insertFailed(.modelDidNotInsertIntoContext) }
+        return .insertedModel
     }
 
     /// Save changes contained inside this context
