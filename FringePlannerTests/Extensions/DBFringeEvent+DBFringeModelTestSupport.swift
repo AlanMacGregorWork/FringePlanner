@@ -150,7 +150,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                 )
             ],
             warnings: "Original Warning",
-            updated: Date(timeIntervalSince1970: 1704294000),
+            updatedValue: Date(timeIntervalSince1970: 1704294000),
             year: 2024
         )
     }

@@ -30,7 +30,7 @@ final class DBFringeEvent: DBFringeModel {
     private(set) var disabled: FringeDisabled?
     private(set) var images: [String: FringeImage]
     private(set) var warnings: String?
-    private(set) var updated: Date
+    private(set) var updatedValue: Date
     private(set) var year: Int
     
     init(title: String,
@@ -53,7 +53,7 @@ final class DBFringeEvent: DBFringeModel {
          disabled: FringeDisabled? = nil,
          images: [String: FringeImage],
          warnings: String? = nil,
-         updated: Date,
+         updatedValue: Date,
          year: Int) {
         self.title = title
         self.artist = artist
@@ -75,7 +75,7 @@ final class DBFringeEvent: DBFringeModel {
         self.disabled = disabled
         self.images = images
         self.warnings = warnings
-        self.updated = updated
+        self.updatedValue = updatedValue
         self.year = year
     }
 }
@@ -112,7 +112,7 @@ extension DBFringeEvent {
                   disabled: event.disabled,
                   images: event.images,
                   warnings: event.warnings,
-                  updated: event.updated,
+                  updatedValue: event.updated,
                   year: event.year)
         update(from: event)
     }
@@ -138,7 +138,7 @@ extension DBFringeEvent {
         self.disabled = event.disabled
         self.images = event.images
         self.warnings = event.warnings
-        self.updated = event.updated
+        self.updatedValue = event.updated
         self.year = event.year
     }
     
@@ -164,7 +164,7 @@ extension DBFringeEvent {
             EquatableCheck(lhsName: "disabled", rhsName: "disabled", lhsKeyPath: \.disabled, rhsKeyPath: \.disabled),
             EquatableCheck(lhsName: "images", rhsName: "images", lhsKeyPath: \.images, rhsKeyPath: \.images),
             EquatableCheck(lhsName: "warnings", rhsName: "warnings", lhsKeyPath: \.warnings, rhsKeyPath: \.warnings),
-            EquatableCheck(lhsName: "updated", rhsName: "updated", lhsKeyPath: \.updated, rhsKeyPath: \.updated),
+            EquatableCheck(lhsName: "updatedValue", rhsName: "updated", lhsKeyPath: \.updatedValue, rhsKeyPath: \.updated),
             EquatableCheck(lhsName: "year", rhsName: "year", lhsKeyPath: \.year, rhsKeyPath: \.year)
         ]
     }
