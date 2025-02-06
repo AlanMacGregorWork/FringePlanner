@@ -27,6 +27,11 @@ struct DBFringeVenueTests: DBFringeModelTestProtocol {
         try autoTestEquatableChecksMatchProperties()
     }
     
+    @Test("`updated` field should not be in db model")
+    func testUpdatedFieldIsNotPresentInDBModel() throws {
+        try autoTestUpdatedFieldIsNotPresentInDBModel()
+    }
+    
     @Test("Predicate identifies correct models")
     func testPredicateIdentifiesCorrectModels() throws {
         let mockPosition = FringeVenue.Position(lat: 23, lon: 43)
