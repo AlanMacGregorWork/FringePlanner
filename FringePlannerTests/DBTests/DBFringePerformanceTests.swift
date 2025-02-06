@@ -26,6 +26,11 @@ class DBFringePerformanceTests: DBFringeModelTestProtocol {
     func testEquatableChecksMatchProperties() throws {
         try autoTestEquatableChecksMatchProperties()
     }
+    
+    @Test("`updated` field should not be in db model")
+    func testUpdatedFieldIsNotPresentInDBModel() throws {
+        try autoTestUpdatedFieldIsNotPresentInDBModel()
+    }
 
     @Test("Predicate identifies correct models")
     func testPredicateIdentifiesCorrectModels() throws {

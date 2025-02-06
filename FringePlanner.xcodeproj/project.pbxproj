@@ -25,6 +25,7 @@
 		0820A5762CB30F7B006DDEE7 /* MakeEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A5752CB30F77006DDEE7 /* MakeEquatable.swift */; };
 		0820A57D2CB31795006DDEE7 /* ViewDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */; };
 		0820A5802CB318FD006DDEE7 /* FringeDataResultBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */; };
+		0825FD182D54E9E500E9C1BC /* SwiftDataUpdatedFieldTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0825FD172D54E9E200E9C1BC /* SwiftDataUpdatedFieldTest.swift */; };
 		082DFF282D03839E00F5CBB7 /* ViewDataIsEmptyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082DFF272D03839A00F5CBB7 /* ViewDataIsEmptyTests.swift */; };
 		082DFF2A2D06573B00F5CBB7 /* AttributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082DFF292D06573900F5CBB7 /* AttributedString.swift */; };
 		0834BB082C9F60A100BF8A5A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0834BB072C9F609F00BF8A5A /* Text.swift */; };
@@ -151,6 +152,7 @@
 		0820A5752CB30F77006DDEE7 /* MakeEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeEquatable.swift; sourceTree = "<group>"; };
 		0820A57C2CB31794006DDEE7 /* ViewDataProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataProtocol.swift; sourceTree = "<group>"; };
 		0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FringeDataResultBuilder.swift; sourceTree = "<group>"; };
+		0825FD172D54E9E200E9C1BC /* SwiftDataUpdatedFieldTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataUpdatedFieldTest.swift; sourceTree = "<group>"; };
 		082DFF272D03839A00F5CBB7 /* ViewDataIsEmptyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataIsEmptyTests.swift; sourceTree = "<group>"; };
 		082DFF292D06573900F5CBB7 /* AttributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedString.swift; sourceTree = "<group>"; };
 		0834BB072C9F609F00BF8A5A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 		0803724B2C98B7A3002DC9A2 /* FringePlannerTests */ = {
 			isa = PBXGroup;
 			children = (
+				0825FD162D54E9BD00E9C1BC /* ExpectedIssues */,
 				0871A0382D459938000604C8 /* ActorTests */,
 				089709DD2D29B63600C96A0F /* Protocols */,
 				08B4EAC22D2050D6007EA57C /* DBTests */,
@@ -415,6 +418,14 @@
 				0820A57F2CB318F5006DDEE7 /* FringeDataResultBuilder.swift */,
 			);
 			path = ResultBuilder;
+			sourceTree = "<group>";
+		};
+		0825FD162D54E9BD00E9C1BC /* ExpectedIssues */ = {
+			isa = PBXGroup;
+			children = (
+				0825FD172D54E9E200E9C1BC /* SwiftDataUpdatedFieldTest.swift */,
+			);
+			path = ExpectedIssues;
 			sourceTree = "<group>";
 		};
 		082DFF262D03838D00F5CBB7 /* ProtocolTests */ = {
@@ -940,6 +951,7 @@
 				082DFF282D03839E00F5CBB7 /* ViewDataIsEmptyTests.swift in Sources */,
 				0819F73D2CD2C4E1009B9D3E /* HMACGeneratorTests.swift in Sources */,
 				0868584B2D2330DB0081AAD5 /* DBFringeModelTestProtocol.swift in Sources */,
+				0825FD182D54E9E500E9C1BC /* SwiftDataUpdatedFieldTest.swift in Sources */,
 				08033E122CD41E6D00380D54 /* FilterRequestTests.swift in Sources */,
 				08BA67572CE953F3000DDF37 /* FringeEventDownloaderTests.swift in Sources */,
 				08926F9C2D33227C003B6BE5 /* DBFringeEvent+DBFringeModelTestSupport.swift in Sources */,

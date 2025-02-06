@@ -14,6 +14,7 @@ protocol DBFringeModelTestProtocol {
     func testUpdateCopiesAllFields() throws
     func testEquatableChecksMatchProperties() throws
     func testPredicateIdentifiesCorrectModels() throws
+    func testUpdatedFieldIsNotPresentInDBModel() throws 
 }
 
 // MARK: Test
@@ -82,6 +83,14 @@ extension DBFringeModelTestProtocol {
         try #expect([mockDBModel1].filter(DBModelType.predicate(forMatchingAPIModel: mockAPIModel)) == [mockDBModel1], "DB model #1 should match API model")
         // Testing a single model that doesn't match should return an empty array
         try #expect([mockDBModel2].filter(DBModelType.predicate(forMatchingAPIModel: mockAPIModel)) == [], "DB model #2 should not match API model")
+    }
+    
+    func autoTestUpdatedFieldIsNotPresentInDBModel(sourceLocation: SourceLocation = #_sourceLocation) throws {
+        // Note: There is an issue in SwiftData where the `updated` field does not appear to return the
+        // value correctly, so it should not be used. This is identified in `testUpdatedFieldIsLost`
+        let dbProperties = Mirror(reflecting: DBModelType.dbModel).children.compactMap(\.label)
+        // Database properties will all use an underscore prefix
+        #expect(!dbProperties.contains("_updated"), "`updated` field should not be in the DB model", sourceLocation: sourceLocation)
     }
 }
 
