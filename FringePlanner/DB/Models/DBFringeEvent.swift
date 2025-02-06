@@ -83,14 +83,11 @@ final class DBFringeEvent: DBFringeModel {
 extension DBFringeEvent {
     
     convenience init(apiModel event: FringeEvent, context: ModelContext) throws(DBError) {
-        #warning("Work is currently ongoing to correctly record data to the database, while this is ongoing a temporary venue will be used")
-//        // The venue should have been created first as multiple events can share the same venue. If the venue
-//        // cannot be found, then something has gone wrong and the event cannot be created.
-//        guard let dbVenue = try UpdateFromAPIActor.getDBModel(from: event.venue, context: context) else {
-//            throw .assumptionFailed(.expectedCreatedVenue)
-//        }
-        let apiVenue = SeededContent(code: 1).venue(for: 1)
-        let dbVenue = try DBFringeVenue(apiModel: apiVenue, context: context)
+        // The venue should have been created first as multiple events can share the same venue. If the venue
+        // cannot be found, then something has gone wrong and the event cannot be created.
+        guard let dbVenue = try ImportAPIActor.getDBModel(from: event.venue, context: context) else {
+            throw .assumptionFailed(.expectedCreatedVenue)
+        }
 
         self.init(title: event.title,
                   artist: event.artist,
