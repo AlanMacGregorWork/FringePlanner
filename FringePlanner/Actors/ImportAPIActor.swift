@@ -50,7 +50,7 @@ actor ImportAPIActor {
         // There is currently no way to tell if the maintainer has support for the model, and calling `.insert(_)`
         // will not do anything. This will now throw if the model is not inserted as it means saving will fail
         guard dbModel.modelContext != nil else { throw .insertFailed(.modelDidNotInsertIntoContext) }
-        return .insertedModel
+        return .insertedModel(APIFringeModelType.DBFringeModelType.self)
     }
 
     /// Save changes contained inside this context
@@ -90,9 +90,14 @@ actor ImportAPIActor {
 
 extension ImportAPIActor {
     /// Indicates what took place when adding the API content to the database
-    enum Status {
+    enum Status: Equatable {
         case noChanges
-        case insertedModel
+        case insertedModel(String)
         case updatedModel
+        
+        /// Helper function to convert the type into a String
+        static func insertedModel<DBFringeModelType: DBFringeModel>(_ modelType: DBFringeModelType.Type) -> Self {
+            .insertedModel("\(modelType)")
+        }
     }
 }
