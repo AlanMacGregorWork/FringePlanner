@@ -67,7 +67,7 @@ struct ImportAPIActorTests {
         }
         
         // Update the database with a model sharing the same code
-        try await addModelToDB(updatedModel, expecting: .updatedModel)
+        try await addModelToDB(updatedModel, expecting: .updatedModel(DBFringeVenue.self))
         // The model should now be updated & not inserted
         try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
             #expect(venues.count == 1, "Model should have updated the existing model")
@@ -169,7 +169,8 @@ struct ImportAPIActorTests {
         // Update the event in the database
         let updatedStatuses = try await importAPIActor.updateEvents([updatedMockEvent1, Self.mockEvent2, Self.mockEvent3])
         #expect(updatedStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(updatedStatuses)")
-        #expect(updatedStatuses.count(where: { $0 == .updatedModel }) == 1, "Only the first event should have been updated")
+        #expect(updatedStatuses.count(where: { $0 == .updatedModel(DBFringeEvent.self) }) == 1, "Only the first event should have been updated")
+        #expect(updatedStatuses.count(where: { $0 == .updatedModel(DBFringeVenue.self) }) == 0, "Only the first event should have been updated")
         try await importAPIActor.saveChanges()
         
         // Changes should now have been made
@@ -199,7 +200,8 @@ struct ImportAPIActorTests {
         // Update the event in the database
         let updatedStatuses = try await importAPIActor.updateEvents([Self.mockEvent1, Self.mockEvent2, updatedMockEvent3])
         #expect(updatedStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(updatedStatuses)")
-        #expect(updatedStatuses.count(where: { $0 == .updatedModel }) == 1, "Only the first event should have been updated")
+        #expect(updatedStatuses.count(where: { $0 == .updatedModel(DBFringeEvent.self) }) == 0, "Only the venue should have been updated")
+        #expect(updatedStatuses.count(where: { $0 == .updatedModel(DBFringeVenue.self) }) == 1, "Only the venue should have been updated")
         try await importAPIActor.saveChanges()
         
         // Changes should now have been made
