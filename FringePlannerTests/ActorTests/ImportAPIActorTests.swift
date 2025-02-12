@@ -41,7 +41,7 @@ struct ImportAPIActorTests {
     func testInsertsModelIfMissing() async throws {
         // Update the database from the API models
         let apiModel = Self.mockFringeVenue1
-        try await addModelToDB(apiModel, expecting: .insertedModel)
+        try await addModelToDB(apiModel, expecting: .insertedModel(DBFringeVenue.self))
         
         // Test: There should now be one model in the database
         try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
@@ -60,7 +60,7 @@ struct ImportAPIActorTests {
         try #require(originalModel.code == updatedModel.code, "Sanity Check Models should share the same code value")
         
         // Add the first model to the database
-        try await addModelToDB(originalModel, expecting: .insertedModel)
+        try await addModelToDB(originalModel, expecting: .insertedModel(DBFringeVenue.self))
         // The model should now be in the database
         try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
             #expect(venues.count == 1)
@@ -84,8 +84,8 @@ struct ImportAPIActorTests {
     @Test("Inserts models independently if they do not share the same code")
     func testInsertsModelsIndependently() async throws {
         // Add models to DB, should be inserts as they are different models
-        try await addModelToDB(Self.mockFringeVenue1, expecting: .insertedModel)
-        try await addModelToDB(Self.mockFringeVenue2, expecting: .insertedModel)
+        try await addModelToDB(Self.mockFringeVenue1, expecting: .insertedModel(DBFringeVenue.self))
+        try await addModelToDB(Self.mockFringeVenue2, expecting: .insertedModel(DBFringeVenue.self))
         
         // Test: There should now be two models in the database
         try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
@@ -99,7 +99,7 @@ struct ImportAPIActorTests {
     @Test("Returns noChanges if model already exists with the same data (Venue)")
     func testReturnsNoChangesIfModelAlreadyExistsWithSameData_Venue() async throws {
         // Adding a new model should result in an insert
-        try await addModelToDB(Self.mockFringeVenue1, expecting: .insertedModel)
+        try await addModelToDB(Self.mockFringeVenue1, expecting: .insertedModel(DBFringeVenue.self))
         try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
             #expect(venues.count == 1, "There should be 1 model in the database")
         }
@@ -114,10 +114,10 @@ struct ImportAPIActorTests {
     @Test("Returns noChanges if model already exists with the same data (Event)")
     func testReturnsNoChangesIfModelAlreadyExistsWithSameData_Event() async throws {
         // Add venues so that relationships can be made for the event
-        try await addModelToDB(Self.mockFringeVenue1, expecting: .insertedModel)
+        try await addModelToDB(Self.mockFringeVenue1, expecting: .insertedModel(DBFringeVenue.self))
         
         // Adding a new model should result in an insert
-        try await addModelToDB(Self.mockEvent1, expecting: .insertedModel)
+        try await addModelToDB(Self.mockEvent1, expecting: .insertedModel(DBFringeEvent.self))
         try await testActor.performFetch(from: Self.allEventsDescriptor) { events in
             #expect(events.count == 1, "There should be 1 model in the database")
         }
@@ -134,7 +134,8 @@ struct ImportAPIActorTests {
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([Self.mockEvent1, Self.mockEvent2, Self.mockEvent3])
         #expect(initialStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(initialStatuses)")
-        #expect(initialStatuses.count(where: { $0 == .insertedModel }) == 5, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeEvent.self) }) == 3, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeVenue.self) }) == 2, "All venue should be inserts as they are new content")
     }
     
     @Test("Events do not insert or update if changes do not exist")
@@ -142,7 +143,8 @@ struct ImportAPIActorTests {
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([Self.mockEvent1, Self.mockEvent2, Self.mockEvent3])
         #expect(initialStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(initialStatuses)")
-        #expect(initialStatuses.count(where: { $0 == .insertedModel }) == 5, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeEvent.self) }) == 3, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeVenue.self) }) == 2, "All venue should be inserts as they are new content")
         
         // Attempting to re-import the events should make no changes
         let reimportedStatuses = try await importAPIActor.updateEvents([Self.mockEvent1, Self.mockEvent2, Self.mockEvent3])
@@ -155,7 +157,8 @@ struct ImportAPIActorTests {
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([Self.mockEvent1, Self.mockEvent2, Self.mockEvent3])
         #expect(initialStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(initialStatuses)")
-        #expect(initialStatuses.count(where: { $0 == .insertedModel }) == 5, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeEvent.self) }) == 3, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeVenue.self) }) == 2, "All venue should be inserts as they are new content")
 
         // Create a new event with a changed title
         let updatedMockEvent1 = FringeEvent(title: "Title Changed", artist: "Shakespeare Company", country: "United Kingdom", descriptionTeaser: "A modern take on a classic", code: "EVENT1", ageCategory: "12+", description: "Experience Shakespeare's masterpiece like never before", festival: "Edinburgh Fringe", festivalId: "FRINGE2025", genre: "Theatre", genreTags: "Drama, Classical", performances: [FringePerformance(title: "Evening Show", type: .inPerson, isAtFixedTime: true, priceType: .paid, price: 15.0, concession: 12.0, priceString: "£15 (£12)", start: Date().resetToSecond(), end: Date().addingTimeInterval(7200).resetToSecond(), durationMinutes: 120)], performanceSpace: .init(name: "Main Stage"), status: .active, url: URL(string: "https://fringe.co.uk/event1")!, venue: Self.mockFringeVenue1, website: URL(string: "https://shakespearecompany.com")!, disabled: nil, images: ["main": FringeImage(hash: "abc123", orientation: .landscape, type: .hero, versions: ["original": .init(type: "original", width: 1920, height: 1080, mime: "image/jpeg", url: URL(string: "https://example.com/images/original.jpg")!)])], warnings: "Contains strobe lighting", updated: Date().resetToSecond(), year: 2025)
@@ -182,7 +185,8 @@ struct ImportAPIActorTests {
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([Self.mockEvent1, Self.mockEvent2, Self.mockEvent3])
         #expect(initialStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(initialStatuses)")
-        #expect(initialStatuses.count(where: { $0 == .insertedModel }) == 5, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeEvent.self) }) == 3, "All events should be inserts as they are new content")
+        #expect(initialStatuses.count(where: { $0 == .insertedModel(DBFringeVenue.self) }) == 2, "All venue should be inserts as they are new content")
 
         // Create a new event a venue that has a changed name
         let updatedMockVenue2 = FringeVenue(code: "VENUE2", description: nil, name: "Updated NAME", address: "456 Example Ave", position: .init(lat: 55.9533, lon: -3.1883), postCode: "67890", webAddress: nil, phone: nil, email: nil, disabledDescription: nil)
@@ -251,7 +255,7 @@ extension ImportAPIActorTests {
             let container = try ModelContainer(for: DBFringeVenue.self, configurations: config)
             let insertActor = ImportAPIActor(modelContainer: container)
             
-            #expect(try await insertActor.insertModel(from: DBFringeVenue.apiModel) == .insertedModel)
+            #expect(try await insertActor.insertModel(from: DBFringeVenue.apiModel) == .insertedModel(DBFringeVenue.self))
         }
     }
 }
