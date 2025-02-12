@@ -36,7 +36,7 @@ actor ImportAPIActor {
             }
             // Update the model
             dbModel.update(from: apiModel)
-            return .updatedModel
+            return .updatedModel(APIFringeModelType.DBFringeModelType.self)
         } else {
             return try insertModel(from: apiModel)
         }
@@ -93,11 +93,16 @@ extension ImportAPIActor {
     enum Status: Equatable {
         case noChanges
         case insertedModel(String)
-        case updatedModel
+        case updatedModel(String)
         
         /// Helper function to convert the type into a String
         static func insertedModel<DBFringeModelType: DBFringeModel>(_ modelType: DBFringeModelType.Type) -> Self {
             .insertedModel("\(modelType)")
+        }
+        
+        /// Helper function to convert the type into a String
+        static func updatedModel<DBFringeModelType: DBFringeModel>(_ modelType: DBFringeModelType.Type) -> Self {
+            .updatedModel("\(modelType)")
         }
     }
 }
