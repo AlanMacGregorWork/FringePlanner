@@ -39,6 +39,7 @@ struct FringeEvent: Equatable, Hashable {
 
 extension FringeEvent: APIFringeModel {
     typealias DBFringeModelType = DBFringeEvent
+    var referenceID: String { "Event-\(code)" }
 }
 
 // MARK: Codable
