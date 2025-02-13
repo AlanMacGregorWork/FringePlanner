@@ -36,7 +36,7 @@ actor ImportAPIActor {
             }
             // Update the model
             dbModel.update(from: apiModel)
-            return .updatedModel(APIFringeModelType.DBFringeModelType.self)
+            return .updatedModel(type: APIFringeModelType.DBFringeModelType.self, referenceID: apiModel.referenceID)
         } else {
             return try insertModel(from: apiModel)
         }
@@ -50,7 +50,7 @@ actor ImportAPIActor {
         // There is currently no way to tell if the maintainer has support for the model, and calling `.insert(_)`
         // will not do anything. This will now throw if the model is not inserted as it means saving will fail
         guard dbModel.modelContext != nil else { throw .insertFailed(.modelDidNotInsertIntoContext) }
-        return .insertedModel(APIFringeModelType.DBFringeModelType.self)
+        return .insertedModel(type: APIFringeModelType.DBFringeModelType.self, referenceID: apiModel.referenceID)
     }
 
     /// Save changes contained inside this context
@@ -90,19 +90,19 @@ actor ImportAPIActor {
 
 extension ImportAPIActor {
     /// Indicates what took place when adding the API content to the database
-    enum Status: Equatable {
+    enum Status: Equatable, Hashable {
         case noChanges
-        case insertedModel(String)
-        case updatedModel(String)
+        case insertedModel(type: String, referenceID: String)
+        case updatedModel(type: String, referenceID: String)
         
         /// Helper function to convert the type into a String
-        static func insertedModel<DBFringeModelType: DBFringeModel>(_ modelType: DBFringeModelType.Type) -> Self {
-            .insertedModel("\(modelType)")
+        static func insertedModel<DBFringeModelType: DBFringeModel>(type modelType: DBFringeModelType.Type, referenceID: String) -> Self {
+            .insertedModel(type: "\(modelType)", referenceID: referenceID)
         }
         
         /// Helper function to convert the type into a String
-        static func updatedModel<DBFringeModelType: DBFringeModel>(_ modelType: DBFringeModelType.Type) -> Self {
-            .updatedModel("\(modelType)")
+        static func updatedModel<DBFringeModelType: DBFringeModel>(type modelType: DBFringeModelType.Type, referenceID: String) -> Self {
+            .updatedModel(type: "\(modelType)", referenceID: referenceID)
         }
     }
 }
