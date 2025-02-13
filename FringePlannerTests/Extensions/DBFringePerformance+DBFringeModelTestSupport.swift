@@ -18,8 +18,8 @@ extension DBFringePerformance: DBFringeModelTestSupport {
             price: 15.0,
             concession: 12.0,
             priceString: "£15.00 (£12.00)",
-            start: Date(),
-            end: Date().addingTimeInterval(3600),
+            start: DateComponents(calendar: Calendar.current, year: 2024, month: 4, day: 5, hour: 17, minute: 45, second: 43).date!,
+            end: DateComponents(calendar: Calendar.current, year: 2024, month: 4, day: 5, hour: 18, minute: 45, second: 43).date!,
             durationMinutes: 60
         )
     }
@@ -31,8 +31,8 @@ extension DBFringePerformance: DBFringeModelTestSupport {
             priceType: .free,
             price: 0.0,
             priceString: "Free",
-            start: Date(),
-            end: Date().addingTimeInterval(1800),
+            start: DateComponents(calendar: Calendar.current, year: 2025, month: 4, day: 5, hour: 17, minute: 45, second: 43).date!,
+            end: DateComponents(calendar: Calendar.current, year: 2025, month: 4, day: 5, hour: 18, minute: 45, second: 43).date!,
             durationMinutes: 30
         )
     }
