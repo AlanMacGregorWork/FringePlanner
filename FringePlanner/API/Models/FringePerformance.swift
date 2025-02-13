@@ -25,6 +25,8 @@ struct FringePerformance: Equatable, Hashable {
 
 extension FringePerformance: APIFringeModel {
     typealias DBFringeModelType = DBFringePerformance
+    #warning("This is a temporary property while the model does not have a reference to the parent event")
+    var referenceID: String { "Performance-tempCode" }
 }
 
 // MARK: Codable

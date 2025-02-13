@@ -25,6 +25,7 @@ struct FringeVenue: Equatable, Hashable {
 
 extension FringeVenue: APIFringeModel {
     typealias DBFringeModelType = DBFringeVenue
+    var referenceID: String { "Venue-\(code)" }
 }
 
 // MARK: Codable
