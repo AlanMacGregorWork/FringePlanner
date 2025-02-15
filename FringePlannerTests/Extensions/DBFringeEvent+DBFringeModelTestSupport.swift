@@ -33,7 +33,8 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                     priceString: "£10.00 (£8.00)",
                     start: Date(timeIntervalSince1970: 1704366000), // 10:00 AM
                     end: Date(timeIntervalSince1970: 1704369600),   // 11:00 AM
-                    durationMinutes: 60
+                    durationMinutes: 60,
+                    eventCode: "TEST123"
                 ),
                 FringePerformance(
                     title: "Evening Show",
@@ -45,7 +46,8 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                     priceString: "Pay What You Can",
                     start: Date(timeIntervalSince1970: 1704394800), // 18:00 PM
                     end: Date(timeIntervalSince1970: 1704398400),   // 19:00 PM
-                    durationMinutes: 60
+                    durationMinutes: 60,
+                    eventCode: "TEST123"
                 )
             ],
             performanceSpace: FringePerformanceSpace(name: "Test Space"),
@@ -112,7 +114,8 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                     priceString: "Free",
                     start: Date(timeIntervalSince1970: 1704294000),
                     end: Date(timeIntervalSince1970: 1704297600),
-                    durationMinutes: 60
+                    durationMinutes: 60,
+                    eventCode: "ORIGINAL"
                 )
             ],
             performanceSpace: FringePerformanceSpace(name: "Original Space"),

@@ -20,7 +20,8 @@ extension DBFringePerformance: DBFringeModelTestSupport {
             priceString: "£15.00 (£12.00)",
             start: DateComponents(calendar: Calendar.current, year: 2024, month: 4, day: 5, hour: 17, minute: 45, second: 43).date!,
             end: DateComponents(calendar: Calendar.current, year: 2024, month: 4, day: 5, hour: 18, minute: 45, second: 43).date!,
-            durationMinutes: 60
+            durationMinutes: 60,
+            eventCode: "DiffValue"
         )
     }
     
@@ -33,7 +34,8 @@ extension DBFringePerformance: DBFringeModelTestSupport {
             priceString: "Free",
             start: DateComponents(calendar: Calendar.current, year: 2025, month: 4, day: 5, hour: 17, minute: 45, second: 43).date!,
             end: DateComponents(calendar: Calendar.current, year: 2025, month: 4, day: 5, hour: 18, minute: 45, second: 43).date!,
-            durationMinutes: 30
+            durationMinutes: 30,
+            eventCode: "otherVal"
         )
     }
 }

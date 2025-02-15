@@ -36,7 +36,7 @@ struct DBFringeEventTests: DBFringeModelTestProtocol {
     func testPredicateIdentifiesCorrectModels() throws {
         let mockStart = Date()
         let mockEnd = Date()
-        let mockPerformance = FringePerformance(title: "Test Performance", type: .inPerson, isAtFixedTime: true, priceType: .paid, price: 15.0, concession: 12.0, priceString: "£15", start: mockStart, end: mockEnd, durationMinutes: 60)
+        let mockPerformance = FringePerformance(title: "Test Performance", type: .inPerson, isAtFixedTime: true, priceType: .paid, price: 15.0, concession: 12.0, priceString: "£15", start: mockStart, end: mockEnd, durationMinutes: 60, eventCode: "blank")
         let mockPosition = FringeVenue.Position(lat: 55.9486, lon: -3.1999)
         let mockVenue = FringeVenue(code: "VEN123", description: "Test Venue", name: "Test Venue", address: "123 Test St", position: mockPosition, postCode: "EH1 1AB", webAddress: URL(string: "https://test.com"), phone: "12345", email: "test@test.com", disabledDescription: "Accessible")
         let mockPerformanceSpace = FringePerformanceSpace(name: "Main Stage")
