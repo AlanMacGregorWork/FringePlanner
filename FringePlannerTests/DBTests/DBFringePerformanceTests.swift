@@ -36,9 +36,9 @@ class DBFringePerformanceTests: DBFringeModelTestProtocol {
     func testPredicateIdentifiesCorrectModels() throws {
         let mockStart = Date()
         let mockEnd = Date()
-        let mockAPIModel = FringePerformance(title: "Mock Performance", type: .inPerson, isAtFixedTime: false, priceType: .paid, price: 10.0, concession: 5.0, priceString: "£10", start: mockStart, end: mockEnd, durationMinutes: 60)
-        let mockDBModel1 = DBFringePerformance(title: "Different Performance", type: .inPerson, isAtFixedTime: false, priceType: .paid, price: 10.0, concession: 5.0, priceString: "£10", start: mockStart, end: mockEnd, durationMinutes: 60)
-        let mockDBModel2 = DBFringePerformance(title: "Mock Performance 2", type: .inPerson, isAtFixedTime: false, priceType: .paid, price: 10.0, concession: 5.0, priceString: "£10", start: Date(), end: mockEnd, durationMinutes: 60)
+        let mockAPIModel = FringePerformance(title: "Mock Performance", type: .inPerson, isAtFixedTime: false, priceType: .paid, price: 10.0, concession: 5.0, priceString: "£10", start: mockStart, end: mockEnd, durationMinutes: 60, eventCode: "123")
+        let mockDBModel1 = DBFringePerformance(title: "Different Performance", type: .inPerson, isAtFixedTime: false, priceType: .paid, price: 10.0, concession: 5.0, priceString: "£10", start: mockStart, end: mockEnd, durationMinutes: 60, eventCode: "123")
+        let mockDBModel2 = DBFringePerformance(title: "Mock Performance 2", type: .inPerson, isAtFixedTime: false, priceType: .paid, price: 10.0, concession: 5.0, priceString: "£10", start: Date(), end: mockEnd, durationMinutes: 60, eventCode: "ABC")
 
         // Verify content. DB models should not equate to API model but the DB model `start` should match the API model `start`
         try #require(mockAPIModel != mockDBModel1, "DB & API models should not match")

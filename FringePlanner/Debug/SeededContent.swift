@@ -103,7 +103,7 @@ struct SeededContent {
         return ["someHash": FringeImage(hash: "someHash", orientation: .landscape, type: .thumb, versions: ["original": version])]
     }
     
-    func performance(for input: Int) -> FringePerformance {
+    func performance(for input: Int, eventCode: String) -> FringePerformance {
         let startDate = seedValue(for: input, at: \.dates)
         let endDate = seedValue(for: input, at: \.dates).addingTimeInterval(60 * 60)
         let basePrice = Double((input % 4) + 1) * 10.00
@@ -119,25 +119,27 @@ struct SeededContent {
             priceString: basePrice == 0 ? "Free" : "£\(basePrice) (£\(concessionPrice) concessions)",
             start: startDate,
             end: endDate,
-            durationMinutes: 60
+            durationMinutes: 60,
+            eventCode: eventCode
         )
     }
     
     func event(for input: Int) -> FringeEvent {
         let newCode = code / input
+        let eventCode = seedValue(for: newCode, at: \.codes)
         return .init(
             title: seedValue(for: newCode, at: \.titles),
             artist: seedValue(for: newCode, at: \.artists),
             country: seedValue(for: newCode, at: \.countries),
             descriptionTeaser: seedValue(for: newCode, at: \.teasers),
-            code: seedValue(for: newCode, at: \.codes),
+            code: eventCode,
             ageCategory: seedValue(for: newCode, at: \.ageCategories),
             description: seedValue(for: newCode, at: \.eventDescriptions),
             festival: seedValue(for: newCode, at: \.festivals),
             festivalId: seedValue(for: newCode, at: \.festivalIds),
             genre: seedValue(for: newCode, at: \.genres),
             genreTags: seedValue(for: newCode, at: \.genreTags),
-            performances: (1..<10).map({ performance(for: newCode * $0) }),
+            performances: (1..<10).map({ performance(for: newCode * $0, eventCode: eventCode) }),
             performanceSpace: FringePerformanceSpace(name: "Main Hall"),
             status: .active,
             url: URL(string: seedValue(for: newCode, at: \.ticketUrls))!,

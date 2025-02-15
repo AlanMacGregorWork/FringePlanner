@@ -20,6 +20,7 @@ final class DBFringePerformance: DBFringeModel {
     private(set) var start: Date
     private(set) var end: Date
     private(set) var durationMinutes: Int
+    private(set) var eventCode: String
     
     init(title: String? = nil,
          type: FringePerformanceType,
@@ -30,7 +31,9 @@ final class DBFringePerformance: DBFringeModel {
          priceString: String,
          start: Date,
          end: Date,
-         durationMinutes: Int) {
+         durationMinutes: Int,
+         eventCode: String
+    ) {
         self.title = title
         self.type = type
         self.isAtFixedTime = isAtFixedTime
@@ -41,6 +44,7 @@ final class DBFringePerformance: DBFringeModel {
         self.start = start
         self.end = end
         self.durationMinutes = durationMinutes
+        self.eventCode = eventCode
     }
 }
 
@@ -56,7 +60,8 @@ extension DBFringePerformance {
             priceString: performance.priceString,
             start: performance.start,
             end: performance.end,
-            durationMinutes: performance.durationMinutes
+            durationMinutes: performance.durationMinutes,
+            eventCode: performance.eventCode
         )
     }
     
@@ -71,6 +76,7 @@ extension DBFringePerformance {
         self.start = performance.start
         self.end = performance.end
         self.durationMinutes = performance.durationMinutes
+        self.eventCode = performance.eventCode
     }
     
     static var equatableChecksForDBAndAPI: [EquatableCheck<DBFringePerformance, FringePerformance>] {
@@ -84,7 +90,8 @@ extension DBFringePerformance {
             EquatableCheck(lhsName: "priceString", rhsName: "priceString", lhsKeyPath: \.priceString, rhsKeyPath: \.priceString),
             EquatableCheck(lhsName: "start", rhsName: "start", lhsKeyPath: \.start, rhsKeyPath: \.start),
             EquatableCheck(lhsName: "end", rhsName: "end", lhsKeyPath: \.end, rhsKeyPath: \.end),
-            EquatableCheck(lhsName: "durationMinutes", rhsName: "durationMinutes", lhsKeyPath: \.durationMinutes, rhsKeyPath: \.durationMinutes)
+            EquatableCheck(lhsName: "durationMinutes", rhsName: "durationMinutes", lhsKeyPath: \.durationMinutes, rhsKeyPath: \.durationMinutes),
+            EquatableCheck(lhsName: "eventCode", rhsName: "eventCode", lhsKeyPath: \.eventCode, rhsKeyPath: \.eventCode)
         ]
     }
     
