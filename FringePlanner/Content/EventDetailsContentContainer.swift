@@ -65,7 +65,7 @@ extension EventDetailsContentContainer {
 
 extension EventDetailsContentContainer {
     @MainActor
-    static func createContent(event: FringeEvent = SeededContent(code: 123).events[0]) -> Content {
+    static func createContent(event: FringeEvent = SeededContent(seed: 123).events()[0]) -> Content {
         let router = Router()
         let dataSource = DataSource(event: event)
         let interaction = Interaction()
