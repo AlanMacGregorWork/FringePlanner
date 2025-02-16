@@ -113,6 +113,8 @@
 		08F10DBA2CB92B97008ACBFF /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DB92CB92B95008ACBFF /* GroupData.swift */; };
 		08FCF6472D622AB900B82786 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCF6462D622AB600B82786 /* Array.swift */; };
 		08FCF6492D622AD300B82786 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCF6482D622ACA00B82786 /* ArrayTests.swift */; };
+		08FCF64B2D62354700B82786 /* PseudoRandomIntGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCF64A2D62354400B82786 /* PseudoRandomIntGenerator.swift */; };
+		08FCF64E2D623A3200B82786 /* PseudoRandomNumberGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCF64D2D623A3000B82786 /* PseudoRandomNumberGeneratorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +248,8 @@
 		08F10DBB2CB96082008ACBFF /* UITestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UITestPlan.xctestplan; path = FringePlannerUITests/TestPlans/UITestPlan.xctestplan; sourceTree = "<group>"; };
 		08FCF6462D622AB600B82786 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		08FCF6482D622ACA00B82786 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
+		08FCF64A2D62354400B82786 /* PseudoRandomIntGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PseudoRandomIntGenerator.swift; sourceTree = "<group>"; };
+		08FCF64D2D623A3000B82786 /* PseudoRandomNumberGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PseudoRandomNumberGeneratorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +369,7 @@
 			children = (
 				0825FD162D54E9BD00E9C1BC /* ExpectedIssues */,
 				0871A0382D459938000604C8 /* ActorTests */,
+				08FCF64C2D623A1900B82786 /* DebugTests */,
 				089709DD2D29B63600C96A0F /* Protocols */,
 				08B4EAC22D2050D6007EA57C /* DBTests */,
 				08BD27182CD984270029E5DF /* TestFiles.xcassets */,
@@ -559,6 +564,7 @@
 		08A94E482CEE8304008B84C6 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				08FCF64A2D62354400B82786 /* PseudoRandomIntGenerator.swift */,
 				08A94E492CEE8309008B84C6 /* SeededContent.swift */,
 			);
 			path = Debug;
@@ -718,6 +724,14 @@
 				08F10DB72CB862B5008ACBFF /* DemoContent.swift */,
 			);
 			path = Content;
+			sourceTree = "<group>";
+		};
+		08FCF64C2D623A1900B82786 /* DebugTests */ = {
+			isa = PBXGroup;
+			children = (
+				08FCF64D2D623A3000B82786 /* PseudoRandomNumberGeneratorTests.swift */,
+			);
+			path = DebugTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -896,6 +910,7 @@
 				08EFD8042D0F47690090A051 /* SectionRowData.swift in Sources */,
 				081826A82CBF1445002293FD /* ForEachData.swift in Sources */,
 				08BA67542CE94767000DDF37 /* FringeEventDownloader.swift in Sources */,
+				08FCF64B2D62354700B82786 /* PseudoRandomIntGenerator.swift in Sources */,
 				086D086C2CE5276C000B6225 /* FringeStatus.swift in Sources */,
 				08DF47392CD6B42700405254 /* FilterRequest.swift in Sources */,
 				08F10DB02CB85EC0008ACBFF /* BasicComponents.swift in Sources */,
@@ -967,6 +982,7 @@
 				089709DE2D29B6F000C96A0F /* DBFringeModelTestSupport.swift in Sources */,
 				08E6AF342D17939D007F3F59 /* ViewDataProtocol.swift in Sources */,
 				089709E42D29BE8F00C96A0F /* DBFringePerformance+DBFringeModelTestSupport.swift in Sources */,
+				08FCF64E2D623A3200B82786 /* PseudoRandomNumberGeneratorTests.swift in Sources */,
 				08E6AF312D17229B007F3F59 /* EventDetailsContentContainerTests.swift in Sources */,
 				086858522D233A5C0081AAD5 /* DBFringePerformanceTests.swift in Sources */,
 				0871A03A2D45994C000604C8 /* ImportAPIActorTests.swift in Sources */,
