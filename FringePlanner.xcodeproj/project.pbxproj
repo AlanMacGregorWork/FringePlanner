@@ -111,6 +111,8 @@
 		08F10DB52CB861F9008ACBFF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DB42CB861F6008ACBFF /* ContentView.swift */; };
 		08F10DB82CB862B8008ACBFF /* DemoContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DB72CB862B5008ACBFF /* DemoContent.swift */; };
 		08F10DBA2CB92B97008ACBFF /* GroupData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F10DB92CB92B95008ACBFF /* GroupData.swift */; };
+		08FCF6472D622AB900B82786 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCF6462D622AB600B82786 /* Array.swift */; };
+		08FCF6492D622AD300B82786 /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FCF6482D622ACA00B82786 /* ArrayTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +244,8 @@
 		08F10DB72CB862B5008ACBFF /* DemoContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoContent.swift; sourceTree = "<group>"; };
 		08F10DB92CB92B95008ACBFF /* GroupData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupData.swift; sourceTree = "<group>"; };
 		08F10DBB2CB96082008ACBFF /* UITestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = UITestPlan.xctestplan; path = FringePlannerUITests/TestPlans/UITestPlan.xctestplan; sourceTree = "<group>"; };
+		08FCF6462D622AB600B82786 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		08FCF6482D622ACA00B82786 /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +293,7 @@
 		080272E82C9A394E0040A673 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				08FCF6462D622AB600B82786 /* Array.swift */,
 				08D180E32D42F46C00B985AF /* Date.swift */,
 				082DFF292D06573900F5CBB7 /* AttributedString.swift */,
 				08B1BF7D2CFBAC4C00925B8D /* Dictionary.swift */,
@@ -439,6 +444,7 @@
 		086159022CD69BD70076255B /* ExtensionTests */ = {
 			isa = PBXGroup;
 			children = (
+				08FCF6482D622ACA00B82786 /* ArrayTests.swift */,
 				08D180E12D42F41200B985AF /* DateTests.swift */,
 				08926F942D31C5EC003B6BE5 /* DBFringeModelTests.swift */,
 				0892D9732D1F274000145788 /* AttributedStringTests.swift */,
@@ -929,6 +935,7 @@
 				0834BB082C9F60A100BF8A5A /* Text.swift in Sources */,
 				0843C2342CE7EA8C0076FF11 /* ApplicationEnvironment.swift in Sources */,
 				0820A5732CB308BE006DDEE7 /* EventPerformanceCell.swift in Sources */,
+				08FCF6472D622AB900B82786 /* Array.swift in Sources */,
 				0871A0372D459899000604C8 /* ImportAPIActor.swift in Sources */,
 				089B2DDD2D2DE63D0027A439 /* EquatableCheck.swift in Sources */,
 				086D08782CE53111000B6225 /* FringeDisabled.swift in Sources */,
@@ -945,6 +952,7 @@
 				08D180E22D42F41600B985AF /* DateTests.swift in Sources */,
 				0892D9742D1F274600145788 /* AttributedStringTests.swift in Sources */,
 				086240122CCEC030004DDC3C /* ApiKeyTests.swift in Sources */,
+				08FCF6492D622AD300B82786 /* ArrayTests.swift in Sources */,
 				08B4EAC42D2050E1007EA57C /* DBFringeVenueTests.swift in Sources */,
 				08BA67592CEA3ADE000DDF37 /* Bundle.swift in Sources */,
 				08926F972D330202003B6BE5 /* DBFringeEventTests.swift in Sources */,
