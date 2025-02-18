@@ -103,21 +103,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
             festivalId: "ORIG123",
             genre: "Original Genre",
             genreTags: "OriginalTag1, OriginalTag2",
-            performances: [
-                FringePerformance(
-                    title: "Original Performance",
-                    type: .onlineOnDemand,
-                    isAtFixedTime: false,
-                    priceType: .free,
-                    price: 0.0,
-                    concession: nil,
-                    priceString: "Free",
-                    start: Date(timeIntervalSince1970: 1704294000),
-                    end: Date(timeIntervalSince1970: 1704297600),
-                    durationMinutes: 60,
-                    eventCode: "ORIGINAL"
-                )
-            ],
+            performances: [],
             performanceSpace: FringePerformanceSpace(name: "Original Space"),
             status: .cancelled,
             url: URL(string: "https://original.com/event")!,
@@ -159,6 +145,6 @@ extension DBFringeEvent: DBFringeModelTestSupport {
     }
 
     static var omittedDBAndAPIFields: (dbFields: [String], apiFields: [String]) {
-        (dbFields: ["venue"], apiFields: ["venue"])
+        (dbFields: ["venue", "performances"], apiFields: ["venue", "performances"])
     }
 }

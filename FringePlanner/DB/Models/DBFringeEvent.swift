@@ -21,7 +21,7 @@ final class DBFringeEvent: DBFringeModel {
     private(set) var festivalId: String
     private(set) var genre: String
     private(set) var genreTags: String?
-    private(set) var performances: [FringePerformance]
+    @Relationship private(set) var performances: [DBFringePerformance]
     private(set) var performanceSpace: FringePerformanceSpace
     private(set) var status: FringeStatus
     private(set) var url: URL
@@ -44,7 +44,7 @@ final class DBFringeEvent: DBFringeModel {
          festivalId: String,
          genre: String,
          genreTags: String? = nil,
-         performances: [FringePerformance],
+         performances: [DBFringePerformance] = [],
          performanceSpace: FringePerformanceSpace,
          status: FringeStatus,
          url: URL,
@@ -100,7 +100,6 @@ extension DBFringeEvent {
                   festivalId: event.festivalId,
                   genre: event.genre,
                   genreTags: event.genreTags,
-                  performances: event.performances,
                   performanceSpace: event.performanceSpace,
                   status: event.status,
                   url: event.url,
@@ -126,11 +125,9 @@ extension DBFringeEvent {
         self.festivalId = event.festivalId
         self.genre = event.genre
         self.genreTags = event.genreTags
-        self.performances = event.performances
         self.performanceSpace = event.performanceSpace
         self.status = event.status
         self.url = event.url
-        self.venue.update(from: event.venue)
         self.website = event.website
         self.disabled = event.disabled
         self.images = event.images
@@ -141,7 +138,7 @@ extension DBFringeEvent {
     
     static var equatableChecksForDBAndAPI: [EquatableCheck<DBFringeEvent, FringeEvent>] {
         [
-            // Note: `venue` not included as changes to that entity should not effect this one.
+            // Note: `venue` & `performances` not included as changes to that entity should not effect this one.
             EquatableCheck(lhsName: "title", rhsName: "title", lhsKeyPath: \.title, rhsKeyPath: \.title),
             EquatableCheck(lhsName: "artist", rhsName: "artist", lhsKeyPath: \.artist, rhsKeyPath: \.artist),
             EquatableCheck(lhsName: "country", rhsName: "country", lhsKeyPath: \.country, rhsKeyPath: \.country),
@@ -153,7 +150,6 @@ extension DBFringeEvent {
             EquatableCheck(lhsName: "festivalId", rhsName: "festivalId", lhsKeyPath: \.festivalId, rhsKeyPath: \.festivalId),
             EquatableCheck(lhsName: "genre", rhsName: "genre", lhsKeyPath: \.genre, rhsKeyPath: \.genre),
             EquatableCheck(lhsName: "genreTags", rhsName: "genreTags", lhsKeyPath: \.genreTags, rhsKeyPath: \.genreTags),
-            EquatableCheck(lhsName: "performances", rhsName: "performances", lhsKeyPath: \.performances, rhsKeyPath: \.performances),
             EquatableCheck(lhsName: "performanceSpace", rhsName: "performanceSpace", lhsKeyPath: \.performanceSpace, rhsKeyPath: \.performanceSpace),
             EquatableCheck(lhsName: "status", rhsName: "status", lhsKeyPath: \.status, rhsKeyPath: \.status),
             EquatableCheck(lhsName: "url", rhsName: "url", lhsKeyPath: \.url, rhsKeyPath: \.url),
