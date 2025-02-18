@@ -6,6 +6,7 @@
 //
 
 import SwiftData
+import Foundation
 
 @ModelActor
 /// Allows the importing of API models into the database
@@ -66,10 +67,15 @@ actor ImportAPIActor {
     /// Retrieves the corresponding database model for the api model
     static func getDBModel<APIFringeModelType: APIFringeModel>(from apiModel: APIFringeModelType, context: ModelContext) throws(DBError) -> APIFringeModelType.DBFringeModelType? {
         let predicate = APIFringeModelType.DBFringeModelType.predicate(forMatchingAPIModel: apiModel)
+        return try getDBModel(from: predicate, context: context)
+    }
+    
+    /// Retrieves the corresponding database model for the api model
+    static func getDBModel<DBFringeModelType: DBFringeModel>(from predicate: Predicate<DBFringeModelType>, context: ModelContext) throws(DBError) -> DBFringeModelType? {
         let descriptor = FetchDescriptor(predicate: predicate)
         
         // Get models from database
-        let allDBModels: [APIFringeModelType.DBFringeModelType]
+        let allDBModels: [DBFringeModelType]
         do {
             allDBModels = try context.fetch(descriptor)
         } catch {

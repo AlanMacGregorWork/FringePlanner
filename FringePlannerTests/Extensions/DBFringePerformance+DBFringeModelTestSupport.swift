@@ -26,7 +26,8 @@ extension DBFringePerformance: DBFringeModelTestSupport {
     }
     
     static var dbModel: DBFringePerformance {
-        DBFringePerformance(
+        let event = DBFringeEvent.dbModel
+        return DBFringePerformance(
             type: .onlineLive,
             isAtFixedTime: false,
             priceType: .free,
@@ -35,7 +36,12 @@ extension DBFringePerformance: DBFringeModelTestSupport {
             start: DateComponents(calendar: Calendar.current, year: 2025, month: 4, day: 5, hour: 17, minute: 45, second: 43).date!,
             end: DateComponents(calendar: Calendar.current, year: 2025, month: 4, day: 5, hour: 18, minute: 45, second: 43).date!,
             durationMinutes: 30,
-            eventCode: "otherVal"
+            eventCode: event.code,
+            event: event
         )
+    }
+    
+    static var omittedDBAndAPIFields: (dbFields: [String], apiFields: [String]) {
+        (dbFields: ["event"], apiFields: [])
     }
 }

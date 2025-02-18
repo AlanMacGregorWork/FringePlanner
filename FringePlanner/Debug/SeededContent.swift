@@ -108,15 +108,16 @@ struct SeededContent {
         return ["someHash": FringeImage(hash: "someHash", orientation: .landscape, type: .thumb, versions: ["original": version])]
     }
     
-    func performance(eventCode: String) -> FringePerformance {
-        let startDate = seedValue(for: randomNumber, at: \.dates)
+    func performance(eventCode: String, config: PerformanceConfig? = nil) -> FringePerformance {
+        let startDate = config?.start.value ?? seedValue(for: randomNumber, at: \.dates)
         let endDate = seedValue(for: randomNumber, at: \.dates).addingTimeInterval(60 * 60)
         let basePrice = Double((randomNumber % 4) + 1) * 10.00
         let concessionPrice = basePrice * 0.8
+        let type = config?.type.value ?? .inPerson
         
         return FringePerformance(
             title: nil,
-            type: .inPerson,
+            type: type,
             isAtFixedTime: true,
             priceType: basePrice == 0 ? .free : .paid,
             price: basePrice,
@@ -129,7 +130,7 @@ struct SeededContent {
         )
     }
 
-    func event(config: EventSeedConfig?) -> FringeEvent {
+    func event(config: EventSeedConfig? = nil) -> FringeEvent {
         let eventCode = config?.code.value ?? seedValue(for: randomNumber, at: \.codes)
         
         let venue = config?.venue.value.map({
@@ -138,6 +139,8 @@ struct SeededContent {
             case .entireObject(let object): object
             }
         }) ?? self.venue()
+
+        let performances = config?.performances.value ?? (1..<10).map({ _ in performance(eventCode: eventCode) })
         
         return .init(
             title: config?.title.value ?? seedValue(for: randomNumber, at: \.titles),
@@ -151,7 +154,7 @@ struct SeededContent {
             festivalId: seedValue(for: randomNumber, at: \.festivalIds),
             genre: seedValue(for: randomNumber, at: \.genres),
             genreTags: seedValue(for: randomNumber, at: \.genreTags),
-            performances: (1..<10).map({ _ in performance(eventCode: eventCode) }),
+            performances: performances,
             performanceSpace: FringePerformanceSpace(name: "Main Hall"),
             status: .active,
             url: URL(string: seedValue(for: randomNumber, at: \.ticketUrls))!,
@@ -196,18 +199,37 @@ extension SeededContent {
         }
     }
     
+    struct PerformanceConfig {
+        let start: OverrideSeedValue<Date>
+        let end: OverrideSeedValue<Date>
+        let type: OverrideSeedValue<FringePerformanceType>
+        
+        init(
+            start: OverrideSeedValue<Date> = .doNotOverride,
+            end: OverrideSeedValue<Date> = .doNotOverride,
+            type: OverrideSeedValue<FringePerformanceType> = .doNotOverride
+        ) {
+            self.start = start
+            self.end = end
+            self.type = type
+        }
+    }
+    
     struct EventSeedConfig {
         let code: OverrideSeedValue<String>
         let title: OverrideSeedValue<String>
+        let performances: OverrideSeedValue<[FringePerformance]>
         let venue: OverrideSeedValue<OverrideSeedVenueValue>
         
         init(
             code: OverrideSeedValue<String> = .doNotOverride,
             title: OverrideSeedValue<String> = .doNotOverride,
+            performances: OverrideSeedValue<[FringePerformance]> = .doNotOverride,
             venue: OverrideSeedValue<OverrideSeedVenueValue> = .doNotOverride
         ) {
             self.code = code
             self.title = title
+            self.performances = performances
             self.venue = venue
         }
     }

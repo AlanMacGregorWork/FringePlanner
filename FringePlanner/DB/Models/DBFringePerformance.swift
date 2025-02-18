@@ -21,6 +21,7 @@ final class DBFringePerformance: DBFringeModel {
     private(set) var end: Date
     private(set) var durationMinutes: Int
     private(set) var eventCode: String
+    @Relationship private(set) var event: DBFringeEvent
     
     init(title: String? = nil,
          type: FringePerformanceType,
@@ -32,7 +33,8 @@ final class DBFringePerformance: DBFringeModel {
          start: Date,
          end: Date,
          durationMinutes: Int,
-         eventCode: String
+         eventCode: String,
+         event: DBFringeEvent
     ) {
         self.title = title
         self.type = type
@@ -45,11 +47,19 @@ final class DBFringePerformance: DBFringeModel {
         self.end = end
         self.durationMinutes = durationMinutes
         self.eventCode = eventCode
+        self.event = event
     }
 }
 
 extension DBFringePerformance {
     convenience init(apiModel performance: FringePerformance, context: ModelContext) throws(DBError) {
+        // The event should have been created first as multiple performances can share the same event. If the event
+        // cannot be found, then something has gone wrong and the performance cannot be created.
+        let predicate: Predicate<DBFringeEvent> = #Predicate { $0.code == performance.eventCode }
+        guard let dbEvent = try ImportAPIActor.getDBModel(from: predicate, context: context) else {
+            throw .assumptionFailed(.expectedCreatedVenue)
+        }
+        
         self.init(
             title: performance.title,
             type: performance.type,
@@ -61,7 +71,8 @@ extension DBFringePerformance {
             start: performance.start,
             end: performance.end,
             durationMinutes: performance.durationMinutes,
-            eventCode: performance.eventCode
+            eventCode: performance.eventCode,
+            event: dbEvent
         )
     }
     
@@ -100,6 +111,7 @@ extension DBFringePerformance {
         // performance id as each performance is allocated a set time and should not move our of it. This information
         // was gathered from an enquiry to the API owner
         let start = apiModel.start
-        return #Predicate { $0.start == start }
+        let eventCode = apiModel.eventCode
+        return #Predicate { $0.start == start && $0.eventCode == eventCode }
     }
 }
