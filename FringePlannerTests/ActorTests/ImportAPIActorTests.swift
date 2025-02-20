@@ -145,7 +145,8 @@ struct ImportAPIActorTests {
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT2"),
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT3"),
             .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"),
-            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2")
+            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2"),
+            .noChanges // Duplicate Venue
         ]), "All expected statuses should be present")
     }
     
@@ -164,19 +165,19 @@ struct ImportAPIActorTests {
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT2"),
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT3"),
             .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"),
-            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2")
+            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2"),
+            .noChanges // Duplicate Venue (Event 1 & 3)
         ]), "All expected statuses should be present")
 
         // Attempting to re-import the events should make no changes
         let reimportedStatuses = try await importAPIActor.updateEvents([event1, event2, event3])
-        #expect(reimportedStatuses.count == 5, "5 noChanges statuses should be returned: \(reimportedStatuses)")
-        #expect(reimportedStatuses.count(where: { $0 == .noChanges }) == 5, "Content already exists so does not require updating: \(reimportedStatuses)")
         #expect(reimportedStatuses.unorderedElementsEqual([
             .noChanges,
             .noChanges,
             .noChanges,
             .noChanges,
-            .noChanges
+            .noChanges,
+            .noChanges // Duplicate Venue
         ]), "Content already exists so does not require updating")
     }
     
@@ -190,27 +191,25 @@ struct ImportAPIActorTests {
 
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([event1, event2, event3])
-        #expect(initialStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(initialStatuses)")
         #expect(initialStatuses.unorderedElementsEqual([
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"),
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT2"),
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT3"),
             .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"),
-            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2")
+            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2"),
+            .noChanges // Duplicate Venue
         ]), "All expected statuses should be present")
 
         // Create a new event with a changed title
         let updatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), title: .override("Title Changed"), performances: performances, venue: .override(.entireObject(event1.venue))))
-
         try #require(updatedEvent1 != event1, "Sanity Check: Models should be different")
         try #require(updatedEvent1.title != event1.title, "Sanity Check: Models should be different")
         try #require(updatedEvent1.code == event1.code, "Sanity Check: Models should share the same code value")
 
         // Update the event in the database
         let updatedStatuses = try await importAPIActor.updateEvents([updatedEvent1, event2, event3])
-        
-        #expect(updatedStatuses.count == 5, "5 (3 events & 2 venues) statuses should be returned: \(updatedStatuses)")
         #expect(updatedStatuses.unorderedElementsEqual([
+            .noChanges,
             .noChanges,
             .noChanges,
             .noChanges,
@@ -242,7 +241,8 @@ struct ImportAPIActorTests {
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT2"),
             .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT3"),
             .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"),
-            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2")
+            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2"),
+            .noChanges
         ]), "All expected statuses should be present")
 
         // Create a venue that has a changed name
@@ -256,6 +256,7 @@ struct ImportAPIActorTests {
         // Update the event in the database
         let updatedStatuses = try await importAPIActor.updateEvents([event1, event2, updatedEvent3])
         #expect(updatedStatuses.unorderedElementsEqual([
+            .noChanges,
             .noChanges,
             .noChanges,
             .noChanges,
@@ -293,7 +294,8 @@ struct ImportAPIActorTests {
             .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"),
             .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance1.referenceID),
             .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance2.referenceID),
-            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance3.referenceID)
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance3.referenceID),
+            .noChanges
         ]), "All expected statuses should be present")
 
         // Add the events (with the updated performances)
@@ -301,6 +303,7 @@ struct ImportAPIActorTests {
         let apiUpdatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiUpdatedPerformance1]), venue: .override(.entireObject(venue))))
         let updatedStatuses = try await importAPIActor.updateEvents([apiUpdatedEvent1, apiOriginalEvent2])
         #expect(updatedStatuses.unorderedElementsEqual([
+            .noChanges,
             .noChanges,
             .noChanges,
             .noChanges,

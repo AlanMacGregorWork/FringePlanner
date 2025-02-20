@@ -23,9 +23,15 @@ actor ImportAPIActor {
 
     /// The main entry point for updating the database from the fringe events
     func updateEvents(_ events: [FringeEvent]) throws(DBError) -> [Status] {
-        let venues = Set(events.map(\.venue)) // Set used to avoid attempting to import duplicate models
-        let performances = events.flatMap(\.performances)
-        return try venues.map(updateModel(from:)) + events.map(updateModel(from:)) + performances.map(updateModel(from:))
+        try events.map(update(event:)).flatMap({ $0 })
+    }
+    
+    /// Updates/Adds a single fringe event into the database
+    func update(event: FringeEvent) throws(DBError) -> [Status] {
+        let venueStatus = try updateModel(from: event.venue)
+        let eventStatus = try updateModel(from: event)
+        let performanceStatuses = try event.performances.map(updateModel(from:))
+        return [venueStatus, eventStatus] + performanceStatuses
     }
 
     /// Will insert the model if it does not exist or update if it does exist.
