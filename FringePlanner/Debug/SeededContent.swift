@@ -95,6 +95,10 @@ struct SeededContent {
             disabledDescription: seedValue(for: currentRandom, at: \.disabledDescriptions)
         )
     }
+
+    func date() -> Date {
+        return seedValue(for: randomNumber, at: \.dates)
+    }   
     
     func images() -> [String: FringeImage] {
         let version = FringeImage.Version(
@@ -109,14 +113,14 @@ struct SeededContent {
     }
     
     func performance(eventCode: String, config: PerformanceConfig? = nil) -> FringePerformance {
-        let startDate = config?.start.value ?? seedValue(for: randomNumber, at: \.dates)
+        let startDate = config?.start.value ?? date()
         let endDate = seedValue(for: randomNumber, at: \.dates).addingTimeInterval(60 * 60)
         let basePrice = Double((randomNumber % 4) + 1) * 10.00
         let concessionPrice = basePrice * 0.8
         let type = config?.type.value ?? .inPerson
-        
+        let title = config?.title.value ?? seedValue(for: randomNumber, at: \.titles)
         return FringePerformance(
-            title: nil,
+            title: title,
             type: type,
             isAtFixedTime: true,
             priceType: basePrice == 0 ? .free : .paid,
@@ -200,15 +204,18 @@ extension SeededContent {
     }
     
     struct PerformanceConfig {
+        let title: OverrideSeedValue<String>
         let start: OverrideSeedValue<Date>
         let end: OverrideSeedValue<Date>
         let type: OverrideSeedValue<FringePerformanceType>
         
         init(
+            title: OverrideSeedValue<String> = .doNotOverride,
             start: OverrideSeedValue<Date> = .doNotOverride,
             end: OverrideSeedValue<Date> = .doNotOverride,
             type: OverrideSeedValue<FringePerformanceType> = .doNotOverride
         ) {
+            self.title = title
             self.start = start
             self.end = end
             self.type = type
