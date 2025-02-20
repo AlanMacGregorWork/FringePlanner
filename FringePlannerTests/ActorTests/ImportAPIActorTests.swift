@@ -133,9 +133,10 @@ struct ImportAPIActorTests {
     @Test("Events insert if they do not exist")
     func testEventsInsertIfTheyDoNotExist() async throws {
         // Setup models
-        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), venue: .override(.config(.init(code: .override("VENUE1"))))))
-        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), venue: .override(.config(.init(code: .override("VENUE2"))))))
-        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), venue: .override(.entireObject(event1.venue))))
+        let performances = SeededContent.OverrideSeedValue<[FringePerformance]>.override([])
+        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: performances, venue: .override(.config(.init(code: .override("VENUE1"))))))
+        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), performances: performances, venue: .override(.config(.init(code: .override("VENUE2"))))))
+        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), performances: performances, venue: .override(.entireObject(event1.venue))))
 
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([event1, event2, event3])
@@ -151,9 +152,10 @@ struct ImportAPIActorTests {
     @Test("Events do not insert or update if changes do not exist")
     func testEventsDoNotInsertOrUpdateIfChangesDoNotExist() async throws {
         // Setup models
-        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), venue: .override(.config(.init(code: .override("VENUE1"))))))
-        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), venue: .override(.config(.init(code: .override("VENUE2"))))))
-        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), venue: .override(.entireObject(event1.venue))))
+        let performances = SeededContent.OverrideSeedValue<[FringePerformance]>.override([])
+        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: performances, venue: .override(.config(.init(code: .override("VENUE1"))))))
+        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), performances: performances, venue: .override(.config(.init(code: .override("VENUE2"))))))
+        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), performances: performances, venue: .override(.entireObject(event1.venue))))
 
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([event1, event2, event3])
@@ -181,9 +183,10 @@ struct ImportAPIActorTests {
     @Test("Events will update if changes are found")
     func testEventsWillUpdateIfChangesAreFound_Event() async throws {
         // Setup models
-        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), venue: .override(.config(.init(code: .override("VENUE1"))))))
-        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), venue: .override(.entireObject(event1.venue))))
-        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), venue: .override(.config(.init(code: .override("VENUE2"))))))
+        let performances = SeededContent.OverrideSeedValue<[FringePerformance]>.override([])
+        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: performances, venue: .override(.config(.init(code: .override("VENUE1"))))))
+        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), performances: performances, venue: .override(.entireObject(event1.venue))))
+        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), performances: performances, venue: .override(.config(.init(code: .override("VENUE2"))))))
 
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([event1, event2, event3])
@@ -197,7 +200,7 @@ struct ImportAPIActorTests {
         ]), "All expected statuses should be present")
 
         // Create a new event with a changed title
-        let updatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), title: .override("Title Changed"), venue: .override(.entireObject(event1.venue))))
+        let updatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), title: .override("Title Changed"), performances: performances, venue: .override(.entireObject(event1.venue))))
 
         try #require(updatedEvent1 != event1, "Sanity Check: Models should be different")
         try #require(updatedEvent1.title != event1.title, "Sanity Check: Models should be different")
@@ -227,9 +230,10 @@ struct ImportAPIActorTests {
     @Test("Venues will update if changes are found")
     func testVenuesWillUpdateIfChangesAreFound_Venue() async throws {
         // Setup models
-        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), venue: .override(.config(.init(code: .override("VENUE1"))))))
-        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), venue: .override(.entireObject(event1.venue))))
-        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), venue: .override(.config(.init(code: .override("VENUE2"))))))
+        let performances = SeededContent.OverrideSeedValue<[FringePerformance]>.override([])
+        let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: performances, venue: .override(.config(.init(code: .override("VENUE1"))))))
+        let event2 = SeededContent().event(config: .init(code: .override("EVENT2"), performances: performances, venue: .override(.entireObject(event1.venue))))
+        let event3 = SeededContent().event(config: .init(code: .override("EVENT3"), performances: performances, venue: .override(.config(.init(code: .override("VENUE2"))))))
 
         // Importing the events should insert 5 models
         let initialStatuses = try await importAPIActor.updateEvents([event1, event2, event3])
@@ -265,6 +269,51 @@ struct ImportAPIActorTests {
             try #require(venues.count == 1, "There should still only be 1 modes in the database")
             let venue = try #require(venues.first)
             #expect(venue.name == updatedVenue2.name, "Name should have been updated")
+        }
+    }
+
+    @Test("Performances will update if changes are found")
+    func testPerformancesWillUpdateIfChangesAreFound_Performance() async throws {
+        // Setup models
+        let date1 = SeededContent().date()
+        let date2 = date1.addingTimeInterval(60)
+        let date3 = date1.addingTimeInterval(120)
+        let venue = SeededContent().venue(config: .init(code: .override("VENUE1")))
+        let apiOriginalPerformance1 = SeededContent().performance(eventCode: "EVENT1", config: .init(title: .override("Title1"), start: .override(date1)))
+        let apiOriginalPerformance2 = SeededContent().performance(eventCode: "EVENT1", config: .init(title: .override("Title2"), start: .override(date2)))
+        let apiOriginalPerformance3 = SeededContent().performance(eventCode: "EVENT2", config: .init(title: .override("Title3"), start: .override(date3)))
+        let apiOriginalEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiOriginalPerformance1, apiOriginalPerformance2]), venue: .override(.entireObject(venue))))
+        let apiOriginalEvent2 = SeededContent().event(config: .init(code: .override("EVENT2"), performances: .override([apiOriginalPerformance3]), venue: .override(.entireObject(venue))))
+        
+        // Add the events
+        let initialStatuses = try await importAPIActor.updateEvents([apiOriginalEvent1, apiOriginalEvent2])
+        #expect(initialStatuses.unorderedElementsEqual([
+            .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"),
+            .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT2"),
+            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"),
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance1.referenceID),
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance2.referenceID),
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance3.referenceID)
+        ]), "All expected statuses should be present")
+
+        // Add the events (with the updated performances)
+        let apiUpdatedPerformance1 = SeededContent().performance(eventCode: "EVENT1", config: .init(title: .override("UpdatedTitle"), start: .override(date1)))
+        let apiUpdatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiUpdatedPerformance1]), venue: .override(.entireObject(venue))))
+        let updatedStatuses = try await importAPIActor.updateEvents([apiUpdatedEvent1, apiOriginalEvent2])
+        #expect(updatedStatuses.unorderedElementsEqual([
+            .noChanges,
+            .noChanges,
+            .noChanges,
+            .updatedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"),
+            .updatedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance1.referenceID)
+        ]))
+        try await importAPIActor.saveChanges()
+
+        // Performance changes should now have been made
+        try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>(predicate: #Predicate { $0.eventCode == apiUpdatedPerformance1.eventCode && $0.start == apiUpdatedPerformance1.start })) { performances in
+            try #require(performances.count == 1, "There should still only be 1 modes in the database")
+            let performance = try #require(performances.first)
+            #expect(performance.title == "UpdatedTitle", "Title should have been updated")
         }
     }
 
