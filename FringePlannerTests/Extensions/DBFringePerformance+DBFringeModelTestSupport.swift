@@ -42,6 +42,6 @@ extension DBFringePerformance: DBFringeModelTestSupport {
     }
     
     static var omittedDBAndAPIFields: (dbFields: [String], apiFields: [String]) {
-        (dbFields: ["event"], apiFields: [])
+        (dbFields: ["event", "statusString"], apiFields: [])
     }
 }

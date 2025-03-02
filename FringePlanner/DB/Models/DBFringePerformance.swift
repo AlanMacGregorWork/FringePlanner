@@ -10,6 +10,14 @@ import Foundation
 
 @Model
 final class DBFringePerformance: DBFringeModel {
+    /// SwiftData does not currently support using predicates so instead the `statusString` will allow saving the
+    /// `rawValue` into the database. It uses `originalName` as `status` so if enum predicate support is eventually
+    /// added this can be replaced with the `Status`.
+    @Attribute(originalName: "status") private var statusString: String
+    private(set) var status: Status {
+        get { Status(rawValue: statusString) ?? .defaultValue }
+        set { statusString = newValue.rawValue }
+    }
     private(set) var title: String?
     private(set) var type: FringePerformanceType
     private(set) var isAtFixedTime: Bool
@@ -34,7 +42,8 @@ final class DBFringePerformance: DBFringeModel {
          end: Date,
          durationMinutes: Int,
          eventCode: String,
-         event: DBFringeEvent
+         event: DBFringeEvent,
+         status: Status = .defaultValue
     ) {
         self.title = title
         self.type = type
@@ -48,6 +57,7 @@ final class DBFringePerformance: DBFringeModel {
         self.durationMinutes = durationMinutes
         self.eventCode = eventCode
         self.event = event
+        self.statusString = status.rawValue
     }
 }
 
@@ -88,6 +98,8 @@ extension DBFringePerformance {
         self.end = performance.end
         self.durationMinutes = performance.durationMinutes
         self.eventCode = performance.eventCode
+        // If the performance exists from the API it must mean that the performance is still `active`
+        self.status = Status.active
     }
     
     static var equatableChecksForDBAndAPI: [EquatableCheck<DBFringePerformance, FringePerformance>] {
@@ -113,5 +125,17 @@ extension DBFringePerformance {
         let start = apiModel.start
         let eventCode = apiModel.eventCode
         return #Predicate { $0.start == start && $0.eventCode == eventCode }
+    }
+    
+    /// Denotes whether the performance is still active for the event, or whether it's been cancelled.
+    ///  - Note: The API currently does not offer any information as to whether the performance is still going ahead,
+    /// but if the performance is cancelled it will not be included in the events performances array. We can can
+    /// therefore identify if a performance has been cancelled if it previously existed in the database and with it now
+    /// not included in the array from the API.
+    enum Status: String, Codable {
+        case active
+        case cancelled
+        
+        static let defaultValue = Status.active
     }
 }
