@@ -30,8 +30,10 @@ actor ImportAPIActor {
     func update(event: FringeEvent) throws(DBError) -> [Status] {
         let venueStatus = try updateModel(from: event.venue)
         let eventStatus = try updateModel(from: event)
-        let performanceStatuses = try event.performances.map(updateModel(from:))
-        return [venueStatus, eventStatus] + performanceStatuses
+        let performanceInputStatuses = try event.performances.map(updateModel(from:))
+        let performanceCancelledStatuses = try cancelMissingPerformances(from: event)
+        // Return statuses
+        return [venueStatus, eventStatus] + performanceInputStatuses + performanceCancelledStatuses
     }
 
     /// Will insert the model if it does not exist or update if it does exist.
@@ -60,6 +62,16 @@ actor ImportAPIActor {
         guard dbModel.modelContext != nil else { throw .insertFailed(.modelDidNotInsertIntoContext) }
         return .insertedModel(type: APIFringeModelType.DBFringeModelType.self, referenceID: apiModel.referenceID)
     }
+    
+    /// Cancels any performances no longer included in the event
+    private func cancelMissingPerformances(from event: FringeEvent) throws(DBError) -> [Status] {
+        let predicate = newlyCancelledPerformancesPredicate(from: event)
+        let cancelledPerformances = try Self.getDBModels(from: predicate, context: modelContext)
+        return cancelledPerformances.map({ performance in
+            performance.updateStatusToCancelled()
+            return Status.updatedModel(type: DBFringePerformance.self, referenceID: performance.referenceID)
+        })
+    }
 
     /// Save changes contained inside this context
     func saveChanges() throws(DBError) {
@@ -79,16 +91,8 @@ actor ImportAPIActor {
     
     /// Retrieves the corresponding database model for the api model
     static func getDBModel<DBFringeModelType: DBFringeModel>(from predicate: Predicate<DBFringeModelType>, context: ModelContext) throws(DBError) -> DBFringeModelType? {
-        let descriptor = FetchDescriptor(predicate: predicate)
-        
         // Get models from database
-        let allDBModels: [DBFringeModelType]
-        do {
-            allDBModels = try context.fetch(descriptor)
-        } catch {
-            fringeAssertFailure("Database fetch failed")
-            throw DBError.fetchFailed
-        }
+        let allDBModels = try getDBModels(from: predicate, context: context)
         
         // Ensure that no more than one more model is found as the the response should be unique.
         guard allDBModels.count <= 1 else {
@@ -96,6 +100,35 @@ actor ImportAPIActor {
             throw DBError.assumptionFailed(.multipleModelsForSingle)
         }
         return allDBModels.first
+    }
+    
+    /// Retrieves the corresponding database model for the api model
+    static func getDBModels<DBFringeModelType: DBFringeModel>(from predicate: Predicate<DBFringeModelType>, context: ModelContext) throws(DBError) -> [DBFringeModelType] {
+        let descriptor = FetchDescriptor(predicate: predicate)
+        do {
+            return try context.fetch(descriptor)
+        } catch {
+            fringeAssertFailure("Database fetch failed")
+            throw DBError.fetchFailed
+        }
+    }
+}
+
+// MARK: - Predicates
+
+/// Predicate to find performances that are no longer active
+private func newlyCancelledPerformancesPredicate(from event: FringeEvent) -> Predicate<DBFringePerformance> {
+    let eventCode = event.code
+    let performanceStartDates = event.performances.map(\.start)
+    let activePredicate = DBFringePerformance.predicate(for: .active)
+    
+    return #Predicate<DBFringePerformance> { dbPerformance in
+        // The performance must be for this event
+        dbPerformance.eventCode == eventCode &&
+        // The performance must not be included in the input performances
+        !performanceStartDates.contains(dbPerformance.start) &&
+        // The performance must previously have previously been active
+        activePredicate.evaluate(dbPerformance)
     }
 }
 

@@ -181,8 +181,10 @@ struct ImportAPIActorTests {
         ]), "Content already exists so does not require updating")
     }
     
+    // MARK: Individual Model Updates
+    
     @Test("Events will update if changes are found")
-    func testEventsWillUpdateIfChangesAreFound_Event() async throws {
+    func testEventsWillUpdateIfChangesAreFound() async throws {
         // Setup models
         let performances = SeededContent.OverrideSeedValue<[FringePerformance]>.override([])
         let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: performances, venue: .override(.config(.init(code: .override("VENUE1"))))))
@@ -227,7 +229,7 @@ struct ImportAPIActorTests {
     }
     
     @Test("Venues will update if changes are found")
-    func testVenuesWillUpdateIfChangesAreFound_Venue() async throws {
+    func testVenuesWillUpdateIfChangesAreFound() async throws {
         // Setup models
         let performances = SeededContent.OverrideSeedValue<[FringePerformance]>.override([])
         let event1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: performances, venue: .override(.config(.init(code: .override("VENUE1"))))))
@@ -274,7 +276,7 @@ struct ImportAPIActorTests {
     }
 
     @Test("Performances will update if changes are found")
-    func testPerformancesWillUpdateIfChangesAreFound_Performance() async throws {
+    func testPerformancesWillUpdateIfChangesAreFound() async throws {
         // Setup models
         let date1 = SeededContent().date()
         let date2 = date1.addingTimeInterval(60)
@@ -297,12 +299,20 @@ struct ImportAPIActorTests {
             .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance3.referenceID),
             .noChanges
         ]), "All expected statuses should be present")
+        try await importAPIActor.saveChanges()
+        // Performances should not include the "UpdatedTitle" as this will be tested later
+        try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>(predicate: #Predicate { $0.start == date1 })) { performances in
+            try #require(performances.count == 1, "There should still only be 1 model in the database")
+            let performance = try #require(performances.first)
+            #expect(performance.title != "UpdatedTitle", "Title should not have test title")
+        }
 
         // Add the events (with the updated performances)
-        let apiUpdatedPerformance1 = SeededContent().performance(eventCode: "EVENT1", config: .init(title: .override("UpdatedTitle"), start: .override(date1)))
-        let apiUpdatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiUpdatedPerformance1]), venue: .override(.entireObject(venue))))
+        let apiUpdatedPerformance1 = SeededContent().performance(eventCode: "EVENT1", config: .init(title: .override("UpdatedTitle"), start: .override(apiOriginalPerformance1.start)))
+        let apiUpdatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiUpdatedPerformance1, apiOriginalPerformance2]), venue: .override(.entireObject(venue))))
         let updatedStatuses = try await importAPIActor.updateEvents([apiUpdatedEvent1, apiOriginalEvent2])
         #expect(updatedStatuses.unorderedElementsEqual([
+            .noChanges,
             .noChanges,
             .noChanges,
             .noChanges,
@@ -311,13 +321,84 @@ struct ImportAPIActorTests {
             .updatedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance1.referenceID)
         ]))
         try await importAPIActor.saveChanges()
-
         // Performance changes should now have been made
-        try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>(predicate: #Predicate { $0.eventCode == apiUpdatedPerformance1.eventCode && $0.start == apiUpdatedPerformance1.start })) { performances in
-            try #require(performances.count == 1, "There should still only be 1 modes in the database")
+        try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>(predicate: #Predicate { $0.start == date1 })) { performances in
+            try #require(performances.count == 1, "There should still only be 1 model in the database")
             let performance = try #require(performances.first)
             #expect(performance.title == "UpdatedTitle", "Title should have been updated")
         }
+    }
+    
+    // MARK: Performance Specific Tests
+    
+    @Test("Missing performances will become cancelled")
+    func testMissingPerformancesWillBecomeCancelled() async throws {
+        // Setup models
+        let date1 = SeededContent().date()
+        let date2 = date1.addingTimeInterval(1000)
+        let date3 = date1.addingTimeInterval(2000)
+        let venue = SeededContent().venue(config: .init(code: .override("VENUE1")))
+        let apiOriginalPerformance1 = SeededContent().performance(eventCode: "EVENT1", config: .init(title: .override("Title1"), start: .override(date1)))
+        let apiOriginalPerformance2 = SeededContent().performance(eventCode: "EVENT1", config: .init(title: .override("Title2"), start: .override(date2)))
+        let apiOriginalPerformance3 = SeededContent().performance(eventCode: "EVENT2", config: .init(title: .override("Title3"), start: .override(date3)))
+        let apiOriginalEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiOriginalPerformance1, apiOriginalPerformance2]), venue: .override(.entireObject(venue))))
+        let apiOriginalEvent2 = SeededContent().event(config: .init(code: .override("EVENT2"), performances: .override([apiOriginalPerformance3]), venue: .override(.entireObject(venue))))
+        
+        // Add the events
+        let initialStatuses = try await importAPIActor.updateEvents([apiOriginalEvent1, apiOriginalEvent2])
+        #expect(initialStatuses.unorderedElementsEqual([
+            .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"),
+            .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT2"),
+            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"),
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance1.referenceID),
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance2.referenceID),
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance3.referenceID),
+            .noChanges
+        ]), "All expected statuses should be present")
+        try await importAPIActor.saveChanges()
+        // All performances imported should be active   
+        try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>()) { performances in
+            let performance1 = try #require(performances.first { $0.start == apiOriginalPerformance1.start })
+            let performance2 = try #require(performances.first { $0.start == apiOriginalPerformance2.start })
+            let performance3 = try #require(performances.first { $0.start == apiOriginalPerformance3.start })
+            #expect(performance1.status == .active, "Performance 1 should have a status of active")
+            #expect(performance2.status == .active, "Performance 2 should have a status of active")
+            #expect(performance3.status == .active, "Performance 3 should have a status of active")
+        }
+        
+        // Add the events (with a performance now missing)
+        let apiUpdatedEvent1 = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiOriginalPerformance1]), venue: .override(.entireObject(venue))))
+        let updatedStatuses = try await importAPIActor.updateEvents([apiUpdatedEvent1, apiOriginalEvent2])
+        #expect(updatedStatuses.unorderedElementsEqual([
+            .noChanges,
+            .noChanges,
+            .noChanges,
+            .noChanges,
+            .noChanges,
+            .updatedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"),
+            .updatedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance2.referenceID)
+        ]))
+        try await importAPIActor.saveChanges()
+        // Only performance 2 should have been cancelled
+        try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>()) { performances in
+            let performance1 = try #require(performances.first { $0.start == apiOriginalPerformance1.start })
+            let performance2 = try #require(performances.first { $0.start == apiOriginalPerformance2.start })
+            let performance3 = try #require(performances.first { $0.start == apiOriginalPerformance3.start })
+            #expect(performance1.status == .active, "Performance 1 still existed in event and should remain active")
+            #expect(performance2.status == .cancelled, "Performance 2 was not included in the event and should have a status of cancelled")
+            #expect(performance3.status == .active, "Performance 3 did not have an event imported and should remain active")
+        }
+        
+        // Add the events (with the performance still missing, no further changes will be made)
+        let reUpdatedStatuses = try await importAPIActor.updateEvents([apiUpdatedEvent1, apiOriginalEvent2])
+        #expect(reUpdatedStatuses.unorderedElementsEqual([
+            .noChanges,
+            .noChanges,
+            .noChanges,
+            .noChanges,
+            .noChanges,
+            .noChanges
+        ]))
     }
 
     // MARK: Helper

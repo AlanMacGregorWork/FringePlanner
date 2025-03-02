@@ -102,6 +102,10 @@ extension DBFringePerformance {
         self.status = Status.active
     }
     
+    func updateStatusToCancelled() {
+        self.status = .cancelled
+    }
+    
     static var equatableChecksForDBAndAPI: [EquatableCheck<DBFringePerformance, FringePerformance>] {
         [
             EquatableCheck(lhsName: "title", rhsName: "title", lhsKeyPath: \.title, rhsKeyPath: \.title),
@@ -137,5 +141,18 @@ extension DBFringePerformance {
         case cancelled
         
         static let defaultValue = Status.active
+    }
+    
+    /// A custom referenceID for `DBFringePerformance` as cancelling performances will not have a API model
+    /// to use as its reference
+    var referenceID: String { "Performance-\(eventCode)-\(fringeDateFormatter.string(from: start))" }
+    
+    /// A predicate to check for the status
+    static func predicate(for status: DBFringePerformance.Status) -> Predicate<DBFringePerformance> {
+        // Note: static func created as `statusString` is not available outside this file
+        #Predicate<DBFringePerformance>{ dbPerformance in
+            // The performance must previously have been active
+            dbPerformance.statusString == status.rawValue
+        }
     }
 }
