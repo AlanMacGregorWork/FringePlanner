@@ -435,7 +435,7 @@ extension ImportAPIActorTests {
             let container = try ModelContainer(configurations: config)
             let insertActor = ImportAPIActor(modelContainer: container)
             
-            try await #require(throws: DBError.insertFailed(.modelDidNotInsertIntoContext)) {
+            try await #require(throws: DBError.insertFailed(.modelNotFoundInSchema)) {
                 try await insertActor.insertModel(from: DBFringeVenue.apiModel)
             }
         }

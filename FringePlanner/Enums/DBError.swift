@@ -23,6 +23,7 @@ extension DBError: CustomStringConvertible {
         case .assumptionFailed(.expectedCreatedVenue): return "Expected created venue not found"
         case .assumptionFailed(.multipleModelsForSingle): return "Found multiple models when expecting single model"
         case .insertFailed(.modelDidNotInsertIntoContext): return "Failed to insert model into the context. The model type may not be set for use with the ModelContainer"
+        case .insertFailed(.modelNotFoundInSchema): return "Failed to insert model into the context. The model type was not found in the ModelContainer schemas"
         }
     }
 }
@@ -38,6 +39,7 @@ extension DBError {
     
     /// An insertion action failure
     enum InsertFailedReason: Equatable {
+        case modelNotFoundInSchema
         case modelDidNotInsertIntoContext
     }
 }

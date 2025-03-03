@@ -54,6 +54,13 @@ actor ImportAPIActor {
     
     /// Insert the model into the Database
     func insertModel<APIFringeModelType: APIFringeModel>(from apiModel: APIFringeModelType) throws(DBError) -> ImportAPIActor.Status {
+        // Check to see if the database model name is included in the schema.
+        // This isn't fully accurate but should work for most types.
+        let dbEntityName = String(describing: APIFringeModelType.DBFringeModelType.self)
+        guard modelContext.container.schema.entities.contains(where: { $0.name == dbEntityName }) else {
+            throw .insertFailed(.modelNotFoundInSchema)
+        }
+        
         // Create a new model and insert it into the database
         let dbModel = try APIFringeModelType.DBFringeModelType(apiModel: apiModel, context: modelContext)
         modelContext.insert(dbModel)
