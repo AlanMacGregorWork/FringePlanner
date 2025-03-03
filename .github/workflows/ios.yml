@@ -73,13 +73,23 @@ jobs:
             -testPlan UnitTestPlan \
             test | xcpretty --report junit --output test_results.xml
 
+      - name: Convert JUnit to CTRF
+        uses: ctrf-io/junit-to-ctrf@v1
+        if: always()
+        with:
+          input: test_results.xml
+          output: ctrf_results.json
+
       - name: Publish Test Results
         uses: ctrf-io/github-test-reporter@v1
         if: always()
         with:
-          name: XCode Tests
-          path: test_results.xml
-          reporter: junit
+          report-path: 'ctrf_results.json'
+          flaky-rate-report: true
+          pull-request: true
+          update-comment: true
+          comment-tag: '${{ github.workflow }}-${{ github.job }}'
+          github-report: true
           
       - name: Upload test results
         uses: actions/upload-artifact@v4
