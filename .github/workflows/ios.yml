@@ -1,4 +1,4 @@
-name: iOS starter workflow
+name: iOS workflow
 
 on:
   push:
@@ -6,39 +6,39 @@ on:
   pull_request:
     branches: [ "main", "ci" ]
     
-env:
-  SCHEME: FringePlanner
-  PROJECT: FringePlanner.xcodeproj
+permissions:
+  checks: write
+  contents: read
 
 jobs:
   build:
-    name: Build and Test using any available iPhone simulator
+    name: Build and Test
     runs-on: macos-14
     timeout-minutes: 10     # Ensures that if the tests get stuck there will me a timeout to reduce the cost of running this
 
     steps:
-      - name: List available Xcode versions
-        run: ls /Applications | grep Xcode
-        
-      - name: List available simulators
-        run: xcrun xctrace list devices
-        
-      - name: Show current version of Xcode
+      - name: (Debug) List available Xcode versions
+        run: ls /Applications | grep Xcode       
+
+      - name: (Debug) Show current version of Xcode
         run: xcodebuild -version
         
       - name: Set up Xcode version
         run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
-          
-      - name: Checkout
+        
+      - name: (Debug) List available simulators
+        run: xcrun xctrace list devices
+
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Current Location
+      - name: (Debug) Show current location
         run: pwd;ls FringePlanner
 
       - name: Add fake keys
         run: echo -e "FRINGE_API_KEY = fake\nFRINGE_SECRET_SIGNING_KEY = fake" > FringePlanner/Helper/Keys.xcconfig
 
-      - name: Display fake keys
+      - name: (Debug) Show fake keys
         run: cat FringePlanner/Helper/Keys.xcconfig
         
       - name: Run tests using fastlane
