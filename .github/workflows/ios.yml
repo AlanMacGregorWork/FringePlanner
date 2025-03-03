@@ -71,33 +71,26 @@ jobs:
             -destination "platform=$platform,id=${{ steps.set-simulator.outputs.simulator }},OS=$IOS_VERSION" \
             -resultBundlePath TestResults.xcresult \
             -testPlan UnitTestPlan \
-            test 
-      # | xcpretty --report junit --output test_results.xml
+            test | xcpretty --report junit --output test_results.xml
 
-      # - name: Publish Test Results
-      #   uses: ctrf-io/github-test-reporter@v1
-      #   if: always()
-      #   with:
-      #     name: XCode Tests
-      #     path: test_results.xml
-      #     reporter: junit
-          
-      - name: Process xcresult
-        uses: kishikawakatsumi/xcresulttool@v1
+      - name: Publish Test Results
+        uses: ctrf-io/github-test-reporter@v1
         if: always()
         with:
-          path: TestResults.xcresult
+          name: XCode Tests
+          path: test_results.xml
+          reporter: junit
           
-      # - name: Upload test results
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: test-results
-      #     path: test_results.xml
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: test_results.xml
 
-      # - name: Upload xcresult
-      #   uses: actions/upload-artifact@v4
-      #   if: always()
-      #   with:
-      #     name: TestResults.xcresult
-      #     path: TestResults.xcresult
+      - name: Upload xcresult
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: TestResults.xcresult
+          path: TestResults.xcresult
