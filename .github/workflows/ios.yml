@@ -73,12 +73,14 @@ jobs:
             -testPlan UnitTestPlan \
             test | xcpretty --report junit --output test_results.xml
 
-      - name: Convert JUnit to CTRF
-        uses: ctrf-io/junit-to-ctrf@v1
-        if: always()
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          input: test_results.xml
-          output: ctrf_results.json
+          node-version: '18'
+
+      - name: Convert JUnit to CTRF
+        run: |
+          npx @ctrf/cli convert junit test_results.xml -o ctrf_results.json
 
       - name: Publish Test Results
         uses: ctrf-io/github-test-reporter@v1
