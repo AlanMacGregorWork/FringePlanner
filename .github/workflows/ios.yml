@@ -81,6 +81,12 @@ jobs:
           path: test_results.xml
           reporter: junit
           
+      - name: Process xcresult
+        uses: kishikawakatsumi/xcresulttool@v1
+        if: always()
+        with:
+          path: TestResults.xcresult
+          
       - name: Upload test results
         uses: actions/upload-artifact@v4
         if: always()
