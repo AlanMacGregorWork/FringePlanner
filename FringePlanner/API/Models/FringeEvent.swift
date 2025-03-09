@@ -35,8 +35,11 @@ struct FringeEvent: Equatable, Hashable {
     let year: Int
 }
 
-extension FringeEvent: Identifiable {
-    var id: String { code }
+// MARK: APIFringeModelType
+
+extension FringeEvent: APIFringeModel {
+    typealias DBFringeModelType = DBFringeEvent
+    var referenceID: String { "Event-\(code)" }
 }
 
 // MARK: Codable
@@ -44,13 +47,28 @@ extension FringeEvent: Identifiable {
 extension FringeEvent: Codable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
+        
+        // The performance model does not include the events code that is needed for the database tables to correctly
+        // relate. In order for the performance model to access this value it will need to be passed via the decoder.
+        self.code = try container.decode(String.self, forKey: "code").trimmed
+        // Add event code into the decoder so the performances can retrieve it
+        guard let eventCodeKey = JSONDecoder.DecoderStorage.eventCodeKey else {
+            throw JSONDecoder.DecoderStorage.DecoderStorageError.keyIsNil }
+        // FP-2: The `JSONDecoderStorage` should be a requirement, however we currently have tests that encode this
+        // model meaning that a general JSONDecoder may be used instead. This will be removed, and will then throw
+        // if the type is incorrect
+        if let eventCodeStorage = decoder.userInfo[eventCodeKey] as? JSONDecoder.DecoderStorage {
+            eventCodeStorage.value = self.code
+        }
+        
+        // Now decode everything else
+
         self.title = try container.decode(String.self, forKey: "title").trimmed
         self.ageCategory = try container.decodeIfPresent(String.self, forKey: "ageCategory")?.trimmed.nilOnEmpty
         self.artist = try container.decodeIfPresent(String.self, forKey: "artist")?.trimmed.nilOnEmpty
         self.country = try container.decodeIfPresent(String.self, forKey: "country")?.trimmed.nilOnEmpty
         self.warnings = try container.decodeIfPresent(String.self, forKey: "warnings")?.trimmed.nilOnEmpty
         self.status = try container.decode(FringeStatus.self, forKey: "status")
-        self.code = try container.decode(String.self, forKey: "code").trimmed
         self.festival = try container.decode(String.self, forKey: "festival").trimmed
         self.festivalId = try container.decode(String.self, forKey: "festivalId").trimmed
         self.genre = try container.decode(String.self, forKey: "genre").trimmed
