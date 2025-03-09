@@ -40,6 +40,14 @@ jobs:
 
       - name: (Debug) Show fake keys
         run: cat FringePlanner/Helper/Keys.xcconfig
+
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: SwiftLint Code Quality Analysis
+        uses: cirruslabs/swiftlint-action@v1
+        with:
+          version: latest
         
       - name: Run tests using fastlane
         run: fastlane build_and_run_tests
