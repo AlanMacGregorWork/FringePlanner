@@ -1,4 +1,4 @@
-name: iOS starter workflow
+name: iOS workflow
 
 on:
   push:
@@ -6,45 +6,48 @@ on:
   pull_request:
     branches: [ "main", "ci" ]
     
-env:
-  SCHEME: FringePlanner
-  PROJECT: FringePlanner.xcodeproj
+permissions:
+  checks: write
+  contents: read
 
 jobs:
   build:
-    name: Build and Test using any available iPhone simulator
+    name: Build and Test
     runs-on: macos-14
     timeout-minutes: 10     # Ensures that if the tests get stuck there will me a timeout to reduce the cost of running this
 
     steps:
-      - name: List available Xcode versions
-        run: ls /Applications | grep Xcode
-        
-      - name: List available simulators
-        run: xcrun xctrace list devices
-        
-      - name: Show current version of Xcode
+      - name: (Debug) List available Xcode versions
+        run: ls /Applications | grep Xcode       
+
+      - name: (Debug) Show current version of Xcode
         run: xcodebuild -version
         
       - name: Set up Xcode version
         run: sudo xcode-select -s /Applications/Xcode_16.1.app/Contents/Developer
-          
-      - name: Checkout
+        
+      - name: (Debug) List available simulators
+        run: xcrun xctrace list devices
+
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Current Location
+      - name: (Debug) Show current location
         run: pwd;ls FringePlanner
 
       - name: Add fake keys
         run: echo -e "FRINGE_API_KEY = fake\nFRINGE_SECRET_SIGNING_KEY = fake" > FringePlanner/Helper/Keys.xcconfig
 
-      - name: Display fake keys
+      - name: (Debug) Show fake keys
         run: cat FringePlanner/Helper/Keys.xcconfig
 
-      - name: Run Unit Tests
-        env:
-          platform: ${{ 'iOS Simulator' }}
-        run: |
-          # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-          device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
-          xcodebuild -scheme "$SCHEME" -project "$PROJECT" -destination "platform=$platform,name=$device" -resultBundlePath TestResults.xcresult -testPlan UnitTestPlan test
+      - name: Install SwiftLint
+        run: brew install swiftlint
+
+      - name: SwiftLint Code Quality Analysis
+        uses: cirruslabs/swiftlint-action@v1
+        with:
+          version: latest
+        
+      - name: Run tests using fastlane
+        run: fastlane build_and_run_tests
