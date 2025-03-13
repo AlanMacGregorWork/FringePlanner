@@ -117,7 +117,8 @@ extension DBFringeModelTestProtocol {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: DBModelType.self, configurations: config)
         let schema = container.schema
-        let entity = try #require(schema.entities.first)
+        let currentEntity = String(describing: DBModelType.self)
+        let entity = try #require(schema.entities.first(where: { $0.name == currentEntity }))
         return entity.properties.map(\.name)
     }
 }
