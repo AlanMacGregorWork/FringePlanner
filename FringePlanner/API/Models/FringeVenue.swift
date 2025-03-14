@@ -21,6 +21,13 @@ struct FringeVenue: Equatable, Hashable {
     let disabledDescription: String?
 }
 
+// MARK: APIFringeModel
+
+extension FringeVenue: APIFringeModel {
+    typealias DBFringeModelType = DBFringeVenue
+    var referenceID: String { "Venue-\(code)" }
+}
+
 // MARK: Codable
 
 extension FringeVenue: Codable {

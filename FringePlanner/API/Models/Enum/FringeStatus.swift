@@ -15,30 +15,45 @@ enum FringeStatus {
 
 // MARK: Codable
 
-private let kActive = "active"
-private let kCancelled = "cancelled"
-private let kDeleted = "deleted"
+// Note: Codable is predominantly used from decoding the JSON from the API however SwiftData has issues with this
+// so relies on the `RawRepresentable` for its reading & writing
 
 extension FringeStatus: Codable {
     func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
-        let stringValue = switch self {
-        case .active: kActive
-        case .cancelled: kCancelled
-        case .deleted: kDeleted
-        }
-        try container.encode(stringValue)
+        try container.encode(rawValue)
     }
     
     init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         let status = try container.decode(String.self).lowercased()
-        
-        switch status {
+        self = .init(rawValue: status) ?? .active // Default to `active` if unknown status
+    }
+}
+
+// MARK: RawRepresentable
+
+private let kActive = "active"
+private let kCancelled = "cancelled"
+private let kDeleted = "deleted"
+
+extension FringeStatus: RawRepresentable {
+    init?(rawValue: String) {
+        switch rawValue {
         case kActive: self = .active
         case kCancelled: self = .cancelled
         case kDeleted: self = .deleted
-        default: self = .active // Default to `active` if unknown status
+        default:
+            fringeAssertFailure("Found non-identified status type")
+            self = .active // Default to `active` if unknown status
+        }
+    }
+    
+    var rawValue: String {
+        switch self {
+        case .active: return kActive
+        case .cancelled: return kCancelled
+        case .deleted: return kDeleted
         }
     }
 }

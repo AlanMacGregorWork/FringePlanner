@@ -11,8 +11,13 @@ import Foundation
 
 /// Allows basic example content to be used for debugging and testing uses. Not for production.
 struct SeededContent {
-    let code: Int
-    private let allContent = AllContent()
+    private static let allContent = AllContent()
+    private let randomIntGenerator: PseudoRandomIntGenerator
+    var randomNumber: Int { self.randomIntGenerator.get() }
+
+    init(seed: Int = Int.random(in: 0...10000)) {
+        self.randomIntGenerator = PseudoRandomIntGenerator(seed: seed)
+    }
     
     struct AllContent {
         let postcodes = ["EH1 1QR", "EH2 2LR", "EH3 9QN", "EH6 4NP", "EH8 9AB", "EH10 4SD", "EH11 2JL", "EH15 2QR"]
@@ -69,27 +74,31 @@ struct SeededContent {
     }
 
     private func seedValue<T>(for input: Int, at keyPath: KeyPath<AllContent, [T]>) -> T {
-        let allContent = AllContent()
-        let array = allContent[keyPath: keyPath]
-        let newCode = code / input
-        let index = newCode.remainderReportingOverflow(dividingBy: array.count).partialValue
+        let array = Self.allContent[keyPath: keyPath]
+        let index = randomIntGenerator.get(maxNumber: array.count - 1)
         return array[index]
     }
     
-    func venue(for input: Int) -> FringeVenue {
-        FringeVenue(
-           code: "venue\(input)",
-           description: seedValue(for: input, at: \.venueDescriptions),
-           name: seedValue(for: input, at: \.names),
-           address: seedValue(for: input, at: \.addresses),
-           position: seedValue(for: input, at: \.positions),
-           postCode: seedValue(for: input, at: \.postcodes),
-           webAddress: URL(string: seedValue(for: input, at: \.webAddresses)),
-           phone: seedValue(for: input, at: \.phoneNumbers),
-           email: seedValue(for: input, at: \.emails),
-           disabledDescription: seedValue(for: input, at: \.disabledDescriptions)
-       )
+    func venue(config: VenueSeedConfig? = nil) -> FringeVenue {
+        let currentRandom = randomNumber
+        let code = config?.code.value ?? String(currentRandom)
+        return FringeVenue(
+            code: code,
+            description: seedValue(for: currentRandom, at: \.venueDescriptions),
+            name: config?.name.value ?? seedValue(for: currentRandom, at: \.names),
+            address: seedValue(for: currentRandom, at: \.addresses),
+            position: seedValue(for: currentRandom, at: \.positions),
+            postCode: seedValue(for: currentRandom, at: \.postcodes),
+            webAddress: URL(string: seedValue(for: currentRandom, at: \.webAddresses)),
+            phone: seedValue(for: currentRandom, at: \.phoneNumbers),
+            email: seedValue(for: currentRandom, at: \.emails),
+            disabledDescription: seedValue(for: currentRandom, at: \.disabledDescriptions)
+        )
     }
+
+    func date() -> Date {
+        return seedValue(for: randomNumber, at: \.dates)
+    }   
     
     func images() -> [String: FringeImage] {
         let version = FringeImage.Version(
@@ -103,15 +112,16 @@ struct SeededContent {
         return ["someHash": FringeImage(hash: "someHash", orientation: .landscape, type: .thumb, versions: ["original": version])]
     }
     
-    func performance(for input: Int) -> FringePerformance {
-        let startDate = seedValue(for: input, at: \.dates)
-        let endDate = seedValue(for: input, at: \.dates).addingTimeInterval(60 * 60)
-        let basePrice = Double((input % 4) + 1) * 10.00
+    func performance(eventCode: String, config: PerformanceConfig? = nil) -> FringePerformance {
+        let startDate = config?.start.value ?? date()
+        let endDate = seedValue(for: randomNumber, at: \.dates).addingTimeInterval(60 * 60)
+        let basePrice = Double((randomNumber % 4) + 1) * 10.00
         let concessionPrice = basePrice * 0.8
-        
+        let type = config?.type.value ?? .inPerson
+        let title = config?.title.value ?? seedValue(for: randomNumber, at: \.titles)
         return FringePerformance(
-            title: nil,
-            type: .inPerson,
+            title: title,
+            type: type,
             isAtFixedTime: true,
             priceType: basePrice == 0 ? .free : .paid,
             price: basePrice,
@@ -119,46 +129,140 @@ struct SeededContent {
             priceString: basePrice == 0 ? "Free" : "£\(basePrice) (£\(concessionPrice) concessions)",
             start: startDate,
             end: endDate,
-            durationMinutes: 60
+            durationMinutes: 60,
+            eventCode: eventCode
         )
     }
-    
-    func event(for input: Int) -> FringeEvent {
-        let newCode = code / input
+
+    func event(config: EventSeedConfig? = nil) -> FringeEvent {
+        let eventCode = config?.code.value ?? seedValue(for: randomNumber, at: \.codes)
+        
+        let venue = config?.venue.value.map({
+            switch $0 {
+            case .config(let config): self.venue(config: config)
+            case .entireObject(let object): object
+            }
+        }) ?? self.venue()
+
+        let performances = config?.performances.value ?? (1..<10).map({ _ in performance(eventCode: eventCode) })
+        
         return .init(
-            title: seedValue(for: newCode, at: \.titles),
-            artist: seedValue(for: newCode, at: \.artists),
-            country: seedValue(for: newCode, at: \.countries),
-            descriptionTeaser: seedValue(for: newCode, at: \.teasers),
-            code: seedValue(for: newCode, at: \.codes),
-            ageCategory: seedValue(for: newCode, at: \.ageCategories),
-            description: seedValue(for: newCode, at: \.eventDescriptions),
-            festival: seedValue(for: newCode, at: \.festivals),
-            festivalId: seedValue(for: newCode, at: \.festivalIds),
-            genre: seedValue(for: newCode, at: \.genres),
-            genreTags: seedValue(for: newCode, at: \.genreTags),
-            performances: (1..<10).map({ performance(for: newCode * $0) }),
+            title: config?.title.value ?? seedValue(for: randomNumber, at: \.titles),
+            artist: seedValue(for: randomNumber, at: \.artists),
+            country: seedValue(for: randomNumber, at: \.countries),
+            descriptionTeaser: seedValue(for: randomNumber, at: \.teasers),
+            code: eventCode,
+            ageCategory: seedValue(for: randomNumber, at: \.ageCategories),
+            description: seedValue(for: randomNumber, at: \.eventDescriptions),
+            festival: seedValue(for: randomNumber, at: \.festivals),
+            festivalId: seedValue(for: randomNumber, at: \.festivalIds),
+            genre: seedValue(for: randomNumber, at: \.genres),
+            genreTags: seedValue(for: randomNumber, at: \.genreTags),
+            performances: performances,
             performanceSpace: FringePerformanceSpace(name: "Main Hall"),
             status: .active,
-            url: URL(string: seedValue(for: newCode, at: \.ticketUrls))!,
-            venue: venue(for: newCode),
-            website: URL(string: seedValue(for: newCode, at: \.websites))!,
-            disabled: seedValue(for: newCode, at: \.disabledInfo),
+            url: URL(string: seedValue(for: randomNumber, at: \.ticketUrls))!,
+            venue: venue,
+            website: URL(string: seedValue(for: randomNumber, at: \.websites))!,
+            disabled: seedValue(for: randomNumber, at: \.disabledInfo),
             images: images(),
-            warnings: seedValue(for: newCode, at: \.warnings),
+            warnings: seedValue(for: randomNumber, at: \.warnings),
             updated: DateComponents(calendar: .current, year: 2024, month: 8, day: 1, hour: 19, minute: 30).date!,
             year: 2024
         )
     }
     
-    var events: [FringeEvent] {
-        (1...25).map({ self.event(for: $0) })
+    func events(for config: [Int: EventSeedConfig] = [:]) -> [FringeEvent] {
+        (1...25).map({ self.event(config: config[$0]) })
     }
 }
 
 extension Array where Element == FringeEvent {
     static func exampleModels() -> Self {
-        SeededContent(code: 8494536).events
+        SeededContent(seed: 8494536).events()
+    }
+}
+
+// MARK: - Override Seed
+
+extension SeededContent {
+    
+    // The following types allow the seed to be configured to override set values. For example, you may
+    // need to test two different models but for them to use the same value for a `name` property
+    
+    struct VenueSeedConfig {
+        let code: OverrideSeedValue<String>
+        let name: OverrideSeedValue<String>
+        
+        init(
+            code: OverrideSeedValue<String> = .doNotOverride,
+            name: OverrideSeedValue<String> = .doNotOverride
+        ) {
+            self.code = code
+            self.name = name
+        }
+    }
+    
+    struct PerformanceConfig {
+        let title: OverrideSeedValue<String>
+        let start: OverrideSeedValue<Date>
+        let end: OverrideSeedValue<Date>
+        let type: OverrideSeedValue<FringePerformanceType>
+        
+        init(
+            title: OverrideSeedValue<String> = .doNotOverride,
+            start: OverrideSeedValue<Date> = .doNotOverride,
+            end: OverrideSeedValue<Date> = .doNotOverride,
+            type: OverrideSeedValue<FringePerformanceType> = .doNotOverride
+        ) {
+            self.title = title
+            self.start = start
+            self.end = end
+            self.type = type
+        }
+    }
+    
+    struct EventSeedConfig {
+        let code: OverrideSeedValue<String>
+        let title: OverrideSeedValue<String>
+        let performances: OverrideSeedValue<[FringePerformance]>
+        let venue: OverrideSeedValue<OverrideSeedVenueValue>
+        
+        init(
+            code: OverrideSeedValue<String> = .doNotOverride,
+            title: OverrideSeedValue<String> = .doNotOverride,
+            performances: OverrideSeedValue<[FringePerformance]> = .doNotOverride,
+            venue: OverrideSeedValue<OverrideSeedVenueValue> = .doNotOverride
+        ) {
+            self.code = code
+            self.title = title
+            self.performances = performances
+            self.venue = venue
+        }
+    }
+
+    /// Defines whether the seeding should be overridden with a specific value
+    enum OverrideSeedValue<Value> {
+        /// Allow default seeding to be used
+        case doNotOverride
+        /// Override the default seeding with a specific value
+        case override(Value)
+        
+        /// Helper property to get the value if it is overridden
+        var value: Value? {
+            switch self {
+            case .doNotOverride: return nil
+            case .override(let value): return value
+            }
+        }
+    }
+    
+    /// Helper enum to allow the venue to be overridden with an entire object or a configuration
+    enum OverrideSeedVenueValue {
+        /// Override the default seeding with a specific venue
+        case entireObject(FringeVenue)
+        /// Override the default seeding with a specific venue configuration
+        case config(VenueSeedConfig)
     }
 }
 
