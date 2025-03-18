@@ -141,7 +141,7 @@ private struct TestDataContent {
             FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"]),
             FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil),
             nil]),
-        "performance_space": TestData(keyPath: \.performanceSpace, array: [FringePerformanceSpace(name: "Test\nYes", ageLimited: nil), FringePerformanceSpace(name: "Place", ageLimited: true), FringePerformanceSpace(name: nil, ageLimited: false), FringePerformanceSpace(name: "Item", ageLimited: nil)]),
+        "performance_space": TestData(keyPath: \.performanceSpace, array: [FringePerformanceSpace(name: "Test\nYes", ageLimited: nil, wheelchairAccess: true), FringePerformanceSpace(name: "Place", ageLimited: true, wheelchairAccess: false), FringePerformanceSpace(name: nil, ageLimited: false, wheelchairAccess: nil), FringePerformanceSpace(name: "Item", ageLimited: nil, wheelchairAccess: nil)]),
         "venue": TestData(keyPath: \.venue, array: [
             FringeVenue(code: "Code1", description: nil, name: "Name1", address: nil, position: FringeVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode1", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
             FringeVenue(code: "Code2", description: "Desc2", name: "Name2", address: "Address2", position: FringeVenue.Position(lat: 123, lon: 4567), postCode: "Code2", webAddress: URL(string: "https://www.google.com")!, phone: "Phone2", email: "Email2", disabledDescription: "Disabled2"),

@@ -60,7 +60,7 @@
     "performance_space": {
       "name": "\nTest\nYes\n",
       "capacity": null,
-      "wheelchair_access": null,
+      "wheelchair_access": true,
       "age_limited": null,
       "age_limit": null
     },
@@ -186,7 +186,7 @@
     "performance_space": {
       "name": "Place",
       "capacity": null,
-      "wheelchair_access": null,
+      "wheelchair_access": false,
       "age_limited": true,
       "age_limit": null
     },

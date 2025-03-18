@@ -9,6 +9,7 @@
 struct FringePerformanceSpace: Equatable, Hashable {
     let name: String?
     let ageLimited: Bool?
+    let wheelchairAccess: Bool?
 }
 
 // MARK: Codable
@@ -18,7 +19,8 @@ extension FringePerformanceSpace: Codable {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.name = try container.decodeIfPresent(String.self, forKey: "name")?.trimmed
         self.ageLimited = try container.decodeIfPresent(Bool.self, forKey: "ageLimited")
+        self.wheelchairAccess = try container.decodeIfPresent(Bool.self, forKey: "wheelchairAccess")
 
-        container.validateAssumedNil(keys: ["ageLimit", "capacity", "wheelchairAccess"])
+        container.validateAssumedNil(keys: ["ageLimit", "capacity"])
     }
 }

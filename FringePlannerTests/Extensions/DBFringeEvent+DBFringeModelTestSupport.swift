@@ -50,7 +50,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                     eventCode: "TEST123"
                 )
             ],
-            performanceSpace: FringePerformanceSpace(name: "Test Space", ageLimited: false),
+            performanceSpace: FringePerformanceSpace(name: "Test Space", ageLimited: false, wheelchairAccess: true),
             status: .active,
             url: URL(string: "https://example.com/event")!,
             venue: DBFringeVenue.apiModel,
@@ -104,7 +104,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
             genre: "Original Genre",
             genreTags: "OriginalTag1, OriginalTag2",
             performances: [],
-            performanceSpace: FringePerformanceSpace(name: "Original Space", ageLimited: true),
+            performanceSpace: FringePerformanceSpace(name: "Original Space", ageLimited: true, wheelchairAccess: false),
             status: .cancelled,
             url: URL(string: "https://original.com/event")!,
             venue: DBFringeVenue.dbModel,
