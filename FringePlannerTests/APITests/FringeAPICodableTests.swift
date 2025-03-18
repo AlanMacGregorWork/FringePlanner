@@ -45,6 +45,7 @@ struct FringeAPICodableTests {
     func testFringePerformanceSpace() throws {
         try testEncodeDecodeEquates(value: FringePerformanceSpace(name: "Item"))
         try testEncodeDecodeEquates(value: FringePerformanceSpace(name: "New"))
+        try testEncodeDecodeEquates(value: FringePerformanceSpace(name: nil))
     }
 
     @Test("FringeVenue")

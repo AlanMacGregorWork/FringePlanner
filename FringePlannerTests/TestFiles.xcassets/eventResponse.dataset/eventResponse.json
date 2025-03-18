@@ -289,7 +289,7 @@
     },
     "performances": [],
     "performance_space": {
-      "name": "Nothing",
+      "name": null,
       "capacity": null,
       "wheelchair_access": null,
       "age_limited": null,
