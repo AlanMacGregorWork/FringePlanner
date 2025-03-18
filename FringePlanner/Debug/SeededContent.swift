@@ -71,6 +71,7 @@ struct SeededContent {
             FringeDisabled(otherServices: false, audio: true, captioningDates: nil, signedDates: ["2024-08-06", "2024-08-13"]),
             FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-07"], signedDates: ["2024-08-14"])
         ]
+        let ageLimited = [nil, true, false]
     }
 
     private func seedValue<T>(for input: Int, at keyPath: KeyPath<AllContent, [T]>) -> T {
@@ -145,6 +146,7 @@ struct SeededContent {
         }) ?? self.venue()
 
         let performances = config?.performances.value ?? (1..<10).map({ _ in performance(eventCode: eventCode) })
+        let ageLimited = seedValue(for: randomNumber, at: \.ageLimited)
         
         return .init(
             title: config?.title.value ?? seedValue(for: randomNumber, at: \.titles),
@@ -159,7 +161,7 @@ struct SeededContent {
             genre: seedValue(for: randomNumber, at: \.genres),
             genreTags: seedValue(for: randomNumber, at: \.genreTags),
             performances: performances,
-            performanceSpace: FringePerformanceSpace(name: "Main Hall"),
+            performanceSpace: FringePerformanceSpace(name: "Main Hall", ageLimited: ageLimited),
             status: .active,
             url: URL(string: seedValue(for: randomNumber, at: \.ticketUrls))!,
             venue: venue,

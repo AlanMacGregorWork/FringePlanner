@@ -8,6 +8,7 @@
 /// Defines a general location for the performance
 struct FringePerformanceSpace: Equatable, Hashable {
     let name: String?
+    let ageLimited: Bool?
 }
 
 // MARK: Codable
@@ -16,7 +17,8 @@ extension FringePerformanceSpace: Codable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: AnyCodingKey.self)
         self.name = try container.decodeIfPresent(String.self, forKey: "name")?.trimmed
+        self.ageLimited = try container.decodeIfPresent(Bool.self, forKey: "ageLimited")
 
-        container.validateAssumedNil(keys: ["ageLimit", "ageLimited", "capacity", "wheelchairAccess"])
+        container.validateAssumedNil(keys: ["ageLimit", "capacity", "wheelchairAccess"])
     }
 }
