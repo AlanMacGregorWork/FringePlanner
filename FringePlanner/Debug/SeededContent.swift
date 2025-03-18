@@ -41,6 +41,7 @@ struct SeededContent {
         let positions = [FringeVenue.Position(lat: 55.9533, lon: -3.1883), FringeVenue.Position(lat: 55.9478, lon: -3.1836), FringeVenue.Position(lat: 55.9419, lon: -3.1789), FringeVenue.Position(lat: 55.9557, lon: -3.1897), FringeVenue.Position(lat: 55.9468, lon: -3.2021), FringeVenue.Position(lat: 55.9486, lon: -3.1891), FringeVenue.Position(lat: 55.9465, lon: -3.1892), FringeVenue.Position(lat: 55.9412, lon: -3.1824), FringeVenue.Position(lat: 55.9467, lon: -3.1859)]
         let dates = (2...17).map({ DateComponents(calendar: .current, year: 2024, month: 8, day: $0, hour: 19, minute: 30).date! })
         let titles = ["The Stand-Up Sensation", "Shakespeare in Space", "Musical Mayhem", "Dance Through Time", "Comedy Chaos", "Magical Mysteries", "Poetry in Motion", "Circus Spectacular", "Late Night Laughs", "Drama in the Dark"]
+        let subTitles = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
         let artists = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
         let countries = ["United Kingdom", "Germany", "France", "Ireland", "Scotland", "Spain", "Italy", "Netherlands", "Belgium", "Denmark"]
         let teasers = ["A hilarious evening of non-stop laughter", "Classic theatre with a modern twist", "Musical entertainment for all ages", "Journey through dance history", "Improvised comedy at its finest", "Mind-bending illusions", "Words that move and inspire", "Acrobatic excellence", "Comedy after dark", "Dramatic masterpiece"]
@@ -151,6 +152,7 @@ struct SeededContent {
         
         return .init(
             title: config?.title.value ?? seedValue(for: randomNumber, at: \.titles),
+            subTitle: seedValue(for: randomNumber, at: \.subTitles),
             artist: seedValue(for: randomNumber, at: \.artists),
             country: seedValue(for: randomNumber, at: \.countries),
             descriptionTeaser: seedValue(for: randomNumber, at: \.teasers),

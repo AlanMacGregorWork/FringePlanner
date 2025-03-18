@@ -12,6 +12,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
     static var apiModel: FringeEvent {
         FringeEvent(
             title: "Test Event",
+            subTitle: "Test Subtitle",
             artist: "Test Artist",
             country: "Test Country",
             descriptionTeaser: "Test Teaser",
@@ -94,6 +95,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
     static var dbModel: DBFringeEvent {
         DBFringeEvent(
             title: "Original Event",
+            subTitle: "Original Subtitle",
             artist: "Original Artist",
             country: "Original Country",
             descriptionTeaser: "Original Teaser",

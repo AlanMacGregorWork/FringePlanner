@@ -2,7 +2,7 @@
   {
     "festival_id": "Normal Value",
     "title": "Normal Value",
-    "sub_title": null,
+    "sub_title": "Other",
     "status": "active",
     "code": "Normal Value",
     "year": 2024,
@@ -140,7 +140,7 @@
   {
     "festival_id": "   Trim   ",
     "title": "   Trim   ",
-    "sub_title": "",
+    "sub_title": "Fake1",
     "status": "cancelled",
     "code": "   Trim   ",
     "year": 2024,
@@ -258,7 +258,7 @@
   {
     "festival_id": "  \n\nTrimNewLine\n\n",
     "title": "  \n\nTrimNewLine\n\n",
-    "sub_title": null,
+    "sub_title": "Fake2",
     "status": "",
     "code": "  \n\nTrimNewLine\n\n",
     "year": 2024,

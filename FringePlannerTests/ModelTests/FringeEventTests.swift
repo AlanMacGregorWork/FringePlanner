@@ -121,6 +121,7 @@ private struct TestDataContent {
     /// A array of the the expected response from the decoded JSON
     static let expectedValues: [String: (any Identifiable & Sendable)?] = [
         "title": TestData(keyPath: \.title, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
+        "sub_title": TestData(keyPath: \.subTitle, array: ["Other", "Fake1", "Fake2", nil]),
         "genre": TestData(keyPath: \.genre, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
         "code": TestData(keyPath: \.code, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
         "festival": TestData(keyPath: \.festival, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
@@ -190,7 +191,6 @@ private struct TestDataContent {
         "fringe_first": nil,
         "longitude": nil,
         "latitude": nil,
-        "sub_title": nil,
         "artist_type": nil,
         "performers_number": nil,
         "non_english": nil,
