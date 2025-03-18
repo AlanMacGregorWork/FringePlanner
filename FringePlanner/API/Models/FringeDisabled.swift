@@ -10,6 +10,7 @@ struct FringeDisabled: Equatable, Hashable {
     let audio: Bool?
     let captioningDates: [String]?
     let signedDates: [String]?
+    let audioDates: [String]?
 }
 
 // MARK: Codable
@@ -18,6 +19,7 @@ private let kOtherServices = "otherServices"
 private let kAudio = "audio"
 private let kCaptioningDates = "captioningDates"
 private let kSignedDates = "signedDates"
+private let kAudioDates = "audioDates"
 
 extension FringeDisabled: Codable {
     func encode(to encoder: any Encoder) throws {
@@ -26,6 +28,7 @@ extension FringeDisabled: Codable {
         try container.encodeIfPresent(audio, forKey: kAudio)
         try container.encodeIfPresent(captioningDates?.joined(separator: ","), forKey: kCaptioningDates)
         try container.encodeIfPresent(signedDates?.joined(separator: ","), forKey: kSignedDates)
+        try container.encodeIfPresent(audioDates?.joined(separator: ","), forKey: kAudioDates)
     }
 
     init(from decoder: any Decoder) throws {
@@ -36,6 +39,9 @@ extension FringeDisabled: Codable {
             .components(separatedBy: ",")
             .compactMap { $0.nilOnEmpty } // None of the elements should be empty
         self.signedDates = try container.decodeIfPresent(String.self, forKey: kSignedDates)?
+            .components(separatedBy: ",")
+            .compactMap { $0.nilOnEmpty } // None of the elements should be empty
+        self.audioDates = try container.decodeIfPresent(String.self, forKey: kAudioDates)?
             .components(separatedBy: ",")
             .compactMap { $0.nilOnEmpty } // None of the elements should be empty
         
@@ -54,6 +60,6 @@ extension FringeDisabled: Codable {
             fringeAssert(signed ?? false, "Signed Dates exist with Bool flag not true")
         }
         
-        container.validateAssumedNil(keys: ["audioDates", "otherServicesDates", "otherServicesInformation"])
+        container.validateAssumedNil(keys: ["otherServicesDates", "otherServicesInformation"])
     }
 }

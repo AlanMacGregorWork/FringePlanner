@@ -66,10 +66,10 @@ struct SeededContent {
         let ticketUrls = ["https://tickets.edfringe.com/COM123", "https://tickets.edfringe.com/THTR456", "https://tickets.edfringe.com/MUS789", "https://tickets.edfringe.com/DNC012", "https://tickets.edfringe.com/IMP345", "https://tickets.edfringe.com/MAG678", "https://tickets.edfringe.com/POE901", "https://tickets.edfringe.com/CIR234", "https://tickets.edfringe.com/LNL567", "https://tickets.edfringe.com/DRM890"]
         let websites = ["https://www.comedycrew.com", "https://www.theatrex.com", "https://www.musicmavericks.net", "https://www.dancecollective.org", "https://www.improvtroupe.co.uk", "https://www.magiccircle.com", "https://www.poetsunited.org", "https://www.circusdreams.com", "https://www.latenightcomics.com", "https://www.dramaworkshop.co.uk"]
         let disabledInfo = [
-            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-03", "2024-08-10"], signedDates: ["2024-08-05", "2024-08-12"]),
-            FringeDisabled(otherServices: true, audio: false, captioningDates: ["2024-08-04", "2024-08-11"], signedDates: nil),
-            FringeDisabled(otherServices: false, audio: true, captioningDates: nil, signedDates: ["2024-08-06", "2024-08-13"]),
-            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-07"], signedDates: ["2024-08-14"])
+            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-03", "2024-08-10"], signedDates: ["2024-08-05", "2024-08-12"], audioDates: ["2024-08-03", "2024-08-10"]),
+            FringeDisabled(otherServices: true, audio: false, captioningDates: ["2024-08-04", "2024-08-11"], signedDates: nil, audioDates: nil),
+            FringeDisabled(otherServices: false, audio: true, captioningDates: nil, signedDates: ["2024-08-06", "2024-08-13"], audioDates: ["2024-08-06", "2024-08-13"]),
+            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-07"], signedDates: ["2024-08-14"], audioDates: ["2024-08-07", "2024-08-14"])
         ]
         let optionalBool = [nil, true, false]
     }

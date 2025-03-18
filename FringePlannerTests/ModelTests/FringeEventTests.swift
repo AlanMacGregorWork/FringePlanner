@@ -137,9 +137,9 @@ private struct TestDataContent {
         "description_teaser": TestData(keyPath: \.descriptionTeaser, array: [nil, "Some Text", nil, "Code for […]"]),
         "year": TestData(keyPath: \.year, array: [2024, 2024, 2024, 2024]),
         "disabled": TestData(keyPath: \.disabled, array: [
-            FringeDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil),
-            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"]),
-            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil),
+            FringeDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil, audioDates: nil),
+            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"], audioDates: ["2024-08-25", "2024-08-26"]),
+            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil, audioDates: nil),
             nil]),
         "performance_space": TestData(keyPath: \.performanceSpace, array: [FringePerformanceSpace(name: "Test\nYes", ageLimited: nil, wheelchairAccess: true), FringePerformanceSpace(name: "Place", ageLimited: true, wheelchairAccess: false), FringePerformanceSpace(name: nil, ageLimited: false, wheelchairAccess: nil), FringePerformanceSpace(name: "Item", ageLimited: nil, wheelchairAccess: nil)]),
         "venue": TestData(keyPath: \.venue, array: [

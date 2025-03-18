@@ -213,7 +213,7 @@
     },
     "disabled": {
       "audio": false,
-      "audio_dates": null,
+      "audio_dates": "2024-08-25,2024-08-26",
       "signed": true,
       "signed_dates": "2024-08-25,2024-08-26",
       "captioning": true,

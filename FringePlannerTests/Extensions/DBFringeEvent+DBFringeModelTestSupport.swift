@@ -59,7 +59,8 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                 otherServices: true,
                 audio: false,
                 captioningDates: ["2025-01-04", "2025-01-05"],
-                signedDates: ["2025-01-06"]
+                signedDates: ["2025-01-06"],
+                audioDates: ["2025-01-07"]
             ),
             images: [
                 "main": FringeImage(
@@ -113,7 +114,8 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                 otherServices: false,
                 audio: true,
                 captioningDates: ["2024-01-04"],
-                signedDates: nil
+                signedDates: nil,
+                audioDates: nil
             ),
             images: [
                 "main": FringeImage(
