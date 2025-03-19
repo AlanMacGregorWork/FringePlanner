@@ -12,6 +12,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
     static var apiModel: FringeEvent {
         FringeEvent(
             title: "Test Event",
+            subTitle: "Test Subtitle",
             artist: "Test Artist",
             country: "Test Country",
             descriptionTeaser: "Test Teaser",
@@ -50,7 +51,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                     eventCode: "TEST123"
                 )
             ],
-            performanceSpace: FringePerformanceSpace(name: "Test Space"),
+            performanceSpace: FringePerformanceSpace(name: "Test Space", ageLimited: false, wheelchairAccess: true),
             status: .active,
             url: URL(string: "https://example.com/event")!,
             venue: DBFringeVenue.apiModel,
@@ -59,7 +60,8 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                 otherServices: true,
                 audio: false,
                 captioningDates: ["2025-01-04", "2025-01-05"],
-                signedDates: ["2025-01-06"]
+                signedDates: ["2025-01-06"],
+                audioDates: ["2025-01-07"]
             ),
             images: [
                 "main": FringeImage(
@@ -93,6 +95,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
     static var dbModel: DBFringeEvent {
         DBFringeEvent(
             title: "Original Event",
+            subTitle: "Original Subtitle",
             artist: "Original Artist",
             country: "Original Country",
             descriptionTeaser: "Original Teaser",
@@ -104,7 +107,7 @@ extension DBFringeEvent: DBFringeModelTestSupport {
             genre: "Original Genre",
             genreTags: "OriginalTag1, OriginalTag2",
             performances: [],
-            performanceSpace: FringePerformanceSpace(name: "Original Space"),
+            performanceSpace: FringePerformanceSpace(name: "Original Space", ageLimited: true, wheelchairAccess: false),
             status: .cancelled,
             url: URL(string: "https://original.com/event")!,
             venue: DBFringeVenue.dbModel,
@@ -113,7 +116,8 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                 otherServices: false,
                 audio: true,
                 captioningDates: ["2024-01-04"],
-                signedDates: nil
+                signedDates: nil,
+                audioDates: nil
             ),
             images: [
                 "main": FringeImage(

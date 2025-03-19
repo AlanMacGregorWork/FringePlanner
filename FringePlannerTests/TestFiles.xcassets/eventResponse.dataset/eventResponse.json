@@ -2,7 +2,7 @@
   {
     "festival_id": "Normal Value",
     "title": "Normal Value",
-    "sub_title": null,
+    "sub_title": "Other",
     "status": "active",
     "code": "Normal Value",
     "year": 2024,
@@ -60,7 +60,7 @@
     "performance_space": {
       "name": "\nTest\nYes\n",
       "capacity": null,
-      "wheelchair_access": null,
+      "wheelchair_access": true,
       "age_limited": null,
       "age_limit": null
     },
@@ -140,7 +140,7 @@
   {
     "festival_id": "   Trim   ",
     "title": "   Trim   ",
-    "sub_title": "",
+    "sub_title": "Fake1",
     "status": "cancelled",
     "code": "   Trim   ",
     "year": 2024,
@@ -186,8 +186,8 @@
     "performance_space": {
       "name": "Place",
       "capacity": null,
-      "wheelchair_access": null,
-      "age_limited": null,
+      "wheelchair_access": false,
+      "age_limited": true,
       "age_limit": null
     },
     "sub_venue": null,
@@ -213,7 +213,7 @@
     },
     "disabled": {
       "audio": false,
-      "audio_dates": null,
+      "audio_dates": "2024-08-25,2024-08-26",
       "signed": true,
       "signed_dates": "2024-08-25,2024-08-26",
       "captioning": true,
@@ -258,7 +258,7 @@
   {
     "festival_id": "  \n\nTrimNewLine\n\n",
     "title": "  \n\nTrimNewLine\n\n",
-    "sub_title": null,
+    "sub_title": "Fake2",
     "status": "",
     "code": "  \n\nTrimNewLine\n\n",
     "year": 2024,
@@ -289,10 +289,10 @@
     },
     "performances": [],
     "performance_space": {
-      "name": "Nothing",
+      "name": null,
       "capacity": null,
       "wheelchair_access": null,
-      "age_limited": null,
+      "age_limited": false,
       "age_limit": null
     },
     "sub_venue": null,

@@ -11,6 +11,7 @@ import SwiftData
 @Model
 final class DBFringeEvent: DBFringeModel {
     private(set) var title: String
+    private(set) var subTitle: String?
     private(set) var artist: String?
     private(set) var country: String?
     private(set) var descriptionTeaser: String?
@@ -34,6 +35,7 @@ final class DBFringeEvent: DBFringeModel {
     private(set) var year: Int
     
     init(title: String,
+         subTitle: String? = nil,
          artist: String? = nil,
          country: String? = nil,
          descriptionTeaser: String? = nil,
@@ -56,6 +58,7 @@ final class DBFringeEvent: DBFringeModel {
          updatedValue: Date,
          year: Int) {
         self.title = title
+        self.subTitle = subTitle
         self.artist = artist
         self.country = country
         self.descriptionTeaser = descriptionTeaser
@@ -90,6 +93,7 @@ extension DBFringeEvent {
         }
 
         self.init(title: event.title,
+                  subTitle: event.subTitle,
                   artist: event.artist,
                   country: event.country,
                   descriptionTeaser: event.descriptionTeaser,
@@ -115,6 +119,7 @@ extension DBFringeEvent {
     
     func update(from event: FringeEvent) {
         self.title = event.title
+        self.subTitle = event.subTitle
         self.artist = event.artist
         self.country = event.country
         self.descriptionTeaser = event.descriptionTeaser
@@ -140,6 +145,7 @@ extension DBFringeEvent {
         [
             // Note: `venue` & `performances` not included as changes to that entity should not effect this one.
             EquatableCheck(lhsName: "title", rhsName: "title", lhsKeyPath: \.title, rhsKeyPath: \.title),
+            EquatableCheck(lhsName: "subTitle", rhsName: "subTitle", lhsKeyPath: \.subTitle, rhsKeyPath: \.subTitle),
             EquatableCheck(lhsName: "artist", rhsName: "artist", lhsKeyPath: \.artist, rhsKeyPath: \.artist),
             EquatableCheck(lhsName: "country", rhsName: "country", lhsKeyPath: \.country, rhsKeyPath: \.country),
             EquatableCheck(lhsName: "descriptionTeaser", rhsName: "descriptionTeaser", lhsKeyPath: \.descriptionTeaser, rhsKeyPath: \.descriptionTeaser),

@@ -8,7 +8,8 @@
 import Foundation
 
 struct FringeEvent: Equatable, Hashable {
-    var title: String
+    let title: String
+    let subTitle: String?
     let artist: String?
     /// Example: `Germany`, `Ireland`, `Scotland`
     let country: String?
@@ -84,11 +85,12 @@ extension FringeEvent: Codable {
         self.venue = try container.decode(FringeVenue.self, forKey: "venue")
         self.disabled = try container.decodeIfPresent(FringeDisabled.self, forKey: "disabled")
         self.images = try container.decode([String: FringeImage].self, forKey: "images")
+        self.subTitle = try container.decodeIfPresent(String.self, forKey: "subTitle")?.trimmed.nilOnEmpty
         
         // Additional key validation: 
 
         container.validateAssumedNil(keys: [
-            "subTitle", "artistType", "performersNumber", "nonEnglish", "fringeFirst", "relatedContent"])
+            "artistType", "performersNumber", "nonEnglish", "fringeFirst", "relatedContent"])
         
         // Some fields are deprecated but may be included in the response, these should not be used:
         // - `fringe_first`, `sub_venue`, `twitter`, `discounts`, `categories`
@@ -105,6 +107,7 @@ extension FringeEvent: Codable {
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: AnyCodingKey.self)
         try container.encodeIfPresent(title, forKey: "title")
+        try container.encodeIfPresent(subTitle, forKey: "subTitle")
         try container.encodeIfPresent(ageCategory, forKey: "ageCategory")
         try container.encodeIfPresent(artist, forKey: "artist")
         try container.encodeIfPresent(country, forKey: "country")

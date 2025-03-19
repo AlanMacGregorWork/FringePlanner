@@ -121,6 +121,7 @@ private struct TestDataContent {
     /// A array of the the expected response from the decoded JSON
     static let expectedValues: [String: (any Identifiable & Sendable)?] = [
         "title": TestData(keyPath: \.title, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
+        "sub_title": TestData(keyPath: \.subTitle, array: ["Other", "Fake1", "Fake2", nil]),
         "genre": TestData(keyPath: \.genre, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
         "code": TestData(keyPath: \.code, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
         "festival": TestData(keyPath: \.festival, array: ["Normal Value", "Trim", "TrimNewLine", "lowercase"]),
@@ -137,11 +138,11 @@ private struct TestDataContent {
         "description_teaser": TestData(keyPath: \.descriptionTeaser, array: [nil, "Some Text", nil, "Code for […]"]),
         "year": TestData(keyPath: \.year, array: [2024, 2024, 2024, 2024]),
         "disabled": TestData(keyPath: \.disabled, array: [
-            FringeDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil),
-            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"]),
-            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil),
+            FringeDisabled(otherServices: nil, audio: nil, captioningDates: nil, signedDates: nil, audioDates: nil),
+            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-25", "2024-08-25", "2024-08-26"], signedDates: ["2024-08-25", "2024-08-26"], audioDates: ["2024-08-25", "2024-08-26"]),
+            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-25"], signedDates: nil, audioDates: nil),
             nil]),
-        "performance_space": TestData(keyPath: \.performanceSpace, array: [FringePerformanceSpace(name: "Test\nYes"), FringePerformanceSpace(name: "Place"), FringePerformanceSpace(name: "Nothing"), FringePerformanceSpace(name: "Item")]),
+        "performance_space": TestData(keyPath: \.performanceSpace, array: [FringePerformanceSpace(name: "Test\nYes", ageLimited: nil, wheelchairAccess: true), FringePerformanceSpace(name: "Place", ageLimited: true, wheelchairAccess: false), FringePerformanceSpace(name: nil, ageLimited: false, wheelchairAccess: nil), FringePerformanceSpace(name: "Item", ageLimited: nil, wheelchairAccess: nil)]),
         "venue": TestData(keyPath: \.venue, array: [
             FringeVenue(code: "Code1", description: nil, name: "Name1", address: nil, position: FringeVenue.Position(lat: 55.964266, lon: -3.212126), postCode: "PostCode1", webAddress: nil, phone: nil, email: nil, disabledDescription: nil),
             FringeVenue(code: "Code2", description: "Desc2", name: "Name2", address: "Address2", position: FringeVenue.Position(lat: 123, lon: 4567), postCode: "Code2", webAddress: URL(string: "https://www.google.com")!, phone: "Phone2", email: "Email2", disabledDescription: "Disabled2"),
@@ -190,7 +191,6 @@ private struct TestDataContent {
         "fringe_first": nil,
         "longitude": nil,
         "latitude": nil,
-        "sub_title": nil,
         "artist_type": nil,
         "performers_number": nil,
         "non_english": nil,

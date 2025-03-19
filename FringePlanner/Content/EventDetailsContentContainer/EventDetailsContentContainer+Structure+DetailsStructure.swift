@@ -11,6 +11,7 @@ extension EventDetailsContentContainer.Structure {
     /// Structure for the general details portion of the event details
     struct DetailsStructure: BaseStructureProtocol {
         let title: AttributedString
+        let subTitle: AttributedString?
         let artist: AttributedString?
         let country: AttributedString?
         let ageCategory: AttributedString?
@@ -27,6 +28,7 @@ extension EventDetailsContentContainer.Structure {
                     Self.getArtistRow(from: artist)
                     Self.getTitleRow(from: title)
                 }
+                Self.getSubTitleRow(from: subTitle)
                 Self.getCountryRow(from: country)
                 Self.getAgeCategoryRow(from: ageCategory)
                 Self.getGenreRow(from: genre)
@@ -44,6 +46,13 @@ extension EventDetailsContentContainer.Structure {
         @FringeDataResultBuilder
         static func getTitleRow(from title: AttributedString) -> SectionRowData {
             SectionRowData(title: "Title", text: title)
+        }
+
+        @FringeDataResultBuilder
+        static func getSubTitleRow(from subTitle: AttributedString?) -> some ViewDataProtocol {
+            if let subTitle {
+                SectionRowData(title: "Subtitle", text: subTitle)
+            }
         }
         
         @FringeDataResultBuilder
@@ -84,6 +93,7 @@ extension EventDetailsContentContainer.Structure.DetailsStructure {
     init(event: FringeEvent) {
         self.init(
             title: event.title,
+            subTitle: event.subTitle,
             artist: event.artist,
             country: event.country,
             ageCategory: event.ageCategory,
@@ -95,6 +105,7 @@ extension EventDetailsContentContainer.Structure.DetailsStructure {
     @MainActor
     init(
         title: String,
+        subTitle: String?,
         artist: String?,
         country: String?,
         ageCategory: String?,
@@ -102,6 +113,7 @@ extension EventDetailsContentContainer.Structure.DetailsStructure {
         genreTags: String?
     ) {
         self.title = AttributedString(fromHTML: title) ?? AttributedString(title)
+        self.subTitle = subTitle.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
         self.artist = artist.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
         self.country = country.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
         self.ageCategory = ageCategory.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }

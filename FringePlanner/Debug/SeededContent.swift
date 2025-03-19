@@ -41,6 +41,7 @@ struct SeededContent {
         let positions = [FringeVenue.Position(lat: 55.9533, lon: -3.1883), FringeVenue.Position(lat: 55.9478, lon: -3.1836), FringeVenue.Position(lat: 55.9419, lon: -3.1789), FringeVenue.Position(lat: 55.9557, lon: -3.1897), FringeVenue.Position(lat: 55.9468, lon: -3.2021), FringeVenue.Position(lat: 55.9486, lon: -3.1891), FringeVenue.Position(lat: 55.9465, lon: -3.1892), FringeVenue.Position(lat: 55.9412, lon: -3.1824), FringeVenue.Position(lat: 55.9467, lon: -3.1859)]
         let dates = (2...17).map({ DateComponents(calendar: .current, year: 2024, month: 8, day: $0, hour: 19, minute: 30).date! })
         let titles = ["The Stand-Up Sensation", "Shakespeare in Space", "Musical Mayhem", "Dance Through Time", "Comedy Chaos", "Magical Mysteries", "Poetry in Motion", "Circus Spectacular", "Late Night Laughs", "Drama in the Dark"]
+        let subTitles = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
         let artists = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
         let countries = ["United Kingdom", "Germany", "France", "Ireland", "Scotland", "Spain", "Italy", "Netherlands", "Belgium", "Denmark"]
         let teasers = ["A hilarious evening of non-stop laughter", "Classic theatre with a modern twist", "Musical entertainment for all ages", "Journey through dance history", "Improvised comedy at its finest", "Mind-bending illusions", "Words that move and inspire", "Acrobatic excellence", "Comedy after dark", "Dramatic masterpiece"]
@@ -66,11 +67,12 @@ struct SeededContent {
         let ticketUrls = ["https://tickets.edfringe.com/COM123", "https://tickets.edfringe.com/THTR456", "https://tickets.edfringe.com/MUS789", "https://tickets.edfringe.com/DNC012", "https://tickets.edfringe.com/IMP345", "https://tickets.edfringe.com/MAG678", "https://tickets.edfringe.com/POE901", "https://tickets.edfringe.com/CIR234", "https://tickets.edfringe.com/LNL567", "https://tickets.edfringe.com/DRM890"]
         let websites = ["https://www.comedycrew.com", "https://www.theatrex.com", "https://www.musicmavericks.net", "https://www.dancecollective.org", "https://www.improvtroupe.co.uk", "https://www.magiccircle.com", "https://www.poetsunited.org", "https://www.circusdreams.com", "https://www.latenightcomics.com", "https://www.dramaworkshop.co.uk"]
         let disabledInfo = [
-            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-03", "2024-08-10"], signedDates: ["2024-08-05", "2024-08-12"]),
-            FringeDisabled(otherServices: true, audio: false, captioningDates: ["2024-08-04", "2024-08-11"], signedDates: nil),
-            FringeDisabled(otherServices: false, audio: true, captioningDates: nil, signedDates: ["2024-08-06", "2024-08-13"]),
-            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-07"], signedDates: ["2024-08-14"])
+            FringeDisabled(otherServices: true, audio: true, captioningDates: ["2024-08-03", "2024-08-10"], signedDates: ["2024-08-05", "2024-08-12"], audioDates: ["2024-08-03", "2024-08-10"]),
+            FringeDisabled(otherServices: true, audio: false, captioningDates: ["2024-08-04", "2024-08-11"], signedDates: nil, audioDates: nil),
+            FringeDisabled(otherServices: false, audio: true, captioningDates: nil, signedDates: ["2024-08-06", "2024-08-13"], audioDates: ["2024-08-06", "2024-08-13"]),
+            FringeDisabled(otherServices: false, audio: false, captioningDates: ["2024-08-07"], signedDates: ["2024-08-14"], audioDates: ["2024-08-07", "2024-08-14"])
         ]
+        let optionalBool = [nil, true, false]
     }
 
     private func seedValue<T>(for input: Int, at keyPath: KeyPath<AllContent, [T]>) -> T {
@@ -145,9 +147,12 @@ struct SeededContent {
         }) ?? self.venue()
 
         let performances = config?.performances.value ?? (1..<10).map({ _ in performance(eventCode: eventCode) })
+        let ageLimited = seedValue(for: randomNumber, at: \.optionalBool)
+        let wheelchairAccess = seedValue(for: randomNumber, at: \.optionalBool)
         
         return .init(
             title: config?.title.value ?? seedValue(for: randomNumber, at: \.titles),
+            subTitle: seedValue(for: randomNumber, at: \.subTitles),
             artist: seedValue(for: randomNumber, at: \.artists),
             country: seedValue(for: randomNumber, at: \.countries),
             descriptionTeaser: seedValue(for: randomNumber, at: \.teasers),
@@ -159,7 +164,7 @@ struct SeededContent {
             genre: seedValue(for: randomNumber, at: \.genres),
             genreTags: seedValue(for: randomNumber, at: \.genreTags),
             performances: performances,
-            performanceSpace: FringePerformanceSpace(name: "Main Hall"),
+            performanceSpace: FringePerformanceSpace(name: "Main Hall", ageLimited: ageLimited, wheelchairAccess: wheelchairAccess),
             status: .active,
             url: URL(string: seedValue(for: randomNumber, at: \.ticketUrls))!,
             venue: venue,
