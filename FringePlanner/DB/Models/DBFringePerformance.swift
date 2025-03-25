@@ -66,7 +66,7 @@ extension DBFringePerformance {
         // The event should have been created first as multiple performances can share the same event. If the event
         // cannot be found, then something has gone wrong and the performance cannot be created.
         let predicate: Predicate<DBFringeEvent> = #Predicate { $0.code == performance.eventCode }
-        guard let dbEvent = try ImportAPIActor.getDBModel(from: predicate, context: context) else {
+        guard let dbEvent = try DBHelper.getDBModel(from: predicate, context: context) else {
             throw .assumptionFailed(.expectedCreatedVenue)
         }
         
