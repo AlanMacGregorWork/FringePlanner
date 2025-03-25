@@ -14,9 +14,6 @@ import Testing
 struct ImportAPIActorTests {
     private let testActor: TestDBActor
     private let importAPIActor: ImportAPIActor
-    private static let allVenuesDescriptor = FetchDescriptor<DBFringeVenue>()
-    private static let allEventsDescriptor = FetchDescriptor<DBFringeEvent>()
-    private static let allPerformancesDescriptor = FetchDescriptor<DBFringePerformance>()
     
     init() async throws {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
@@ -25,108 +22,8 @@ struct ImportAPIActorTests {
         self.importAPIActor = ImportAPIActor(modelContainer: container)
         
         // Sanity Check: There should be no models in the database
-        try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
+        try await testActor.performFetch(from: FetchDescriptor<DBFringeVenue>()) { venues in
             try #require(venues.isEmpty, "No Venues should exist")
-        }
-    }
-    
-    @Test("Inserts model if missing")
-    func testInsertsModelIfMissing() async throws {
-        // Update the database from the API models
-        let apiModel = SeededContent().venue(config: .init(code: .override("VENUE1")))
-        try await addModelToDB(apiModel, expecting: .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"))
-        
-        // Test: There should now be one model in the database
-        try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
-            #expect(venues.count == 1, "Venue should have been added")
-            #expect(venues.first == apiModel, "Venue should have been added")
-        }
-    }
-    
-    @Test("Updates model if new content is available")
-    func testUpdatesModelIfNewContentIsAvailable() async throws {
-        // Setup models
-        let originalModel = SeededContent().venue(config: .init(code: .override("VENUE1"), name: .override("Original Name")))
-        let updatedModel = SeededContent().venue(config: .init(code: .override("VENUE1"), name: .override("Updated Name")))
-        // Sanity Check
-        try #require(originalModel != updatedModel, "Sanity Check: Models should be different")
-        try #require(originalModel.code == updatedModel.code, "Sanity Check Models should share the same code value")
-        
-        // Add the first model to the database
-        try await addModelToDB(originalModel, expecting: .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"))
-        // The model should now be in the database
-        try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
-            #expect(venues.count == 1)
-        }
-        
-        // Update the database with a model sharing the same code
-        try await addModelToDB(updatedModel, expecting: .updatedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"))
-        // The model should now be updated & not inserted
-        try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
-            #expect(venues.count == 1, "Model should have updated the existing model")
-            let venue = try #require(venues.first)
-            // Both venues share the same code
-            #expect(venue.code == originalModel.code, "Code should not have changed as it matched the previous value")
-            #expect(venue.code == updatedModel.code, "Code should not have changed as it matched the previous value")
-            // The name was different, causing the update
-            #expect(venue.name != originalModel.name, "Name should have changed as it was different to the previous value")
-            #expect(venue.name == updatedModel.name, "Name should have changed as it was different to the previous value")
-        }
-    }
-    
-    @Test("Inserts models independently if they do not share the same code")
-    func testInsertsModelsIndependently() async throws {
-        // Setup models
-        let venue1 = SeededContent().venue(config: .init(code: .override("VENUE1")))
-        let venue2 = SeededContent().venue(config: .init(code: .override("VENUE2")))
-        
-        // Add models to DB, should be inserts as they are different models
-        try await addModelToDB(venue1, expecting: .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"))
-        try await addModelToDB(venue2, expecting: .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2"))
-        
-        // Test: There should now be two models in the database
-        try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
-            #expect(venues.count == 2, "There should be two models in the database")
-            // Both codes should now be in the DB
-            #expect(venues.map(\.code).unorderedElementsEqual(["VENUE1", "VENUE2"]))
-        }
-    }
-
-    @Test("Returns noChanges if model already exists with the same data (Venue)")
-    func testReturnsNoChangesIfModelAlreadyExistsWithSameData_Venue() async throws {
-        // Setup model
-        let venue1 = SeededContent().venue(config: .init(code: .override("VENUE1")))
-        // Adding a new model should result in an insert
-        try await addModelToDB(venue1, expecting: .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"))
-        try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
-            #expect(venues.count == 1, "There should be 1 model in the database")
-        }
-        
-        // Adding the same model should result in noChanges
-        try await addModelToDB(venue1, expecting: .noChanges)
-        try await testActor.performFetch(from: Self.allVenuesDescriptor) { venues in
-            #expect(venues.count == 1, "There should still only be 1 modes in the database")
-        }
-    }
-    
-    @Test("Returns noChanges if model already exists with the same data (Event)")
-    func testReturnsNoChangesIfModelAlreadyExistsWithSameData_Event() async throws {
-        // Setup model
-        let event = SeededContent().event(config: .init(code: .override("EVENT1"), venue: .override(.config(.init(code: .override("VENUE1"))))))
-        
-        // Add venues so that relationships can be made for the event
-        try await addModelToDB(event.venue, expecting: .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE1"))
-        
-        // Adding a new model should result in an insert
-        try await addModelToDB(event, expecting: .insertedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"))
-        try await testActor.performFetch(from: Self.allEventsDescriptor) { events in
-            #expect(events.count == 1, "There should be 1 model in the database")
-        }
-        
-        // Adding the same model should result in noChanges
-        try await addModelToDB(event, expecting: .noChanges)
-        try await testActor.performFetch(from: Self.allEventsDescriptor) { events in
-            #expect(events.count == 1, "There should still only be 1 modes in the database")
         }
     }
     
@@ -218,7 +115,6 @@ struct ImportAPIActorTests {
             .noChanges,
             .updatedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1")
         ]), "Only the first event should have been updated")
-        try await importAPIActor.saveChanges()
         
         // Changes should now have been made
         try await testActor.performFetch(from: FetchDescriptor<DBFringeEvent>(predicate: #Predicate { $0.code == updatedEvent1.code })) { events in
@@ -265,7 +161,6 @@ struct ImportAPIActorTests {
             .noChanges,
             .updatedModel(type: DBFringeVenue.self, referenceID: "Venue-VENUE2")
         ]), "Only the venue should have been updated")
-        try await importAPIActor.saveChanges()
         
         // Changes should now have been made
         try await testActor.performFetch(from: FetchDescriptor<DBFringeVenue>(predicate: #Predicate { $0.code == updatedVenue2.code })) { venues in
@@ -299,7 +194,6 @@ struct ImportAPIActorTests {
             .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance3.referenceID),
             .noChanges
         ]), "All expected statuses should be present")
-        try await importAPIActor.saveChanges()
         // Performances should not include the "UpdatedTitle" as this will be tested later
         try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>(predicate: #Predicate { $0.start == date1 })) { performances in
             try #require(performances.count == 1, "There should still only be 1 model in the database")
@@ -320,7 +214,6 @@ struct ImportAPIActorTests {
             .updatedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"),
             .updatedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance1.referenceID)
         ]))
-        try await importAPIActor.saveChanges()
         // Performance changes should now have been made
         try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>(predicate: #Predicate { $0.start == date1 })) { performances in
             try #require(performances.count == 1, "There should still only be 1 model in the database")
@@ -355,7 +248,6 @@ struct ImportAPIActorTests {
             .insertedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance3.referenceID),
             .noChanges
         ]), "All expected statuses should be present")
-        try await importAPIActor.saveChanges()
         // All performances imported should be active   
         try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>()) { performances in
             let performance1 = try #require(performances.first { $0.start == apiOriginalPerformance1.start })
@@ -378,7 +270,6 @@ struct ImportAPIActorTests {
             .updatedModel(type: DBFringeEvent.self, referenceID: "Event-EVENT1"),
             .updatedModel(type: DBFringePerformance.self, referenceID: apiOriginalPerformance2.referenceID)
         ]))
-        try await importAPIActor.saveChanges()
         // Only performance 2 should have been cancelled
         try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>()) { performances in
             let performance1 = try #require(performances.first { $0.start == apiOriginalPerformance1.start })
@@ -399,55 +290,6 @@ struct ImportAPIActorTests {
             .noChanges,
             .noChanges
         ]))
-    }
-
-    // MARK: Helper
-    
-    /// Simplifies the update execution of the DB actor and verifies the state is correct
-    private func addModelToDB<APIFringeModelType: APIFringeModel>(
-        _ apiModel: APIFringeModelType,
-        expecting status: ImportAPIActor.Status,
-        saveChanges: Bool = true,
-        sourceLocation: SourceLocation = #_sourceLocation
-    ) async throws(DBError) {
-        let dbStatus = try await importAPIActor.updateModel(from: apiModel)
-        #expect(dbStatus == status, "Model should have status `\(status)`", sourceLocation: sourceLocation)
-        switch status {
-        case .insertedModel, .updatedModel:
-            #expect(await importAPIActor.hasChanges, "Changes should not have been saved yet", sourceLocation: sourceLocation)
-            if saveChanges {
-                try await importAPIActor.saveChanges()
-                #expect(await !importAPIActor.hasChanges, "Changes should now have been saved.", sourceLocation: sourceLocation)
-            }
-        case .noChanges:
-            #expect(await !importAPIActor.hasChanges, "No changes should exist", sourceLocation: sourceLocation)
-        }
-    }
-}
-
-extension ImportAPIActorTests {
-    @Suite("Insert Model Tests")
-    struct InsertModelTests {
-        
-        @Test("Insert will throw if the container is not setup for the model type")
-        func testMissingContainerThrows() async throws {
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(configurations: config)
-            let insertActor = ImportAPIActor(modelContainer: container)
-            
-            try await #require(throws: DBError.insertFailed(.modelNotFoundInSchema)) {
-                try await insertActor.insertModel(from: DBFringeVenue.apiModel)
-            }
-        }
-
-        @Test("Insert will not throw if the container is setup for the model type")
-        func testSetupContainerDoesNotThrow() async throws {
-            let config = ModelConfiguration(isStoredInMemoryOnly: true)
-            let container = try ModelContainer(for: DBFringeVenue.self, configurations: config)
-            let insertActor = ImportAPIActor(modelContainer: container)
-            
-            #expect(try await insertActor.insertModel(from: DBFringeVenue.apiModel) == .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-TEST123"))
-        }
     }
 }
 

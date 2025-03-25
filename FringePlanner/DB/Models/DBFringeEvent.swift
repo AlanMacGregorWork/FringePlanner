@@ -88,7 +88,7 @@ extension DBFringeEvent {
     convenience init(apiModel event: FringeEvent, context: ModelContext) throws(DBError) {
         // The venue should have been created first as multiple events can share the same venue. If the venue
         // cannot be found, then something has gone wrong and the event cannot be created.
-        guard let dbVenue = try ImportAPIActor.getDBModel(from: event.venue, context: context) else {
+        guard let dbVenue = try DBHelper.getDBModel(from: event.venue, context: context) else {
             throw .assumptionFailed(.expectedCreatedVenue)
         }
 
