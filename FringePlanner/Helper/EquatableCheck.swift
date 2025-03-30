@@ -27,4 +27,22 @@ extension EquatableCheck {
             lhs[keyPath: lhsKeyPath] == rhs[keyPath: rhsKeyPath]
         }
     }
+
+    /// Initialise an EquatableCheck using an optional-sided keyPath
+    init<T: Equatable>(lhsName: String, rhsName: String, lhsKeyPath: KeyPath<LHSType, T?>, rhsKeyPath: KeyPath<RHSType, T>) {
+        self.lhsName = lhsName
+        self.rhsName = rhsName
+        self.isEqual = { lhs, rhs in
+            lhs[keyPath: lhsKeyPath] == rhs[keyPath: rhsKeyPath]
+        }
+    }
+
+    /// Initialise an EquatableCheck using an optional-sided keyPath
+    init<T: Equatable>(lhsName: String, rhsName: String, lhsKeyPath: KeyPath<LHSType, T>, rhsKeyPath: KeyPath<RHSType, T?>) {
+        self.lhsName = lhsName
+        self.rhsName = rhsName
+        self.isEqual = { lhs, rhs in
+            lhs[keyPath: lhsKeyPath] == rhs[keyPath: rhsKeyPath]
+        }
+    }
 }
