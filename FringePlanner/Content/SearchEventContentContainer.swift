@@ -154,9 +154,33 @@ extension SearchEventContentContainer {
 extension SearchEventContentContainer {
     @MainActor
     static func createContent(modelContainer: ModelContainer) -> Content {
+        let downloader = getDownloader()
         let router = Router()
         let dataSource = DataSource()
-        let interaction = Interaction(dataSource: dataSource, router: router, modelContainer: modelContainer)
+        let interaction = Interaction(dataSource: dataSource, router: router, downloader: downloader, modelContainer: modelContainer)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
+    }
+    
+    private static func getDownloader() -> FringeEventDownloader.GetEventsProtocol {
+#if DEBUG
+        switch ApplicationEnvironment.current {
+        case .normal:
+            return FringeEventDownloader()
+        case .preview, .testingUI, .testingUnit:
+            return MockEventDownloader()
+        }
+#else	
+        return FringeEventDownloader()
+#endif
+    }
+}
+
+// MARK: - Preview
+
+#Preview {
+    if let modelContainer = try? ModelContainer.create() {
+        SearchEventContentContainer.createContent(modelContainer: modelContainer).buildView()
+    } else {
+        Text("Failed to generated Container")
     }
 }
