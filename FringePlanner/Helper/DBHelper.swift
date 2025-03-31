@@ -103,19 +103,22 @@ struct DBHelper {
 
 extension DBHelper {
     /// Indicates what took place when adding the API content to the database
-    enum Status: Equatable, Hashable {
+    enum Status: Equatable {
         case noChanges
-        case insertedModel(type: String, referenceID: String)
-        case updatedModel(type: String, referenceID: String)
+        case insertedModel(type: Any.Type, referenceID: String)
+        case updatedModel(type: Any.Type, referenceID: String)
         
-        /// Helper function to convert the type into a String
-        static func insertedModel<DBFringeModelType: DBFringeModel>(type modelType: DBFringeModelType.Type, referenceID: String) -> Self {
-            .insertedModel(type: "\(modelType)", referenceID: referenceID)
-        }
-        
-        /// Helper function to convert the type into a String
-        static func updatedModel<DBFringeModelType: DBFringeModel>(type modelType: DBFringeModelType.Type, referenceID: String) -> Self {
-            .updatedModel(type: "\(modelType)", referenceID: referenceID)
+        static func == (lhs: Self, rhs: Self) -> Bool {
+            switch (lhs, rhs) {
+            case (.noChanges, .noChanges):
+                return true
+            case (.insertedModel(let lhsType, let lhsID), .insertedModel(let rhsType, let rhsID)):
+                return lhsType == rhsType && lhsID == rhsID
+            case (.updatedModel(let lhsType, let lhsID), .updatedModel(let rhsType, let rhsID)):
+                return lhsType == rhsType && lhsID == rhsID
+            default:
+                return false
+            }
         }
     }
 }

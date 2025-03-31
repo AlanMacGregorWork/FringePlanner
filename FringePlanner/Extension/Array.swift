@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array where Element: Hashable {
+extension Array where Element: Equatable {
     /// Checks if two arrays contain the same elements, regardless of order
     /// - Returns: `true` if the arrays contain the same elements, `false` otherwise
     func unorderedElementsEqual(_ other: Self) -> Bool {
