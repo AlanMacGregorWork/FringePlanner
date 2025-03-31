@@ -47,23 +47,6 @@ private enum ContainerLoadedStatus {
     case failed
     
     static var current: Self {
-        do {
-            let container = try ModelContainer(
-                for: DBFringeEvent.self, DBFringeVenue.self, DBFringePerformance.self,
-                configurations: Self.modelConfiguration)
-            return .successfullyLoaded(container)
-        } catch {
-            fringeAssertFailure("Failed to setup container")
-            return .failed
-        }
-    }
-    
-    private static var modelConfiguration: ModelConfiguration {
-        switch ApplicationEnvironment.current {
-        case .preview, .testingUI, .testingUnit:
-            return ModelConfiguration(isStoredInMemoryOnly: true)
-        case .normal:
-            return ModelConfiguration()
-        }
+        return (try? ModelContainer.create()).map({ .successfullyLoaded($0) }) ?? .failed
     }
 }
