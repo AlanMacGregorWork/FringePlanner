@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 import Combine
 
 /// Container for searching Fringe events
@@ -79,21 +80,24 @@ extension SearchEventContentContainer {
         private let router: Router
         private let downloader: FringeEventDownloader.GetEventsProtocol
         private let searchSubjectCancellable: AnyCancellable
+        private let modelContainer: ModelContainer
         
         @MainActor
         init(
             dataSource: DataSource,
             router: Router,
-            downloader: FringeEventDownloader.GetEventsProtocol = FringeEventDownloader()
+            downloader: FringeEventDownloader.GetEventsProtocol = FringeEventDownloader(),
+            modelContainer: ModelContainer
         ) {
             self.dataSource = dataSource
             self.router = router
             self.downloader = downloader
+            self.modelContainer = modelContainer
             self.searchSubjectCancellable = dataSource.searchSubject
                 .receive(on: DispatchQueue.main)
                 .sink { _ in
                     Task {
-                        await Self.asyncSearch(downloader: downloader, dataSource: dataSource)
+                        await Self.asyncSearch(downloader: downloader, dataSource: dataSource, modelContainer: modelContainer)
                     }
                 }
         }
@@ -108,16 +112,19 @@ extension SearchEventContentContainer {
             // Note: Calls out another function to perform the sync as the `Task` will allow
             // any errors thrown to be silenced.
             Task {
-                await Self.asyncSearch(downloader: downloader, dataSource: dataSource)
+                await Self.asyncSearch(downloader: downloader, dataSource: dataSource, modelContainer: modelContainer)
             }
         }
         
         private static func asyncSearch(
             downloader: FringeEventDownloader.GetEventsProtocol,
-            dataSource: DataSource
+            dataSource: DataSource,
+            modelContainer: ModelContainer
         ) async {
             do {
                 let events = try await downloader.getEvents(from: .init(title: dataSource.search))
+                let importAPIActor = ImportAPIActor(modelContainer: modelContainer)
+                try await importAPIActor.updateEvents(events)
                 dataSource.events = events
             } catch {
                 // TODO: Implement error UI
@@ -146,10 +153,10 @@ extension SearchEventContentContainer {
 
 extension SearchEventContentContainer {
     @MainActor
-    static func createContent() -> Content {
+    static func createContent(modelContainer: ModelContainer) -> Content {
         let router = Router()
         let dataSource = DataSource()
-        let interaction = Interaction(dataSource: dataSource, router: router)
+        let interaction = Interaction(dataSource: dataSource, router: router, modelContainer: modelContainer)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }

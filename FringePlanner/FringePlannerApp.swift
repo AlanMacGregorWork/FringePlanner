@@ -17,12 +17,5 @@ struct FringePlannerApp: App {
 }
 
 #Preview {
-    demoView
-}
-
-@ViewBuilder
-@MainActor
-var demoView: some View {
-    SearchEventContentContainer.createContent()
-        .buildView()
+    MainView()
 }

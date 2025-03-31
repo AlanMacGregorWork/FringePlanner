@@ -23,7 +23,8 @@ struct MainView: View {
     static func bodyWith(modelContainer: ModelContainer) -> some View {
         switch ApplicationEnvironment.current {
         case .normal:
-            demoView
+            SearchEventContentContainer.createContent(modelContainer: modelContainer)
+                .buildView()
         case .testingUI:
             UITestingContentContainer.Content().buildView()
                 .onAppear {
@@ -47,12 +48,22 @@ private enum ContainerLoadedStatus {
     
     static var current: Self {
         do {
-            let config = ModelConfiguration()
-            let container = try ModelContainer(for: DBFringeEvent.self, DBFringeVenue.self, DBFringePerformance.self, configurations: config)
+            let container = try ModelContainer(
+                for: DBFringeEvent.self, DBFringeVenue.self, DBFringePerformance.self,
+                configurations: Self.modelConfiguration)
             return .successfullyLoaded(container)
         } catch {
             fringeAssertFailure("Failed to setup container")
             return .failed
+        }
+    }
+    
+    private static var modelConfiguration: ModelConfiguration {
+        switch ApplicationEnvironment.current {
+        case .preview, .testingUI, .testingUnit:
+            return ModelConfiguration(isStoredInMemoryOnly: true)
+        case .normal:
+            return ModelConfiguration()
         }
     }
 }
