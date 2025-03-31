@@ -23,7 +23,8 @@ final class DBFringeEvent: DBFringeModel {
     private(set) var genre: String
     private(set) var genreTags: String?
     @Relationship private(set) var performances: [DBFringePerformance]
-    private(set) var performanceSpace: FringePerformanceSpace
+    // Note: Is optional due to SwiftDatas handling of Codable objects with entirely nil proeprties
+    private(set) var performanceSpace: FringePerformanceSpace?
     private(set) var status: FringeStatus
     private(set) var url: URL
     @Relationship private(set) var venue: DBFringeVenue
@@ -47,7 +48,7 @@ final class DBFringeEvent: DBFringeModel {
          genre: String,
          genreTags: String? = nil,
          performances: [DBFringePerformance] = [],
-         performanceSpace: FringePerformanceSpace,
+         performanceSpace: FringePerformanceSpace?,
          status: FringeStatus,
          url: URL,
          venue: DBFringeVenue,
