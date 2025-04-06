@@ -94,8 +94,17 @@ extension URLSession: FringeEventDownloader.DownloadProtocol {}
 
 #if DEBUG
 struct MockEventDownloader: FringeEventDownloader.GetEventsProtocol {
+    /// The models to return
+    let models: [FringeEvent]
+    
+    /// Initialise a MockEventDownloader with a set of models
+    /// - Parameter models: The models to return
+    init(models: [FringeEvent] = .exampleModels()) {
+        self.models = models
+    }
+    
     func getEvents(from request: FilterRequest) async throws(FringeEventDownloader.DownloadError) -> [FringeEvent] {
-        return .exampleModels()
+        return self.models
     }
 }
 #endif
