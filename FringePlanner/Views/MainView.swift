@@ -25,6 +25,7 @@ struct MainView: View {
         case .normal:
             SearchEventContentContainer.createContent(modelContainer: modelContainer)
                 .buildView()
+                .modelContainer(modelContainer)
         case .testingUI:
             UITestingContentContainer.Content().buildView()
                 .onAppear {
