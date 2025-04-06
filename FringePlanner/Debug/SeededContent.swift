@@ -45,7 +45,6 @@ struct SeededContent {
         let artists = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
         let countries = ["United Kingdom", "Germany", "France", "Ireland", "Scotland", "Spain", "Italy", "Netherlands", "Belgium", "Denmark"]
         let teasers = ["A hilarious evening of non-stop laughter", "Classic theatre with a modern twist", "Musical entertainment for all ages", "Journey through dance history", "Improvised comedy at its finest", "Mind-bending illusions", "Words that move and inspire", "Acrobatic excellence", "Comedy after dark", "Dramatic masterpiece"]
-        let codes = ["COM123", "THTR456", "MUS789", "DNC012", "IMP345", "MAG678", "POE901", "CIR234", "LNL567", "DRM890"]
         let ageCategories = ["16+", "12+", "All ages", "5+", "18+", "7+", "14+", "3+", "16+", "15+"]
         let venueDescriptions = [
             "Join us for an unforgettable evening of entertainment. <br><em>Book early to avoid disappointment!</em>",
@@ -137,7 +136,7 @@ struct SeededContent {
     }
 
     func event(config: EventSeedConfig? = nil) -> FringeEvent {
-        let eventCode = config?.code.value ?? seedValue(for: randomNumber, at: \.codes)
+        let eventCode = config?.code.value ?? String(format: "%012d", randomNumber)
         
         let venue = config?.venue.value.map({
             switch $0 {
