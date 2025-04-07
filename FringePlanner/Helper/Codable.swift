@@ -23,7 +23,17 @@ var fringeJsonDecoder: JSONDecoder {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     decoder.dateDecodingStrategy = .formatted(fringeDateFormatter)
-    decoder.userInfo = JSONDecoder.DecoderStorage.eventCodeKey.map { [$0: JSONDecoder.DecoderStorage()] } ?? [:]
+
+    // The API decoder can use some added functionality to help with decoding
+    decoder.userInfo = [
+        JSONDecoder.DecoderStorage.eventCodeKey: JSONDecoder.DecoderStorage(),
+        JSONDecoder.DecoderStorage.validateMissingValuesKey: JSONDecoder.DecoderStorage(value: true)
+    ].reduce(into: [:]) { result, pair in
+        // Map all of the optional keys to non-optional keys
+        guard let key = pair.key else { return }
+        result[key] = pair.value
+    }
+    
     return decoder
 }
 
@@ -33,7 +43,13 @@ extension JSONDecoder {
     /// A class that allows storing content in the `userInfo` part of the decoder
     class DecoderStorage {
         static let eventCodeKey = CodingUserInfoKey(rawValue: "eventId")
+        /// If exists, validation can be performed for missing keys
+        static let validateMissingValuesKey = CodingUserInfoKey(rawValue: "validateMissingValues")
         var value: Any?
+        
+        init(value: Any? = nil) {
+            self.value = value
+        }
         
         // MARK: Errors
         
