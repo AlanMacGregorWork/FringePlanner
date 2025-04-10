@@ -90,7 +90,7 @@ extension EventDetailsContentContainer.Structure {
 
 extension EventDetailsContentContainer.Structure.DetailsStructure {
     @MainActor
-    init(event: FringeEvent) {
+    init(event: DBFringeEvent) {
         self.init(
             title: event.title,
             subTitle: event.subTitle,

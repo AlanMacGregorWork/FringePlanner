@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 /// Container for displaying event
 struct EventDetailsContentContainer {
@@ -28,14 +29,18 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     struct Structure: StructureProtocol {
         let input: Content
-        var event: FringeEvent { input.dataSource.event }
         
         var structure: some ViewDataProtocol {
-            GroupData(type: .form) {
-                DetailsStructure(event: event)
-                AccessibilityStructure(disabled: event.disabled)
-                DescriptionStructure(event: event)
-            }
+            let eventCode = input.dataSource.eventCode
+            return DatabaseItemsData(
+                predicate: #Predicate<DBFringeEvent> { $0.code == eventCode },
+                elementView: { event in
+                    GroupData(type: .form) {
+                        DetailsStructure(event: event)
+                        AccessibilityStructure(disabled: event.disabled)
+                        DescriptionStructure(event: event)
+                    }
+                })
         }
     }
 }
@@ -45,10 +50,10 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let event: FringeEvent
+        let eventCode: String
         
-        init(event: FringeEvent) {
-            self.event = event
+        init(eventCode: String) {
+            self.eventCode = eventCode
         }
     }
 }
@@ -65,16 +70,31 @@ extension EventDetailsContentContainer {
 
 extension EventDetailsContentContainer {
     @MainActor
-    static func createContent(event: FringeEvent = SeededContent(seed: 123).events()[0]) -> Content {
+    static func createContent(eventCode: String) -> Content {
         let router = Router()
-        let dataSource = DataSource(event: event)
+        let dataSource = DataSource(eventCode: eventCode)
         let interaction = Interaction()
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }
 
-#endif
+// MARK: - Preview
 
 #Preview {
-    EventDetailsContentContainer.createContent().buildView()
+    AsyncPreviewView(asyncOperation: {
+        try await previewModelContainerAndEventCode()
+    }, contentView: { modelContainer, eventCode in
+        EventDetailsContentContainer.createContent(eventCode: eventCode).buildView()
+            .modelContainer(modelContainer)
+    })
 }
+
+private func previewModelContainerAndEventCode() async throws -> (ModelContainer, String) {
+    let modelContainer = try ModelContainer.create()
+    let apiEvents = SeededContent(seed: 123).events()
+    let actor = ImportAPIActor(modelContainer: modelContainer)
+    try await actor.updateEvents(apiEvents)
+    return (modelContainer, apiEvents[0].code)
+}
+
+#endif
