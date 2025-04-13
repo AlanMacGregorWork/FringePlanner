@@ -35,6 +35,10 @@ final class DBFringeEvent: DBFringeModel {
     private(set) var updatedValue: Date
     private(set) var year: Int
     
+    // Custom properties
+    
+    var isFavourite: Bool
+    
     init(title: String,
          subTitle: String? = nil,
          artist: String? = nil,
@@ -57,7 +61,9 @@ final class DBFringeEvent: DBFringeModel {
          images: [String: FringeImage],
          warnings: String? = nil,
          updatedValue: Date,
-         year: Int) {
+         year: Int,
+         isFavourite: Bool = false
+    ) {
         self.title = title
         self.subTitle = subTitle
         self.artist = artist
@@ -81,6 +87,7 @@ final class DBFringeEvent: DBFringeModel {
         self.warnings = warnings
         self.updatedValue = updatedValue
         self.year = year
+        self.isFavourite = isFavourite
     }
 }
 

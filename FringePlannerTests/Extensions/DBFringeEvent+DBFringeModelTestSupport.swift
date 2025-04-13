@@ -149,6 +149,13 @@ extension DBFringeEvent: DBFringeModelTestSupport {
     }
 
     static var omittedDBAndAPIFields: (dbFields: [String], apiFields: [String]) {
-        (dbFields: ["venue", "performances"], apiFields: ["venue", "performances"])
+        (dbFields: [
+            "venue", // Relationship
+            "performances", // Relationship
+            "isFavourite" // Custom property
+        ], apiFields: [
+            "venue", // Relationship
+            "performances" // Relationship
+            ])
     }
 }
