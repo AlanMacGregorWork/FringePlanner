@@ -41,6 +41,8 @@ extension DatabaseItemsData {
     struct ContentView: View, ViewProtocol {
         @Query var models: [Element]
         let data: DatabaseItemsData<Element, ElementViewData>
+        // A cache for the ViewData models
+        @State private var processedViewData: [Element.ID: ElementViewData] = [:]
 
         init(data: DatabaseItemsData<Element, ElementViewData>) {
             // Set the sorting of the models at the database level if possible
@@ -55,9 +57,25 @@ extension DatabaseItemsData {
         }
     
         var body: some View {
-            // Loops through the sorted models and displays them
-            ForEach(sortedModels) { event in
-                data.elementView(event).createView()
+            ForEach(sortedModels) { model in
+                // Some UI elements (such as the AttributedString) must be processed on the main thread
+                // so we need to ensure that the view data is processed outside of the view update cycle
+                
+                // If the view data has already been processed, use the cached version
+                if let cachedViewData = processedViewData[model.id] {
+                    cachedViewData.createView()
+                } else {
+                    Color.clear
+                        .task(id: model.id) {
+                            // Process the view data outside the view update cycle
+                            let viewData = data.elementView(model)
+                            await MainActor.run { processedViewData[model.id] = viewData }
+                        }
+                }
+            }
+            .onChange(of: models) {
+                // Clear cache when models change
+                processedViewData.removeAll()
             }
         }
 
