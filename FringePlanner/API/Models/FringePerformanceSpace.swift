@@ -21,6 +21,8 @@ extension FringePerformanceSpace: Codable {
         self.ageLimited = try container.decodeIfPresent(Bool.self, forKey: "ageLimited")
         self.wheelchairAccess = try container.decodeIfPresent(Bool.self, forKey: "wheelchairAccess")
 
-        container.validateAssumedNil(keys: ["ageLimit", "capacity"])
+        if decoder.canValidateMissingKeys {
+            container.validateAssumedNil(keys: ["ageLimit", "capacity"])
+        }
     }
 }

@@ -89,8 +89,10 @@ extension FringeEvent: Codable {
         
         // Additional key validation: 
 
-        container.validateAssumedNil(keys: [
-            "artistType", "performersNumber", "nonEnglish", "fringeFirst", "relatedContent"])
+        if decoder.canValidateMissingKeys {
+            container.validateAssumedNil(keys: [
+                "artistType", "performersNumber", "nonEnglish", "fringeFirst", "relatedContent"])
+        }
         
         // Some fields are deprecated but may be included in the response, these should not be used:
         // - `fringe_first`, `sub_venue`, `twitter`, `discounts`, `categories`

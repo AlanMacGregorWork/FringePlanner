@@ -12,6 +12,7 @@ import Foundation
 /// Allows the importing of API models into the database
 actor ImportAPIActor {
     /// The main entry point for updating the database from the fringe events
+    @discardableResult
     func updateEvents(_ events: [FringeEvent]) throws(DBError) -> [DBHelper.Status] {
         let statuses = try events.map(update(event:)).flatMap({ $0 })
         try DBHelper.saveChanges(modelContext: modelContext)

@@ -46,8 +46,8 @@ extension EventDetailsContentContainer.Structure {
 
 extension EventDetailsContentContainer.Structure.DescriptionStructure {
     @MainActor
-    init(event: FringeEvent) {
-        self.init(descriptionTeaser: event.descriptionTeaser, description: event.description, warnings: event.warnings)
+    init(event: DBFringeEvent) {
+        self.init(descriptionTeaser: event.descriptionTeaser, description: event.eventDescription, warnings: event.warnings)
     }
     
     @MainActor
