@@ -43,7 +43,9 @@ extension SearchEventContentContainer {
                     DatabaseItemsData(
                         predicate: eventCodesPredicate,
                         sortOption: eventSorting,
-                        elementView: { FringeEventData(event: $0, onSelected: { /* TODO: Open Event */ }) }
+                        elementView: { event in
+                            FringeEventData(event: event, onSelected: { input.interaction.openEvent(event)})
+                        }
                     )
                 }
             }
