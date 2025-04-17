@@ -34,10 +34,9 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     
     @Suite("Init Tests")
     struct InitTests {
-        @MainActor
-        @Test("Init converts string to AttributedStrings correctly")
-        func testInitConvertsStrings() {
-            let details = EventDetailsContentContainer.Structure.DetailsStructure(
+        @Test("Init understands HTML strings")
+        func testInitHTMLStrings() {
+            let detailsWithHTML = EventDetailsContentContainer.Structure.DetailsStructure(
                 title: "Test <b>Title</b>",
                 subTitle: "Test <i>Subtitle</i>",
                 artist: "Test <i>Artist</i>",
@@ -47,34 +46,37 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
                 genreTags: "Tag1, <i>Tag2</i>"
             )
             
-            // Verify raw HTML strings are not being used as the final strings
-            #expect(details.title != AttributedString("Test <b>Title</b>"))
-            #expect(details.subTitle != AttributedString("Test <i>Subtitle</i>"))
-            #expect(details.artist != AttributedString("Test <i>Artist</i>"))
-            #expect(details.country != AttributedString("Test <u>Country</u>"))
-            #expect(details.ageCategory != AttributedString("Age <b>12+</b>"))
-            #expect(details.genre != AttributedString("Test <b>Genre</b>"))
-            #expect(details.genreTags != AttributedString("Tag1, <i>Tag2</i>"))
-
-            // Verify formatting has been applied (ie not just raw strings)
-            #expect(details.title != AttributedString("Test Title"))
-            #expect(details.subTitle != AttributedString("Test Subtitle"))
-            #expect(details.artist != AttributedString("Test Artist"))
-            #expect(details.country != AttributedString("Test Country"))
-            #expect(details.ageCategory != AttributedString("Age 12+"))
-            #expect(details.genre != AttributedString("Test Genre"))
-            #expect(details.genreTags != AttributedString("Tag1, Tag2"))
-            
-            // Verify generated AttributedStrings are formatted correctly
-            #expect(NSAttributedString(details.title).string == NSAttributedString(AttributedString("Test Title ")).string)
-            #expect(details.subTitle.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Subtitle ")).string)
-            #expect(details.artist.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Artist ")).string)
-            #expect(details.country.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Country ")).string)
-            #expect(details.ageCategory.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Age 12+ ")).string)
-            #expect(NSAttributedString(details.genre).string == NSAttributedString(AttributedString("Test Genre ")).string)
-            #expect(details.genreTags.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Tag1, Tag2 ")).string)
+            // HTML strings are stored as htmlString for later conversion
+            #expect(detailsWithHTML.title == AttributedString.StringProvider.htmlString("Test <b>Title</b>"))
+            #expect(detailsWithHTML.subTitle == AttributedString.StringProvider.htmlString("Test <i>Subtitle</i>"))
+            #expect(detailsWithHTML.artist == AttributedString.StringProvider.htmlString("Test <i>Artist</i>"))
+            #expect(detailsWithHTML.country == AttributedString.StringProvider.htmlString("Test <u>Country</u>"))
+            #expect(detailsWithHTML.ageCategory == AttributedString.StringProvider.htmlString("Age <b>12+</b>"))
+            #expect(detailsWithHTML.genre == AttributedString.StringProvider.htmlString("Test <b>Genre</b>"))
+            #expect(detailsWithHTML.genreTags == AttributedString.StringProvider.htmlString("Tag1, <i>Tag2</i>"))
         }
-    
+
+        @Test("Init understands non-HTML strings")
+        func testInitNonHTMLStrings() {            
+            let detailsWithNormalStrings = EventDetailsContentContainer.Structure.DetailsStructure(
+                title: "Test Title",
+                subTitle: "Test Subtitle",
+                artist: "Test Artist",
+                country: "Test Country",
+                ageCategory: "Age 12+",
+                genre: "Test Genre",
+                genreTags: "Tag1, Tag2"
+            )
+
+            // Normal strings are stored as attributedString immediately
+            #expect(detailsWithNormalStrings.title == AttributedString.StringProvider.attributedString(AttributedString("Test Title")))
+            #expect(detailsWithNormalStrings.subTitle == AttributedString.StringProvider.attributedString(AttributedString("Test Subtitle")))
+            #expect(detailsWithNormalStrings.artist == AttributedString.StringProvider.attributedString(AttributedString("Test Artist")))
+            #expect(detailsWithNormalStrings.country == AttributedString.StringProvider.attributedString(AttributedString("Test Country")))
+            #expect(detailsWithNormalStrings.ageCategory == AttributedString.StringProvider.attributedString(AttributedString("Age 12+")))
+            #expect(detailsWithNormalStrings.genre == AttributedString.StringProvider.attributedString(AttributedString("Test Genre")))
+            #expect(detailsWithNormalStrings.genreTags == AttributedString.StringProvider.attributedString(AttributedString("Tag1, Tag2")))
+        }
     }
 
     @Suite("General Structure Tests")
@@ -83,12 +85,12 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
         @Test("Structure with minimal content")
         func testMinimalContent() {
             let structure = Structure(
-                title: AttributedString("Test Title"),
+                title: AttributedString.StringProvider("Test Title"),
                 subTitle: nil,
                 artist: nil,
                 country: nil,
                 ageCategory: nil,
-                genre: AttributedString("Comedy"),
+                genre: AttributedString.StringProvider("Comedy"),
                 genreTags: nil
             )
             
@@ -97,7 +99,7 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
                     ContainerData {
                         EmptyData()
                             .conditionalSecond(firstType: SectionRowData.self)
-                        SectionRowData(title: "Title", text: AttributedString("Test Title"))
+                        SectionRowData(title: "Title", text: AttributedString.StringProvider("Test Title"))
                     }
                     .conditionalSecond(firstType: SectionRowData.self)
                     EmptyData()
@@ -106,7 +108,7 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
                         .conditionalSecond(firstType: SectionRowData.self)
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
-                    SectionRowData(title: "Genre", text: AttributedString("Comedy"))
+                    SectionRowData(title: "Genre", text: AttributedString.StringProvider("Comedy"))
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
                 }
@@ -117,31 +119,31 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
         @Test("Structure with all content")
         func testAllContent() {
             let structure = Structure(
-                title: AttributedString("Test Title"),
-                subTitle: AttributedString("Test Subtitle"),
-                artist: AttributedString("Test Artist"),
-                country: AttributedString("UK"),
-                ageCategory: AttributedString("12+"),
-                genre: AttributedString("Comedy"),
-                genreTags: AttributedString("Stand-up, Improv")
+                title: AttributedString.StringProvider("Test Title"),
+                subTitle: AttributedString.StringProvider("Test Subtitle"),
+                artist: AttributedString.StringProvider("Test Artist"),
+                country: AttributedString.StringProvider("UK"),
+                ageCategory: AttributedString.StringProvider("12+"),
+                genre: AttributedString.StringProvider("Comedy"),
+                genreTags: AttributedString.StringProvider("Stand-up, Improv")
             )
             
             structure.expect {
                 GroupData(type: .section(title: "Details")) {
                     ContainerData {
-                        SectionRowData(title: "Artist", text: AttributedString("Test Artist"))
+                        SectionRowData(title: "Artist", text: AttributedString.StringProvider("Test Artist"))
                             .conditionalFirst()
-                        SectionRowData(title: "Title", text: AttributedString("Test Title"))
+                        SectionRowData(title: "Title", text: AttributedString.StringProvider("Test Title"))
                     }
                     .conditionalSecond(firstType: SectionRowData.self)
-                    SectionRowData(title: "Subtitle", text: AttributedString("Test Subtitle"))
+                    SectionRowData(title: "Subtitle", text: AttributedString.StringProvider("Test Subtitle"))
                         .conditionalFirst()
-                    SectionRowData(title: "Country", text: AttributedString("UK"))
+                    SectionRowData(title: "Country", text: AttributedString.StringProvider("UK"))
                         .conditionalFirst()
-                    SectionRowData(title: "Age Category", text: AttributedString("12+"))
+                    SectionRowData(title: "Age Category", text: AttributedString.StringProvider("12+"))
                         .conditionalFirst()
-                    SectionRowData(title: "Genre", text: AttributedString("Comedy"))
-                    SectionRowData(title: "Genre Tags", text: AttributedString("Stand-up, Improv"))
+                    SectionRowData(title: "Genre", text: AttributedString.StringProvider("Comedy"))
+                    SectionRowData(title: "Genre Tags", text: AttributedString.StringProvider("Stand-up, Improv"))
                         .conditionalFirst()
                 }
             }
@@ -151,26 +153,26 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
         @Test("Structure with artist prefix in title")
         func testArtistPrefixInTitle() {
             let structure = Structure(
-                title: AttributedString("Test Artist: The Show"),
+                title: AttributedString.StringProvider("Test Artist: The Show"),
                 subTitle: nil,
-                artist: AttributedString("Test Artist"),
-                country: AttributedString("UK"),
+                artist: AttributedString.StringProvider("Test Artist"),
+                country: AttributedString.StringProvider("UK"),
                 ageCategory: nil,
-                genre: AttributedString("Comedy"),
+                genre: AttributedString.StringProvider("Comedy"),
                 genreTags: nil
             )
             
             structure.expect {
                 GroupData(type: .section(title: "Details")) {
-                    SectionRowData(title: "Artist & Title", text: AttributedString("Test Artist: The Show"))
+                    SectionRowData(title: "Artist & Title", text: AttributedString.StringProvider("Test Artist: The Show"))
                         .conditionalFirst(secondType: ContainerData<ConditionalData<SectionRowData, EmptyData>, SectionRowData>.self)
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
-                    SectionRowData(title: "Country", text: AttributedString("UK"))
+                    SectionRowData(title: "Country", text: AttributedString.StringProvider("UK"))
                         .conditionalFirst()
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
-                    SectionRowData(title: "Genre", text: AttributedString("Comedy"))
+                    SectionRowData(title: "Genre", text: AttributedString.StringProvider("Comedy"))
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
                 }
@@ -184,8 +186,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetArtistRowTests {
         @Test("Artist exists")
         func testArtistExists() {
-            Structure.getArtistRow(from: AttributedString("Test Artist")).expect {
-                SectionRowData(title: "Artist", text: AttributedString("Test Artist"))
+            Structure.getArtistRow(from: AttributedString.StringProvider("Test Artist")).expect {
+                SectionRowData(title: "Artist", text: AttributedString.StringProvider("Test Artist"))
                     .conditionalFirst()
             }
         }
@@ -205,8 +207,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetTitleRowTests {
         @Test("Creates title row")
         func testTitleRow() {
-            Structure.getTitleRow(from: AttributedString("Test Title")).expect {
-                SectionRowData(title: "Title", text: AttributedString("Test Title"))
+            Structure.getTitleRow(from: AttributedString.StringProvider("Test Title")).expect {
+                SectionRowData(title: "Title", text: AttributedString.StringProvider("Test Title"))
             }
         }
     }
@@ -217,8 +219,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetSubtitleRowTests {
         @Test("Subtitle exists")
         func testSubtitleExists() {
-            Structure.getSubTitleRow(from: AttributedString("Test Subtitle")).expect {
-                SectionRowData(title: "Subtitle", text: AttributedString("Test Subtitle"))
+            Structure.getSubTitleRow(from: AttributedString.StringProvider("Test Subtitle")).expect {
+                SectionRowData(title: "Subtitle", text: AttributedString.StringProvider("Test Subtitle"))
                     .conditionalFirst()
             }
         }
@@ -238,8 +240,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetArtistAndTitleRowTests {
         @Test("Creates combined row")
         func testCombinedRow() {
-            Structure.getArtistAndTitleRow(from: AttributedString("Test Artist: The Show")).expect {
-                SectionRowData(title: "Artist & Title", text: AttributedString("Test Artist: The Show"))
+            Structure.getArtistAndTitleRow(from: AttributedString.StringProvider("Test Artist: The Show")).expect {
+                SectionRowData(title: "Artist & Title", text: AttributedString.StringProvider("Test Artist: The Show"))
             }
         }
     }
@@ -250,8 +252,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetCountryRowTests {
         @Test("Country exists")
         func testCountryExists() {
-            Structure.getCountryRow(from: AttributedString("UK")).expect {
-                SectionRowData(title: "Country", text: AttributedString("UK"))
+            Structure.getCountryRow(from: AttributedString.StringProvider("UK")).expect {
+                SectionRowData(title: "Country", text: AttributedString.StringProvider("UK"))
                     .conditionalFirst()
             }
         }
@@ -271,8 +273,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetAgeCategoryRowTests {
         @Test("Age category exists")
         func testAgeCategoryExists() {
-            Structure.getAgeCategoryRow(from: AttributedString("12+")).expect {
-                SectionRowData(title: "Age Category", text: AttributedString("12+"))
+            Structure.getAgeCategoryRow(from: AttributedString.StringProvider("12+")).expect {
+                SectionRowData(title: "Age Category", text: AttributedString.StringProvider("12+"))
                     .conditionalFirst()
             }
         }
@@ -292,8 +294,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetGenreRowTests {
         @Test("Creates genre row")
         func testGenreRow() {
-            Structure.getGenreRow(from: AttributedString("Comedy")).expect {
-                SectionRowData(title: "Genre", text: AttributedString("Comedy"))
+            Structure.getGenreRow(from: AttributedString.StringProvider("Comedy")).expect {
+                SectionRowData(title: "Genre", text: AttributedString.StringProvider("Comedy"))
             }
         }
     }
@@ -304,8 +306,8 @@ extension EventDetailsContentContainerTests.DetailsStructureTests {
     struct GetGenreTagsRowTests {
         @Test("Genre tags exist")
         func testGenreTagsExist() {
-            Structure.getGenreTagsRow(from: AttributedString("Stand-up, Improv")).expect {
-                SectionRowData(title: "Genre Tags", text: AttributedString("Stand-up, Improv"))
+            Structure.getGenreTagsRow(from: AttributedString.StringProvider("Stand-up, Improv")).expect {
+                SectionRowData(title: "Genre Tags", text: AttributedString.StringProvider("Stand-up, Improv"))
                     .conditionalFirst()
             }
         }
@@ -505,29 +507,17 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
     
     @Suite("Init Tests")
     struct InitTests {
-        @MainActor
-        @Test("Init converts string to AttributedStrings correctly")
-        func testInitConvertsStrings() {
+        @Test("Init understands HTML strings")
+        func testInitHTMLStrings() {
             let description = Structure(
                 descriptionTeaser: "Test <b>Teaser</b>",
                 description: "Test <i>Description</i>",
                 warnings: "Test <u>Warning</u>"
             )
-            
-            // Verify raw HTML strings are not being used as the final strings
-            #expect(description.descriptionTeaser != AttributedString("Test <b>Teaser</b>"))
-            #expect(description.description != AttributedString("Test <i>Description</i>"))
-            #expect(description.warnings != AttributedString("Test <u>Warning</u>"))
-            
-            // Verify formatting has been applied (ie not just raw strings)
-            #expect(description.descriptionTeaser != AttributedString("Test Teaser"))
-            #expect(description.description != AttributedString("Test Description"))
-            #expect(description.warnings != AttributedString("Test Warning"))
-            
-            // Verify generated AttributedStrings are formatted correctly
-            #expect(description.descriptionTeaser.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Teaser ")).string)
-            #expect(NSAttributedString(description.description).string == NSAttributedString(AttributedString("Test Description ")).string)
-            #expect(description.warnings.map(NSAttributedString.init)?.string == NSAttributedString(AttributedString("Test Warning ")).string)
+            // HTML strings are stored as htmlString for later conversion
+            #expect(description.descriptionTeaser == AttributedString.StringProvider.htmlString("Test <b>Teaser</b>"))
+            #expect(description.description == AttributedString.StringProvider.htmlString("Test <i>Description</i>"))
+            #expect(description.warnings == AttributedString.StringProvider.htmlString("Test <u>Warning</u>"))
         }
     }
     
@@ -538,7 +528,7 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
         func testMinimalContent() {
             let structure = Structure(
                 descriptionTeaser: nil,
-                description: AttributedString("Test Description"),
+                description: AttributedString.StringProvider("Test Description"),
                 warnings: nil
             )
             
@@ -546,7 +536,7 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
                 GroupData(type: .section) {
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
-                    SectionRowData(text: AttributedString("Test Description"))
+                    SectionRowData(text: AttributedString.StringProvider("Test Description"))
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
                 }
@@ -557,17 +547,17 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
         @Test("Structure with all content")
         func testAllContent() {
             let structure = Structure(
-                descriptionTeaser: AttributedString("Test Teaser"),
-                description: AttributedString("Test Description"),
-                warnings: AttributedString("Test Warning")
+                descriptionTeaser: AttributedString.StringProvider("Test Teaser"),
+                description: AttributedString.StringProvider("Test Description"),
+                warnings: AttributedString.StringProvider("Test Warning")
             )
             
             structure.expect {
                 GroupData(type: .section) {
-                    SectionRowData(text: AttributedString("Test Teaser"))
+                    SectionRowData(text: AttributedString.StringProvider("Test Teaser"))
                         .conditionalFirst()
-                    SectionRowData(text: AttributedString("Test Description"))
-                    SectionRowData(title: "Warnings", text: AttributedString("Test Warning"))
+                    SectionRowData(text: AttributedString.StringProvider("Test Description"))
+                    SectionRowData(title: "Warnings", text: AttributedString.StringProvider("Test Warning"))
                         .conditionalFirst()
                 }
             }
@@ -576,8 +566,8 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
         @MainActor
         @Test("Structure with teaser included in description")
         func testTeaserIncludedInDescription() {
-            let teaser = AttributedString("Test Teaser")
-            let description = AttributedString("Test Teaser followed by more text")
+            let teaser = AttributedString.StringProvider("Test Teaser")
+            let description = AttributedString.StringProvider("Test Teaser followed by more text")
             
             let structure = Structure(
                 descriptionTeaser: teaser,
@@ -589,7 +579,7 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
                 GroupData(type: .section) {
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
-                    SectionRowData(text: AttributedString("Test Teaser followed by more text"))
+                    SectionRowData(text: AttributedString.StringProvider("Test Teaser followed by more text"))
                     EmptyData()
                         .conditionalSecond(firstType: SectionRowData.self)
                 }
@@ -603,17 +593,17 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
     struct GetTeaserRowTests {
         @Test("Returns row if teaser exists and not prefix of description")
         func testTeaserExistsAndNotPrefixOfDescription() {
-            let teaser = AttributedString("Test Teaser")
-            let description = AttributedString("Some Other Description")
+            let teaser = AttributedString.StringProvider("Test Teaser")
+            let description = AttributedString.StringProvider("Some Other Description")
             Structure.getTeaserRow(from: teaser, description: description).expect {
-                SectionRowData(text: AttributedString("Test Teaser"))
+                SectionRowData(text: AttributedString.StringProvider("Test Teaser"))
                     .conditionalFirst()
             }
         }
         
         @Test("Returns empty if teaser does not exist")
         func testNoTeaser() {
-            let description = AttributedString("Some Other Description")
+            let description = AttributedString.StringProvider("Some Other Description")
             Structure.getTeaserRow(from: nil, description: description).expect {
                 EmptyData()
                     .conditionalSecond(firstType: SectionRowData.self)
@@ -622,8 +612,8 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
         
         @Test("Returns empty if teaser is prefix of description")
         func testTeaserIsPrefix() {
-            let teaser = AttributedString("Test Teaser")
-            let description = AttributedString("Test Teaser Description")
+            let teaser = AttributedString.StringProvider("Test Teaser")
+            let description = AttributedString.StringProvider("Test Teaser Description")
             Structure.getTeaserRow(from: teaser, description: description).expect {
                 EmptyData()
                     .conditionalSecond(firstType: SectionRowData.self)
@@ -637,8 +627,8 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
     struct GetDescriptionRowTests {
         @Test("Returns description row")
         func testDescriptionRow() {
-            Structure.getDescriptionRow(from: AttributedString("Test Description")).expect {
-                SectionRowData(text: AttributedString("Test Description"))
+            Structure.getDescriptionRow(from: AttributedString.StringProvider("Test Description")).expect {
+                SectionRowData(text: AttributedString.StringProvider("Test Description"))
             }
         }
     }
@@ -649,8 +639,8 @@ extension EventDetailsContentContainerTests.DescriptionStructureTests {
     struct GetWarningsRowTests {
         @Test("Row returned with warning")
         func testWarningsExist() {
-            Structure.getWarningsRow(from: AttributedString("Test Warning")).expect {
-                SectionRowData(title: "Warnings", text: AttributedString("Test Warning"))
+            Structure.getWarningsRow(from: AttributedString.StringProvider("Test Warning")).expect {
+                SectionRowData(title: "Warnings", text: AttributedString.StringProvider("Test Warning"))
                     .conditionalFirst()
             }
         }

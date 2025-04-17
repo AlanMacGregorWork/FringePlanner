@@ -48,51 +48,59 @@ struct AttributedStringTests {
             """)
         }
     }
-    
-    @Suite("hasTrimmedPrefix")
-    struct HasTrimmedPrefixTests {
-        let testString = AttributedString("Some Value")
-        
-        @Test("Returns true on matching prefix")
-        func testExactPrefixMatch() {
-            #expect(AttributedString("Some Value In Here").hasTrimmedPrefix(AttributedString("Some Value")))
-            #expect(AttributedString("Alternative Text").hasTrimmedPrefix(AttributedString("Alt")))
-            #expect(AttributedString("Example Text").hasTrimmedPrefix(AttributedString("Example Text")), "As long as the prefix is still at the start of the String, having it use the ensite string is valid")
-        }
-        
-        @Test("Returns true on matching prefix (with trimming)")
-        func testPrefixMatchWithTrimming() {
-            #expect(AttributedString("  Some Value In Here    ").hasTrimmedPrefix(AttributedString("   Some Value ")))
-            #expect(AttributedString(" Alternative Text  ").hasTrimmedPrefix(AttributedString("       Alt       ")))
-        }
-        
-        @Test("Returns false on nil prefix")
-        func testNilPrefix() {
-            #expect(!AttributedString("General String").hasTrimmedPrefix(nil))
-            #expect(!AttributedString("").hasTrimmedPrefix(nil), "Even an empty string will require a non nil prefix")
-        }
-        
-        @Test("Returns false on non-matching prefix")
-        func testNonMatchingPrefix() {
-            #expect(!AttributedString("Some Text").hasTrimmedPrefix("Other Text"))
-            #expect(!AttributedString("123 Some Text").hasTrimmedPrefix("123 Other Text"))
-        }
-    }
 
     @Suite("StringProvider")
     struct StringProviderTests {
-        @Test("init correctly identifies HTML content")
-        func testInitWithHTMLContent() throws {
-            let htmlString = "<p>This is <b>HTML</b> content</p>"
-            try #require(htmlString.mayContainHTML, "Sanity Check: HTML string should be detected as containing HTML")
-            #expect(AttributedString.StringProvider(htmlString) == .htmlString(htmlString))
+        @Suite("init(_ string: String)")
+        struct InitWithStringTests {
+            @Test("init correctly identifies HTML content")
+            func testInitWithHTMLContent() throws {
+                let htmlString = "<p>This is <b>HTML</b> content</p>"
+                try #require(htmlString.mayContainHTML, "Sanity Check: HTML string should be detected as containing HTML")
+                #expect(AttributedString.StringProvider(htmlString) == .htmlString(htmlString))
+            }
+            
+            @Test("init correctly handles plain text")
+            func testInitWithPlainText() throws {
+                let plainString = "This is plain text content"
+                try #require(!plainString.mayContainHTML, "Sanity Check: Plain text should not be detected as containing HTML")
+                #expect(AttributedString.StringProvider(plainString) == .attributedString(AttributedString(plainString)))
+            }
         }
         
-        @Test("init correctly handles plain text")
-        func testInitWithPlainText() throws {
-            let plainString = "This is plain text content"
-            try #require(!plainString.mayContainHTML, "Sanity Check: Plain text should not be detected as containing HTML")
-            #expect(AttributedString.StringProvider(plainString) == .attributedString(AttributedString(plainString)))
+        @Suite("hasTrimmedPrefix")
+        struct HasTrimmedPrefixTests {
+            @Test("hasTrimmedPrefix correctly identifies prefixes between StringProviders")
+            func testHasTrimmedPrefix() {
+                // Valid comparisons
+                #expect(AttributedString.StringProvider.htmlString("Some Value In Here").hasTrimmedPrefix(AttributedString.StringProvider.htmlString("Some Value")))
+                #expect(AttributedString.StringProvider.attributedString(AttributedString("Some Value In Here")).hasTrimmedPrefix(AttributedString.StringProvider.attributedString(AttributedString("Some Value"))))
+                #expect(AttributedString.StringProvider.attributedString(AttributedString("Some Value In Here")).hasTrimmedPrefix(AttributedString.StringProvider.htmlString("Some Value")))
+                #expect(AttributedString.StringProvider.htmlString("Some Value In Here").hasTrimmedPrefix(AttributedString.StringProvider.attributedString("Some Value")))
+                
+                // Invalid comparisons
+                #expect(!AttributedString.StringProvider.htmlString("Some Value In Here").hasTrimmedPrefix(AttributedString.StringProvider.htmlString("Some Other Value")))
+                #expect(!AttributedString.StringProvider.attributedString(AttributedString("Some Value In Here")).hasTrimmedPrefix(AttributedString.StringProvider.attributedString(AttributedString("Some Other Value"))))
+                #expect(!AttributedString.StringProvider.htmlString("Some Value In Here").hasTrimmedPrefix(AttributedString.StringProvider.attributedString("Some Other Value")))
+                
+                // Empty string comparisons
+                #expect(!AttributedString.StringProvider.htmlString("").hasTrimmedPrefix(AttributedString.StringProvider.htmlString("Some Value")))
+                #expect(!AttributedString.StringProvider.attributedString(AttributedString("")).hasTrimmedPrefix(AttributedString.StringProvider.attributedString(AttributedString("Some Value"))))
+                #expect(!AttributedString.StringProvider.htmlString("").hasTrimmedPrefix(AttributedString.StringProvider.attributedString("Some Value")))
+                #expect(AttributedString.StringProvider.htmlString("").hasTrimmedPrefix(AttributedString.StringProvider.htmlString("")))
+                #expect(AttributedString.StringProvider.attributedString(AttributedString("")).hasTrimmedPrefix(AttributedString.StringProvider.attributedString(AttributedString(""))))
+                #expect(AttributedString.StringProvider.attributedString(AttributedString("")).hasTrimmedPrefix(AttributedString.StringProvider.htmlString("")))
+            
+                // HTML to HTML comparison
+                #expect(AttributedString.StringProvider.htmlString("Some Value In Here").hasTrimmedPrefix(AttributedString.StringProvider.htmlString("<p>Some Value In Here</p>")))
+                #expect(AttributedString.StringProvider.htmlString("<p>Some Value In Here</p>").hasTrimmedPrefix(AttributedString.StringProvider.htmlString("<p>Some Value In Here</p>")))
+                
+                // Typographically enhanced comparison for right double quotes
+                let curlyQuotes = "\u{201C}Quote test\u{201D}"
+                let straightQuotes = "\"Quote test\""
+                #expect(AttributedString.StringProvider.htmlString(curlyQuotes.typographicallyEnhanced).hasTrimmedPrefix(AttributedString.StringProvider.htmlString(straightQuotes)))
+                #expect(AttributedString.StringProvider.attributedString(AttributedString(curlyQuotes.typographicallyEnhanced)).hasTrimmedPrefix(AttributedString.StringProvider.attributedString(AttributedString(straightQuotes))))
+            }
         }
     }
 }

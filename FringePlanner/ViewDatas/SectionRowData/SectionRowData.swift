@@ -29,7 +29,7 @@ struct SectionRowData: ViewDataProtocol, Equatable {
     /// The content to be used for the row
     enum ValueType: Equatable {
         case url(title: String, value: String, url: String)
-        case text(title: String?, text: AttributedString)
+        case text(title: String?, text: AttributedString.StringProvider)
         case button(title: String, closure: MakeEquatableReadOnly<(() -> Void)>)
     }
 }
@@ -38,17 +38,15 @@ struct SectionRowData: ViewDataProtocol, Equatable {
 
 extension SectionRowData {
     init(title: String? = nil, text: AttributedString) {
+        self.value = .text(title: title, text: .attributedString(text))
+    }
+    
+    init(title: String? = nil, text: AttributedString.StringProvider) {
         self.value = .text(title: title, text: text)
     }
     
-    @MainActor
-    init(title: String? = nil, html: String) {
-        let attributedStringText = AttributedString(fromHTML: html) ?? .init(html)
-        self = .init(title: title, text: attributedStringText)
-    }
-    
     init(title: String? = nil, text: String) {
-        self.value = .text(title: title, text: AttributedString(text))
+        self.value = .text(title: title, text: .init(text))
     }
     
     init(title: String, value: URL) {
