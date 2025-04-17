@@ -10,13 +10,13 @@ import SwiftUI
 extension EventDetailsContentContainer.Structure {
     /// Structure for the general details portion of the event details
     struct DetailsStructure: BaseStructureProtocol {
-        let title: AttributedString
-        let subTitle: AttributedString?
-        let artist: AttributedString?
-        let country: AttributedString?
-        let ageCategory: AttributedString?
-        let genre: AttributedString
-        let genreTags: AttributedString?
+        let title: AttributedString.StringProvider
+        let subTitle: AttributedString.StringProvider?
+        let artist: AttributedString.StringProvider?
+        let country: AttributedString.StringProvider?
+        let ageCategory: AttributedString.StringProvider?
+        let genre: AttributedString.StringProvider
+        let genreTags: AttributedString.StringProvider?
         
         var structure: some ViewDataProtocol {
             GroupData(type: .section(title: "Details")) {
@@ -37,50 +37,50 @@ extension EventDetailsContentContainer.Structure {
         }
 
         @FringeDataResultBuilder
-        static func getArtistRow(from artist: AttributedString?) -> some ViewDataProtocol {
+        static func getArtistRow(from artist: AttributedString.StringProvider?) -> some ViewDataProtocol {
             if let artist {
                 SectionRowData(title: "Artist", text: artist)
             }
         }
         
         @FringeDataResultBuilder
-        static func getTitleRow(from title: AttributedString) -> SectionRowData {
+        static func getTitleRow(from title: AttributedString.StringProvider) -> SectionRowData {
             SectionRowData(title: "Title", text: title)
         }
 
         @FringeDataResultBuilder
-        static func getSubTitleRow(from subTitle: AttributedString?) -> some ViewDataProtocol {
+        static func getSubTitleRow(from subTitle: AttributedString.StringProvider?) -> some ViewDataProtocol {
             if let subTitle {
                 SectionRowData(title: "Subtitle", text: subTitle)
             }
         }
         
         @FringeDataResultBuilder
-        static func getArtistAndTitleRow(from artistAndTitle: AttributedString) -> SectionRowData {
+        static func getArtistAndTitleRow(from artistAndTitle: AttributedString.StringProvider) -> SectionRowData {
             SectionRowData(title: "Artist & Title", text: artistAndTitle)
         }
         
         @FringeDataResultBuilder
-        static func getCountryRow(from country: AttributedString?) -> some ViewDataProtocol {
+        static func getCountryRow(from country: AttributedString.StringProvider?) -> some ViewDataProtocol {
             if let country {
                 SectionRowData(title: "Country", text: country)
             }
         }
         
         @FringeDataResultBuilder
-        static func getAgeCategoryRow(from ageCategory: AttributedString?) -> some ViewDataProtocol {
+        static func getAgeCategoryRow(from ageCategory: AttributedString.StringProvider?) -> some ViewDataProtocol {
             if let ageCategory {
                 SectionRowData(title: "Age Category", text: ageCategory)
             }
         }
         
         @FringeDataResultBuilder
-        static func getGenreRow(from genre: AttributedString) -> SectionRowData {
+        static func getGenreRow(from genre: AttributedString.StringProvider) -> SectionRowData {
             SectionRowData(title: "Genre", text: genre)
         }
         
         @FringeDataResultBuilder
-        static func getGenreTagsRow(from genreTags: AttributedString?) -> some ViewDataProtocol {
+        static func getGenreTagsRow(from genreTags: AttributedString.StringProvider?) -> some ViewDataProtocol {
             if let genreTags {
                 SectionRowData(title: "Genre Tags", text: genreTags)
             }
@@ -89,7 +89,6 @@ extension EventDetailsContentContainer.Structure {
 }
 
 extension EventDetailsContentContainer.Structure.DetailsStructure {
-    @MainActor
     init(event: DBFringeEvent) {
         self.init(
             title: event.title,
@@ -102,7 +101,6 @@ extension EventDetailsContentContainer.Structure.DetailsStructure {
         )
     }
         
-    @MainActor
     init(
         title: String,
         subTitle: String?,
@@ -112,12 +110,12 @@ extension EventDetailsContentContainer.Structure.DetailsStructure {
         genre: String,
         genreTags: String?
     ) {
-        self.title = AttributedString(fromHTML: title) ?? AttributedString(title)
-        self.subTitle = subTitle.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
-        self.artist = artist.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
-        self.country = country.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
-        self.ageCategory = ageCategory.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
-        self.genre = AttributedString(fromHTML: genre) ?? AttributedString(genre)
-        self.genreTags = genreTags.map { AttributedString(fromHTML: $0) ?? AttributedString($0) }
+        self.title = AttributedString.StringProvider(title)
+        self.subTitle = subTitle.map { AttributedString.StringProvider($0) }
+        self.artist = artist.map { AttributedString.StringProvider($0) }
+        self.country = country.map { AttributedString.StringProvider($0) }
+        self.ageCategory = ageCategory.map { AttributedString.StringProvider($0) }
+        self.genre = AttributedString.StringProvider(genre)
+        self.genreTags = genreTags.map { AttributedString.StringProvider($0) }
     }
 }

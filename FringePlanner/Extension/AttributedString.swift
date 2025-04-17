@@ -7,22 +7,6 @@
 
 import SwiftUI
 
-// MARK: - General
-
-extension AttributedString {
-    /// Returns true if the string includes the prefix after both string are trimmed.
-    func hasTrimmedPrefix(_ prefix: AttributedString?) -> Bool {
-        // Prefix must exist to be a prefix for the title
-        guard let prefix else { return false }
-        // Get the string values for each so that they can be evaluated
-        let stringPrefix = NSAttributedString(prefix).string
-        let stringSelf = NSAttributedString(self).string
-        // Values must be trimmed of whitespace before comparison as the attributed string generated from HTML
-        // may have whitespace which is not part of the default decoding
-        return stringSelf.trimmed.hasPrefix(stringPrefix.trimmed)
-    }
-}
-
 // MARK: - Generation from HTML
 
 extension AttributedString {
@@ -80,5 +64,57 @@ extension AttributedString {
         uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         
         return String(format: "#%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
+    }
+}
+
+// MARK: - StringProvider
+
+extension AttributedString {
+    /// An enum that provides attributed text content with deferred processing for HTML strings.
+    enum StringProvider: Equatable {
+        /// Content that is already in AttributedString format
+        case attributedString(AttributedString)
+        /// HTML string content that will be converted later to AttributedString
+        case htmlString(String)
+
+        /// Creates a provider by automatically detecting if the string contains HTML
+        /// - Parameter string: The input string to analyze
+        /// If string contains HTML markers, it's stored as htmlString for later conversion
+        /// Otherwise, it's immediately converted to AttributedString
+        init(_ string: String) {
+            if string.mayContainHTML {
+                self = .htmlString(string)
+            } else {
+                self = .attributedString(AttributedString(string))
+            }
+        }
+        
+        /// Returns true if the string includes the prefix after both strings are processed.
+        /// Processing includes:
+        /// - Removing HTML tags
+        /// - Normalizing typographic characters (converting curly quotes to straight quotes)
+        /// - Trimming whitespace
+        /// This ensures consistent comparison regardless of formatting differences.
+        func hasTrimmedPrefix(_ stringProvider: AttributedString.StringProvider?) -> Bool {
+            // Prefix must exist to be a prefix for the title
+            guard let stringProvider else { return false }
+            // Values must be trimmed of whitespace before comparison as the attributed string generated from HTML
+            // may have whitespace which is not part of the default decoding
+            let string1 = self.rawString.withoutHTMLTags.typographicallyEnhanced.trimmed
+            let string2 = stringProvider.rawString.withoutHTMLTags.typographicallyEnhanced.trimmed
+            return string1.hasPrefix(string2)
+        }
+        
+        /// Returns the raw string content regardless of the provider type
+        /// - For attributed string: converts characters to a standard string
+        /// - For HTML string: returns the original HTML content
+        private var rawString: String {
+            switch self {
+            case .attributedString(let attributedString):
+                return String(attributedString.characters)
+            case .htmlString(let htmlString):
+                return htmlString
+            }
+        }
     }
 }
