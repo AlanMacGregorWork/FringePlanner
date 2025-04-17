@@ -13,6 +13,30 @@ extension String {
     var trimmed: Self {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    /// Returns a string with proper typographic characters and normalized quotes
+    var typographicallyEnhanced: Self {
+        var result = self
+        
+        // Convert any curly quotes to standard straight quotes
+        result = result.replacingOccurrences(of: "\u{201C}", with: "\"") // Left double quote to straight quote
+        result = result.replacingOccurrences(of: "\u{201D}", with: "\"") // Right double quote to straight quote
+        result = result.replacingOccurrences(of: "\u{2018}", with: "'") // Left single quote to straight quote
+        result = result.replacingOccurrences(of: "\u{2019}", with: "'") // Right single quote to straight quote
+        
+        // Replace three dots with ellipsis
+        result = result.replacingOccurrences(of: "...", with: "\u{2026}")
+        
+        // Replace common symbol representations
+        result = result.replacingOccurrences(of: "(c)", with: "\u{00A9}") // Copyright
+        result = result.replacingOccurrences(of: "(r)", with: "\u{00AE}") // Registered trademark
+        result = result.replacingOccurrences(of: "(tm)", with: "\u{2122}") // Trademark
+        
+        // Replace double hyphen with em dash
+        result = result.replacingOccurrences(of: "--", with: "\u{2014}")
+        
+        return result
+    }
     
     /// Will return nil if the string is empty
     var nilOnEmpty: Self? {

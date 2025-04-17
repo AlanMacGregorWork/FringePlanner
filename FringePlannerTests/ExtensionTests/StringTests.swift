@@ -45,6 +45,28 @@ struct StringTests {
         #expect("Text before <span>and tag</span> after".mayContainHTML == true)
     }
     
+    @Test("`typographicallyEnhanced` correctly replaces typographic characters")
+    func testTypographicallyEnhanced() {
+        // Test quotes normalization
+        #expect("\u{201C}Hello World\u{201D}".typographicallyEnhanced == "\"Hello World\"")
+        #expect("It\u{2019}s working".typographicallyEnhanced == "It's working")
+        #expect("It\u{2018}s a \u{201C}quote\u{201D}".typographicallyEnhanced == "It's a \"quote\"")
+        
+        // Test ellipsis
+        #expect("Testing...done".typographicallyEnhanced == "Testing\u{2026}done")
+        
+        // Test symbols
+        #expect("Copyright (c) 2024".typographicallyEnhanced == "Copyright \u{00A9} 2024")
+        #expect("Registered (r) mark".typographicallyEnhanced == "Registered \u{00AE} mark")
+        #expect("Trademark (tm) symbol".typographicallyEnhanced == "Trademark \u{2122} symbol")
+        
+        // Test dashes
+        #expect("Word--connection".typographicallyEnhanced == "Word\u{2014}connection")
+        
+        // Test multiple substitutions
+        #expect("\u{201C}Hello World\u{201D}... It\u{2019}s (c) 2024".typographicallyEnhanced == "\"Hello World\"\u{2026} It's \u{00A9} 2024")
+    }
+    
     @Test("`withoutHTMLTags` correctly removes HTML tags")
     func testWithoutHTMLTags() {
         // Empty string
