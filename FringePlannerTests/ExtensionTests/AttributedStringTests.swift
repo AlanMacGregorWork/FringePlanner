@@ -78,4 +78,21 @@ struct AttributedStringTests {
             #expect(!AttributedString("123 Some Text").hasTrimmedPrefix("123 Other Text"))
         }
     }
+
+    @Suite("StringProvider")
+    struct StringProviderTests {
+        @Test("init correctly identifies HTML content")
+        func testInitWithHTMLContent() throws {
+            let htmlString = "<p>This is <b>HTML</b> content</p>"
+            try #require(htmlString.mayContainHTML, "Sanity Check: HTML string should be detected as containing HTML")
+            #expect(AttributedString.StringProvider(htmlString) == .htmlString(htmlString))
+        }
+        
+        @Test("init correctly handles plain text")
+        func testInitWithPlainText() throws {
+            let plainString = "This is plain text content"
+            try #require(!plainString.mayContainHTML, "Sanity Check: Plain text should not be detected as containing HTML")
+            #expect(AttributedString.StringProvider(plainString) == .attributedString(AttributedString(plainString)))
+        }
+    }
 }

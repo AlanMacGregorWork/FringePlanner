@@ -82,3 +82,27 @@ extension AttributedString {
         return String(format: "#%02X%02X%02X", Int(red * 255), Int(green * 255), Int(blue * 255))
     }
 }
+
+// MARK: - StringProvider
+
+extension AttributedString {
+    /// An enum that provides attributed text content with deferred processing for HTML strings.
+    enum StringProvider: Equatable {
+        /// Content that is already in AttributedString format
+        case attributedString(AttributedString)
+        /// HTML string content that will be converted later to AttributedString
+        case htmlString(String)
+
+        /// Creates a provider by automatically detecting if the string contains HTML
+        /// - Parameter string: The input string to analyze
+        /// If string contains HTML markers, it's stored as htmlString for later conversion
+        /// Otherwise, it's immediately converted to AttributedString
+        init(_ string: String) {
+            if string.mayContainHTML {
+                self = .htmlString(string)
+            } else {
+                self = .attributedString(AttributedString(string))
+            }
+        }
+    }
+}
