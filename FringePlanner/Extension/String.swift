@@ -6,6 +6,9 @@
 //
 
 extension String {
+    /// Pattern to match HTML tags
+    private static let htmlTagPattern = "</?[a-zA-Z][^>]*>"
+
     /// Returns a string without the new lines
     var trimmed: Self {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -21,7 +24,14 @@ extension String {
     var mayContainHTML: Bool {
         // Look for a pattern that starts with < followed by a letter (tag name)
         // This helps distinguish HTML tags from mathematical expressions
-        let pattern = "<[a-zA-Z][^>]*>"
-        return self.range(of: pattern, options: .regularExpression) != nil
+        return self.range(of: Self.htmlTagPattern, options: .regularExpression) != nil
+    }
+    
+    /// Returns the string with all HTML tags removed
+    /// Preserves the text content between tags
+    var withoutHTMLTags: Self {
+        // Match HTML tags that start with < followed by a letter or / (for closing tags)
+        // This avoids matching mathematical expressions like "2 < 3"
+        return self.replacingOccurrences(of: Self.htmlTagPattern, with: "", options: .regularExpression)
     }
 }
