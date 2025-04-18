@@ -60,8 +60,8 @@ struct DemoContentContainer {
      
     // MARK: - Create
     
-    static func createDemoContent() -> Content<OverridingDataSource> {
-        let router = Router()
+    static func createDemoContent(constructionHelper: ConstructionHelper) -> Content<OverridingDataSource> {
+        let router = Router(constructionHelper: constructionHelper)
         let dataSource = OverridingDataSource()
         let interaction = Interaction(router: router, dataSource: dataSource)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
@@ -112,7 +112,7 @@ struct DemoContentContainer {
         case sheet2
         
         @ViewBuilder
-        func toView() -> some View {
+        func toView(constructionHelper: ConstructionHelper) -> some View {
             Text(title)
         }
         

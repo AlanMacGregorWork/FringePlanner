@@ -7,6 +7,7 @@
 
 import Testing
 import SwiftUI
+import SwiftData
 @testable import FringePlanner
 
 @Suite("Example Tests")
@@ -14,10 +15,12 @@ struct ExampleTest {
 
     private let content: Content
     
-    init() async {
+    init() async throws {
+        let modelContainer = try ModelContainer()
+        let constructionHelper = ConstructionHelper(modelContainer: modelContainer)
         let dataSource = DataSource()
         let interaction = Interaction(dataSource: dataSource)
-        let router = Router()
+        let router = Router(constructionHelper: constructionHelper)
         self.content = Content(router: router, interaction: interaction, dataSource: dataSource)
     }
     

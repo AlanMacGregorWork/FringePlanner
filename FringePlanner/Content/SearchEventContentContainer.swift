@@ -174,10 +174,13 @@ extension SearchEventContentContainer {
         case eventDetails(String)
         
         @ViewBuilder
-        func toView() -> some View {
+        func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
             case .eventDetails(let event):
-                EventDetailsContentContainer.createContent(eventCode: event).buildView()
+                EventDetailsContentContainer.createContent(
+                    eventCode: event,
+                    constructionHelper: constructionHelper
+                ).buildView()
             }
         }
     }
@@ -187,11 +190,11 @@ extension SearchEventContentContainer {
 
 extension SearchEventContentContainer {
     @MainActor
-    static func createContent(modelContainer: ModelContainer) -> Content {
+    static func createContent(constructionHelper: ConstructionHelper) -> Content {
         let downloader = getDownloader()
-        let router = Router()
-        let dataSource = DataSource(modelContainer: modelContainer)
-        let interaction = Interaction(dataSource: dataSource, router: router, downloader: downloader, modelContainer: modelContainer)
+        let router = Router(constructionHelper: constructionHelper)
+        let dataSource = DataSource(modelContainer: constructionHelper.modelContainer)
+        let interaction = Interaction(dataSource: dataSource, router: router, downloader: downloader, modelContainer: constructionHelper.modelContainer)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
     
@@ -215,7 +218,7 @@ extension SearchEventContentContainer {
 
 #Preview {
     if let modelContainer = try? ModelContainer.create() {
-        SearchEventContentContainer.createContent(modelContainer: modelContainer).buildView()
+        SearchEventContentContainer.createContent(constructionHelper: .init(modelContainer: modelContainer)).buildView()
             .modelContainer(modelContainer)
     } else {
         Text("Failed to generated Container")

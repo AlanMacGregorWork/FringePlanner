@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import SwiftData
 
 // MARK: - Main
 
@@ -28,6 +29,8 @@ protocol RouterProtocol: Observable, Equatable {
     associatedtype NavigationLocation: NavigationLocationProtocol
     var pushedSheet: NavigationLocation? { get set }
     var objectWillChange: PassthroughSubject<Void, Never> { get }
+    /// Reference to the helper that provides dependencies for view construction and navigation
+    var constructionHelper: ConstructionHelper { get }
 }
 
 /// Contains interactions and events from the user.
@@ -57,7 +60,7 @@ protocol NavigationLocationProtocol: Hashable {
     /// A view that van be generated from the location
     @ViewBuilder
     @MainActor
-    func toView() -> ContentView
+    func toView(constructionHelper: ConstructionHelper) -> ContentView
 }
 
 // MARK: - Helpers
@@ -66,6 +69,15 @@ protocol NavigationLocationProtocol: Hashable {
 /// Simplifies the router creation when just requiring the location type
 final class SimplifiedRouter<NavigationLocation: NavigationLocationProtocol>: RouterProtocol, Hashable {
     let objectWillChange = PassthroughSubject<Void, Never>()
+    /// Helper that provides dependencies for constructing views during navigation
+    let constructionHelper: ConstructionHelper
+    
+    /// Initializes router with necessary dependencies
+    /// - Parameter constructionHelper: The helper containing dependencies for view construction
+    init(constructionHelper: ConstructionHelper) {
+        self.constructionHelper = constructionHelper
+    }
+    
     var pushedSheet: NavigationLocation? {
         didSet {
             objectWillChange.send(())
@@ -83,4 +95,12 @@ final class SimplifiedRouter<NavigationLocation: NavigationLocationProtocol>: Ro
     func pushSheet(location: NavigationLocation?) {
         self.pushedSheet = location
     }
+}
+
+/// A helper struct used to provide necessary dependencies for constructing views in the application architecture.
+/// This allows passing critical resources throughout the navigation and view generation processes.
+struct ConstructionHelper {
+    /// The SwiftData model container that provides access to the app's persistent storage
+    /// Used by views and other components to access and modify model data
+    let modelContainer: ModelContainer
 }

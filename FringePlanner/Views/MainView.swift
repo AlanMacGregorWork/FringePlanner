@@ -21,17 +21,19 @@ struct MainView: View {
     
     @ViewBuilder
     static func bodyWith(modelContainer: ModelContainer) -> some View {
+        let constructionHelper = ConstructionHelper(modelContainer: modelContainer)
         switch ApplicationEnvironment.current {
         case .normal:
-            SearchEventContentContainer.createContent(modelContainer: modelContainer)
+            SearchEventContentContainer.createContent(constructionHelper: constructionHelper)
                 .buildView()
                 .modelContainer(modelContainer)
         case .testingUI:
-            UITestingContentContainer.Content().buildView()
+            UITestingContentContainer.Content(constructionHelper: constructionHelper).buildView()
                 .onAppear {
                     // Disabling animations for UI tests makes them faster
                     UIView.setAnimationsEnabled(false)
                 }
+                .modelContainer(modelContainer)
         case .preview:
             Text("Preview")
         case .testingUnit:

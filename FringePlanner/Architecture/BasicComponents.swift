@@ -17,5 +17,5 @@ class BasicDataSource: DataSourceProtocol {}
 /// Enum with no cases meaning no valid selection can be triggered
 enum BasicNavigationLocation: NavigationLocationProtocol {
     // Without a case, we can always refuse the UI
-    func toView() -> some View { EmptyView() }
+    func toView(constructionHelper: ConstructionHelper) -> some View { EmptyView() }
 }

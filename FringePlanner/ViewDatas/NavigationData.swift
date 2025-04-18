@@ -74,7 +74,7 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
         private var content: some View {
             data.container.createView()
                 .navigationDestination(for: RouterType.NavigationLocation.self,
-                                       destination: { $0.toView() })
+                                       destination: { $0.toView(constructionHelper: router.constructionHelper) })
         }
         
         // MARK: Content Updates

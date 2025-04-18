@@ -70,8 +70,8 @@ extension EventDetailsContentContainer {
 
 extension EventDetailsContentContainer {
     @MainActor
-    static func createContent(eventCode: String) -> Content {
-        let router = Router()
+    static func createContent(eventCode: String, constructionHelper: ConstructionHelper) -> Content {
+        let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(eventCode: eventCode)
         let interaction = Interaction()
         return Content(router: router, interaction: interaction, dataSource: dataSource)
@@ -84,7 +84,7 @@ extension EventDetailsContentContainer {
     AsyncPreviewView(asyncOperation: {
         try await previewModelContainerAndEventCode()
     }, contentView: { modelContainer, eventCode in
-        EventDetailsContentContainer.createContent(eventCode: eventCode).buildView()
+        EventDetailsContentContainer.createContent(eventCode: eventCode, constructionHelper: .init(modelContainer: modelContainer)).buildView()
             .modelContainer(modelContainer)
     })
 }
