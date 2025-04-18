@@ -81,7 +81,7 @@ extension EventDetailsContentContainer {
 // MARK: - Preview
 
 #Preview {
-    AsyncPreviewView(asyncOperation: {
+    AsyncView(asyncOperation: {
         try await previewModelContainerAndEventCode()
     }, contentView: { modelContainer, eventCode in
         EventDetailsContentContainer.createContent(eventCode: eventCode, constructionHelper: .init(modelContainer: modelContainer)).buildView()
