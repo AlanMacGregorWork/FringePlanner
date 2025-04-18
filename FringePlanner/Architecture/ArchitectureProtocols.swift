@@ -42,6 +42,7 @@ protocol DataSourceProtocol: Observable, AnyObject { }
 /// A structure that is not bound to any `ContentProtocol` type
 protocol BaseStructureProtocol {
     @MainActor
+    @FringeDataResultBuilder
     var structure: StructureType { get }
     associatedtype StructureType: ViewDataProtocol
 }
