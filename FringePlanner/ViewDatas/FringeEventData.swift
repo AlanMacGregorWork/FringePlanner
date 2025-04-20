@@ -22,12 +22,19 @@ extension FringeEventData {
         /// Displays basic info wrapped in a button
         var body: some View {
             Button(action: { data.onSelected() }, label: {
-                VStack(alignment: .leading) {
-                    Text(data.event.title)
-                    if let descriptionTeaser = data.event.descriptionTeaser {
-                        Text(descriptionTeaser)
-                            .font(.footnote)
-                            .lineLimit(1)
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(data.event.title)
+                        if let descriptionTeaser = data.event.descriptionTeaser {
+                            Text(descriptionTeaser)
+                                .font(.footnote)
+                                .lineLimit(1)
+                        }
+                    }
+                    // Display the favourite UI
+                    if data.event.isFavourite {
+                        Spacer()
+                        Image.favourite(isFavourite: data.event.isFavourite)
                     }
                 }
             })
