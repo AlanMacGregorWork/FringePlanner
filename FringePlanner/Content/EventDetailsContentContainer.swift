@@ -43,10 +43,20 @@ extension EventDetailsContentContainer {
         
         @MainActor
         func eventStructure(event: DBFringeEvent) -> some ViewDataProtocol {
-            GroupData(type: .form) {
-                DetailsStructure(event: event)
-                AccessibilityStructure(disabled: event.disabled)
-                DescriptionStructure(event: event)
+            NavigationData(router: input.router, toolbarItems: [
+                .favourite(isFavourite: event.isFavourite, onTap: input.interaction.toggleFavourite)
+            ]) {
+                GroupData(type: .form) {
+                    // TODO: Implement proper error handling for the UI
+                    if let errorContent = input.dataSource.errorContent {
+                        ButtonData(title: errorContent.description, interaction: {
+                            input.dataSource.errorContent = nil
+                        })
+                    }
+                    DetailsStructure(event: event)
+                    AccessibilityStructure(disabled: event.disabled)
+                    DescriptionStructure(event: event)
+                }
             }
         }       
     }
@@ -58,6 +68,7 @@ extension EventDetailsContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
         let content: EventDetailsContent
+        var errorContent: ErrorContent?
         
         init(content: EventDetailsContent) {
             self.content = content
@@ -102,7 +113,41 @@ extension EventDetailsContentContainer.DataSource {
 // MARK: - Interaction
     
 extension EventDetailsContentContainer {
-    struct Interaction: InteractionProtocol {}
+    struct Interaction: InteractionProtocol {
+        let dataSource: DataSource
+        
+        // MARK: Toggle Favourite
+        
+        /// Toggles the favourite status of the event
+        func toggleFavourite() {
+            switch dataSource.content {
+            case .eventFound(let event): toggleFavourite(for: event)
+            case .databaseError, .noEventFound: break
+            }
+        }
+        
+        /// Toggles the favourite status of the event
+        private func toggleFavourite(for event: DBFringeEvent) {
+            event.isFavourite.toggle()
+            
+            // ModelContext should exist
+            guard let modelContext = event.modelContext else {
+                // Reset favourite value & show error
+                event.isFavourite.toggle()
+                dataSource.errorContent = ErrorContent(error: DBError.missingModelContext)
+                return
+            }
+            
+            // Save changes to the parent context
+            do {
+                try modelContext.save()
+            } catch let error {
+                // Reset favourite value & show error
+                event.isFavourite.toggle()
+                dataSource.errorContent = ErrorContent(error: error)
+            }
+        }
+    }
 }
 
 // MARK: - Helper
@@ -115,7 +160,7 @@ extension EventDetailsContentContainer {
         let dataSourceContent = EventDetailsContentContainer.DataSource.EventDetailsContent(eventCode: eventCode, constructionHelper: constructionHelper)
         let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(content: dataSourceContent)
-        let interaction = Interaction()
+        let interaction = Interaction(dataSource: dataSource)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }
@@ -123,17 +168,19 @@ extension EventDetailsContentContainer {
 // MARK: - Preview
 
 #Preview {
-    AsyncView(asyncOperation: {
-        try await previewModelContainerAndEventCode()
-    }, contentView: { modelContainer, eventCode in
-        AsyncView {
-            await EventDetailsContentContainer.createContent(
-                eventCode: eventCode,
-                constructionHelper: .init(modelContainer: modelContainer)
-            ).buildView()
-        }
-        .modelContainer(modelContainer)
-    })
+    NavigationView {
+        AsyncView(asyncOperation: {
+            try await previewModelContainerAndEventCode()
+        }, contentView: { modelContainer, eventCode in
+            AsyncView {
+                await EventDetailsContentContainer.createContent(
+                    eventCode: eventCode,
+                    constructionHelper: .init(modelContainer: modelContainer)
+                ).buildView()
+            }
+            .modelContainer(modelContainer)
+        })
+    }
 }
 
 private func previewModelContainerAndEventCode() async throws -> (ModelContainer, String) {
