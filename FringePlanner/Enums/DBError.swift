@@ -11,6 +11,7 @@ enum DBError: Error, Equatable {
     case saveFailed
     case insertFailed(InsertFailedReason)
     case assumptionFailed(AssumptionFailedReasons)
+    case missingModelContext
 }
 
 // MARK: CustomStringConvertible
@@ -24,6 +25,7 @@ extension DBError: CustomStringConvertible {
         case .assumptionFailed(.multipleModelsForSingle): return "Found multiple models when expecting single model"
         case .insertFailed(.modelDidNotInsertIntoContext): return "Failed to insert model into the context. The model type may not be set for use with the ModelContainer"
         case .insertFailed(.modelNotFoundInSchema): return "Failed to insert model into the context. The model type was not found in the ModelContainer schemas"
+        case .missingModelContext: return "Model context is missing"
         }
     }
 }

@@ -12,10 +12,12 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
     typealias ContentView = NavigationView
     let router: RouterType
     let container: Content
+    let toolbarItems: [NavigationToolbarItem]
     
-    init(router: RouterType, @FringeDataResultBuilder _ values: () -> Content) {
+    init(router: RouterType, toolbarItems: [NavigationToolbarItem] = [], @FringeDataResultBuilder _ values: () -> Content) {
         self.container = values()
         self.router = router
+        self.toolbarItems = toolbarItems
     }
     
     struct NavigationView: View, ViewProtocol {
@@ -74,7 +76,13 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
         private var content: some View {
             data.container.createView()
                 .navigationDestination(for: RouterType.NavigationLocation.self,
-                                       destination: { $0.toView() })
+                                       destination: { $0.toView(constructionHelper: router.constructionHelper) })
+                // Adds toolbar items from the NavigationData to the view
+                .toolbar {
+                    ForEach(data.toolbarItems) { toolBarItem in
+                        toolBarItem.content()
+                    }
+                }
         }
         
         // MARK: Content Updates
@@ -116,4 +124,31 @@ private extension EnvironmentValues {
 @Observable
 private final class PathContainer {
     var path = NavigationPath()
+}
+
+// MARK: - ToolbarItem
+
+/// A structure representing an item to be displayed in a navigation toolbar.
+/// Provides a standardized way to create and manage toolbar items across the application.
+struct NavigationToolbarItem: Equatable, Identifiable {
+    let id = UUID()
+    /// The content to be displayed in the toolbar item
+    @MakeEquatableReadOnly var content: (() -> AnyView)
+}
+
+extension NavigationToolbarItem {
+    /// Creates a favorite/unfavorite toolbar button
+    /// - Parameters:
+    ///   - isFavourite: Boolean indicating whether the item is currently favorited
+    ///   - onTap: Closure to execute when the button is tapped
+    /// - Returns: A configured `NavigationToolbarItem` for toggling favorite status
+    static func favourite(isFavourite: Bool, onTap: @escaping (() -> Void)) -> Self {
+        NavigationToolbarItem() {
+            AnyView(
+                Button(action: onTap) {
+                    Image.favourite(isFavourite: isFavourite)
+                }
+            )
+        }
+    }
 }

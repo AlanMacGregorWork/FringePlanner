@@ -26,10 +26,10 @@ struct UITestingContentContainer {
         case renderingTests
         
         @ViewBuilder
-        func toView() -> some View {
+        func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
-            case .navigationTests: NavigationTestSheetAContainer.Content().buildView()
-            case .renderingTests: RenderingTestsContainer.Content().buildView()
+            case .navigationTests: NavigationTestSheetAContainer.Content(constructionHelper: constructionHelper).buildView()
+            case .renderingTests: RenderingTestsContainer.Content(constructionHelper: constructionHelper).buildView()
             }
         }
     }
@@ -40,8 +40,8 @@ struct UITestingContentContainer {
         let dataSource = BasicDataSource()
         typealias Structure = UITestingContentContainer.Structure
         
-        init() {
-            let router = Router()
+        init(constructionHelper: ConstructionHelper) {
+            let router = Router(constructionHelper: constructionHelper)
             let interaction = Interaction(router: router)
             self.interaction = interaction
             self.router = router
@@ -75,10 +75,10 @@ private struct NavigationTestSheetAContainer {
         case sheetBV2
         
         @ViewBuilder
-        func toView() -> some View {
+        func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
             case .sheetBV1(let parentRouter):
-                NavigationTestSheetBContainer.Content(parentRouter: parentRouter).buildView()
+                NavigationTestSheetBContainer.Content(parentRouter: parentRouter, constructionHelper: constructionHelper).buildView()
             case .sheetBV2:
                 Text("Title: Sheet B (V2)")
             }
@@ -98,10 +98,15 @@ private struct NavigationTestSheetAContainer {
     }
     
     struct Content: ContentProtocol {
-        let router = Router()
+        let router: Router
         let interaction = BasicInteraction()
         let dataSource = BasicDataSource()
         typealias Structure = NavigationTestSheetAContainer.Structure
+
+        init(constructionHelper: ConstructionHelper) {
+            let router = Router(constructionHelper: constructionHelper)
+            self.router = router
+        }
     }
     
     struct Structure: StructureProtocol {
@@ -128,17 +133,23 @@ private struct NavigationTestSheetBContainer {
         case sheetC
         
         @ViewBuilder
-        func toView() -> some View {
-            NavigationTestSheetCContainer.Content().buildView()
+        func toView(constructionHelper: ConstructionHelper) -> some View {
+            NavigationTestSheetCContainer.Content(constructionHelper: constructionHelper).buildView()
         }
     }
     
     struct Content: ContentProtocol {
-        let router = Router()
+        let router: Router
         let interaction = BasicInteraction()
         let dataSource = BasicDataSource()
         let parentRouter: NavigationTestSheetAContainer.Router
         typealias Structure = NavigationTestSheetBContainer.Structure
+
+        init(parentRouter: NavigationTestSheetAContainer.Router, constructionHelper: ConstructionHelper) {
+            let router = Router(constructionHelper: constructionHelper)
+            self.router = router
+            self.parentRouter = parentRouter
+        }
     }
     
     struct Structure: StructureProtocol {
@@ -170,7 +181,7 @@ private struct NavigationTestSheetCContainer {
         case sheetDV2
         
         @ViewBuilder
-        func toView() -> some View {
+        func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
             case .sheetDV1: Text("Title: Sheet D (V1)")
             case .sheetDV2: Text("title: Sheet D (V2)")
@@ -179,10 +190,15 @@ private struct NavigationTestSheetCContainer {
     }
     
     struct Content: ContentProtocol {
-        let router = Router()
+        let router: Router
         let interaction = BasicInteraction()
         let dataSource = BasicDataSource()
         typealias Structure = NavigationTestSheetCContainer.Structure
+
+        init(constructionHelper: ConstructionHelper) {
+            let router = Router(constructionHelper: constructionHelper)
+            self.router = router
+        }
     }
     
     struct Structure: StructureProtocol {
@@ -219,13 +235,14 @@ private struct RenderingTestsContainer {
     }
     
     struct Content: ContentProtocol {
-        let router = Router()
+        let router: Router
         let interaction: Interaction
         let dataSource: DataSource
         typealias Structure = RenderingTestsContainer.Structure
         
-        init() {
+        init(constructionHelper: ConstructionHelper) {
             let dataSource = DataSource()
+            self.router = .init(constructionHelper: constructionHelper)
             self.interaction = .init(dataSource: dataSource)
             self.dataSource = dataSource
         }

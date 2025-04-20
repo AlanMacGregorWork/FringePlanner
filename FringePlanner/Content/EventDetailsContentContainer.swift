@@ -31,17 +31,34 @@ extension EventDetailsContentContainer {
         let input: Content
         
         var structure: some ViewDataProtocol {
-            let eventCode = input.dataSource.eventCode
-            return DatabaseItemsData(
-                predicate: #Predicate<DBFringeEvent> { $0.code == eventCode },
-                elementView: { event in
-                    GroupData(type: .form) {
-                        DetailsStructure(event: event)
-                        AccessibilityStructure(disabled: event.disabled)
-                        DescriptionStructure(event: event)
-                    }
-                })
+            switch input.dataSource.content {
+            case .noEventFound:
+                TextData(text: "Event not found")
+            case .eventFound(let event):
+                eventStructure(event: event)
+            case .databaseError(let error):
+                TextData(text: "Database error\n\(error.description)")
+            }
         }
+        
+        @MainActor
+        func eventStructure(event: DBFringeEvent) -> some ViewDataProtocol {
+            NavigationData(router: input.router, toolbarItems: [
+                .favourite(isFavourite: event.isFavourite, onTap: input.interaction.toggleFavourite)
+            ]) {
+                GroupData(type: .form) {
+                    // TODO: Implement proper error handling for the UI
+                    if let errorContent = input.dataSource.errorContent {
+                        ButtonData(title: errorContent.description, interaction: {
+                            input.dataSource.errorContent = nil
+                        })
+                    }
+                    DetailsStructure(event: event)
+                    AccessibilityStructure(disabled: event.disabled)
+                    DescriptionStructure(event: event)
+                }
+            }
+        }       
     }
 }
 
@@ -50,10 +67,45 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let eventCode: String
+        let content: EventDetailsContent
+        var errorContent: ErrorContent?
         
-        init(eventCode: String) {
-            self.eventCode = eventCode
+        init(content: EventDetailsContent) {
+            self.content = content
+        }
+    }
+}
+
+extension EventDetailsContentContainer.DataSource {
+    /// Represents the possible states of event details content
+    enum EventDetailsContent { 
+        /// No event was found matching the provided event code
+        case noEventFound
+        /// Event was successfully found and retrieved from the database
+        case eventFound(DBFringeEvent)
+        /// An error occurred while attempting to retrieve the event from the database
+        case databaseError(DBError)
+
+        /// Creates a new event details content state by fetching an event with the provided code
+        /// - Parameters:
+        ///   - eventCode: The unique identifier code for the event to retrieve
+        ///   - constructionHelper: Helper that provides the model container for database access
+        init(eventCode: String, constructionHelper: ConstructionHelper) {
+            let context = ModelContext(constructionHelper.modelContainer)
+            let eventPredicate = #Predicate<DBFringeEvent> { $0.code == eventCode }
+            let events: [DBFringeEvent]
+            do {
+                events = try DBHelper.getDBModels(from: eventPredicate, context: context)
+            } catch {
+                self = .databaseError(error)
+                return
+            }
+            guard let firstEvent = events.first else {
+                fringeAssertFailure("No event found for expected event code: \(eventCode)")
+                self = .noEventFound
+                return
+            }
+            self = .eventFound(firstEvent)
         }
     }
 }
@@ -61,7 +113,41 @@ extension EventDetailsContentContainer {
 // MARK: - Interaction
     
 extension EventDetailsContentContainer {
-    struct Interaction: InteractionProtocol {}
+    struct Interaction: InteractionProtocol {
+        let dataSource: DataSource
+        
+        // MARK: Toggle Favourite
+        
+        /// Toggles the favourite status of the event
+        func toggleFavourite() {
+            switch dataSource.content {
+            case .eventFound(let event): toggleFavourite(for: event)
+            case .databaseError, .noEventFound: break
+            }
+        }
+        
+        /// Toggles the favourite status of the event
+        private func toggleFavourite(for event: DBFringeEvent) {
+            event.isFavourite.toggle()
+            
+            // ModelContext should exist
+            guard let modelContext = event.modelContext else {
+                // Reset favourite value & show error
+                event.isFavourite.toggle()
+                dataSource.errorContent = ErrorContent(error: DBError.missingModelContext)
+                return
+            }
+            
+            // Save changes to the parent context
+            do {
+                try modelContext.save()
+            } catch let error {
+                // Reset favourite value & show error
+                event.isFavourite.toggle()
+                dataSource.errorContent = ErrorContent(error: error)
+            }
+        }
+    }
 }
 
 // MARK: - Helper
@@ -70,10 +156,11 @@ extension EventDetailsContentContainer {
 
 extension EventDetailsContentContainer {
     @MainActor
-    static func createContent(eventCode: String) -> Content {
-        let router = Router()
-        let dataSource = DataSource(eventCode: eventCode)
-        let interaction = Interaction()
+    static func createContent(eventCode: String, constructionHelper: ConstructionHelper) async -> Content {
+        let dataSourceContent = EventDetailsContentContainer.DataSource.EventDetailsContent(eventCode: eventCode, constructionHelper: constructionHelper)
+        let router = Router(constructionHelper: constructionHelper)
+        let dataSource = DataSource(content: dataSourceContent)
+        let interaction = Interaction(dataSource: dataSource)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }
@@ -81,12 +168,19 @@ extension EventDetailsContentContainer {
 // MARK: - Preview
 
 #Preview {
-    AsyncPreviewView(asyncOperation: {
-        try await previewModelContainerAndEventCode()
-    }, contentView: { modelContainer, eventCode in
-        EventDetailsContentContainer.createContent(eventCode: eventCode).buildView()
+    NavigationView {
+        AsyncView(asyncOperation: {
+            try await previewModelContainerAndEventCode()
+        }, contentView: { modelContainer, eventCode in
+            AsyncView {
+                await EventDetailsContentContainer.createContent(
+                    eventCode: eventCode,
+                    constructionHelper: .init(modelContainer: modelContainer)
+                ).buildView()
+            }
             .modelContainer(modelContainer)
-    })
+        })
+    }
 }
 
 private func previewModelContainerAndEventCode() async throws -> (ModelContainer, String) {
