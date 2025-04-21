@@ -25,14 +25,24 @@ struct MainView: View {
         switch ApplicationEnvironment.current {
         case .normal:
             TabView {
-                SearchEventContentContainer.createContent(constructionHelper: constructionHelper)
-                    .buildView()
+                NavigationData(
+                    router: SimplifiedRouter<BasicNavigationLocation>(constructionHelper: constructionHelper),
+                    title: "Search"
+                ) {
+                    SearchEventContentContainer.createContent(constructionHelper: constructionHelper)
+                }
+                    .createView()
                     .tabItem {
                         Label("Search", systemImage: "magnifyingglass")
                     }
                 
-                PlannerContentContainer.createContent(constructionHelper: constructionHelper)
-                    .buildView()
+                NavigationData(
+                    router: SimplifiedRouter<BasicNavigationLocation>(constructionHelper: constructionHelper),
+                    title: "Planner"
+                ) {
+                    PlannerContentContainer.createContent(constructionHelper: constructionHelper)
+                }
+                    .createView()
                     .tabItem {
                         Label("Planner", systemImage: "checkmark.rectangle.stack")
                     }
