@@ -12,11 +12,13 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
     typealias ContentView = NavigationView
     let router: RouterType
     let container: Content
+    let title: String?
     let toolbarItems: [NavigationToolbarItem]
     
-    init(router: RouterType, toolbarItems: [NavigationToolbarItem] = [], @FringeDataResultBuilder _ values: () -> Content) {
+    init(router: RouterType, title: String? = nil, toolbarItems: [NavigationToolbarItem] = [], @FringeDataResultBuilder _ values: () -> Content) {
         self.container = values()
         self.router = router
+        self.title = title
         self.toolbarItems = toolbarItems
     }
     
@@ -82,6 +84,8 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
                         toolBarItem.content()
                     }
                 }
+                // Adds a title
+                .withContent(data.title, transform: { $0.navigationTitle($1) })
         }
         
         // MARK: Content Updates
