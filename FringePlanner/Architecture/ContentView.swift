@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ContainerView.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 10/10/2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Constructs a view from the content
-struct ContentView<Content: ContentProtocol>: View {
+struct ContainerView<Content: ContentProtocol>: View {
     @State private var router: Content.RouterType
     // Note: `@State` is required for detecting changes in the data source that trigger a view update
     @State private var dataSource: Content.DataSourceType
@@ -22,14 +22,14 @@ struct ContentView<Content: ContentProtocol>: View {
     
     var body: some View {
         let structure = Content.Structure.init(input: container).structure
-        ContentViewGenerator(structure)
+        ContainerViewGenerator(structure)
     }
 }
 
 // MARK: - Helpers
 
 /// Creates a view from a series of `ViewDataProtocol` models
-private struct ContentViewGenerator<T>: View {
+private struct ContainerViewGenerator<T>: View {
     let contentViews: T
     
     init<each DataType: ViewDataProtocol>(_ data: repeat each DataType) where T == (repeat (each DataType).ContentView) {
@@ -44,7 +44,7 @@ private struct ContentViewGenerator<T>: View {
 extension ContentProtocol {
     /// Helper to construct the view from the protocol
     @MainActor
-    func buildView() -> ContentView<Self> {
+    func buildView() -> ContainerView<Self> {
         .init(self)
     }
 }
