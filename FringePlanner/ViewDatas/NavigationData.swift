@@ -143,7 +143,7 @@ extension NavigationToolbarItem {
     ///   - onTap: Closure to execute when the button is tapped
     /// - Returns: A configured `NavigationToolbarItem` for toggling favorite status
     static func favourite(isFavourite: Bool, onTap: @escaping (() -> Void)) -> Self {
-        NavigationToolbarItem() {
+        NavigationToolbarItem {
             AnyView(
                 Button(action: onTap) {
                     Image.favourite(isFavourite: isFavourite)
