@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 /// Helper struct providing utilities for downloading data from URLs
 struct DownloadHelper {
@@ -58,4 +59,8 @@ protocol DownloadProtocol: Sendable {
     /// - Returns: A tuple containing the downloaded data and the URL response
     /// - Throws: Any error that occurs during the download operation
     func data(from: URL) async throws -> (Data, URLResponse)
+}
+
+extension EnvironmentValues {
+    @Entry var downloader: DownloadProtocol = URLSession.shared
 }
