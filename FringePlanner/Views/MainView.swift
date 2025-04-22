@@ -24,9 +24,30 @@ struct MainView: View {
         let constructionHelper = ConstructionHelper(modelContainer: modelContainer)
         switch ApplicationEnvironment.current {
         case .normal:
-            SearchEventContentContainer.createContent(constructionHelper: constructionHelper)
-                .buildView()
-                .modelContainer(modelContainer)
+            TabView {
+                NavigationData(
+                    router: SimplifiedRouter<BasicNavigationLocation>(constructionHelper: constructionHelper),
+                    title: "Search"
+                ) {
+                    SearchEventContentContainer.createContent(constructionHelper: constructionHelper)
+                }
+                    .createView()
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
+                
+                NavigationData(
+                    router: SimplifiedRouter<BasicNavigationLocation>(constructionHelper: constructionHelper),
+                    title: "Planner"
+                ) {
+                    PlannerContentContainer.createContent(constructionHelper: constructionHelper)
+                }
+                    .createView()
+                    .tabItem {
+                        Label("Planner", systemImage: "checkmark.rectangle.stack")
+                    }
+            }
+            .modelContainer(modelContainer)
         case .testingUI:
             UITestingContentContainer.Content(constructionHelper: constructionHelper).buildView()
                 .onAppear {

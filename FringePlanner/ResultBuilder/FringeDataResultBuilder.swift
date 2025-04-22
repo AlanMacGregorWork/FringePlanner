@@ -56,4 +56,10 @@ extension FringeDataResultBuilder {
     static func buildExpression<Structure: BaseStructureProtocol>(_ structure: Structure) -> Structure.StructureType {
         structure.structure
     }
+    
+    /// Builds content from a container
+    @MainActor
+    static func buildExpression<Content: ContentProtocol>(_ content: Content) -> ContentData<Content> {
+        .init(content: content)
+    }
 }

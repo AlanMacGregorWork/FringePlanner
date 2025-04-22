@@ -12,11 +12,13 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
     typealias ContentView = NavigationView
     let router: RouterType
     let container: Content
+    let title: String?
     let toolbarItems: [NavigationToolbarItem]
     
-    init(router: RouterType, toolbarItems: [NavigationToolbarItem] = [], @FringeDataResultBuilder _ values: () -> Content) {
+    init(router: RouterType, title: String? = nil, toolbarItems: [NavigationToolbarItem] = [], @FringeDataResultBuilder _ values: () -> Content) {
         self.container = values()
         self.router = router
+        self.title = title
         self.toolbarItems = toolbarItems
     }
     
@@ -75,14 +77,15 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
         /// The content to include in the navigation view
         private var content: some View {
             data.container.createView()
-                .navigationDestination(for: RouterType.NavigationLocation.self,
-                                       destination: { $0.toView(constructionHelper: router.constructionHelper) })
+                .modifier(NavigationDestinationModifier(router: router))
                 // Adds toolbar items from the NavigationData to the view
                 .toolbar {
                     ForEach(data.toolbarItems) { toolBarItem in
                         toolBarItem.content()
                     }
                 }
+                // Adds a title
+                .withContent(data.title, transform: { $0.navigationTitle($1) })
         }
         
         // MARK: Content Updates
@@ -149,6 +152,27 @@ extension NavigationToolbarItem {
                     Image.favourite(isFavourite: isFavourite)
                 }
             )
+        }
+    }
+}
+
+// MARK: - Navigation Destination Modifier
+
+/// A modifier that conditionally adds a navigation destination based on the navigation location type
+///  - Note: `BasicNavigationLocation` is the default navigation location type for the application with no navigation
+/// destinations, this modifier ensures it is not added to the view as adding multiple navigation destinations to a
+/// view will cause a runtime error.
+private struct NavigationDestinationModifier<RouterType: RouterProtocol>: ViewModifier {
+    let router: RouterType
+    
+    func body(content: Content) -> some View {
+        if RouterType.NavigationLocation.self != BasicNavigationLocation.self {
+            content.navigationDestination(for: RouterType.NavigationLocation.self) { location in
+                location.toView(constructionHelper: router.constructionHelper)
+            }
+        } else {
+            // Ignore setting up a navigation destination
+            content
         }
     }
 }

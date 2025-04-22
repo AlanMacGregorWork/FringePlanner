@@ -19,3 +19,13 @@ protocol ViewProtocol: View {
     associatedtype DataType: ViewDataProtocol
     init(data: DataType)
 }
+
+// MARK: - Helper
+
+extension ViewDataProtocol {
+    /// Helper function to create the view from the type
+    @MainActor
+    func createView() -> ContentView {
+        ContentView(data: self)
+    }
+}
