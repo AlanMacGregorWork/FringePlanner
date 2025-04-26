@@ -125,19 +125,19 @@ struct SeededContent {
             var versions = [String: FringeImage.Version]()
             
             // Always included versions
-            versions["original"] = createVersion(type: "original", width: width, height: height)
-            versions["square-75"] = createVersion(type: "square-75", width: 75, height: 75)
-            versions["square-150"] = createVersion(type: "square-150", width: 150, height: 150)
+            versions["original"] = createVersion(type: .original, width: width, height: height)
+            versions["square-75"] = createVersion(type: .square75, width: 75, height: 75)
+            versions["square-150"] = createVersion(type: .square150, width: 150, height: 150)
             
             // Add common additional versions
             if currentRandom % 3 > 0 { // Add some variations
-                versions["thumb-100"] = createVersion(type: "thumb-100", width: 100, height: orientation == .portrait ? 133 : 75)
-                versions["small-320"] = createVersion(type: "small-320", width: 320, height: orientation == .portrait ? 427 : 240)
+                versions["thumb-100"] = createVersion(type: .thumb100, width: 100, height: orientation == .portrait ? 133 : 75)
+                versions["small-320"] = createVersion(type: .small320, width: 320, height: orientation == .portrait ? 427 : 240)
             }
             
             if currentRandom % 5 > 2 { // Add less common larger versions
-                versions["medium-640"] = createVersion(type: "medium-640", width: 640, height: orientation == .portrait ? 853 : 480)
-                versions["large-1024"] = createVersion(type: "large-1024", width: 1024, height: orientation == .portrait ? 1365 : 768)
+                versions["medium-640"] = createVersion(type: .medium640, width: 640, height: orientation == .portrait ? 853 : 480)
+                versions["large-1024"] = createVersion(type: .large1024, width: 1024, height: orientation == .portrait ? 1365 : 768)
             }
             
             // Add to results
@@ -148,7 +148,7 @@ struct SeededContent {
     }
     
     // Helper to create version objects
-    private func createVersion(type: String, width: Int, height: Int) -> FringeImage.Version {
+    private func createVersion(type: FringeImage.VersionType, width: Int, height: Int) -> FringeImage.Version {
         FringeImage.Version(
             type: type,
             width: width,

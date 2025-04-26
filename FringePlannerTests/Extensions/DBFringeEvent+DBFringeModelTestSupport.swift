@@ -70,14 +70,14 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                     type: .hero,
                     versions: [
                         "original": FringeImage.Version(
-                            type: "original",
+                            type: .original,
                             width: 1920,
                             height: 1080,
                             mime: "image/jpeg",
                             url: URL(string: "https://example.com/images/original.jpg")!
                         ),
-                        "thumb": FringeImage.Version(
-                            type: "thumb",
+                        "thumb100": FringeImage.Version(
+                            type: .thumb100,
                             width: 300,
                             height: 169,
                             mime: "image/jpeg",
@@ -126,14 +126,14 @@ extension DBFringeEvent: DBFringeModelTestSupport {
                     type: .thumb,
                     versions: [
                         "original": FringeImage.Version(
-                            type: "original",
+                            type: .original,
                             width: 1080,
                             height: 1920,
                             mime: "image/jpeg",
                             url: URL(string: "https://original.com/images/original.jpg")!
                         ),
-                        "small": FringeImage.Version(
-                            type: "small",
+                        "small-320": FringeImage.Version(
+                            type: .small320,
                             width: 169,
                             height: 300,
                             mime: "image/jpeg",
