@@ -177,7 +177,7 @@ struct SeededContent {
     }
     
     func events(for config: [Int: EventSeedConfig] = [:]) -> [FringeEvent] {
-        (1...25).map({ self.event(config: config[$0]) })
+        (0..<25).map({ self.event(config: config[$0]) })
     }
 }
 

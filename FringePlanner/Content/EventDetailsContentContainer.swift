@@ -167,26 +167,15 @@ extension EventDetailsContentContainer {
 
 // MARK: - Preview
 
-#Preview {
+@available(iOS 18, *)
+#Preview(traits: .modifier(MockDataPreviewModifier(config: [0: .init(code: .override("demo"))]))) {
+    @Previewable @Environment(\.modelContext) var modelContext
     NavigationView {
-        AsyncView(asyncOperation: {
-            try await previewModelContainerAndEventCode()
-        }, contentView: { modelContainer, eventCode in
-            EventDetailsContentContainer.createContent(
-                eventCode: eventCode,
-                constructionHelper: .init(modelContainer: modelContainer)
-            ).buildView()
-                .modelContainer(modelContainer)
-        })
+        EventDetailsContentContainer.createContent(
+            eventCode: "demo",
+            constructionHelper: .init(modelContainer: modelContext.container)
+        ).buildView()
     }
-}
-
-private func previewModelContainerAndEventCode() async throws -> (ModelContainer, String) {
-    let modelContainer = try ModelContainer.create()
-    let apiEvents = SeededContent(seed: 123).events()
-    let actor = ImportAPIActor(modelContainer: modelContainer)
-    try await actor.updateEvents(apiEvents)
-    return (modelContainer, apiEvents[0].code)
 }
 
 #endif
