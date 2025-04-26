@@ -26,6 +26,9 @@ struct DownloadHelper {
         let (data, response): (Data, URLResponse)
         do {
             (data, response) = try await downloadSupport.data(from: url)
+        } catch let urlError as URLError where urlError.code == .cancelled {
+            // A cancelled download is not an error, it is a normal part of the user experience
+            throw .cancelled
         } catch {
             fringeAssertFailure("Download failed: \(error)")
             throw .downloadFailed
@@ -44,6 +47,7 @@ struct DownloadHelper {
     enum DownloadError: Error, Equatable {
         case urlGenerationFailed(FringeEventURLBuilder.URLError)
         case downloadFailed
+        case cancelled
         case decodeFailed
         case invalidResponse
         case httpError(statusCode: Int)
