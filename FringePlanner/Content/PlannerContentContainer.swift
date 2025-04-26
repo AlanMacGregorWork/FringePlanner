@@ -105,12 +105,10 @@ extension PlannerContentContainer {
         func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
             case .eventDetails(let eventCode):
-                AsyncView {
-                    await EventDetailsContentContainer.createContent(
-                        eventCode: eventCode,
-                        constructionHelper: constructionHelper
-                    ).buildView()
-                }
+                EventDetailsContentContainer.createContent(
+                    eventCode: eventCode,
+                    constructionHelper: constructionHelper
+                ).buildView()
             }
         }
     }

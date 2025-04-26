@@ -177,12 +177,10 @@ extension SearchEventContentContainer {
         func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
             case .eventDetails(let event):
-                AsyncView {
-                    await EventDetailsContentContainer.createContent(
-                        eventCode: event,
-                        constructionHelper: constructionHelper
-                    ).buildView()
-                }
+                EventDetailsContentContainer.createContent(
+                    eventCode: event,
+                    constructionHelper: constructionHelper
+                ).buildView()
             }
         }
     }

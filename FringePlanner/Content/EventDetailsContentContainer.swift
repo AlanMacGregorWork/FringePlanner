@@ -156,7 +156,7 @@ extension EventDetailsContentContainer {
 
 extension EventDetailsContentContainer {
     @MainActor
-    static func createContent(eventCode: String, constructionHelper: ConstructionHelper) async -> Content {
+    static func createContent(eventCode: String, constructionHelper: ConstructionHelper) -> Content {
         let dataSourceContent = EventDetailsContentContainer.DataSource.EventDetailsContent(eventCode: eventCode, constructionHelper: constructionHelper)
         let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(content: dataSourceContent)
@@ -172,13 +172,11 @@ extension EventDetailsContentContainer {
         AsyncView(asyncOperation: {
             try await previewModelContainerAndEventCode()
         }, contentView: { modelContainer, eventCode in
-            AsyncView {
-                await EventDetailsContentContainer.createContent(
-                    eventCode: eventCode,
-                    constructionHelper: .init(modelContainer: modelContainer)
-                ).buildView()
-            }
-            .modelContainer(modelContainer)
+            EventDetailsContentContainer.createContent(
+                eventCode: eventCode,
+                constructionHelper: .init(modelContainer: modelContainer)
+            ).buildView()
+                .modelContainer(modelContainer)
         })
     }
 }
