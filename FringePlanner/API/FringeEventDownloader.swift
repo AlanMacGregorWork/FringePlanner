@@ -16,9 +16,9 @@ struct FringeEventDownloader: FringeEventDownloader.GetEventsProtocol {
         self.downloadSupport = downloadSupport
     }
 
-    func getEvents(from request: FilterRequest) async throws(DownloadError) -> [FringeEvent] {
+    func getEvents(from request: FilterRequest) async throws(DownloadHelper.DownloadError) -> [FringeEvent] {
         let url = try Self.constructURL(from: request)
-        let data = try await Self.downloadData(from: url, downloadSupport: downloadSupport)
+        let data = try await DownloadHelper.downloadData(from: url, downloadSupport: downloadSupport)
         let events = try Self.decodeEvents(from: data)
         return events
     }
@@ -28,69 +28,34 @@ struct FringeEventDownloader: FringeEventDownloader.GetEventsProtocol {
 
 extension FringeEventDownloader {
 
-    private static func constructURL(from request: FilterRequest) throws (DownloadError) -> URL {
+    private static func constructURL(from request: FilterRequest) throws (DownloadHelper.DownloadError) -> URL {
         try mapError(
             for: try FringeEventURLBuilder().constructURL(for: request),
             expectedType: URL.self,
-            to: { DownloadError.urlGenerationFailed($0) })
+            to: { DownloadHelper.DownloadError.urlGenerationFailed($0) })
     }
-    
-    private static func downloadData(
-        from url: URL,
-        downloadSupport: any DownloadProtocol
-    ) async throws(DownloadError) -> Data {
-        // Get Data
-        let (data, response): (Data, URLResponse)
-        do {
-            (data, response) = try await downloadSupport.data(from: url)
-        } catch {
-            fringeAssertFailure("Download failed: \(error)")
-            throw .downloadFailed
-        }
-        
-        // Validate Response
-        guard let httpResponse = response as? HTTPURLResponse else { throw .invalidResponse }
-        guard (200...299).contains(httpResponse.statusCode) else { throw .httpError(statusCode: httpResponse.statusCode) }
 
-        return data
-    }
-    
-    private static func decodeEvents(from data: Data) throws(DownloadError) -> [FringeEvent] {
+    private static func decodeEvents(from data: Data) throws(DownloadHelper.DownloadError) -> [FringeEvent] {
         try mapError(
             for: try fringeJsonDecoder.decode([FringeEvent].self, from: data),
             expectedType: [FringeEvent].self,
             to: { (error: any Error) in
                 fringeAssertFailure("Decode failed: \(error)")
-                return DownloadError.decodeFailed
+                return DownloadHelper.DownloadError.decodeFailed
             })
     }
-    
-    // MARK: Errors
-    
-    enum DownloadError: Error, Equatable {
-        case urlGenerationFailed(FringeEventURLBuilder.URLError)
-        case downloadFailed
-        case decodeFailed
-        case invalidResponse
-        case httpError(statusCode: Int)
-    }
-    
+
     // MARK: Protocols
-    
-    /// Protocol for downloading data from a URL
-    protocol DownloadProtocol: Sendable {
-        func data(from: URL) async throws -> (Data, URLResponse)
-    }
-    
+
     /// Protocol for the downloading events from the Fringe API 
     protocol GetEventsProtocol {
-        func getEvents(from request: FilterRequest) async throws(FringeEventDownloader.DownloadError) -> [FringeEvent]
+        func getEvents(from request: FilterRequest) async throws(DownloadHelper.DownloadError) -> [FringeEvent]
     }
 }
 
 // MARK: Protocol Support
 
-extension URLSession: FringeEventDownloader.DownloadProtocol {}
+extension URLSession: DownloadProtocol {}
 
 #if DEBUG
 struct MockEventDownloader: FringeEventDownloader.GetEventsProtocol {
@@ -103,7 +68,7 @@ struct MockEventDownloader: FringeEventDownloader.GetEventsProtocol {
         self.models = models
     }
     
-    func getEvents(from request: FilterRequest) async throws(FringeEventDownloader.DownloadError) -> [FringeEvent] {
+    func getEvents(from request: FilterRequest) async throws(DownloadHelper.DownloadError) -> [FringeEvent] {
         return self.models
     }
 }

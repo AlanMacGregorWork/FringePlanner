@@ -102,15 +102,60 @@ struct SeededContent {
     }   
     
     func images() -> [String: FringeImage] {
-        let version = FringeImage.Version(
-            type: "original",
-            width: 800,
-            height: 600,
-            mime: "image/jpeg",
-            url: URL(string: "https://example.com/image.jpg")!
-        )
+        let currentRandom = randomNumber
+        let imageCount = (currentRandom % 2) + 1 // Generate 1-2 images
+        var result = [String: FringeImage]()
         
-        return ["someHash": FringeImage(hash: "someHash", orientation: .landscape, type: .thumb, versions: ["original": version])]
+        for index in 0..<imageCount {
+            // Create hash and determine image properties
+            let hash = String(format: "%08x%04x", currentRandom, index)
+            let imageType: FringeImage.ImageType = currentRandom % 2 == 0 ? .thumb : .hero
+            let orientation: FringeImage.Orientation = [.landscape, .portrait, .square][currentRandom % 3]
+            
+            // Set dimensions based on orientation and type
+            let (width, height) = {
+                switch orientation {
+                case .landscape: return (800, 450)
+                case .portrait: return (450, 800)
+                case .square: return (600, 600)
+                }
+            }()
+            
+            // Create the required versions
+            var versions = [String: FringeImage.Version]()
+            
+            // Always included versions
+            versions["original"] = createVersion(type: .original, width: width, height: height)
+            versions["square-75"] = createVersion(type: .square75, width: 75, height: 75)
+            versions["square-150"] = createVersion(type: .square150, width: 150, height: 150)
+            
+            // Add common additional versions
+            if currentRandom % 3 > 0 { // Add some variations
+                versions["thumb-100"] = createVersion(type: .thumb100, width: 100, height: orientation == .portrait ? 133 : 75)
+                versions["small-320"] = createVersion(type: .small320, width: 320, height: orientation == .portrait ? 427 : 240)
+            }
+            
+            if currentRandom % 5 > 2 { // Add less common larger versions
+                versions["medium-640"] = createVersion(type: .medium640, width: 640, height: orientation == .portrait ? 853 : 480)
+                versions["large-1024"] = createVersion(type: .large1024, width: 1024, height: orientation == .portrait ? 1365 : 768)
+            }
+            
+            // Add to results
+            result[hash] = FringeImage(hash: hash, orientation: orientation, type: imageType, versions: versions)
+        }
+        
+        return result
+    }
+    
+    // Helper to create version objects
+    private func createVersion(type: FringeImage.VersionType, width: Int, height: Int) -> FringeImage.Version {
+        FringeImage.Version(
+            type: type,
+            width: width,
+            height: height,
+            mime: "image/jpeg",
+            url: URL(string: "https://fakeimg.com/\(randomNumber)-\(type).jpg")!
+        )
     }
     
     func performance(eventCode: String, config: PerformanceConfig? = nil) -> FringePerformance {

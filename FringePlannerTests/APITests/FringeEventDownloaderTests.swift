@@ -23,7 +23,7 @@ struct FringeEventDownloaderTests {
         let dataResult = try DataResult(testOption: .downloadFailed)
         let downloadSupport = MockDownloaderSupport(dataResult: dataResult)
         let downloader = FringeEventDownloader(downloadSupport: downloadSupport)
-        await #expect(throws: FringeEventDownloader.DownloadError.downloadFailed, performing: { try await downloader.getEvents(from: .init()) })
+        await #expect(throws: DownloadHelper.DownloadError.downloadFailed, performing: { try await downloader.getEvents(from: .init()) })
     }
     
     @Test("Throws `decodeFailed` if decode failed", arguments: ["", "someData", "{}"])
@@ -31,7 +31,7 @@ struct FringeEventDownloaderTests {
         let dataResult = try #require(try DataResult(testOption: .decodeFailed(dataString: dataString)))
         let downloadSupport = MockDownloaderSupport(dataResult: dataResult)
         let downloader = FringeEventDownloader(downloadSupport: downloadSupport)
-        await #expect(throws: FringeEventDownloader.DownloadError.decodeFailed, performing: { try await downloader.getEvents(from: .init()) })
+        await #expect(throws: DownloadHelper.DownloadError.decodeFailed, performing: { try await downloader.getEvents(from: .init()) })
     }
 
     @Test("Throws `httpError` if status code is not 200-299", arguments: [(0...199), (200...299), (300...999)])
@@ -43,7 +43,7 @@ struct FringeEventDownloaderTests {
             if (200...299).contains(statusCode) {
                 await #expect(throws: Never.self, "\(statusCode) should not fail", performing: { try await downloader.getEvents(from: .init()) })
             } else {
-                await #expect(throws: FringeEventDownloader.DownloadError.httpError(statusCode: statusCode), "\(statusCode) should fail", performing: { try await downloader.getEvents(from: .init()) })
+                await #expect(throws: DownloadHelper.DownloadError.httpError(statusCode: statusCode), "\(statusCode) should fail", performing: { try await downloader.getEvents(from: .init()) })
             }
         }
     }
@@ -89,8 +89,8 @@ private struct Cache {
 
 // MARK: - MockDownloaderSupport
 
-/// Mock implementation of `FringeEventDownloader.DownloadProtocol`
-private struct MockDownloaderSupport: FringeEventDownloader.DownloadProtocol {
+/// Mock implementation of `DownloadProtocol`
+private struct MockDownloaderSupport: DownloadProtocol {
     let dataResult: DataResult
     
     func data(from: URL) async throws -> (Data, URLResponse) {

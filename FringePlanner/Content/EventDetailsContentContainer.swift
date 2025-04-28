@@ -67,45 +67,11 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let content: EventDetailsContent
+        let content: EventContent
         var errorContent: ErrorContent?
         
-        init(content: EventDetailsContent) {
+        init(content: EventContent) {
             self.content = content
-        }
-    }
-}
-
-extension EventDetailsContentContainer.DataSource {
-    /// Represents the possible states of event details content
-    enum EventDetailsContent { 
-        /// No event was found matching the provided event code
-        case noEventFound
-        /// Event was successfully found and retrieved from the database
-        case eventFound(DBFringeEvent)
-        /// An error occurred while attempting to retrieve the event from the database
-        case databaseError(DBError)
-
-        /// Creates a new event details content state by fetching an event with the provided code
-        /// - Parameters:
-        ///   - eventCode: The unique identifier code for the event to retrieve
-        ///   - constructionHelper: Helper that provides the model container for database access
-        init(eventCode: String, constructionHelper: ConstructionHelper) {
-            let context = ModelContext(constructionHelper.modelContainer)
-            let eventPredicate = #Predicate<DBFringeEvent> { $0.code == eventCode }
-            let events: [DBFringeEvent]
-            do {
-                events = try DBHelper.getDBModels(from: eventPredicate, context: context)
-            } catch {
-                self = .databaseError(error)
-                return
-            }
-            guard let firstEvent = events.first else {
-                fringeAssertFailure("No event found for expected event code: \(eventCode)")
-                self = .noEventFound
-                return
-            }
-            self = .eventFound(firstEvent)
         }
     }
 }
@@ -157,7 +123,7 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @MainActor
     static func createContent(eventCode: String, constructionHelper: ConstructionHelper) -> Content {
-        let dataSourceContent = EventDetailsContentContainer.DataSource.EventDetailsContent(eventCode: eventCode, constructionHelper: constructionHelper)
+        let dataSourceContent = EventContent(eventCode: eventCode, modelContainer: constructionHelper.modelContainer)
         let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(content: dataSourceContent)
         let interaction = Interaction(dataSource: dataSource)
