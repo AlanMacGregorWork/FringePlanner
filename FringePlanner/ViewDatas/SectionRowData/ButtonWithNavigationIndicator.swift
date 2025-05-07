@@ -1,5 +1,5 @@
 //
-//  ButtonSectionView.swift
+//  ButtonWithNavigationIndicator.swift
 //  FringePlanner
 //
 //  Created by Alan MacGregor on 15/12/2024.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Displays a button with a title and right pointing arrow
-struct ButtonSectionView<Content: View>: View {
+struct ButtonWithNavigationIndicator<Content: View>: View {
     let closure: (() -> Void)
     @ViewBuilder let content: (() -> Content)
     
@@ -27,7 +27,7 @@ struct ButtonSectionView<Content: View>: View {
     }
 }
 
-extension ButtonSectionView {
+extension ButtonWithNavigationIndicator {
     /// Helper initializer for simple text-only buttons
     init(title: String, closure: @escaping () -> Void) where Content == Text {
         self.init(closure: closure, content: { Text(title) })
@@ -39,7 +39,7 @@ extension ButtonSectionView {
 #Preview(traits: .fixedLayout(width: 400, height: 100)) {
     Form {
         Section {
-            ButtonSectionView(title: "Sample Button", closure: {})
+            ButtonWithNavigationIndicator(title: "Sample Button", closure: {})
         }
     }
 }
