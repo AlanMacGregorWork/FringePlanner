@@ -39,7 +39,6 @@ struct SeededContent {
         let emails = ["info@assemblyfestival.com", "info@pleasance.co.uk", "info@summerhall.co.uk", "info@thestand.co.uk", "info@traverse.co.uk", "info@underbelly.co.uk", "info@gildedballoon.co.uk", "info@thequeenshall.net", "info@capitaltheatres.com"]
         let disabledDescriptions = ["Wheelchair accessible, hearing loop available", "Level access, accessible toilets, lift to all floors", "Accessible entrance via ramp, adapted facilities", "Ground floor access, accessible toilets", "Full accessibility, BSL interpreted shows available", "Limited accessibility, please contact venue", "Lift access to all areas, accessible facilities", "Step-free access, accessible seating areas", "Full accessibility including wheelchair spaces"]
         let positions = [FringeVenue.Position(lat: 55.9533, lon: -3.1883), FringeVenue.Position(lat: 55.9478, lon: -3.1836), FringeVenue.Position(lat: 55.9419, lon: -3.1789), FringeVenue.Position(lat: 55.9557, lon: -3.1897), FringeVenue.Position(lat: 55.9468, lon: -3.2021), FringeVenue.Position(lat: 55.9486, lon: -3.1891), FringeVenue.Position(lat: 55.9465, lon: -3.1892), FringeVenue.Position(lat: 55.9412, lon: -3.1824), FringeVenue.Position(lat: 55.9467, lon: -3.1859)]
-        let dates = (2...17).map({ DateComponents(calendar: .current, year: 2024, month: 8, day: $0, hour: 19, minute: 30).date! })
         let titles = ["The Stand-Up Sensation", "Shakespeare in Space", "Musical Mayhem", "Dance Through Time", "Comedy Chaos", "Magical Mysteries", "Poetry in Motion", "Circus Spectacular", "Late Night Laughs", "Drama in the Dark"]
         let subTitles = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
         let artists = ["The Comedy Crew", "Theatre Company X", "Musical Mavericks", "Dance Collective", "Improv Troupe", "Magic Circle", "Poets United", "Circus Dreams", "Late Night Comics", "Drama Workshop"]
@@ -98,8 +97,13 @@ struct SeededContent {
     }
 
     func date() -> Date {
-        return seedValue(for: randomNumber, at: \.dates)
-    }   
+        let month = 7 + randomIntGenerator.get(maxNumber: 1) // Months July (7) or August (8)
+        let day = 1 + randomIntGenerator.get(maxNumber: 30) // Days 1-31
+        let hour = randomIntGenerator.get(maxNumber: 23) // Hours 0-23
+        let minute = [0, 15, 30, 45][randomIntGenerator.get(maxNumber: 3)] // Minutes in 15-min increments
+        
+        return DateComponents(calendar: .current, year: 2005, month: month, day: day, hour: hour, minute: minute).date!
+    }
     
     func images() -> [String: FringeImage] {
         let currentRandom = randomNumber
@@ -160,7 +164,7 @@ struct SeededContent {
     
     func performance(eventCode: String, config: PerformanceConfig? = nil) -> FringePerformance {
         let startDate = config?.start.value ?? date()
-        let endDate = seedValue(for: randomNumber, at: \.dates).addingTimeInterval(60 * 60)
+        let endDate = startDate.addingTimeInterval(60 * 60)
         let basePrice = Double((randomNumber % 4) + 1) * 10.00
         let concessionPrice = basePrice * 0.8
         let type = config?.type.value ?? .inPerson
