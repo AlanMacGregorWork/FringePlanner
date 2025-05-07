@@ -29,10 +29,10 @@ struct DemoContentContainer {
         
         var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
-                TextData(text: "General Row: \(input.dataSource.section2Row1Number)")
+                DebugTextData(text: "General Row: \(input.dataSource.section2Row1Number)")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
-                        TextData(text: input.dataSource.title)
+                        DebugTextData(text: input.dataSource.title)
                     }
                     DebugButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
                     DebugButtonData(title: "Update row 1", interaction: {input.interaction.updateSection1Row1() })
@@ -44,13 +44,13 @@ struct DemoContentContainer {
                     GroupData(type: .section) {
                         DebugButtonData(title: "Add Row", interaction: { input.interaction.addRow() })
                         ForEachData(data: input.dataSource.uuids) { uuid in
-                            TextData(text: "ID: \(uuid.uuidString.prefix(10))")
+                            DebugTextData(text: "ID: \(uuid.uuidString.prefix(10))")
                         }
                     }
                     
                     GroupData(type: .section) {
                         DebugButtonData(title: "Add 1 to values: \(input.dataSource.section2Row1Number)", interaction: { input.interaction.updateSection2Row1() })
-                        TextData(text: "General Row: \(input.dataSource.section2Row1Number)")
+                        DebugTextData(text: "General Row: \(input.dataSource.section2Row1Number)")
                         CustomTimeData(timerOn: input.dataSource.timerOn, interaction: { input.interaction.toggleTimer() })
                     }
                 }

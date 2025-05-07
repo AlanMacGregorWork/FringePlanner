@@ -53,7 +53,7 @@ struct UITestingContentContainer {
         
         var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
-                TextData(text: "Title: Main Sheet")
+                DebugTextData(text: "Title: Main Sheet")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
                         DebugButtonData(title: "Navigation Tests", interaction: { input.interaction.push(sheet: .navigationTests) })
@@ -114,7 +114,7 @@ private struct NavigationTestSheetAContainer {
         
         var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
-                TextData(text: "Title: Sheet A")
+                DebugTextData(text: "Title: Sheet A")
                 GroupData(type: .form) {
                     DebugButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushSheet(location: .sheetBV1(parentRouter: input.router)) })
                     DebugButtonData(title: "Open Sheet B (V2)", interaction: { input.router.pushSheet(location: .sheetBV2) })
@@ -157,7 +157,7 @@ private struct NavigationTestSheetBContainer {
 
         var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
-                TextData(text: "Title: Sheet B (V1)")
+                DebugTextData(text: "Title: Sheet B (V1)")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
                         DebugButtonData(title: "Open Sheet C", interaction: { input.router.pushSheet(location: .sheetC) })
@@ -206,7 +206,7 @@ private struct NavigationTestSheetCContainer {
         
         var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
-                TextData(text: "Title: Sheet C")
+                DebugTextData(text: "Title: Sheet C")
                 GroupData(type: .form) {
                     DebugButtonData(title: "Open Sheet D (V1)", interaction: { input.router.pushSheet(location: .sheetDV1) })
                     DebugButtonData(title: "Open Sheet D (V2)", interaction: { input.router.pushSheet(location: .sheetDV2) })
@@ -253,10 +253,10 @@ private struct RenderingTestsContainer {
 
         var structure: some ViewDataProtocol {
             GroupData(type: .form) {
-                TextData(text: "Title: Rendering Tests")
+                DebugTextData(text: "Title: Rendering Tests")
                 
                 GroupData(type: .section) {
-                    TextData(text: "Value stored in data model: \(input.dataSource.value)")
+                    DebugTextData(text: "Value stored in data model: \(input.dataSource.value)")
                     DebugButtonData(title: "Add 1 to data model directly", interaction: { input.dataSource.value += 1 })
                     DebugButtonData(title: "Add 1 to data model from interaction", interaction: { input.interaction.addToDataSource() })
                 }

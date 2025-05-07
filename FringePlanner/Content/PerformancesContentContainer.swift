@@ -33,11 +33,11 @@ extension PerformancesContentContainer {
         var structure: some ViewDataProtocol {
             switch input.dataSource.content {
             case .noEventFound:
-                TextData(text: "Event not found")
+                TextData("Event not found")
             case .eventFound(let event):
                 performances(for: event)
             case .databaseError(let error):
-                TextData(text: "Database error\n\(error.description)")
+                TextData("Database error\n\(error.description)")
             }
         }
         
@@ -45,7 +45,7 @@ extension PerformancesContentContainer {
         func performances(for event: DBFringeEvent) -> some ViewDataProtocol {
             GroupData(type: .form) {
                 if event.performances.isEmpty {
-                    TextData(text: "No performances currently available")
+                    TextData("No performances currently available")
                 } else {
                     ForEachData(data: event.performances) { performance in
                         TextData(text: performance.referenceID)

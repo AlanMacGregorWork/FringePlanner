@@ -34,11 +34,11 @@ struct TextFieldData: ViewDataProtocol, Equatable {
 }
 
 /// Displays a basic text view
-struct TextData: ViewDataProtocol, Equatable {
+struct DebugTextData: ViewDataProtocol, Equatable {
     let text: String
     
     struct ContentView: View, ViewProtocol {
-        let data: TextData
+        let data: DebugTextData
         
         var body: some View {
             VStack(alignment: .leading) {

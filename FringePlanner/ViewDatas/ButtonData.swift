@@ -29,7 +29,7 @@ extension ButtonData {
     /// Helper init to produce a general text button
     init(title: String, interaction: @escaping () -> Void) where Content == TextData {
         self = .init(interaction: interaction, content: {
-            TextData(text: title)
+            TextData(title)
         })
     }
 }

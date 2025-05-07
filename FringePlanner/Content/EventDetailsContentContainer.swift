@@ -33,11 +33,11 @@ extension EventDetailsContentContainer {
         var structure: some ViewDataProtocol {
             switch input.dataSource.content {
             case .noEventFound:
-                TextData(text: "Event not found")
+                TextData("Event not found")
             case .eventFound(let event):
                 eventStructure(event: event)
             case .databaseError(let error):
-                TextData(text: "Database error\n\(error.description)")
+                TextData("Database error\n\(error.description)")
             }
         }
         
