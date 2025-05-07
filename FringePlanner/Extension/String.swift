@@ -58,4 +58,9 @@ extension String {
         // This avoids matching mathematical expressions like "2 < 3"
         return self.replacingOccurrences(of: Self.htmlTagPattern, with: "", options: .regularExpression)
     }
+    
+    /// Returns the string with all new lines removed
+    var withoutNewLines: Self {
+        self.components(separatedBy: .newlines).joined()
+    }
 }

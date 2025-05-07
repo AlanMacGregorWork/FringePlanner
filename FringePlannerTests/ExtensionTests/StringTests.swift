@@ -102,4 +102,27 @@ struct StringTests {
         """
         #expect(complexHTML.withoutHTMLTags == "\n  Title\n  This is a paragraph with formatted text.\n")
     }
+
+    @Test("`withoutNewLines` correctly removes newline characters")
+    func testWithoutNewLines() {
+        // Empty string
+        #expect("".withoutNewLines == "")
+        
+        // String with no newlines
+        #expect("Hello World".withoutNewLines == "Hello World")
+        
+        // String with single newline
+        #expect("Hello\nWorld".withoutNewLines == "HelloWorld")
+        
+        // String with multiple newlines
+        #expect("Hello\nBeautiful\nWorld".withoutNewLines == "HelloBeautifulWorld")
+        
+        // String with newlines at different positions
+        #expect("\nHello".withoutNewLines == "Hello")
+        #expect("Hello\n".withoutNewLines == "Hello")
+        #expect("\nHello\n".withoutNewLines == "Hello")
+        
+        // String with mixed content
+        #expect("Line 1\nLine 2\nLine 3".withoutNewLines == "Line 1Line 2Line 3")
+    }
 }

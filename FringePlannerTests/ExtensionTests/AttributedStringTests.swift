@@ -100,6 +100,9 @@ struct AttributedStringTests {
                 let straightQuotes = "\"Quote test\""
                 #expect(AttributedString.StringProvider.htmlString(curlyQuotes.typographicallyEnhanced).hasTrimmedPrefix(AttributedString.StringProvider.htmlString(straightQuotes)))
                 #expect(AttributedString.StringProvider.attributedString(AttributedString(curlyQuotes.typographicallyEnhanced)).hasTrimmedPrefix(AttributedString.StringProvider.attributedString(AttributedString(straightQuotes))))
+                
+                // With new lines
+                #expect(AttributedString.StringProvider.htmlString("<p>Item</p><p>Below").hasTrimmedPrefix(AttributedString.StringProvider.htmlString("Item\n\nBelow")))
             }
         }
     }
