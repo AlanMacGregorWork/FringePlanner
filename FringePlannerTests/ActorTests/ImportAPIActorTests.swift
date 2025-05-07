@@ -291,6 +291,43 @@ struct ImportAPIActorTests {
             .noChanges
         ]))
     }
+    
+    @Test("Performances should persist")
+    func testPerformancesShouldPersist() async throws {
+        // Setup models
+        let apiPerformance = SeededContent().performance(eventCode: "EVENT1")
+        let apiEvent = SeededContent().event(config: .init(code: .override("EVENT1"), performances: .override([apiPerformance])))
+        
+        // Import the event
+        let initialStatuses = try await importAPIActor.updateEvents([apiEvent])
+        #expect(initialStatuses.unorderedElementsEqual([
+            .insertedModel(type: DBFringeEvent.self, referenceID: "Event-\(apiEvent.code)"),
+            .insertedModel(type: DBFringeVenue.self, referenceID: "Venue-\(apiEvent.venue.code)"),
+            .insertedModel(type: DBFringePerformance.self, referenceID: apiPerformance.referenceID)
+        ]))
+        
+        // Sanity Check: Performance should exist in the database
+        try await testActor.performFetch(from: FetchDescriptor<DBFringePerformance>(predicate: #Predicate { _ in true })) { performances in
+            // Performance should exist
+            try #require(performances.count == 1, "There should only be 1 performance in the database")
+            let performance = try #require(performances.first)
+            #expect(performance == apiPerformance, "Performance should be the same")
+
+            // Performance should exist via event
+            let event = performance.event
+            #expect(event.code == apiEvent.code, "Performance should have the same event code")
+            #expect(event.performances.count == 1, "Event should have 1 performance")
+            #expect(event.performances.first == performance, "Event should have the same performance")
+        }
+
+        // Test the performance was imported
+        try await testActor.performFetch(from: FetchDescriptor<DBFringeEvent>()) { dbEvents in
+            try #require(dbEvents.count == 1, "There should only be 1 event in the database")
+            let dbEvent = try #require(dbEvents.first)
+            let dbPerformance = try #require(dbEvent.performances.first)
+            #expect(dbPerformance == apiPerformance, "Performance should be the same")
+        }
+    }
 }
 
 /// Allows performing tests on a fetch inside an actor
