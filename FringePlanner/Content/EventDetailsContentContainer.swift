@@ -49,7 +49,7 @@ extension EventDetailsContentContainer {
                 GroupData(type: .form) {
                     // TODO: Implement proper error handling for the UI
                     if let errorContent = input.dataSource.errorContent {
-                        ButtonData(title: errorContent.description, interaction: {
+                        DebugButtonData(title: errorContent.description, interaction: {
                             input.dataSource.errorContent = nil
                         })
                     }

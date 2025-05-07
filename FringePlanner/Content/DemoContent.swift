@@ -34,22 +34,22 @@ struct DemoContentContainer {
                     GroupData(type: .section) {
                         TextData(text: input.dataSource.title)
                     }
-                    ButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
-                    ButtonData(title: "Update row 1", interaction: {input.interaction.updateSection1Row1() })
+                    DebugButtonData(title: "Value updated from row 2: \(input.dataSource.section1Row1Number)", interaction: { print("Test") })
+                    DebugButtonData(title: "Update row 1", interaction: {input.interaction.updateSection1Row1() })
                     
                     ForEachData(data: DemoContentContainer.Router.NavigationLocation.allCases) { sheet in
-                        ButtonData(title: "Push \(sheet.title)", interaction: input.interaction.pushSheet(sheet))
+                        DebugButtonData(title: "Push \(sheet.title)", interaction: input.interaction.pushSheet(sheet))
                     }
                     
                     GroupData(type: .section) {
-                        ButtonData(title: "Add Row", interaction: { input.interaction.addRow() })
+                        DebugButtonData(title: "Add Row", interaction: { input.interaction.addRow() })
                         ForEachData(data: input.dataSource.uuids) { uuid in
                             TextData(text: "ID: \(uuid.uuidString.prefix(10))")
                         }
                     }
                     
                     GroupData(type: .section) {
-                        ButtonData(title: "Add 1 to values: \(input.dataSource.section2Row1Number)", interaction: { input.interaction.updateSection2Row1() })
+                        DebugButtonData(title: "Add 1 to values: \(input.dataSource.section2Row1Number)", interaction: { input.interaction.updateSection2Row1() })
                         TextData(text: "General Row: \(input.dataSource.section2Row1Number)")
                         CustomTimeData(timerOn: input.dataSource.timerOn, interaction: { input.interaction.toggleTimer() })
                     }

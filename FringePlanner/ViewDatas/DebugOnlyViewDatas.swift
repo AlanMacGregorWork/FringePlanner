@@ -51,12 +51,12 @@ struct TextData: ViewDataProtocol, Equatable {
 }
 
 /// Displays a basic button
-struct ButtonData: ViewDataProtocol, Equatable {
+struct DebugButtonData: ViewDataProtocol, Equatable {
     let title: String
     @MakeEquatableReadOnly var interaction: (() -> Void)
     
     struct ContentView: View, ViewProtocol {
-        let data: ButtonData
+        let data: DebugButtonData
         
         var body: some View {
             Button(action: data.interaction) {
