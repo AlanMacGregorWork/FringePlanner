@@ -32,11 +32,9 @@ extension PerformancesContentContainer {
         
         var structure: some ViewDataProtocol {
             switch input.dataSource.content {
-            case .noEventFound:
-                TextData("Event not found")
-            case .eventFound(let event):
+            case .success(let event):
                 performances(for: event)
-            case .databaseError(let error):
+            case .failure(let error):
                 TextData("Database error\n\(error.description)")
             }
         }
@@ -67,10 +65,10 @@ extension PerformancesContentContainer {
 extension PerformancesContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let content: EventContent
+        let content: Result<DBFringeEvent, DBError>
         var errorContent: ErrorContent?
         
-        init(content: EventContent) {
+        init(content: Result<DBFringeEvent, DBError>) {
             self.content = content
         }
     }
@@ -91,7 +89,8 @@ extension PerformancesContentContainer {
 extension PerformancesContentContainer {
     @MainActor
     static func createContent(eventCode: String, constructionHelper: ConstructionHelper) -> Content {
-        let dataSourceContent = EventContent(eventCode: eventCode, modelContainer: constructionHelper.modelContainer)
+        let context = ModelContext(constructionHelper.modelContainer)
+        let dataSourceContent = PredicateHelper.event(eventCode: eventCode).getWrappedContent(context: context)
         let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(content: dataSourceContent)
         let interaction = Interaction(dataSource: dataSource)

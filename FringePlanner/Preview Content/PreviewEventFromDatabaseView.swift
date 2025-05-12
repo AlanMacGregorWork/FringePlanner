@@ -14,13 +14,11 @@ struct PreviewEventFromDatabaseView<ContentView: View>: View {
     let contentView: ((DBFringeEvent) -> ContentView)
     
     var body: some View {
-        let eventContent = EventContent(eventCode: eventCode, modelContainer: modelContext.container)
+        let eventContent = PredicateHelper.event(eventCode: eventCode).getWrappedContent(context: modelContext)
         switch eventContent {
-        case .noEventFound:
-            Text("No Event Found")
-        case .databaseError(let dBError):
+        case .failure(let dBError):
             Text("Database Error: \(dBError.localizedDescription)")
-        case .eventFound(let dBFringeEvent):
+        case .success(let dBFringeEvent):
             contentView(dBFringeEvent)
         }
     }
