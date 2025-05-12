@@ -48,16 +48,8 @@ extension FringeEventData {
 
 @available(iOS 18, *)
 #Preview(traits: .modifier(MockDataPreviewModifier(config: [0: .init(code: .override("demo"))]))) {
-    @Previewable @Environment(\.modelContext) var modelContext
-    
-    let eventContent = EventContent(eventCode: "demo", modelContainer: modelContext.container)
-    switch eventContent {
-    case .noEventFound:
-        Text("No Event Found")
-    case .databaseError(let dBError):
-        Text("Database Error: \(dBError.localizedDescription)")
-    case .eventFound(let dBFringeEvent):
-        FringeEventData.ContentView(data: .init(event: dBFringeEvent, onSelected: {}))
+    PreviewEventFromDatabaseView(eventCode: "demo") { event in
+        FringeEventData.ContentView(data: .init(event: event, onSelected: {}))
             .border(Color.gray)
             .environment(\.downloader, PreviewDownloader())
     }
