@@ -10,7 +10,7 @@ import SwiftData
 
 /// Container for displaying event
 struct EventDetailsContentContainer {
-    typealias Router = SimplifiedRouter<BasicNavigationLocation>
+    typealias Router = SimplifiedRouter<EventDetailsContentContainer.NavigationLocation>
 }
 
 // MARK: - Content
@@ -54,11 +54,37 @@ extension EventDetailsContentContainer {
                         })
                     }
                     DetailsStructure(event: event)
+                    performancesButton(for: event)
                     AccessibilityStructure(disabled: event.disabled)
                     DescriptionStructure(event: event)
                 }
             }
         }       
+        
+        func performancesButton(for event: DBFringeEvent) -> some ViewDataProtocol {
+            ButtonData(interaction: input.interaction.showPerformances, includeNavigationFlair: true) {
+                TextData("Performances: \(event.performances.count)")
+            }
+        }
+    }
+}
+
+// MARK: - Navigation
+
+extension EventDetailsContentContainer {
+    enum NavigationLocation: NavigationLocationProtocol {
+        case performances(eventCode: String)
+        
+        @ViewBuilder
+        func toView(constructionHelper: ConstructionHelper) -> some View {
+            switch self {
+            case .performances(let eventCode):
+                PerformancesContentContainer.createContent(
+                    eventCode: eventCode,
+                    constructionHelper: constructionHelper
+                ).buildView()
+            }
+        }
     }
 }
 
@@ -81,6 +107,14 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     struct Interaction: InteractionProtocol {
         let dataSource: DataSource
+        let router: EventDetailsContentContainer.Router
+        
+        func showPerformances() {
+            switch dataSource.content {
+            case .eventFound(let event): router.pushSheet(location: .performances(eventCode: event.code))
+            case .databaseError, .noEventFound: break
+            }
+        }
         
         // MARK: Toggle Favourite
         
@@ -126,7 +160,7 @@ extension EventDetailsContentContainer {
         let dataSourceContent = EventContent(eventCode: eventCode, modelContainer: constructionHelper.modelContainer)
         let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(content: dataSourceContent)
-        let interaction = Interaction(dataSource: dataSource)
+        let interaction = Interaction(dataSource: dataSource, router: router)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }
