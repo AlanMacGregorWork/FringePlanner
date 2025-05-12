@@ -10,15 +10,32 @@ import SwiftUI
 /// Displays a basic button
 struct ButtonData<Content: ViewDataProtocol>: ViewDataProtocol, Equatable {
     @MakeEquatableReadOnly var interaction: (() -> Void)
+    let includeNavigationFlair: Bool
     @MakeEquatableReadOnly @FringeDataResultBuilder var content: (() -> Content)
+    
+    init(interaction: @escaping () -> Void, includeNavigationFlair: Bool = false, content: @escaping () -> Content) {
+        self._interaction = .init(wrappedValue: interaction)
+        self._content = .init(wrappedValue: content)
+        self.includeNavigationFlair = includeNavigationFlair
+    }
     
     struct ContentView: View, ViewProtocol {
         let data: ButtonData
         
         var body: some View {
-            Button(action: data.interaction) {
-                data.content().createView()
+            if data.includeNavigationFlair {
+                ButtonWithNavigationIndicator(closure: data.interaction) {
+                    buttonContent
+                }
+            } else {
+                Button(action: data.interaction) {
+                    buttonContent
+                }
             }
+        }
+        
+        private var buttonContent: some View {
+            data.content().createView()
         }
     }
 }
@@ -32,4 +49,38 @@ extension ButtonData {
             TextData(title)
         })
     }
+}
+
+// MARK: - Preview
+
+#Preview("Basic title init") {
+    ButtonData(
+        title: "Some title", 
+        interaction: {
+            print("Tapped")
+        })
+    .createView()
+}
+
+#Preview("Custom data") {
+    ButtonData(
+        interaction: {
+            print("Tapped")
+        },
+        content: {
+            TextData("Alternative title")
+        })
+    .createView()
+}
+
+#Preview("Custom data (with flair)") {
+    ButtonData(
+        interaction: {
+            print("Tapped")
+        },
+        includeNavigationFlair: true,
+        content: {
+            TextData("Alternative title")
+        })
+    .createView()
 }
