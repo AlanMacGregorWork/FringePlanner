@@ -47,8 +47,14 @@ extension PerformancesContentContainer {
                 if event.performances.isEmpty {
                     TextData("No performances currently available")
                 } else {
-                    ForEachData(data: event.performances) { performance in
-                        TextData(text: performance.referenceID)
+                    let sortedPerformances = event.performances.sorted(by: { $0.start < $1.start })
+                    ForEachData(data: sortedPerformances) { performance in
+                        ButtonData(interaction: {
+                            // TODO: Implement Interaction
+                            print("Open Performance")
+                        }, includeNavigationFlair: true, content: {
+                            FringePerformanceData(performance: performance)
+                        })
                     }
                 }
             }
