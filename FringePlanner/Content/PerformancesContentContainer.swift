@@ -10,7 +10,7 @@ import SwiftData
 
 /// Container for displaying performances for an event
 struct PerformancesContentContainer {
-    typealias Router = SimplifiedRouter<BasicNavigationLocation>
+    typealias Router = SimplifiedRouter<NavigationLocation>
 }
 
 // MARK: - Content
@@ -41,20 +41,39 @@ extension PerformancesContentContainer {
         
         @MainActor
         func performances(for event: DBFringeEvent) -> some ViewDataProtocol {
-            GroupData(type: .form) {
-                if event.performances.isEmpty {
-                    TextData("No performances currently available")
-                } else {
-                    let sortedPerformances = event.performances.sorted(by: { $0.start < $1.start })
-                    ForEachData(data: sortedPerformances) { performance in
-                        ButtonData(interaction: {
-                            // TODO: Implement Interaction
-                            print("Open Performance")
-                        }, includeNavigationFlair: true, content: {
-                            FringePerformanceData(performance: performance)
-                        })
+            NavigationData(router: input.router) {
+                GroupData(type: .form) {
+                    if event.performances.isEmpty {
+                        TextData("No performances currently available")
+                    } else {
+                        let sortedPerformances = event.performances.sorted(by: { $0.start < $1.start })
+                        ForEachData(data: sortedPerformances) { performance in
+                            ButtonData(
+                                interaction: { input.interaction.showPerformance(referenceID: performance.referenceID) },
+                                includeNavigationFlair: true,
+                                content: { FringePerformanceData(performance: performance) })
+                        }
                     }
                 }
+            }
+        }
+    }
+}
+
+// MARK: - Navigation
+
+extension PerformancesContentContainer {
+    enum NavigationLocation: NavigationLocationProtocol {
+        case performance(referenceID: String)
+        
+        @ViewBuilder
+        func toView(constructionHelper: ConstructionHelper) -> some View {
+            switch self {
+            case .performance(let referenceID):
+                PerformanceContentContainer.createContent(
+                    referenceID: referenceID,
+                    constructionHelper: constructionHelper
+                ).buildView()
             }
         }
     }
@@ -79,6 +98,11 @@ extension PerformancesContentContainer {
 extension PerformancesContentContainer {
     struct Interaction: InteractionProtocol {
         let dataSource: DataSource
+        let router: PerformancesContentContainer.Router
+        
+        func showPerformance(referenceID: String) {
+            router.pushSheet(location: .performance(referenceID: referenceID))
+        }
     }
 }
 
@@ -93,7 +117,7 @@ extension PerformancesContentContainer {
         let dataSourceContent = PredicateHelper.event(eventCode: eventCode).getWrappedContent(context: context)
         let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(content: dataSourceContent)
-        let interaction = Interaction(dataSource: dataSource)
+        let interaction = Interaction(dataSource: dataSource, router: router)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }
