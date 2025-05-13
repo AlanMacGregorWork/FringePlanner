@@ -16,6 +16,35 @@ struct PredicateHelper {
     static func event(eventCode: String) -> SingleContainer<DBFringeEvent> {
         return .init(predicate: #Predicate<DBFringeEvent> { $0.code == eventCode })
     }
+
+    /// Returns a single expected performance
+    static func performance(referenceID: String) -> SingleContainer<DBFringePerformance> {
+        // Swift Predicates don't support String concats required to build the reference id. To get around it,
+        // the values that build the referenceID are created instead.
+        
+        // Split the referenceID into components
+        let components = referenceID.split(separator: "-")
+        
+        // Ensure we have the expected format: "Performance-eventCode-timestamp" where eventCode may contain hyphens
+        guard components.count >= 3, 
+              components[0] == "Performance",
+              let lastComponent = components.last,
+              let timeInterval = TimeInterval(lastComponent) else {
+            // Return a predicate that won't match anything if the format is invalid
+            fringeAssertFailure("ReferenceID is invalid")
+            return .init(predicate: #Predicate<DBFringePerformance> { _ in false })
+        }
+                
+        // Extract eventCode by taking all components between the first and last and joining them with hyphens
+        let eventCodeComponents = components[1..<(components.count-1)]
+        let eventCode = eventCodeComponents.joined(separator: "-")
+        
+        // Create a filter from the values
+        let startDate = Date(timeIntervalSince1970: timeInterval)
+        return .init(predicate: #Predicate<DBFringePerformance> { performance in
+            performance.eventCode == eventCode && performance.start == startDate
+        })
+    }
 }
 
 // MARK: - Container Protocol

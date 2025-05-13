@@ -145,7 +145,7 @@ extension DBFringePerformance {
     
     /// A custom referenceID for `DBFringePerformance` as cancelling performances will not have a API model
     /// to use as its reference
-    var referenceID: String { "Performance-\(eventCode)-\(fringeDateFormatter.string(from: start))" }
+    var referenceID: String { Self.createReferenceID(eventCode: eventCode, startTime: start) }
     
     /// A predicate to check for the status
     static func predicate(for status: DBFringePerformance.Status) -> Predicate<DBFringePerformance> {
@@ -154,5 +154,10 @@ extension DBFringePerformance {
             // The performance must previously have been active
             dbPerformance.statusString == status.rawValue
         }
+    }
+    
+    /// Used for defining some form of id from a performance model
+    static func createReferenceID(eventCode: String, startTime: Date) -> String {
+        "Performance-\(eventCode)-\(startTime.timeIntervalSince1970)"
     }
 }
