@@ -21,7 +21,7 @@ struct SectionRowData: ViewDataProtocol, Equatable {
             case .url(let title, let value, let url):
                 LinkSectionView(title: title, linkName: value, link: url)
             case .button(let title, let closure):
-                ButtonSectionView(title: title, closure: closure.wrappedValue)
+                ButtonWithNavigationIndicator(title: title, closure: closure.wrappedValue)
             }
         }
     }

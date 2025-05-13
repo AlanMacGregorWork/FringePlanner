@@ -34,11 +34,11 @@ struct TextFieldData: ViewDataProtocol, Equatable {
 }
 
 /// Displays a basic text view
-struct TextData: ViewDataProtocol, Equatable {
+struct DebugTextData: ViewDataProtocol, Equatable {
     let text: String
     
     struct ContentView: View, ViewProtocol {
-        let data: TextData
+        let data: DebugTextData
         
         var body: some View {
             VStack(alignment: .leading) {
@@ -51,12 +51,12 @@ struct TextData: ViewDataProtocol, Equatable {
 }
 
 /// Displays a basic button
-struct ButtonData: ViewDataProtocol, Equatable {
+struct DebugButtonData: ViewDataProtocol, Equatable {
     let title: String
     @MakeEquatableReadOnly var interaction: (() -> Void)
     
     struct ContentView: View, ViewProtocol {
-        let data: ButtonData
+        let data: DebugButtonData
         
         var body: some View {
             Button(action: data.interaction) {

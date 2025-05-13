@@ -27,7 +27,7 @@ struct FringePerformance: Equatable, Hashable {
 
 extension FringePerformance: APIFringeModel {
     typealias DBFringeModelType = DBFringePerformance
-    var referenceID: String { "Performance-\(eventCode)-\(fringeDateFormatter.string(from: start))" }
+    var referenceID: String { DBFringePerformance.createReferenceID(eventCode: eventCode, startTime: start) }
 }
 
 // MARK: Codable

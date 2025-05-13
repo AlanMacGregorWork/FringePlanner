@@ -30,7 +30,7 @@ struct ExampleTest {
         // Initial row
         content.expect {
             NavigationData(router: content.router) {
-                TextData(text: "Row Value: 0")
+                DebugTextData(text: "Row Value: 0")
                 ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })
             }
         }
@@ -41,7 +41,7 @@ struct ExampleTest {
         // Row value should increase to 1
         content.expect {
             NavigationData(router: content.router) {
-                TextData(text: "Row Value: 1")
+                DebugTextData(text: "Row Value: 1")
                 ButtonData(title: "Add To Value", interaction: { content.interaction.addToButtonPress() })
             }
         }
@@ -74,7 +74,7 @@ private struct Content: ContentProtocol {
 
         var structure: some ViewDataProtocol {
             NavigationData(router: input.router) {
-                TextData(text: "Row Value: \(input.dataSource.buttonPresses)")
+                DebugTextData(text: "Row Value: \(input.dataSource.buttonPresses)")
                 ButtonData(title: "Add To Value", interaction: input.interaction.addToButtonPress)
             }
         }

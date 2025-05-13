@@ -10,7 +10,7 @@ import SwiftData
 
 /// Container for displaying event
 struct EventDetailsContentContainer {
-    typealias Router = SimplifiedRouter<BasicNavigationLocation>
+    typealias Router = SimplifiedRouter<EventDetailsContentContainer.NavigationLocation>
 }
 
 // MARK: - Content
@@ -32,12 +32,10 @@ extension EventDetailsContentContainer {
         
         var structure: some ViewDataProtocol {
             switch input.dataSource.content {
-            case .noEventFound:
-                TextData(text: "Event not found")
-            case .eventFound(let event):
+            case .success(let event):
                 eventStructure(event: event)
-            case .databaseError(let error):
-                TextData(text: "Database error\n\(error.description)")
+            case .failure(let error):
+                TextData("Database error\n\(error.description)")
             }
         }
         
@@ -49,16 +47,42 @@ extension EventDetailsContentContainer {
                 GroupData(type: .form) {
                     // TODO: Implement proper error handling for the UI
                     if let errorContent = input.dataSource.errorContent {
-                        ButtonData(title: errorContent.description, interaction: {
+                        DebugButtonData(title: errorContent.description, interaction: {
                             input.dataSource.errorContent = nil
                         })
                     }
                     DetailsStructure(event: event)
+                    performancesButton(for: event)
                     AccessibilityStructure(disabled: event.disabled)
                     DescriptionStructure(event: event)
                 }
             }
         }       
+        
+        func performancesButton(for event: DBFringeEvent) -> some ViewDataProtocol {
+            ButtonData(interaction: input.interaction.showPerformances, includeNavigationFlair: true) {
+                TextData("Performances: \(event.performances.count)")
+            }
+        }
+    }
+}
+
+// MARK: - Navigation
+
+extension EventDetailsContentContainer {
+    enum NavigationLocation: NavigationLocationProtocol {
+        case performances(eventCode: String)
+        
+        @ViewBuilder
+        func toView(constructionHelper: ConstructionHelper) -> some View {
+            switch self {
+            case .performances(let eventCode):
+                PerformancesContentContainer.createContent(
+                    eventCode: eventCode,
+                    constructionHelper: constructionHelper
+                ).buildView()
+            }
+        }
     }
 }
 
@@ -67,10 +91,10 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let content: EventContent
+        let content: Result<DBFringeEvent, DBError>
         var errorContent: ErrorContent?
         
-        init(content: EventContent) {
+        init(content: Result<DBFringeEvent, DBError>) {
             self.content = content
         }
     }
@@ -81,14 +105,22 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     struct Interaction: InteractionProtocol {
         let dataSource: DataSource
+        let router: EventDetailsContentContainer.Router
+        
+        func showPerformances() {
+            switch dataSource.content {
+            case .success(let event): router.pushSheet(location: .performances(eventCode: event.code))
+            case .failure: break
+            }
+        }
         
         // MARK: Toggle Favourite
         
         /// Toggles the favourite status of the event
         func toggleFavourite() {
             switch dataSource.content {
-            case .eventFound(let event): toggleFavourite(for: event)
-            case .databaseError, .noEventFound: break
+            case .success(let event): toggleFavourite(for: event)
+            case .failure: break
             }
         }
         
@@ -123,10 +155,11 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @MainActor
     static func createContent(eventCode: String, constructionHelper: ConstructionHelper) -> Content {
-        let dataSourceContent = EventContent(eventCode: eventCode, modelContainer: constructionHelper.modelContainer)
+        let context = ModelContext(constructionHelper.modelContainer)
+        let dataSourceContent = PredicateHelper.event(eventCode: eventCode).getWrappedContent(context: context)
         let router = Router(constructionHelper: constructionHelper)
         let dataSource = DataSource(content: dataSourceContent)
-        let interaction = Interaction(dataSource: dataSource)
+        let interaction = Interaction(dataSource: dataSource, router: router)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
 }

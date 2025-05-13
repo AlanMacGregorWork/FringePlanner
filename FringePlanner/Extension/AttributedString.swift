@@ -100,8 +100,8 @@ extension AttributedString {
             guard let stringProvider else { return false }
             // Values must be trimmed of whitespace before comparison as the attributed string generated from HTML
             // may have whitespace which is not part of the default decoding
-            let string1 = self.rawString.withoutHTMLTags.typographicallyEnhanced.trimmed
-            let string2 = stringProvider.rawString.withoutHTMLTags.typographicallyEnhanced.trimmed
+            let string1 = self.rawString.withoutHTMLTags.withoutNewLines.typographicallyEnhanced.trimmed
+            let string2 = stringProvider.rawString.withoutHTMLTags.withoutNewLines.typographicallyEnhanced.trimmed
             return string1.hasPrefix(string2)
         }
         

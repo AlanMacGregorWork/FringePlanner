@@ -22,7 +22,7 @@ final class DBFringeEvent: DBFringeModel {
     private(set) var festivalId: String
     private(set) var genre: String
     private(set) var genreTags: String?
-    @Relationship private(set) var performances: [DBFringePerformance]
+    @Relationship(inverse: \DBFringePerformance.event) private(set) var performances: [DBFringePerformance]
     // Note: Is optional due to SwiftDatas handling of Codable objects with entirely nil proeprties
     private(set) var performanceSpace: FringePerformanceSpace?
     private(set) var status: FringeStatus
