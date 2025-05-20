@@ -8,14 +8,14 @@
 import SwiftUI
 
 /// Displays a basic button
-struct ButtonData<Content: ViewDataProtocol>: ViewDataProtocol, Equatable {
+struct ButtonData<Content: ViewDataProtocol>: ViewDataProtocol {
     @MakeEquatableReadOnly var interaction: (() -> Void)
     let includeNavigationFlair: Bool
-    @MakeEquatableReadOnly @FringeDataResultBuilder var content: (() -> Content)
+    let content: Content
     
-    init(interaction: @escaping () -> Void, includeNavigationFlair: Bool = false, content: @escaping () -> Content) {
+    init(interaction: @escaping () -> Void, includeNavigationFlair: Bool = false, @FringeDataResultBuilder content: () -> Content) {
         self._interaction = .init(wrappedValue: interaction)
-        self._content = .init(wrappedValue: content)
+        self.content = content()
         self.includeNavigationFlair = includeNavigationFlair
     }
     
@@ -35,7 +35,7 @@ struct ButtonData<Content: ViewDataProtocol>: ViewDataProtocol, Equatable {
         }
         
         private var buttonContent: some View {
-            data.content().createView()
+            data.content.createView()
         }
     }
 }
