@@ -41,7 +41,7 @@ extension EventDetailsContentContainer {
         
         @MainActor
         func eventStructure(event: DBFringeEvent) -> some ViewDataProtocol {
-            NavigationData(router: input.router, toolbarItems: [
+            NavigationData(toolbarItems: [
                 .favourite(isFavourite: event.isFavourite, onTap: input.interaction.toggleFavourite)
             ]) {
                 GroupData(type: .form) {
