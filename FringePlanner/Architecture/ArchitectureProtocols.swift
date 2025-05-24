@@ -25,7 +25,7 @@ protocol ContentProtocol {
 // MARK: - Components
 
 /// Allows access to navigation
-protocol RouterProtocol: Observable, Equatable {
+protocol RouterProtocol: Observable, Equatable, AnyObject {
     associatedtype NavigationLocation: NavigationLocationProtocol
     var pushedSheet: NavigationLocation? { get set }
     var objectWillChange: PassthroughSubject<Void, Never> { get }

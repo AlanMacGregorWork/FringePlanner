@@ -8,16 +8,14 @@
 import SwiftUI
 
 /// Allows handling navigation
-struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: ViewDataProtocol {
+struct NavigationData<Content: ViewDataProtocol>: ViewDataProtocol {
     typealias ContentView = NavigationView
-    let router: RouterType
     let container: Content
     let title: String?
     let toolbarItems: [NavigationToolbarItem]
     
-    init(router: RouterType, title: String? = nil, toolbarItems: [NavigationToolbarItem] = [], @FringeDataResultBuilder _ values: () -> Content) {
+    init(title: String? = nil, toolbarItems: [NavigationToolbarItem] = [], @FringeDataResultBuilder _ values: () -> Content) {
         self.container = values()
-        self.router = router
         self.title = title
         self.toolbarItems = toolbarItems
     }
@@ -26,9 +24,8 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
         
         // MARK: Property
         
-        private let data: NavigationData<RouterType, Content>
-        @State private var router: RouterType
-        @State private var localSheet: RouterType.NavigationLocation?
+        private let data: NavigationData<Content>
+        @State private var localSheet: (any NavigationLocationProtocol)?
         /// The path count given on the last push. This can be used to identify if the view has been popped and
         /// the sheet needs to be set to nil.
         @State private var pathCount = 0
@@ -41,19 +38,18 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
         private var pathContainer: PathContainer { envPath ?? statePath }
         @Environment(\.pathContainer) private var envPath: PathContainer?
         @State private var statePath = PathContainer()
+        @Environment(\.router) private var router: RouterProtocolWrapper
         
         // MARK: Init
         
-        init(data: NavigationData<RouterType, Content>) {
+        init(data: NavigationData<Content>) {
             self.data = data
-            self._router = .init(wrappedValue: data.router)
         }
         
         // MARK: Body
         
         var body: some View {
             navigationView
-                .onChange(of: router.pushedSheet) { onSheetAdded() }
                 .onChange(of: pathContainer.path) { onChangeNavigationPath() }
                 .onReceive(router.objectWillChange, perform: { _ in onSheetUpdated() })
         }
@@ -90,27 +86,26 @@ struct NavigationData<RouterType: RouterProtocol, Content: ViewDataProtocol>: Vi
         
         // MARK: Content Updates
         
-        func onSheetUpdated() {
-            // This block of work only updates views if the local & router sheets exist
-            guard let routerSheet = router.pushedSheet, let localSheet = localSheet else { return }
+        private func onSheetUpdated() {
+            guard let routerSheet = router.pushedSheet else { return }
+
             // If a sheet is already presented and is different from the sheet in the router,
             // we need to pop the existing sheet
-            guard localSheet != routerSheet else { return }
-            pathContainer.path.removeLast(pathContainer.path.count - pathCount + 1)
-        }
-        
-        func onSheetAdded() {
-            guard let routerSheet = router.pushedSheet else { return }
+            if router.shouldPopExistingSheet(localSheet) {
+                pathContainer.path.removeLast(pathContainer.path.count - pathCount + 1)
+            }
+            
+            // Add the new sheet add onto the path container
             pathContainer.path.append(routerSheet)
             pathCount = pathContainer.path.count
             localSheet = routerSheet
         }
-        
-        func onChangeNavigationPath() {
+
+        private func onChangeNavigationPath() {
             // If the router has a sheet which was made on a path count larger than the current
             // path count, it must already been removed from the path, and it can now be removed.
             guard router.pushedSheet != nil, pathCount > pathContainer.path.count else { return }
-            router.pushedSheet = nil
+            router.clearPushedSheet()
             localSheet = nil
             pathCount = 0
         }
@@ -159,20 +154,10 @@ extension NavigationToolbarItem {
 // MARK: - Navigation Destination Modifier
 
 /// A modifier that conditionally adds a navigation destination based on the navigation location type
-///  - Note: `BasicNavigationLocation` is the default navigation location type for the application with no navigation
-/// destinations, this modifier ensures it is not added to the view as adding multiple navigation destinations to a
-/// view will cause a runtime error.
-private struct NavigationDestinationModifier<RouterType: RouterProtocol>: ViewModifier {
-    let router: RouterType
+private struct NavigationDestinationModifier: ViewModifier {
+    let router: RouterProtocolWrapper
     
     func body(content: Content) -> some View {
-        if RouterType.NavigationLocation.self != BasicNavigationLocation.self {
-            content.navigationDestination(for: RouterType.NavigationLocation.self) { location in
-                location.toView(constructionHelper: router.constructionHelper)
-            }
-        } else {
-            // Ignore setting up a navigation destination
-            content
-        }
+        return router.setupNavigationDestination(for: content)
     }
 }
