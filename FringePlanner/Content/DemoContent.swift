@@ -28,7 +28,7 @@ struct DemoContentContainer {
         let input: Content<DataSourceType>
         
         var structure: some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 DebugTextData(text: "General Row: \(input.dataSource.section2Row1Number)")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
