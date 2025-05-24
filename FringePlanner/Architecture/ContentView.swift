@@ -23,6 +23,7 @@ struct ContainerView<Content: ContentProtocol>: View {
     var body: some View {
         let structure = Content.Structure.init(input: container).structure
         ContainerViewGenerator(structure)
+            .environment(\.router, .init(router))
     }
 }
 

@@ -37,7 +37,7 @@ extension PlannerContentContainer {
         
         /// The main structure of the planner view
         var structure: some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 GroupData(type: .form) {
                     nonBookedPerformances
                 }
