@@ -32,7 +32,7 @@ extension SearchEventContentContainer {
         let input: Content
         
         var structure: some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 GroupData(type: .form) {
                     GroupData(type: .section) {
                         TextFieldData(text: Bindable(input.dataSource).search)

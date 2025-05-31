@@ -25,10 +25,7 @@ struct MainView: View {
         switch ApplicationEnvironment.current {
         case .normal:
             TabView {
-                NavigationData(
-                    router: SimplifiedRouter<BasicNavigationLocation>(constructionHelper: constructionHelper),
-                    title: "Search"
-                ) {
+                NavigationData(title: "Search") {
                     SearchEventContentContainer.createContent(constructionHelper: constructionHelper)
                 }
                     .createView()
@@ -36,10 +33,7 @@ struct MainView: View {
                         Label("Search", systemImage: "magnifyingglass")
                     }
                 
-                NavigationData(
-                    router: SimplifiedRouter<BasicNavigationLocation>(constructionHelper: constructionHelper),
-                    title: "Planner"
-                ) {
+                NavigationData(title: "Planner") {
                     PlannerContentContainer.createContent(constructionHelper: constructionHelper)
                 }
                     .createView()

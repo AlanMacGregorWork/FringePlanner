@@ -41,7 +41,7 @@ extension PerformancesContentContainer {
         
         @MainActor
         func performances(for event: DBFringeEvent) -> some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 GroupData(type: .form) {
                     if event.performances.isEmpty {
                         TextData("No performances currently available")

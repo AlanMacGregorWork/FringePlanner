@@ -52,7 +52,7 @@ struct UITestingContentContainer {
         let input: Content
         
         var structure: some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 DebugTextData(text: "Title: Main Sheet")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
@@ -113,7 +113,7 @@ private struct NavigationTestSheetAContainer {
         let input: Content
         
         var structure: some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 DebugTextData(text: "Title: Sheet A")
                 GroupData(type: .form) {
                     DebugButtonData(title: "Open Sheet B (V1)", interaction: { input.router.pushSheet(location: .sheetBV1(parentRouter: input.router)) })
@@ -156,7 +156,7 @@ private struct NavigationTestSheetBContainer {
         let input: Content
 
         var structure: some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 DebugTextData(text: "Title: Sheet B (V1)")
                 GroupData(type: .form) {
                     GroupData(type: .section) {
@@ -205,7 +205,7 @@ private struct NavigationTestSheetCContainer {
         let input: Content
         
         var structure: some ViewDataProtocol {
-            NavigationData(router: input.router) {
+            NavigationData {
                 DebugTextData(text: "Title: Sheet C")
                 GroupData(type: .form) {
                     DebugButtonData(title: "Open Sheet D (V1)", interaction: { input.router.pushSheet(location: .sheetDV1) })
