@@ -135,7 +135,7 @@ extension SearchEventContentContainer {
         
         @MainActor
         func openEvent(_ event: DBFringeEvent) {
-            router.pushSheet(location: .eventDetails(event.code))
+            router.pushSheet(location: .eventDetails(event))
         }
         
         @MainActor
@@ -171,16 +171,17 @@ extension SearchEventContentContainer {
 
 extension SearchEventContentContainer {
     enum NavigationLocation: NavigationLocationProtocol {
-        case eventDetails(String)
+        case eventDetails(DBFringeEvent)
         
         @ViewBuilder
         func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
             case .eventDetails(let event):
                 EventDetailsContentContainer.createContent(
-                    eventCode: event,
+                    event: event,
                     constructionHelper: constructionHelper
-                ).buildView()
+                )
+                .buildView()
             }
         }
     }

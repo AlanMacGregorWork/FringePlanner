@@ -75,7 +75,7 @@ extension PlannerContentContainer {
         /// Opens the details view for the specified fringe event
         /// - Parameter event: The event to display details for
         func openEvent(_ event: DBFringeEvent) {
-            router.pushSheet(location: .eventDetails(event.code))
+            router.pushSheet(location: .eventDetails(event))
         }
     }
 }
@@ -95,7 +95,7 @@ extension PlannerContentContainer {
     /// Defines the possible navigation destinations from the planner container
     enum NavigationLocation: NavigationLocationProtocol {
         /// Shows details for an event with the specified code
-        case eventDetails(String)
+        case eventDetails(DBFringeEvent)
         
         /// Converts this navigation location to a view
         /// - Parameter constructionHelper: Helper for constructing views
@@ -104,11 +104,9 @@ extension PlannerContentContainer {
         @MainActor
         func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
-            case .eventDetails(let eventCode):
-                EventDetailsContentContainer.createContent(
-                    eventCode: eventCode,
-                    constructionHelper: constructionHelper
-                ).buildView()
+            case .eventDetails(let event):
+                EventDetailsContentContainer.createContent(event: event, constructionHelper: constructionHelper)
+                    .buildView()
             }
         }
     }

@@ -29,18 +29,9 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     struct Structure: StructureProtocol {
         let input: Content
+        var event: DBFringeEvent { input.dataSource.event }
         
         var structure: some ViewDataProtocol {
-            switch input.dataSource.content {
-            case .success(let event):
-                eventStructure(event: event)
-            case .failure(let error):
-                TextData("Database error\n\(error.description)")
-            }
-        }
-        
-        @MainActor
-        func eventStructure(event: DBFringeEvent) -> some ViewDataProtocol {
             NavigationData(toolbarItems: [
                 .favourite(isFavourite: event.isFavourite, onTap: input.interaction.toggleFavourite)
             ]) {
@@ -71,16 +62,17 @@ extension EventDetailsContentContainer {
 
 extension EventDetailsContentContainer {
     enum NavigationLocation: NavigationLocationProtocol {
-        case performances(eventCode: String)
+        case performances(event: DBFringeEvent)
         
         @ViewBuilder
         func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
-            case .performances(let eventCode):
+            case .performances(let event):
                 PerformancesContentContainer.createContent(
-                    eventCode: eventCode,
+                    event: event,
                     constructionHelper: constructionHelper
-                ).buildView()
+                )
+                .buildView()
             }
         }
     }
@@ -91,11 +83,11 @@ extension EventDetailsContentContainer {
 extension EventDetailsContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let content: Result<DBFringeEvent, DBError>
+        let event: DBFringeEvent
         var errorContent: ErrorContent?
         
-        init(content: Result<DBFringeEvent, DBError>) {
-            self.content = content
+        init(event: DBFringeEvent) {
+            self.event = event
         }
     }
 }
@@ -108,20 +100,14 @@ extension EventDetailsContentContainer {
         let router: EventDetailsContentContainer.Router
         
         func showPerformances() {
-            switch dataSource.content {
-            case .success(let event): router.pushSheet(location: .performances(eventCode: event.code))
-            case .failure: break
-            }
+            router.pushSheet(location: .performances(event: dataSource.event))
         }
         
         // MARK: Toggle Favourite
         
         /// Toggles the favourite status of the event
         func toggleFavourite() {
-            switch dataSource.content {
-            case .success(let event): toggleFavourite(for: event)
-            case .failure: break
-            }
+            toggleFavourite(for: dataSource.event)
         }
         
         /// Toggles the favourite status of the event
@@ -153,12 +139,9 @@ extension EventDetailsContentContainer {
 #if DEBUG
 
 extension EventDetailsContentContainer {
-    @MainActor
-    static func createContent(eventCode: String, constructionHelper: ConstructionHelper) -> Content {
-        let context = ModelContext(constructionHelper.modelContainer)
-        let dataSourceContent = PredicateHelper.event(eventCode: eventCode).getWrappedContent(context: context)
+    static func createContent(event: DBFringeEvent, constructionHelper: ConstructionHelper) -> Content {
         let router = Router(constructionHelper: constructionHelper)
-        let dataSource = DataSource(content: dataSourceContent)
+        let dataSource = DataSource(event: event)
         let interaction = Interaction(dataSource: dataSource, router: router)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
@@ -170,10 +153,11 @@ extension EventDetailsContentContainer {
 #Preview(traits: .modifier(MockDataPreviewModifier(config: [0: .init(code: .override("demo"))]))) {
     @Previewable @Environment(\.modelContext) var modelContext
     NavigationView {
-        EventDetailsContentContainer.createContent(
-            eventCode: "demo",
-            constructionHelper: .init(modelContainer: modelContext.container)
-        ).buildView()
+        PreviewEventFromDatabaseView(eventCode: "demo") { event in
+            let constructionHelper = ConstructionHelper(modelContainer: modelContext.container)
+            EventDetailsContentContainer.createContent(event: event, constructionHelper: constructionHelper)
+                .buildView()
+        }
     }
 }
 

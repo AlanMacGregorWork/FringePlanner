@@ -29,18 +29,9 @@ extension PerformancesContentContainer {
 extension PerformancesContentContainer {
     struct Structure: StructureProtocol {
         let input: Content
+        var event: DBFringeEvent { input.dataSource.event }
         
         var structure: some ViewDataProtocol {
-            switch input.dataSource.content {
-            case .success(let event):
-                performances(for: event)
-            case .failure(let error):
-                TextData("Database error\n\(error.description)")
-            }
-        }
-        
-        @MainActor
-        func performances(for event: DBFringeEvent) -> some ViewDataProtocol {
             NavigationData {
                 GroupData(type: .form) {
                     if event.performances.isEmpty {
@@ -49,7 +40,7 @@ extension PerformancesContentContainer {
                         let sortedPerformances = event.performances.sorted(by: { $0.start < $1.start })
                         ForEachData(data: sortedPerformances) { performance in
                             ButtonData(
-                                interaction: { input.interaction.showPerformance(referenceID: performance.referenceID) },
+                                interaction: { input.interaction.showPerformance(performance) },
                                 includeNavigationFlair: true,
                                 content: { FringePerformanceData(performance: performance) })
                         }
@@ -64,14 +55,14 @@ extension PerformancesContentContainer {
 
 extension PerformancesContentContainer {
     enum NavigationLocation: NavigationLocationProtocol {
-        case performance(referenceID: String)
+        case performance(performance: DBFringePerformance)
         
         @ViewBuilder
         func toView(constructionHelper: ConstructionHelper) -> some View {
             switch self {
-            case .performance(let referenceID):
+            case .performance(let performance):
                 PerformanceContentContainer.createContent(
-                    referenceID: referenceID,
+                    performance: performance,
                     constructionHelper: constructionHelper
                 ).buildView()
             }
@@ -84,11 +75,10 @@ extension PerformancesContentContainer {
 extension PerformancesContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let content: Result<DBFringeEvent, DBError>
-        var errorContent: ErrorContent?
+        let event: DBFringeEvent
         
-        init(content: Result<DBFringeEvent, DBError>) {
-            self.content = content
+        init(event: DBFringeEvent) {
+            self.event = event
         }
     }
 }
@@ -100,8 +90,8 @@ extension PerformancesContentContainer {
         let dataSource: DataSource
         let router: PerformancesContentContainer.Router
         
-        func showPerformance(referenceID: String) {
-            router.pushSheet(location: .performance(referenceID: referenceID))
+        func showPerformance(_ performance: DBFringePerformance) {
+            router.pushSheet(location: .performance(performance: performance))
         }
     }
 }
@@ -112,11 +102,9 @@ extension PerformancesContentContainer {
 
 extension PerformancesContentContainer {
     @MainActor
-    static func createContent(eventCode: String, constructionHelper: ConstructionHelper) -> Content {
-        let context = ModelContext(constructionHelper.modelContainer)
-        let dataSourceContent = PredicateHelper.event(eventCode: eventCode).getWrappedContent(context: context)
+    static func createContent(event: DBFringeEvent, constructionHelper: ConstructionHelper) -> Content {
         let router = Router(constructionHelper: constructionHelper)
-        let dataSource = DataSource(content: dataSourceContent)
+        let dataSource = DataSource(event: event)
         let interaction = Interaction(dataSource: dataSource, router: router)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
@@ -128,10 +116,11 @@ extension PerformancesContentContainer {
 #Preview(traits: .modifier(MockDataPreviewModifier(config: [0: .init(code: .override("demo"))]))) {
     @Previewable @Environment(\.modelContext) var modelContext
     NavigationView {
-        PerformancesContentContainer.createContent(
-            eventCode: "demo",
-            constructionHelper: .init(modelContainer: modelContext.container)
-        ).buildView()
+        PreviewEventFromDatabaseView(eventCode: "demo") { event in
+            let constructionHelper = ConstructionHelper(modelContainer: modelContext.container)
+            PerformancesContentContainer.createContent(event: event, constructionHelper: constructionHelper)
+                .buildView()
+        }
     }
 }
 

@@ -29,19 +29,10 @@ extension PerformanceContentContainer {
 extension PerformanceContentContainer {
     struct Structure: StructureProtocol {
         let input: Content
+        var performance: DBFringePerformance { input.dataSource.performance }
         
         var structure: some ViewDataProtocol {
-            switch input.dataSource.content {
-            case .success(let performance):
-                performanceStructure(performance: performance)
-            case .failure(let error):
-                TextData("Database error\n\(error.description)")
-            }
-        }
-
-        func performanceStructure(performance: DBFringePerformance) -> some ViewDataProtocol {
-            // TODO: Implement proper error handling for the UI
-            FringePerformanceData(performance: performance) 
+            FringePerformanceData(performance: performance)
         }
     }
 }
@@ -51,11 +42,10 @@ extension PerformanceContentContainer {
 extension PerformanceContentContainer {
     @Observable
     class DataSource: DataSourceProtocol {
-        let content: Result<DBFringePerformance, DBError>
-        var errorContent: ErrorContent?
+        let performance: DBFringePerformance
         
-        init(content: Result<DBFringePerformance, DBError>) {
-            self.content = content
+        init(performance: DBFringePerformance) {
+            self.performance = performance
         }
     }
 }
@@ -74,11 +64,9 @@ extension PerformanceContentContainer {
 
 extension PerformanceContentContainer {
     @MainActor
-    static func createContent(referenceID: String, constructionHelper: ConstructionHelper) -> Content {
-        let context = ModelContext(constructionHelper.modelContainer)
-        let dataSourceContent = PredicateHelper.performance(referenceID: referenceID).getWrappedContent(context: context)
+    static func createContent(performance: DBFringePerformance, constructionHelper: ConstructionHelper) -> Content {
         let router = Router(constructionHelper: constructionHelper)
-        let dataSource = DataSource(content: dataSourceContent)
+        let dataSource = DataSource(performance: performance)
         let interaction = Interaction(dataSource: dataSource)
         return Content(router: router, interaction: interaction, dataSource: dataSource)
     }
@@ -96,7 +84,7 @@ extension PerformanceContentContainer {
         
         let constructionHelper = ConstructionHelper(modelContainer: modelContext.container)
         return PerformanceContentContainer.createContent(
-            referenceID: performance.referenceID,
+            performance: performance,
             constructionHelper: constructionHelper
         ).buildView()
     }
