@@ -11,7 +11,7 @@ import SwiftUI
 struct PreviewEventFromDatabaseView<ContentView: View>: View {
     @Environment(\.modelContext) private var modelContext
     let eventCode: String
-    let contentView: ((DBFringeEvent) -> ContentView)
+    @ViewBuilder let contentView: ((DBFringeEvent) -> ContentView)
     
     var body: some View {
         let eventContent = PredicateHelper.event(eventCode: eventCode).getWrappedContent(context: modelContext)
