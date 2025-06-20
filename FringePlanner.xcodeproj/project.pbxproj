@@ -6,6 +6,10 @@
 	objectVersion = 71;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		08BB9C8F2E057E1000BD7540 /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 08BB9C8E2E057E1000BD7540 /* ViewInspector */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		080372492C98B7A3002DC9A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08BB9C8F2E057E1000BD7540 /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +194,9 @@
 				Base,
 			);
 			mainGroup = 0803722F2C98B7A2002DC9A2;
+			packageReferences = (
+				08BB9C8D2E057E1000BD7540 /* XCRemoteSwiftPackageReference "ViewInspector" */,
+			);
 			productRefGroup = 080372392C98B7A2002DC9A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -593,6 +601,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		08BB9C8D2E057E1000BD7540 /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		08BB9C8E2E057E1000BD7540 /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08BB9C8D2E057E1000BD7540 /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 080372302C98B7A2002DC9A2 /* Project object */;
 }
