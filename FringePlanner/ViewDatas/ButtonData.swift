@@ -9,12 +9,12 @@ import SwiftUI
 
 /// Displays a basic button
 struct ButtonData<Content: ViewDataProtocol>: ViewDataProtocol {
-    @MakeEquatableReadOnly var interaction: (() -> Void)
+    let interaction: (() -> Void)
     let includeNavigationFlair: Bool
     let content: Content
     
     init(interaction: @escaping () -> Void, includeNavigationFlair: Bool = false, @FringeDataResultBuilder content: () -> Content) {
-        self._interaction = .init(wrappedValue: interaction)
+        self.interaction = interaction
         self.content = content()
         self.includeNavigationFlair = includeNavigationFlair
     }

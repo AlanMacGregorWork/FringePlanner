@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Displays basic information about the performance
-struct FringePerformanceData: ViewDataProtocol, Equatable {
+struct FringePerformanceData: ViewDataProtocol {
     let performance: DBFringePerformance
 
     struct ContentView: View, ViewProtocol {

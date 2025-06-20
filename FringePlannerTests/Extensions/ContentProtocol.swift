@@ -26,7 +26,8 @@ extension ViewDataProtocol {
                 """, sourceLocation: sourceLocation)
             return
         }
-        #expect(self == value, "Type matched but produced different values", sourceLocation: sourceLocation)
+        #warning("Without equatable support this will no longer work")
+//        #expect(self == value, "Type matched but produced different values", sourceLocation: sourceLocation)
     }
 }
 
@@ -50,15 +51,4 @@ extension BaseStructureProtocol {
     ) {
         self.structure.expect(data, sourceLocation: sourceLocation)
     }
-}
-
-// MARK: - Helpers
-
-/// Provides a basic `==` for two parameter packs
-/// - Note: Does not make the parameter packs conform to `Equatable`
-private func == <each Element: Equatable>(lhs: (repeat each Element), rhs: (repeat each Element)) -> Bool {
-    for (left, right) in repeat (each lhs, each rhs) {
-        guard left == right else { return false }
-    }
-    return true
 }

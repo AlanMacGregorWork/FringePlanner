@@ -12,14 +12,9 @@ import SwiftUI
 #if DEBUG
 
 /// Displays a basic text view
-struct TextFieldData: ViewDataProtocol, Equatable {
+struct TextFieldData: ViewDataProtocol {
     var text: Binding<String>
     
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        guard lhs.text.wrappedValue == rhs.text.wrappedValue else { return false }
-        return true
-    }
-
     struct ContentView: View, ViewProtocol {
         let data: TextFieldData
 
@@ -34,7 +29,7 @@ struct TextFieldData: ViewDataProtocol, Equatable {
 }
 
 /// Displays a basic text view
-struct DebugTextData: ViewDataProtocol, Equatable {
+struct DebugTextData: ViewDataProtocol {
     let text: String
     
     struct ContentView: View, ViewProtocol {
@@ -51,9 +46,9 @@ struct DebugTextData: ViewDataProtocol, Equatable {
 }
 
 /// Displays a basic button
-struct DebugButtonData: ViewDataProtocol, Equatable {
+struct DebugButtonData: ViewDataProtocol {
     let title: String
-    @MakeEquatableReadOnly var interaction: (() -> Void)
+    let interaction: (() -> Void)
     
     struct ContentView: View, ViewProtocol {
         let data: DebugButtonData
@@ -72,9 +67,9 @@ struct DebugButtonData: ViewDataProtocol, Equatable {
 
 /// Displays a Times
 ///  - Note: Currently does not disable the time on tap
-struct CustomTimeData: ViewDataProtocol, Equatable {
+struct CustomTimeData: ViewDataProtocol {
     let timerOn: Bool
-    @MakeEquatableReadOnly var interaction: (() -> Void)
+    let interaction: (() -> Void)
     
     struct ContentView: View, ViewProtocol {
         let data: CustomTimeData

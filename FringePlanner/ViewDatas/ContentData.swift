@@ -8,8 +8,8 @@
 import SwiftUI
 
 /// Wraps a `ContentProtocol` into a `ViewDataProtocol`
-struct ContentData<Content: ContentProtocol>: ViewDataProtocol, Equatable {
-    @MakeEquatableReadOnly var content: Content
+struct ContentData<Content: ContentProtocol>: ViewDataProtocol {
+    let content: Content
     
     struct ContentView: View, ViewProtocol {
         let data: ContentData<Content>

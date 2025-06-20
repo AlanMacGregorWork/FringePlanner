@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Displays basic content that can be used in a section
-struct SectionRowData: ViewDataProtocol, Equatable {
+struct SectionRowData: ViewDataProtocol {
     let value: ValueType
     
     struct ContentView: View, ViewProtocol {
@@ -21,16 +21,16 @@ struct SectionRowData: ViewDataProtocol, Equatable {
             case .url(let title, let value, let url):
                 LinkSectionView(title: title, linkName: value, link: url)
             case .button(let title, let closure):
-                ButtonWithNavigationIndicator(title: title, closure: closure.wrappedValue)
+                ButtonWithNavigationIndicator(title: title, closure: closure)
             }
         }
     }
     
     /// The content to be used for the row
-    enum ValueType: Equatable {
+    enum ValueType {
         case url(title: String, value: String, url: String)
         case text(title: String?, text: AttributedString.StringProvider)
-        case button(title: String, closure: MakeEquatableReadOnly<(() -> Void)>)
+        case button(title: String, closure: (() -> Void))
     }
 }
 

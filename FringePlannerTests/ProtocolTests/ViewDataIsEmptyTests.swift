@@ -38,10 +38,10 @@ struct ViewDataIsEmptyTests {
         @Test("Build If: Boolean value should show/hide content", arguments: [true, false])
         func testBuildIf(show: Bool) {
             if show {
-                #expect(buildIf(shouldShowText: true).option == .first(TextData("test item")))
+                #expect(buildIf(shouldShowText: true).option.isFirstContent == true, "First Option should be selected")
                 #expect(!buildIf(shouldShowText: true).isEmpty, "Content should not be empty")
             } else {
-                #expect(buildIf(shouldShowText: false).option == .second(EmptyData()))
+                #expect(buildIf(shouldShowText: false).option.isFirstContent == false, "Second Option should be selected")
                 #expect(buildIf(shouldShowText: false).isEmpty, "Content should be empty")
             }
         }
@@ -51,6 +51,15 @@ struct ViewDataIsEmptyTests {
             if shouldShowText {
                 TextData("test item")
             }
+        }
+    }
+}
+
+private extension ConditionalData.Options {
+    var isFirstContent: Bool {
+        switch self {
+        case .first: return true
+        case .second: return false
         }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 import Foundation
 
 /// Displays items from the database
-struct DatabaseItemsData<Element: PersistentModel, ElementViewData: ViewDataProtocol>: ViewDataProtocol, Equatable {
+struct DatabaseItemsData<Element: PersistentModel, ElementViewData: ViewDataProtocol>: ViewDataProtocol {
     let predicate: Predicate<Element>
     let elementView: ((Element) -> ElementViewData)
     let sortOption: DatabaseSortOption
@@ -23,15 +23,6 @@ struct DatabaseItemsData<Element: PersistentModel, ElementViewData: ViewDataProt
         self.predicate = predicate
         self.sortOption = sortOption
         self.elementView = elementView
-    }
-
-    // MARK: Equatable
-        
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        // Note: Purposely omitting elementView
-        guard lhs.predicate.description == rhs.predicate.description else { return false }
-        guard lhs.sortOption == rhs.sortOption else { return false }
-        return true
     }
 }
 
@@ -78,7 +69,7 @@ extension DatabaseItemsData {
 extension DatabaseItemsData {
 
     /// The option for sorting the database items
-    enum DatabaseSortOption: Equatable {
+    enum DatabaseSortOption {
         /// No sorting
         case noSorting
         /// Custom sorting 
@@ -87,18 +78,5 @@ extension DatabaseItemsData {
         /// Sorting using a sort descriptor
         /// - Note: Will sort whilst retrieving the models from the database
         case sortDescriptor([SortDescriptor<Element>])
-        
-        static func == (lhs: DatabaseSortOption, rhs: DatabaseSortOption) -> Bool {
-            // Note: `==` being handled manually as `custom` is not equatable
-            switch (lhs, rhs) {
-            case (.noSorting, .noSorting):
-                return true
-            case (.custom, .custom):
-                return true
-            case (.sortDescriptor(let lhsSortDescriptor), .sortDescriptor(let rhsSortDescriptor)):
-                return lhsSortDescriptor.description == rhsSortDescriptor.description
-            default: return false
-            }
-        }
     }
 }

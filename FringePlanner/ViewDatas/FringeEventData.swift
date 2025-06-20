@@ -8,9 +8,9 @@
 import SwiftUI
 
 /// Displays the Event content
-struct FringeEventData: ViewDataProtocol, Equatable {
+struct FringeEventData: ViewDataProtocol {
     let event: DBFringeEvent
-    @MakeEquatableReadOnly var onSelected: (() -> Void)
+    let onSelected: (() -> Void)
 }
 
 // MARK: - ContentView

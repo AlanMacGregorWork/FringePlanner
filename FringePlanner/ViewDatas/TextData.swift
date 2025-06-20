@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Displays a basic text label
-struct TextData: ViewDataProtocol, Equatable {
+struct TextData: ViewDataProtocol {
     let text: String
     
     struct ContentView: View, ViewProtocol {

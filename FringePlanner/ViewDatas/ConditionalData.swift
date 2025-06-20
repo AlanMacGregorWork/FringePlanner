@@ -24,7 +24,7 @@ struct ConditionalData<FirstContent: ViewDataProtocol, SecondContent: ViewDataPr
 }
 
 extension ConditionalData {
-    enum Options: Equatable {
+    enum Options {
         case first(FirstContent)
         case second(SecondContent)
     }

@@ -128,10 +128,10 @@ private final class PathContainer {
 
 /// A structure representing an item to be displayed in a navigation toolbar.
 /// Provides a standardized way to create and manage toolbar items across the application.
-struct NavigationToolbarItem: Equatable, Identifiable {
+struct NavigationToolbarItem: Identifiable {
     let id = UUID()
     /// The content to be displayed in the toolbar item
-    @MakeEquatableReadOnly var content: (() -> AnyView)
+    let content: (() -> AnyView)
 }
 
 extension NavigationToolbarItem {
